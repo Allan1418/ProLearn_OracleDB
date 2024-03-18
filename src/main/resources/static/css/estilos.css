@@ -1,11 +1,4 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : 15 mar 2024, 02:24:59
-    Author     : anyelo
-*/
+
 
 @import url('https:fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
@@ -71,6 +64,27 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     
 }
 
+/*agregado de iniciarSecion*/
+#fondoLogin{
+    font-size: 100%;
+    width: 30%;
+    height: 30%;
+    margin-left: 10%;
+}
+
+#contenedor-formulario{
+    color: rgb(255, 255, 255);
+    position: absolute;
+    max-width:35%;
+}
+
+#local{
+    padding-top: 5%;
+    padding-bottom: 300px;
+    display: flex;
+    justify-content: center;
+}
+
 .fs-2{
     color: rgb(255, 255, 255);
 }
@@ -91,6 +105,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 #btn1{
     border-color: #00FF29;
     color: rgb(255, 255, 255);
+}
+
+/*agregado de iniciarSecion*/
+#btnLogin{
+    background-color: #FF0049;
+    color: white;
+    margin-top: 30px;
 }
 
 #btn2{

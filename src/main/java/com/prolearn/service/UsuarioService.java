@@ -14,4 +14,5 @@ public interface UsuarioService {
     
     public void delete(Usuario usuario);
     
+    Usuario findByCorreoAndContra(String correoUsuario, String contraUsuario);
 }

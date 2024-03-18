@@ -18,14 +18,12 @@
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
 
         <!-- Link de CCS-->
-        <link th:href="@{/static/index.css}" rel="stylesheet"/>
+        <link th:href="@{/css/estilos.css}" rel="stylesheet"/>
 
         <!-- Link para icon del titulo-->
         <link rel="icon" th:href="@{/img/icon.png}" type="image/x-icon"/>
         <title th:text="|Prolearn|"> Prolearn</title>
-
-        <!-- Preguntar Anyelo -->
-        <!-- <img  alt=""/> -->
+        
     </head>
 
     <!-- 
@@ -40,7 +38,7 @@
 
             <nav class="navbar navbar-expand-sm navbar-light p-3" id="Nav">
                 <div class="container-fluid">
-                    <a class="nav-link" th:href="@{/cuenta/menu}">
+                    <a class="nav-link" th:href="@{/index}">
                         <img th:src="@{/img/icon.png}" alt="Logo" width="30" height="24"> PROLEARN</a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -50,10 +48,10 @@
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto ">
-                            <li class="nav-item"><a class="nav-link" th:href="@{/cuenta/menu}">Cursos</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/cuenta/menu}">Precio</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/cuenta/menu}">FAQS</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/cuenta/sesion}">Inicio Sesión</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{Por Hacer}">Cursos</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{Por hacer}">Precio</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{UsrSinCuenta/despSesion}">Inicio Sesión</a></li>
                         </ul>
                     </div>
                 </div>

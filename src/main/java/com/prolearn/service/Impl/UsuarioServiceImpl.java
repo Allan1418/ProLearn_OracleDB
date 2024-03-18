@@ -30,6 +30,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
     }
+
+    @Override
+    public Usuario findByCorreoAndContra(String correoUsuario, String contraUsuario) {
+        return usuarioDao.findByCorreoAndContra(correoUsuario, contraUsuario);
+    }
     
     
     
