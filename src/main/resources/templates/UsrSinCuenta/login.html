@@ -20,38 +20,38 @@
         
         <section th:fragment="iniciar" class="container-fluid">
             <div id="local" >
-                <div>
+                <div id="recuadro">
                     <div class="wrapper">
                         <p class="fs-2">¡Bienvenido de nuevo! Ingrese los datos para ingresar</p>
                     </div>
                     <div class="container ">
                         <div class="ps-5" id="contenedor-formulario">
                             <form id="input" class="row g-2 ">
-                                <div class="col-12 col-md-7">
+                                <div class="col-12">
                                     <label for="email" class="form-label">Correo</label>
                                     <input type="email" class="form-control" id="email" placeholder="ejemplo@.com">
                                 </div>
-                                <div class="col-8 col-md-7">
+                                <div class="col-12">
                                     <label for="password" class="form-label">Contraseña</label>
                                     <input type="password" class="form-control" id="password" placeholder="password">
                                 </div>
 
-                                <div class="col-8 col-md-6 ">
+                                <div class="col-12 col-md-9">
                                     <button id="btnLogin" type="submit" class="btn btn-primary">Ingresar</button>
                                 </div>
 
-                                <div class="col-8 col-md-2  my-4 py-4">
+                                <div class="col-12 col-md-3 my-4 py-4 ">
                                     <a style="color: #FF0049;" th:href="@{/cuenta/recuperar}">Se me olvido la contraseña</a>
                                 </div>
                             </form>
-                            <div class="row container text-center me-5" >
-                                <a class="col-8" th:href="@{/cuenta/crear}">Crear una nueva cuenta</a>
+                            <div class=" row container text-center me-5" >
+                                <a th:href="@{/cuenta/crear}">Crear una nueva cuenta</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="fondoLogin">
-                    <img class="img-fluid fondo d-block w-100" th:src="@{/img/iniciar_Sesion.png}" alt="Cuenta">
+                    <img class="img-fluid col-12" th:src="@{/img/iniciar_Sesion.png}" alt="Cuenta">
                 </div>
             </div>
         </section>
