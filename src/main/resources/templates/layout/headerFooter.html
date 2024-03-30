@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:fragment="head">
+        <meta charset="UTF-8"></meta>
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+        <script th:src="@{/js/img.js}"></script>
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+        <!-- Link de Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+
+        <!-- Link de CCS-->
+        <link th:href="@{/css/estilos.css}" rel="stylesheet"/>
+
+        <!-- Link para icon del titulo-->
+        <link rel="icon" th:href="@{/img/icon.png}" type="image/x-icon"/>
+        <title th:text="|Prolearn|"> Prolearn</title>
+        
+    </head>
+
+    <!-- 
+       ==============================================================-->
+    <!-- Barra de Navegacion -->
+    <!-- 
+       ==============================================================-->
+
+    <body>
+
+        <header th:fragment="header">
+
+            <nav class="navbar navbar-expand-sm navbar-light p-3" id="Nav">
+                <div class="container-fluid">
+                    <a class="nav-link" th:href="@{/index}">
+                        <img th:src="@{/img/icon.png}" alt="Logo" width="30" height="24"> PROLEARN</a>
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto ">
+                            <li class="nav-item"><a class="nav-link" th:href="@{Por Hacer}">Cursos</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{Por hacer}">Precio</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{UsrSinCuenta/despSesion}">Inicio Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- 
+           ==============================================================-->
+        <!-- Footer -->
+        <!-- 
+           ==============================================================-->
+
+        <footer th:fragment="footer" style="background-color: #2D2C2E; color: white;">
+            <div class="container my-3 px-5">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3">
+                        <p>POLÍTICA DE PRIVACIDAD</p>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <p>CONDICIONES DE CONTRATACIÓN</p>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <p>POLÍTICA DE COOKIES</p>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <p>AVISO LEGAL</p>
+                    </div>
+                </div>
+                <div class="my-3">
+                    &COPY; Copyright Prolearn 2023
+                </div>
+            </div>
+        </footer>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+
+</html>

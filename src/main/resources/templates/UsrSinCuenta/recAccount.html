@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+    
+    <body>
+        <section th:fragment="recuperar" class="container-fluid">
+            <div id="local">
+                <div id="recuadro">
+                    <div class="wrapper ">
+                        <p>¿Has olvidado tu contraseña?</p>
+                        <p>Introduce la dirección de email que has utilizado para registrarte, te enviaremos un email con las
+                            instrucciones de restablecimiento.</p>
+                        <p><a th:href="@{/cuenta/sesion}">Ya tengo una cuenta</a></p>
+                    </div>
+                    <div class="container">
+                        <div id="contenedor-formulario">
+                            <form id="input" class="row g-2">
+                                <div class="col-6 col-md-6">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="email" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" id="email" placeholder="ejemplo@.com">
+                                </div>
+                                <div class="col-9 col-md-6">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" placeholder="password">
+                                </div>
+                            </form>
+                            <div class="col-12 col-md-12">
+                                <button id="btn1" type="submit" class="btn btn-primary">Ingresar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </body>
+</html>
