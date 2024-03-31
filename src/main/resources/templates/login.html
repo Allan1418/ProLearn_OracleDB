@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+
+    <!-- 
+         ==============================================================-->
+    <!-- Formulario para Iniciar cuenta -->
+    <!-- 
+         ==============================================================-->
+
+
+    <body id="cuerpo">
+
+        <header th:replace="~{layout/headerFooter :: header}"></header>
+
+        <div id="local" >
+            <div id="recuadro">
+                <div class="wrapper">
+                    <p class="fs-2">¡Bienvenido de nuevo! Ingrese los datos para ingresar</p>
+                </div>
+                <div class="container ">
+                    <div class="ps-5" id="contenedor-formulario">
+                        <form id="input" class="row g-2 " method="POST" th:action="@{/login}">
+                            <div class="col-12">
+                                <label for="email" class="form-label">Correo</label>
+                                <input type="email" class="form-control" id="email" placeholder="ejemplo@.com">
+                            </div>
+                            <div class="col-12">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" id="password" placeholder="password">
+                            </div>
+
+                            <div class="col-12 col-md-9">
+                                <button id="btnLogin" type="submit" class="btn btn-primary">Ingresar</button>
+                            </div>
+
+                            <div class="col-12 col-md-3 my-4 py-4 ">
+                                <a style="color: #FF0049;" th:href="@{/cuenta/recuperar}">Se me olvido la contraseña</a>
+                            </div>
+                        </form>
+                        <div class=" row container text-center me-5" >
+                            <a th:href="@{/cuenta/crear}">Crear una nueva cuenta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="fondoLogin">
+                <img class="img-fluid col-12" th:src="@{/img/iniciar_Sesion.png}" alt="Cuenta">
+            </div>
+        </div>
+        <div th:if="${param.error != null}">
+            <h3>Credenciales Erroneas!</h3>
+        </div>
+
+        <footer th:replace="~{layout/headerFooter :: footer}"></footer>
+
+    </body>
+</html>

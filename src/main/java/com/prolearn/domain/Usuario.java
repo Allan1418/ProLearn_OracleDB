@@ -3,6 +3,7 @@ package com.prolearn.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 
@@ -20,33 +21,32 @@ public class Usuario implements Serializable {
     
     
     
-    @Column(name = "nombre_usuario")
-    private String nombreUsuario;
+    private String nombre;
     
-    @Column(name = "apellidos_usuario")
-    private String apellidosUsuario;
+    private String apellidos;
     
-    @Column(name = "correo_usuario")
-    private String correoUsuario;
+    private String username;
     
-    @Column(name = "contra_usuario")
-    private String contraUsuario;
+    private String password;
     
-    
+    @OneToMany
+    @JoinColumn(name = "id_usuario")
+    List<Rol> roles;
     
     
     public Usuario(){
         
     }
 
-    public Usuario(Long idUsuario, String nombreUsuario, String apellidosUsuario, String correoUsuario, String contraUsuario) {
+    public Usuario(Long idUsuario, String nombre, String apellidos, String username, String password, List<Rol> roles) {
         this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.apellidosUsuario = apellidosUsuario;
-        this.correoUsuario = correoUsuario;
-        this.contraUsuario = contraUsuario;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
     }
-    
+
     
     
 }
