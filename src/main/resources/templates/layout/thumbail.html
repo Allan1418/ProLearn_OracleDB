@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
     </head>
+    
+    
     <body>
-        <div>TODO write content</div>
+        <!-- 
+           ==============================================================-->
+        <!-- Inicio de la Cursos -->
+        <!-- 
+           ==============================================================-->
+        <section th:fragment="cursos">
+            <div id="titulo1" class="fs-3 my-5">Cursos</div>
+            <div id="cuerpo-cursos" class="px-5 py-5">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col ">
+                            <div class="card px-5 py-5 ">
+                                <a href="#"><img></a>
+                                <div class="card-body">
+                                    <h5 class="card-title">Nombre Base de datos</h5>
+                                    <p class="card-text">Descripcion base de datos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </body>
 </html>

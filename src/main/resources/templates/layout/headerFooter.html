@@ -23,7 +23,7 @@
         <!-- Link para icon del titulo-->
         <link rel="icon" th:href="@{/img/icon.png}" type="image/x-icon"/>
         <title th:text="|Prolearn|"> Prolearn</title>
-        
+
     </head>
 
     <!-- 
@@ -51,9 +51,33 @@
                             <li class="nav-item"><a class="nav-link" th:href="@{Por Hacer}">Cursos</a></li>
                             <li class="nav-item"><a class="nav-link" th:href="@{Por hacer}">Precio</a></li>
                             <li class="nav-item"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/UsrSinCuenta/despSesion}">Inicio Sesión</a></li>
                         </ul>
                     </div>
+                    
+                    <div class="col-md-3">
+                            <ul class="navbar-nav" sec:authorize="isAuthenticated()">
+                                <li class="nav-item text-white my-auto">
+                                    <span sec:authentication="name">reemplazable</span>
+                                </li>
+                                <li class="nav-item my-auto">
+                                    <form method="post" th:action="@{/logout}">
+                                        <button class="btn btn-dark">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+
+                            <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
+                                <li class="nav-item px-2">
+                                    <a class="nav-menu-link nav-link" th:href=@{/login}>
+                                        <i class="fas fa-sign-in-alt"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                    </div>
                 </div>
             </nav>
         </header>
