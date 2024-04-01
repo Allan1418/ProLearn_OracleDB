@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+
+    <body>
+        <!-- 
+           ==============================================================-->
+        <!-- Ventana Administrador -->
+        <!-- 
+           ==============================================================-->
+
+        <section th:fragment="administr">
+
+            <div id="titulo2" class="fs-2 my-5">Gestion de Cursos</div>
+
+            <form style="padding-inline-end: 5%;" class="d-flex col-4 ms-auto" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <div class="col-7 table-responsive" style="margin-bottom: 5%;">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Profesor</th>
+                            <th scope="col">Curso</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Anyelo</td>
+                            <td>Python</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Allan</td>
+                            <td>JS</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Daniel</td>
+                            <td>Inteligencia Artificial</td>
+                            <td><button class="btn btn-dark">Editar</button></td>
+                        </tr>
+                </table>
+            </div>
+        </section>
+
+    </body>
+</html>

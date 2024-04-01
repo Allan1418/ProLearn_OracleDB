@@ -20,7 +20,7 @@ public interface FirebaseStorageService {
 
     //Ubicación donde se encuentra el archivo de configuración Json
     final String rutaJsonFile = "firebase";
-    
+
     //El nombre del archivo Json
     final String archivoJsonFile = "prolearn-1a8ca-firebase-adminsdk-q3dqn-882c564149.json";
 }
