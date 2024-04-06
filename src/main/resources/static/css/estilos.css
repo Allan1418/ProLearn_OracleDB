@@ -65,18 +65,20 @@
 }
 
 /*agregado de iniciarSecion*/
-#fondoLogin{
-    font-size: 300px;
-    width: 50%;
-    height: 50%;
-    margin-left: 10%;
-}
 
 #contenedor-formulario{
     color: rgb(255, 255, 255);
     position: absolute;
-    max-width:35%;
+    max-width:30%;
 }
+
+#fondoCuenta{
+    font-size: 300px;
+    width: 30%;
+    height: 30%;
+    margin-left: 10%;
+}
+
 
 #local{
     padding-top: 5%;

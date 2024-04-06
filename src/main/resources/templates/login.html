@@ -48,13 +48,13 @@
                                 <a th:href="@{/cuenta/crear}">Crear una nueva cuenta</a>
                             </div>
                         </form>
-                        <div th:if="${param.error != null}">
+                        <div class="row container text-center me-5 my-5" th:if="${param.error != null}">
                             <h3>Credenciales Erroneas!</h3>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="fondoLogin">
+            <div id="fondoCuenta">
                 <img class="img-fluid col-12" th:src="@{/img/iniciar_Sesion.png}" alt="Cuenta">
             </div>
         </div>
