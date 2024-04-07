@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+      <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+
+    <body>
+        <section th:fragment="metodoPago">
+            <div style="width: 550px; height: 270px; border: 1px solid black; padding: 10px;">
+                <h2 style="text-align: center;">Complete su compra</h2>
+                <p>Acceso a todos los cursos - 12.99$</p>
+                <p>Suscripcion se renueva cada mes</p>
+                <p>Total: 12.99$</p>
+                <form>
+                    <label for="payment-method">Metodo de Pago</label>
+                    <select id="payment-method" name="payment-method">
+                        <option value="credit-card">Tarjeta</option>
+                    </select>
+                    <div id="credit-card-form">
+                        <label for="card-number">Numero de Tarjeta</label>
+                        <input type="text" id="card-number" name="card-number" required>
+
+                        <label for="card-holder">Nombre en la Tarjeta</label>
+                        <input type="text" id="card-holder" name="card-holder" required>
+
+                        <label for="expiry-date">Fecha de Expiracion</label>
+                        <input type="text" id="expiry-date" name="expiry-date" required>
+
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" required>
+                    </div>
+
+                    <input type="submit" value="Submit"> 
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
