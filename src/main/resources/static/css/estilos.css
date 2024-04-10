@@ -190,6 +190,18 @@
     padding-bottom: 10px;
 }
 
+/*================Visual Videos================*/
+
+.txtVideo{
+    color: white;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 70%;
+    margin-left: 13%;
+    margin-right: auto;
+}
+
 
 
 /*================NEDIA QUERIES PANTALLA================*/

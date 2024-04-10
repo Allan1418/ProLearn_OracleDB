@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+      <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+
+    <body id="cuerpo">
+        <section th:fragment="visualVideos">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <video src="video.mp4" controls style="width: 100%; height: 60vh;"></video>
+                    </div>
+                </div>
+            </div>
+
+            <section class="containerInfo">
+                <div class="row" style="background-color: #2D2C2E; color: white;">
+                    <div class="txtVideo">
+                        <h2>Titulo de Clase</h2>
+                        <p>Informacion relevante del video</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </body>
+</html>
