@@ -14,22 +14,20 @@ public class Rol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol")
+    @Column(name = "id")
     private Long idRol;
     private String nombre;
-    
-    @Column(name = "id_usuario")
-    private Long idUsuario;
 
-    public Rol(Long idRol, String nombre, Long idUsuario) {
+    public Rol(Long idRol, String nombre) {
         this.idRol = idRol;
         this.nombre = nombre;
-        this.idUsuario = idUsuario;
+    }
+
+    public Rol(String nombre) {
+        this.nombre = nombre;
     }
 
     public Rol() {
     }
-    
-    
 
 }

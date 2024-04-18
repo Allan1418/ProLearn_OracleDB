@@ -20,10 +20,10 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE prolearn.usuarios (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nombre varchar(250) NOT NULL,
     apellidos varchar(250) NOT NULL,
-    username varchar(25) NOT NULL,
+    email varchar(25) NOT NULL,
     password varchar(512) NOT NULL
     
     
@@ -31,23 +31,30 @@ CREATE TABLE prolearn.usuarios (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-create table prolearn.rol (
-  id_rol INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  nombre varchar(20),
-  id_usuario int,
-  foreign key fk_rol_usuario (id_usuario) references usuarios(id_usuario)
+CREATE TABLE prolearn.rol (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nombre VARCHAR(255)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-INSERT INTO prolearn.usuarios (nombre, apellidos, username, password)
-VALUES ('Juan', 'Perez', 'juan@example.com', SHA2('123', 512));
+CREATE TABLE prolearn.usuario_rol (
+    usuario_id INT,
+    rol_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (rol_id) REFERENCES rol(id)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+INSERT INTO prolearn.rol(nombre)
+values('ROLE_USER');
+
+INSERT INTO prolearn.usuarios (nombre, apellidos, email, password)
+VALUES ('Juan', 'Perez', 'juan@example.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
  
-INSERT INTO prolearn.usuarios (nombre, apellidos, username, password)
+INSERT INTO prolearn.usuarios (nombre, apellidos, email, password)
 VALUES ('Maria', 'Gonzalez', 'maria@example.com', SHA2('456', 512));
 
-INSERT INTO prolearn.rol (nombre, id_usuario)
-VALUES ('ROLE_ADMIN', 1);
- 
-INSERT INTO prolearn.rol (nombre, id_usuario)
-VALUES ('ROLE_ADMIN', 2);
+INSERT INTO prolearn.usuario_Rol(usuario_id,rol_id)
+values('1','1');
