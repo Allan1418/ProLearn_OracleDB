@@ -202,6 +202,18 @@
     margin-right: auto;
 }
 
+/*================Estilo html Footer================*/
+
+.txtFooter{
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 70%;
+    margin-left: 1%;
+    margin-right: auto;
+}
 
 
 /*================NEDIA QUERIES PANTALLA================*/
