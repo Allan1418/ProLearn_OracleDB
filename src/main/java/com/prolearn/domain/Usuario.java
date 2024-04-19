@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
     //Revisar con tablas mysql!!!!!!!
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
-            name = "usuarios_roles",
+            name = "usuario_rol",
             joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id")
     )

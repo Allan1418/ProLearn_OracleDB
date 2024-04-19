@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import com.prolearn.domain.Usuario;
 
-public interface UsuarioService{
+public interface UsuarioService extends UserDetailsService{
     
     public void save(Usuario usuario);
     

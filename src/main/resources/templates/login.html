@@ -30,11 +30,11 @@
                         <form id="input" class="row g-2 " method="POST" th:action="@{/login}">
                             <div class="col-12">
                                 <label for="email" class="form-label">Correo</label>
-                                <input type="email" class="form-control" id="email" placeholder="ejemplo@.com">
+                                <input type="email" class="form-control" name="username" id="email" placeholder="ejemplo@.com">
                             </div>
                             <div class="col-12">
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="password" placeholder="password">
+                                <input type="password" class="form-control" name="password" id="password" placeholder="password">
                             </div>
 
                             <div class="col-12 col-md-9">
