@@ -8,49 +8,45 @@
         <title>Pro Learn</title>
     </head>
 
-    <body id="cuerpo">
-        <header th:replace="~{layout/headerFooter :: header}"></header>
-
-        <div id="local">
-            <div id="recuadro">
-                <div class="wrapper ">
-                    <p style="color: white">Creacion de cuenta → Confirmacion del pago</p>
-                    <p style="color: white">Crear una nueva cuenta</p>
-                    <p><a href="iniciarSesion.html">Ya tengo una cuenta</a></p>
-                </div>
-                <div class="container">
-                    <div id="contenedor-formulario">
-                        <form id="input" class="row g-2">
-                            <div class="col-6 col-md-6">
-                                <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" placeholder="Nombre">
-                            </div>
-                            <div class="col-6 col-md-6">
-                                <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" placeholder="Apellido">
-                            </div>
+    <body>
+        <section th:fragment="crearCuenta">
+            <div id="local">
+                <div id="recuadro">
+                    <div class="wrapper ">
+                        <p style="color: white">Creacion de cuenta → Confirmacion del pago</p>
+                        <p style="color: white">Crear una nueva cuenta</p>
+                        <p><a href="iniciarSesion.html">Ya tengo una cuenta</a></p>
+                    </div>
+                    <div class="container">
+                        <div id="contenedor-formulario">
+                            <form id="input" class="row g-2">
+                                <div class="col-6 col-md-6">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                                </div>
+                                <div class="col-6 col-md-6">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" placeholder="Apellido">
+                                </div>
+                                <div class="col-12 col-md-9">
+                                    <label for="email" class="form-label">Correo</label>
+                                    <input type="email" class="form-control" id="email" placeholder="ejemplo@.com">
+                                </div>
+                                <div class="col-9 col-md-6">
+                                    <label for="password" class="form-label">Contraseña</label>
+                                    <input type="password" class="form-control" id="password" placeholder="password">
+                                </div>
+                            </form>
                             <div class="col-12 col-md-9">
-                                <label for="email" class="form-label">Correo</label>
-                                <input type="email" class="form-control" id="email" placeholder="ejemplo@.com">
+                                <button id="btnLogin" type="submit" class="btn btn-primary">Ingresar</button>
                             </div>
-                            <div class="col-9 col-md-6">
-                                <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control" id="password" placeholder="password">
-                            </div>
-                        </form>
-                        <div class="col-12 col-md-9">
-                            <button id="btnLogin" type="submit" class="btn btn-primary">Ingresar</button>
                         </div>
                     </div>
                 </div>
+                <div id="fondoCuenta">
+                    <img class="mx-5 img-fluid col-12" src="/img/crear-cuenta.png" alt="Marcoz29">
+                </div>
             </div>
-            <div id="fondoCuenta">
-                <img class="mx-5 img-fluid col-12" src="/img/crear-cuenta.png" alt="Marcoz29">
-            </div>
-        </div>
-
-
-        <footer th:replace="~{layout/headerFooter :: footer}"></footer>
-
+        </section>
     </body>
 </html>

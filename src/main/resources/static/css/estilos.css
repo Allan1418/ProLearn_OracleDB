@@ -4,15 +4,6 @@
 
 /*================MENU================*/
 
-#promo{
-    background-color:rgb(157, 255, 0) ;
-
-    p{
-        color:black ;
-    }
-
-
-}
 
 #cuerpo{
     font-family: 'Montserrat', sans-serif;
@@ -21,10 +12,13 @@
     opacity: 80%;
 }
 
-#Nav a{
+#Nav{
+    background-color: #454445;
+    a{
     font-size: 18px;
     font-weight: bold;
     color: #00FF29;
+    }
 
 }
 
@@ -127,6 +121,13 @@
     color: #00FF29;
 }
 
+#titulo2{
+    text-align: center; 
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background-color: #2b2929;
+}
+
 .card{
     color: white;
     background-color: #2D2C2E;
@@ -170,17 +171,16 @@
 
 }
 
-.accordion-header{
+#MetodoPago{
 
     background-color: grey;
     color: white;
     font-size: 20px;
     font-weight: bold;
-    text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 8px;
-    padding-left: 40%;
+    padding-left: 38%;
 }
 
 .button-container{
@@ -213,6 +213,21 @@
     width: 70%;
     margin-left: 1%;
     margin-right: auto;
+}
+
+
+/*================Vista Editar Curso Admin================*/
+
+#gestionCursos{
+    margin-inline-start: 20%;
+    padding-top: 2%;
+    padding-bottom: 5%;
+}
+
+#botones2{
+    margin-top: 5%;
+    padding-left: 25%;
+    
 }
 
 

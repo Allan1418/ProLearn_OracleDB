@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
@@ -10,43 +10,42 @@
 
 
     <body id="cuerpo">
-        <section th:fragment="metodoPago">
+        
+        <section th:fragment="clases">
             <div id="formulario-pago" class="py-5 text-align">
                 <div class="containerPago">
                     <div class="col-7">
-                        <div class="col ">
-                            <div class="card py-5 ">
+                        <div class="col">
+                            <div class="card py-5" style="background-color: #1C1C1C">
                                 <h2 style="text-align: center;">Complete su compra</h2>
                                 <div class="card-body">
                                     <p>Acceso a todos los cursos - 12.99$</p>
                                     <p>Suscripcion se renueva cada mes</p>
                                     <p>Total: 12.99$</p>
-                                    <h2 class="accordion-header">
+                                    <h2 class="accordion-header" id="MetodoPago">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                                 data-bs-target="#panelsStayOpen-collapse" aria-expanded="false"
-                                                aria-controls="panelsStayOpen-collapse">
-                                            Tarjeta de Credito o Debito
+                                                aria-controls="panelsStayOpen-collapse">Tarjeta de Credito o Debito
                                         </button>
                                     </h2>
                                     <div id="panelsStayOpen-collapse" class="accordion-collapse collapse">
                                         <form>                                      
                                             <div id="credit-card-form">
-                                                <label for="card-number" class="col-sm-4 col-md-5">Numero de Tarjeta</label>
-                                                <input type="text" id="card-number" name="card-number" required>
+                                                <label for="card-number" class="col-12 col-ms-5 col-md-5">Numero de Tarjeta</label>
+                                                <input class="col-10 col-ms-7 col-md-4" type="text" id="card-number" name="card-number" required>
 
-                                                <label for="card-holder" class="col-sm-4 col-md-5">Nombre en la Tarjeta</label>
-                                                <input type="text" id="card-holder" name="card-holder" required>
+                                                <label for="card-holder" class="col-12 col-ms-5 col-md-5">Nombre en la Tarjeta</label>
+                                                <input class="col-10 col-ms-7 col-md-4" type="text" id="card-holder" name="card-holder" required>
 
-                                                <label for="expiry-date" class="col-sm-4 col-md-5">Fecha de Expiracion</label>
-                                                <input type="text" id="expiry-date" name="expiry-date" required>
+                                                <label for="expiry-date" class="col-12 col-ms-5 col-md-5">Fecha de Expiracion</label>
+                                                <input class="col-10 col-ms-7 col-md-4" type="text" id="expiry-date" name="expiry-date" required>
 
-                                                <label for="cvv" class="col-sm-4 col-md-5">CVV:</label>
-                                                <input type="text" id="cvv" name="cvv" required>
+                                                <label for="cvv" class="col-12 col-ms-5 col-md-5">CVV:</label>
+                                                <input class="col-10 col-ms-7 col-md-4" type="text" id="cvv" name="cvv" required>
                                             </div>                                       
                                             <div class="button-container">                                           
-                                                <button type="submit" class="custom-button">
-                                                    <span>Comprar</span>
-                                                </button>
+                                                <a href="sesion.html"><button id="btn2" type="button"
+                                                class="btn" style="color: black">Pagar</button></a>
                                             </div>
                                         </form>
 
@@ -58,5 +57,6 @@
                 </div>
             </div>
         </section>
+        
     </body>
 </html>

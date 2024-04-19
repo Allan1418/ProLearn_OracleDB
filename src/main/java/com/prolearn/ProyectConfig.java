@@ -37,7 +37,7 @@ public class ProyectConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/login", "/js/**", "/webjars/**", "/css/**", "/img/**")
+                .requestMatchers("/", "/index", "/login", "/js/**", "/webjars/**", "/css/**", "/img/**", "/curso/**")
                 .permitAll().anyRequest())
                 .formLogin((form) -> form
                 .loginPage("/login").defaultSuccessUrl("/index", true).permitAll())

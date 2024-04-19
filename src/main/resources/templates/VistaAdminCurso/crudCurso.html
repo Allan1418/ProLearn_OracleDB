@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+    <body>
+
+        <section th:fragment="infoCurso">
+        <div id="cuerpo-menu">
+            <div id="fondo" class=" col-6 ms-auto">
+                <img class="img-fluid fondo d-block w-100 px-2 " src="/img/js.png" alt="">
+            </div>
+            <div class="container">
+                <p class="fs-1 offset-md-3 col-10 ms-auto">Curso de JavaScript Desde Cero</p>
+                <div class="py-3 offset-md-3 col-10 ms-auto">
+                    <p class="fs-4" style="color: aliceblue;">
+                        Desarrolla las habilidades para crear grandes aplicaciones y páginas web dinámicas. Aprende desde la 
+                        manipulación de variables, tipos de datos, string y números hasta el control de flujo de 
+                        condicionales y bucles.</p>
+                          <br>
+                        <p class="fs-3" >Se entrega certificado al finalizar.</p>
+                </div>
+                    <div class="offset-md-4 col-6 ms-auto py-5"><a href=""><button id="btn2" type="button"
+                        class="btn  ">Aceptar</button></a></div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+
+        <section th:fragment="modulosCurso">
+            <div id="botones2" class="row" >
+                <div class="fs-2 col-5 col-md-6 my-2">Modulos</div>
+                <div class="col-6 col-md-6 my-2"><a href="sesion.html"><button id="btn2" type="button"
+                                                                               class="btn">Agregar</button></a></div>
+            </div>
+
+            <div id="gestionCursos" class="col-7 table-responsive">
+                <table class="table table-borderless table-dark border border-white">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Programación Orientada a Objetos con Java</td>
+                            <td><button id="btn2" class="btn">Editar</button></td>
+                            <td><button id="btn2" class="btn">Eliminar</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>Desarrollo de Aplicaciones Web con PHP y Laravel</td>
+                            <td><button id="btn2" class="btn">Editar</button></td>
+                            <td><button id="btn2" class="btn">Eliminar</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>Desarrollo Web con JavaScript</td>
+                            <td><button id="btn2" class="btn">Editar</button></td>
+                            <td><button id="btn2" class="btn">Eliminar</button></td>
+                        </tr>
+                </table>
+            </div>
+        </section>
+        
+    </body>
+</html>

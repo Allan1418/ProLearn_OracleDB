@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+    <body>
+
+        <section th:fragment="editarClases">
+        <div id="titulo1" class="fs-3 my-5">Editar Clases</div>
+        <div id="botones2" class="row" >
+            <div class="fs-2 col-5 col-md-6 my-2">Clases</div>
+            <div class="col-6 col-md-6 my-2"><a href="sesion.html"><button id="btn2" type="button"
+                class="btn">Agregar</button></a></div>
+        </div>
+
+        <div id="gestionCursos" class="col-7 table-responsive">
+            <table class="table table-borderless table-dark border border-white">
+                <tbody>
+                  <tr>
+                    <td>Primeros Pasos</td>
+                    <td></td>
+                    <td><button id="btn2" class="btn">Editar</button></td>
+                    <td></td>
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td>Desarrollo de Aplicaciones Web con PHP y Laravel</td>
+                    <td><button id="btn2" class="btn">Editar</button></td>
+                    <td><button id="btn2" class="btn">Eliminar</button></td>
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td>Desarrollo Web con JavaScript</td>
+                    <td><button id="btn2" class="btn">Editar</button></td>
+                    <td><button id="btn2" class="btn">Eliminar</button></td>
+                  </tr>
+              </table>
+        </div>
+        
+    </section>
+        
+    </body>
+</html>
+
