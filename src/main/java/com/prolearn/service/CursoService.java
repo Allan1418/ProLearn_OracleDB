@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CursoService {
     
-    public List<Curso> getCursos(boolean activo);
+    public List<Curso> getCursos();
 
     public Curso getCurso(Curso curso);
     

@@ -18,11 +18,8 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Curso> getCursos(boolean activo) {
+    public List<Curso> getCursos() {
         var lista = cursoDao.findAll();
-        if (activo) {
-            lista.removeIf(e -> !e.isEstadoCurso());
-        }
         return lista;
     }
 

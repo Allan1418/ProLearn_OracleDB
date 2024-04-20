@@ -30,14 +30,15 @@ public class ProyectConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("index");
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
-//        registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
+        registry.addRedirectViewController("/index", "/");
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/login", "/js/**", "/webjars/**", "/css/**", "/img/**", "/curso/**")
+                .requestMatchers("/", "/index", "/login","/signup", "/js/**",
+                        "/webjars/**", "/css/**", "/img/**", "/layout/**")
                 .permitAll().anyRequest())
                 .formLogin((form) -> form
                 .loginPage("/login").defaultSuccessUrl("/index", true).permitAll())

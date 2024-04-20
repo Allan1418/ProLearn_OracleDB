@@ -25,7 +25,7 @@ public class CursoController {
 
     @GetMapping("/curso")
     private String getCursos(Model model) {
-        var cursos = cursoService.getCursos(false);
+        var cursos = cursoService.getCursos();
         model.addAttribute("cursos", cursos);
         return "/curso/curso";
     }
