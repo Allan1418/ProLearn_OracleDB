@@ -1,5 +1,6 @@
 package com.prolearn.service.Impl;
 
+import com.prolearn.dao.RolDao;
 import com.prolearn.dao.UsuarioDao;
 import com.prolearn.domain.Rol;
 import com.prolearn.domain.Usuario;
@@ -14,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +25,19 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioDao usuarioDao;
 
-    //@Autowired
-    //private RolDao rolDao;
+    @Autowired
+    private RolDao rolDao;
+    
     @Override
     public void save(Usuario usuario) {
-        usuario.setRoles(Arrays.asList(new Rol("ROLE_USER")));
+        
+        Rol rolUsuario = rolDao.findByNombre("ROLE_USER");
+        
+        usuario.setRoles(Arrays.asList(rolUsuario));
+        
+        var codigo = new BCryptPasswordEncoder();
+        usuario.setPassword(codigo.encode(usuario.getPassword()));
+        
         usuarioDao.save(usuario);
     }
 
