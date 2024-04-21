@@ -7,17 +7,7 @@ create user 'admin_1'@'%' identified by 'contra_1';
 grant all privileges on prolearn.* to 'admin_1'@'%';
 flush privileges;
 
-CREATE TABLE prolearn.cursos (
-    id_curso INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_curso varchar(250) NOT NULL,
-    descrp_curso text,
-    estado_curso boolean,
-    thumbnail_curso varchar(1024),
-    categoria_curso text
-    
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
+/*creacion de tablas*/
 
 CREATE TABLE prolearn.usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,6 +37,59 @@ CREATE TABLE prolearn.usuario_rol (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+
+
+CREATE TABLE prolearn.categorias (
+  id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_categoria VARCHAR(255) NOT NULL
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE prolearn.capitulo_padre (
+  id_capitulo INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_capitulo VARCHAR(255) NOT NULL,
+  num_capitulo INT NOT NULL
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE prolearn.capitulo_hijo (
+  id_capitulo INT AUTO_INCREMENT PRIMARY KEY,
+  id_categoria_padre INT NOT NULL,
+  nombre_capitulo VARCHAR(255) NOT NULL,
+  video_capitulo TEXT NOT NULL,
+  numero_capitulo INT NOT NULL,
+  FOREIGN KEY (id_categoria_padre) REFERENCES capitulo_padre(id_capitulo)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE prolearn.cursos (
+  id_curso INT AUTO_INCREMENT PRIMARY KEY,
+  nombre_curso VARCHAR(250) NOT NULL,
+  descrp_curso TEXT,
+  estado_curso BOOLEAN,
+  thumbnail_curso VARCHAR(1024),
+  categoria_curso INT NOT NULL,
+  FOREIGN KEY (categoria_curso) REFERENCES categorias(id_categoria)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+CREATE TABLE prolearn.capitulo_x_curso (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_curso INT NOT NULL,
+  id_capitulo INT NOT NULL,
+  FOREIGN KEY (id_curso) REFERENCES cursos(id_curso),
+  FOREIGN KEY (id_capitulo) REFERENCES capitulo_hijo(id_capitulo)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+/*insercion de datos*/
+
 INSERT INTO prolearn.rol(nombre)
 values('ROLE_USER');
 
@@ -59,15 +102,46 @@ VALUES ('Maria', 'Gonzalez', 'maria@example.com', SHA2('456', 512));
 INSERT INTO prolearn.usuario_Rol(usuario_id,rol_id)
 values('1','1');
 
-INSERT INTO prolearn.cursos (nombre_curso,descrp_curso,estado_curso,thumbnail_curso,categoria_curso) 
-VALUES ( 'Desarrollo de Aplicaciones Web con PHP y Laravel','Este curso te enseñará a desarrollar aplicaciones web dinámicas y robustas usando el framework Laravel y el lenguaje PHP.',
-TRUE, 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F27%2FLaravel.svg%2F1200px-Laravel.svg.png&tbnid=12312312312312&vet=12ahUKEwiB9Z6L4syFAxVQg-AKHQ2-CZwQMygAegUIARCuAQ..i&imgrefurl=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FLaravel&docid=KjKjKjKjKjKjKj&w=1200&h=1200&q=laravel&client=opera-gx&ved=2ahUKEwiB9Z6L4syFAxVQg-AKHQ2-CZwQMygAegUIARCuAQ', 
-'Desarrollo web' );
 
-INSERT INTO prolearn.cursos (nombre_curso,descrp_curso,estado_curso,thumbnail_curso,categoria_curso)
- VALUES ( 'Programación Orientada a Objetos con Java','Este curso te enseñará los conceptos básicos y avanzados de la programación orientada a objetos usando el lenguaje Java.',
- TRUE, 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F6%2F6c%2FJava_programming_language_logo.svg%2F1200px-Java_programming_language_logo.svg.png&tbnid=Q3zrJG-_jJX5gM&vet=12ahUKEwiB9Z6L4syFAxVQg-AKHQ2-CZwQMygAegUIARCxAQ..i&imgrefurl=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FJava_(lenguaje_de_programaci%25C3%25B3n)&docid=jKjKjKjKjKjKjK&w=1200&h=1200&q=java&client=opera-gx&ved=2ahUKEwiB9Z6L4syFAxVQg-AKHQ2-CZwQMygAegUIARCxAQ', 'Programación' );
 
-INSERT INTO prolearn.cursos (nombre_curso,descrp_curso,estado_curso,thumbnail_curso,categoria_curso) 
-VALUES ( 'Desarrollo Web con JavaScript','Este curso te enseñará los fundamentos del lenguaje JavaScript y cómo usarlo para crear sitios web dinámicos e interactivos.',
-TRUE, 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F4%2F47%2FJava_Black_icon.svg&tbnid=IpRxpQC6Jex3ZM&vet=12ahUKEwixzbrK4syFAxVoFGIAHegWAE0QMygAegQIARBy..i&imgrefurl=https%3A%2F%2Fes.wikipedia.org%2Fwiki%2FJava_(lenguaje_de_programaci%25C3%25B3n)&docid=Kh6PdKInROJCrM&w=512&h=512&q=java&client=opera-gx&ved=2ahUKEwixzbrK4syFAxVoFGIAHegWAE0QMygAegQIARBy', 'Desarrollo web' );
+INSERT INTO prolearn.categorias (nombre_categoria) VALUES ('Web Development'), ('Data Science'), ('Machine Learning');
+
+INSERT INTO prolearn.capitulo_padre (nombre_capitulo, num_capitulo) VALUES
+('Introduction', 1),
+('Basics of HTML', 2),
+('Basics of CSS', 3),
+('Data Analysis', 2),
+('Data Visualization', 3),
+('Machine Learning in python', 2),
+('Building Machine Learning Models', 3);
+
+INSERT INTO prolearn.capitulo_hijo (id_categoria_padre, nombre_capitulo, video_capitulo, numero_capitulo) VALUES
+(1, 'Getting Started with Web Development', 'video1.mp4', 1),
+(1, 'HTML Basics', 'video2.mp4', 2),
+(2, 'HTML Tags', 'video3.mp4', 1),
+(2, 'CSS Basics', 'video4.mp4', 2),
+(3, 'CSS Selectors', 'video5.mp4', 1),
+
+(1, 'Data Analysis with Pandas', 'video6.mp4', 1),
+(4, 'Data Visualization with Matplotlib', 'video7.mp4', 1),
+
+(1, 'Introduction to Machine Learning', 'video8.mp4', 1),
+(1, 'Building Machine Learning Models with TensorFlow', 'video9.mp4', 2);
+
+INSERT INTO prolearn.cursos (nombre_curso, descrp_curso, estado_curso, thumbnail_curso, categoria_curso) VALUES
+('Curso de javascript', 'Learn the basics of web development', true, 'thumbnail1.jpg', 1),
+('Data Visualization with Python', 'Learn howto visualize data using Python', true, 'thumbnail2.jpg', 2),
+('Machine Learning with TensorFlow', 'Learn how to build machine learning models using TensorFlow', true, 'thumbnail3.jpg', 3);
+
+INSERT INTO prolearn.capitulo_x_curso (id_curso, id_capitulo) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+
+(2, 6),
+(2, 7),
+
+(3, 8),
+(3, 9);

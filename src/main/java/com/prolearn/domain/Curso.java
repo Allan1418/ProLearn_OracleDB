@@ -3,6 +3,7 @@ package com.prolearn.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import lombok.Data;
 
 
@@ -32,27 +33,40 @@ public class Curso implements Serializable {
     @Column(name = "thumbnail_curso")
     private String thumbnailCurso;
     
-    //cambiar a llave foranea
-    @Column(name = "categoria_curso")
-    private String categoria_curso;
+    @ManyToOne
+    @JoinColumn(name = "categorias")
+    private Categoria categoria_curso;
     
-    //referencia a futuro para llaves foraneas
-    //-------
-    //@OneToMany
-    //@JoinColumn(name = "id_categoria", updatable = false)
-    //List<Producto> productos;
+    
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "capitulo_x_curso",
+            joinColumns = @JoinColumn(name = "id_curso"),
+            inverseJoinColumns = @JoinColumn(name = "id_capitulo")
+    )
+    private List<CapituloHijo> capitulosHijos;
+    
 
     public Curso() {
     }
-    
-    
-    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, String categoria_curso) {
+
+    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoria_curso, List<CapituloHijo> capitulosHijos) {
+        this.nombreCurso = nombreCurso;
+        this.descrpCurso = descrpCurso;
+        this.estadoCurso = estadoCurso;
+        this.thumbnailCurso = thumbnailCurso;
+        this.categoria_curso = categoria_curso;
+        this.capitulosHijos = capitulosHijos;
+    }
+
+    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoria_curso, List<CapituloHijo> capitulosHijos) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
         this.categoria_curso = categoria_curso;
+        this.capitulosHijos = capitulosHijos;
     }
     
     
