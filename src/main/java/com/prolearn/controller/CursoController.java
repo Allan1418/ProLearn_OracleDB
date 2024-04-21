@@ -1,10 +1,14 @@
-
 package com.prolearn.controller;
 
+import com.prolearn.domain.CapituloHijo;
+import com.prolearn.domain.CapituloPadre;
+import com.prolearn.domain.CapitulosEstruc;
 import com.prolearn.domain.Curso;
 import com.prolearn.service.CursoService;
 import com.prolearn.service.FirebaseStorageService;
 import com.prolearn.service.Impl.FirebaseStorageServiceImpl;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,17 +53,41 @@ public class CursoController {
 //        model.addAttribute("categoria", curso);
 //        return "//";
 //    }  
-    
     @GetMapping("/curso/{idCurso}")
     public String cursoMostrar(Curso curso, Model model) {
         curso = cursoService.getCurso(curso);
-        
-        
-        
-        
-        
+
+        List<CapitulosEstruc> lista = new ArrayList<>();
+
+        for (CapituloPadre capituloPadre : getListaCapituloPadre(curso)) {
+            List<CapituloHijo> capitulosHijos = new ArrayList<>();
+            for (CapituloHijo hijo : curso.getCapitulosHijos()) {
+                if (hijo.getCapituloPadre().getNombre().equals(capituloPadre.getNombre())) {
+                    capitulosHijos.add(hijo);
+                }
+            }
+            // Ordenar capitulosHijos por numero
+            capitulosHijos.sort(Comparator.comparingInt(CapituloHijo::getNumero));
+            lista.add(new CapitulosEstruc(capituloPadre, capitulosHijos));
+        }
+        // Ordenar CapituloPadre por numero
+        lista.sort(Comparator.comparingInt(e -> e.getCapituloPadre().getNumero()));
+
+        model.addAttribute("lista", lista);
         model.addAttribute("curso", curso);
         return "curso/curso";
-    }  
-    
+    }
+
+    private List<CapituloPadre> getListaCapituloPadre(Curso curso) {
+        List<CapituloPadre> listaCapituloPadre = new ArrayList<>();
+        for (CapituloHijo hijo : curso.getCapitulosHijos()) {
+            if (!listaCapituloPadre.contains(hijo.getCapituloPadre())) {
+                listaCapituloPadre.add(hijo.getCapituloPadre());
+            }
+        }
+        // Sort uniqueCapituloPadre by numero
+        listaCapituloPadre.sort(Comparator.comparingInt(CapituloPadre::getNumero));
+        return listaCapituloPadre;
+    }
+
 }

@@ -27,22 +27,22 @@
                                                                                              class="btn  ">¡Suscríbete!</button></a></div>
                 </div>
             </div>
-            
+
             <div class="container col-12 col-md-7 col-lg-7 px-5 py-5 bg-black">
                 <h2 class="text-center py-5" style="color: white;">Resumen del curso</h2>
                 <div class="accordion" id="accordionPanelsStayOpenExample">
-                    <th:block th:each="capitulopadre, contador : ${capitulo_padre}"> <!-- Iterar sobre la lista de módulos -->
+                    <th:block th:each="capitulosEstruc, contador : ${lista}"> <!-- Iterar sobre la lista de CapitulosEstruc -->
                         <div class="accordion-item">
                             <h2 class="accordion-header"> 
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapse" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapse" th:text="${capitulopadre.nombre}"> Modulo<!-- Título del módulo -->
+                                        aria-controls="panelsStayOpen-collapse" th:text="${capitulosEstruc.capituloPadre.nombre}"> Modulo<!-- Título del módulo -->
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapse" class="accordion-collapse collapse">
                                 <div class="accordion-body">
-                                    <th:block th:each="capitulohijo, contador : ${capitulo_hijo}"> <!-- Iterar sobre la lista de submódulos -->
-                                        <strong th:text="${capitulohijo.nombre}">Submodulo</strong><br/> <!-- Título del sub módulo -->
+                                    <th:block th:each="capituloHijo, contador : ${capitulosEstruc.capitulosHijos}"> <!-- Iterar sobre la lista de CapituloHijo -->
+                                        <strong th:text="${capituloHijo.nombre}">Submodulo</strong><br/> <!-- Título del sub módulo -->
                                     </th:block>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                     </th:block>
                 </div>
             </div>
-            
+
         </section>
 
     </body>
