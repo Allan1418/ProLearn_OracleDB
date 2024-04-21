@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <video src="video.mp4" controls style="width: 100%; height: 60vh;"></video>
+                        <video th:src="${CapituloHijo.video}" controls style="width: 100%; height: 60vh;"></video>
                     </div>
                 </div>
             </div>
@@ -23,8 +23,7 @@
             <section class="containerInfo">
                 <div class="row" style="background-color: #2D2C2E; color: white;">
                     <div class="txtVideo">
-                        <h2>Titulo de Clase</h2>
-                        <p>Informacion relevante del video</p>
+                        <h2 th:text="${capituloHijo.nombre}"></h2>
                     </div>
                 </div>
             </section>
