@@ -24,7 +24,7 @@ public class CapituloHijo implements Serializable {
     @Column(name = "video_capitulo")
     private String video;
 
-    @Column(name = "num_capitulo")
+    @Column(name = "numero_capitulo")
     private int numero;
     
     @ManyToOne

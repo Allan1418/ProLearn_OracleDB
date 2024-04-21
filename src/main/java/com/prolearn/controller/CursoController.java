@@ -23,31 +23,43 @@ public class CursoController {
     @Autowired
     private CursoService cursoService;
 
-    @GetMapping("/curso")
-    private String getCursos(Model model) {
-        var cursos = cursoService.getCursos();
-        model.addAttribute("cursos", cursos);
-        return "/curso/curso";
-    }
+//    @GetMapping("/curso")
+//    private String getCursos(Model model) {
+//        var cursos = cursoService.getCursos();
+//        model.addAttribute("cursos", cursos);
+//        return "/curso/curso";
+//    }
+//    
+//    @GetMapping("/eliminar/{idCurso}")
+//    public String categoriaEliminar(Curso curso) {
+//        cursoService.delete(curso);
+//        return "redirect://";
+//    }
+//    
+//    
+//    @PostMapping("/guardar")
+//    public String categoriaGuardar(Curso curso) {        
+//        cursoService.save(curso);
+//        return "redirect://";
+//    }
+//    
+//    @GetMapping("/modificar/{idCurso}")
+//    public String categoriaModificar(Curso curso, Model model) {
+//        curso = cursoService.getCurso(curso);
+//        model.addAttribute("categoria", curso);
+//        return "//";
+//    }  
     
-    @GetMapping("/eliminar/{idCurso}")
-    public String categoriaEliminar(Curso curso) {
-        cursoService.delete(curso);
-        return "redirect://";
-    }
-    
-    
-    @PostMapping("/guardar")
-    public String categoriaGuardar(Curso curso) {        
-        cursoService.save(curso);
-        return "redirect://";
-    }
-    
-    @GetMapping("/modificar/{idCurso}")
-    public String categoriaModificar(Curso curso, Model model) {
+    @GetMapping("/curso/{idCurso}")
+    public String cursoMostrar(Curso curso, Model model) {
         curso = cursoService.getCurso(curso);
-        model.addAttribute("categoria", curso);
-        return "//";
+        
+        
+        
+        
+        
+        model.addAttribute("curso", curso);
+        return "curso/curso";
     }  
     
 }

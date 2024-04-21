@@ -34,8 +34,8 @@ public class Curso implements Serializable {
     private String thumbnailCurso;
     
     @ManyToOne
-    @JoinColumn(name = "categorias")
-    private Categoria categoria_curso;
+    @JoinColumn(name = "categoria_curso")
+    private Categoria categoriaCurso;
     
     
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -50,22 +50,22 @@ public class Curso implements Serializable {
     public Curso() {
     }
 
-    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoria_curso, List<CapituloHijo> capitulosHijos) {
+    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso, List<CapituloHijo> capitulosHijos) {
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        this.categoria_curso = categoria_curso;
+        this.categoriaCurso = categoriaCurso;
         this.capitulosHijos = capitulosHijos;
     }
 
-    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoria_curso, List<CapituloHijo> capitulosHijos) {
+    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso, List<CapituloHijo> capitulosHijos) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        this.categoria_curso = categoria_curso;
+        this.categoriaCurso = categoriaCurso;
         this.capitulosHijos = capitulosHijos;
     }
     

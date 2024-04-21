@@ -22,7 +22,7 @@ public class CapituloPadre implements Serializable {
     @Column(name = "nombre_capitulo")
     private String nombre;
 
-    @Column(name = "num_capitulo")
+    @Column(name = "numero_capitulo")
     private int numero;
     
     

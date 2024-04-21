@@ -49,7 +49,7 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE prolearn.capitulo_padre (
   id_capitulo INT AUTO_INCREMENT PRIMARY KEY,
   nombre_capitulo VARCHAR(255) NOT NULL,
-  num_capitulo INT NOT NULL
+  numero_capitulo INT NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -106,7 +106,7 @@ values('1','1');
 
 INSERT INTO prolearn.categorias (nombre_categoria) VALUES ('Web Development'), ('Data Science'), ('Machine Learning');
 
-INSERT INTO prolearn.capitulo_padre (nombre_capitulo, num_capitulo) VALUES
+INSERT INTO prolearn.capitulo_padre (nombre_capitulo, numero_capitulo) VALUES
 ('Introduction', 1),
 ('Basics of HTML', 2),
 ('Basics of CSS', 3),
@@ -129,7 +129,7 @@ INSERT INTO prolearn.capitulo_hijo (id_categoria_padre, nombre_capitulo, video_c
 (1, 'Building Machine Learning Models with TensorFlow', 'video9.mp4', 2);
 
 INSERT INTO prolearn.cursos (nombre_curso, descrp_curso, estado_curso, thumbnail_curso, categoria_curso) VALUES
-('Curso de javascript', 'Learn the basics of web development', true, 'thumbnail1.jpg', 1),
+('Curso de javascript', 'Learn the basics of web development', true, 'https://bairesdev.mo.cloudinary.net/blog/2023/08/What-Is-JavaScript-Used-For.jpg?tx=w_1920,q_auto', 1),
 ('Data Visualization with Python', 'Learn howto visualize data using Python', true, 'thumbnail2.jpg', 2),
 ('Machine Learning with TensorFlow', 'Learn how to build machine learning models using TensorFlow', true, 'thumbnail3.jpg', 3);
 
