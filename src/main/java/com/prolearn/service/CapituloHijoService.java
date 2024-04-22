@@ -8,4 +8,6 @@ public interface CapituloHijoService {
     
     public CapituloHijo getCapituloHijo(CapituloHijo capituloHijo);
     
+    public void save(CapituloHijo capituloHijo);
+    
 }

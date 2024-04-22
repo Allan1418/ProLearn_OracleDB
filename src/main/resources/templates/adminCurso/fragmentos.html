@@ -176,8 +176,8 @@
                             <input type="hidden" name="nuevaImagen" value="NO"/>
                             <div class="modal-body">
                                 <div class="mb-3">
-                                    <label for="">Nombre del Modulo</label>
-                                    <input type="text" class="form-control" name="nombreModulo" required="true"/>
+                                    <label for="nombre">Nombre del Modulo</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="numero">Numero del Capitulo</label>                                    
@@ -205,7 +205,7 @@
                     </thead>
                     <tbody>
                         <tr >
-                            <td th:text="${CapituloPadre.id}"></td>
+                            <td th:text="${CapituloPadre.numero}"></td>
                             <td th:text="${CapituloPadre.nombre}"></td>
                             <td>
                                 <a th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
@@ -287,7 +287,7 @@
                             <h5 class="modal-title">Editar Capitulo Padre</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}"
+                        <form th:action="@{/adminCurso/save-capituloPadre}" th:object="${capituloPadre}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
 
                             <div class="modal-body">
@@ -296,6 +296,12 @@
                                     <input type="text" class="form-control" th:field="*{nombre}"
                                            name="nombre" required="true"/>
                                 </div>
+                                <div class="mb-3">
+                                    <label for="numero">Poscion del capitulo</label>                                    
+                                    <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                           name="numero" required="true"/>
+                                </div>
+                                <input type="hidden" th:field="*{id}" />
                             </div>
 
                             <div class="modal-footer">
@@ -313,7 +319,7 @@
             <div id="titulo1" class="fs-3 my-5">Detalle Capitulo Padre</div>
 
             <div id="gestionCursos">
-                <p class="py-3" style="color: white" th:text="${capituloPadre.id}">Parent Module ID</p>
+                <p class="py-3" style="color: white" th:text="${capituloPadre.numero}">Parent Module ID</p>
                 <h2 th:text="${capituloPadre.nombre}" id="detallePadre"
                     class="col-6">Parent Module Name</h2>
                 <div class="col-6 ms-auto">
@@ -326,14 +332,14 @@
             <table class="table table-borderless table-dark border border-white">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
+                        <th scope="col">Posicion</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <tr th:each="capituloHijo : ${listaHijos}">
-                        <td th:text="${capituloHijo.id}"></td>
+                        <td th:text="${capituloHijo.numero}"></td>
                         <td th:text="${capituloHijo.nombre}"></td>
                         <td>
                             <a th:href="@{/adminCurso/detalleCapituloHijo/}+${capituloHijo.id}"><button class="btn my-2" id="btn2" >Editar</button></a>
@@ -357,7 +363,7 @@
         <section th:fragment="editarClaseHijo">
             <div class="container">
                 <h1 class="text-center mt-5">Editar Capitulo Hijo</h1>
-                <form th:action="@{/adminCurso/save}" th:object="${capituloHijo}"    
+                <form th:action="@{/adminCurso/save-capituloHijo}" th:object="${capituloHijo}"    
                       method="POST" class="was-validated" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="mb-3">
@@ -378,12 +384,15 @@
                                    name="numero" required="true"/>
                         </div>
 
+                        <input type="hidden" th:field="*{id}" />
+                        <input type="hidden" th:field="*{capituloPadre}" />
+
                     </div>
 
                     <div class="modal-footer">
                         <button class="btn btn-primary" type="submit">Guardar</button>
                     </div>
-                    
+
                 </form>
             </div>
         </section>

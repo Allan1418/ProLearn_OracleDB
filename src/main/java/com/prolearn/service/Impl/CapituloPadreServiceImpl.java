@@ -1,9 +1,12 @@
 
 package com.prolearn.service.Impl;
 
+import com.prolearn.dao.CapituloHijoDao;
 import com.prolearn.dao.CapituloPadreDao;
+import com.prolearn.domain.CapituloHijo;
 import com.prolearn.domain.CapituloPadre;
 import com.prolearn.service.CapituloPadreService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,9 @@ public class CapituloPadreServiceImpl implements CapituloPadreService{
 
     @Autowired
     private CapituloPadreDao capituloPadreDao;
+    
+    @Autowired
+    private CapituloHijoDao capituloHijoDao;
     
     @Override
     @Transactional(readOnly = true)
@@ -26,6 +32,16 @@ public class CapituloPadreServiceImpl implements CapituloPadreService{
 //            System.out.println("nuloooooooooooooooooooo");
 //        }
         return capituloPadre;
+    }
+
+    @Override
+    public void save(CapituloPadre capituloPadre) {
+        capituloPadreDao.save(capituloPadre);
+    }
+
+    @Override
+    public List<CapituloHijo> getCapitulosHijos(CapituloPadre capituloPadre) {
+        return capituloHijoDao.findAllByCapituloPadreId(capituloPadre.getId());
     }
     
 }
