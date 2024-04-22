@@ -7,10 +7,24 @@
     </head>
     <body id="cuerpo">
         <header th:replace="~{layout/headerFooter :: header}"></header>
-        
+
         <section th:replace="~{adminCurso/fragmentos :: editarClases}"></section>
-        
+
         <footer th:replace="~{layout/headerFooter :: footer}"></footer>
+
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            $(document).ready(function () {
+                $('#editarCapituloHijo').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget);
+                    var capituloHijo = button.data('object');
+                    $(this).find('form').attr('th:object', capituloHijo);
+                });
+            });
+            /*]]>*/
+        </script>
+
+
     </body>
 </html>
 

@@ -39,7 +39,7 @@ public class ProyectConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/login","/signup", "/js/**",
                         "/webjars/**", "/css/**", "/img/**", "/layout/**", 
-                        "/curso/**", "/visualVideos/**", "/adminCurso/**")
+                        "/curso/**", "/visualVideos/**","/Footer/**", "/adminCurso/**")
                 .permitAll().anyRequest())
                 .formLogin((form) -> form
                 .loginPage("/login").defaultSuccessUrl("/index", true).permitAll())

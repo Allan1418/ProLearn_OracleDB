@@ -211,8 +211,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     width: 70%;
-    margin-left: 1%;
-    margin-right: auto;
+    margin: auto;
 }
 
 
@@ -266,3 +265,7 @@
     position: inherit;
 }
 
+/*kk de anyelo*/
+#detallePadre{
+    color: white;
+}

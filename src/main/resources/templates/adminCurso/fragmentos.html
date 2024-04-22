@@ -9,18 +9,18 @@
     </head>
 
     <body>
-        
+
         <!-- 
            ==============================================================-->
         <!-- Se muestra los cursos y se crean-->
         <!-- 
            ==============================================================-->
-        
+
 
         <section th:fragment="agregarCurso">
-            
-            
-          <div id="titulo2" class="fs-2 my-5">Gestion de Cursos</div>
+
+
+            <div id="titulo2" class="fs-2 my-5">Gestion de Cursos</div>
 
             <div class="col-12 col-md-9 my-5 mx-5">
                 <button id="btnLogin" type="botton" class="btn btn-primary"
@@ -84,11 +84,11 @@
             </div>
 
 
-        <!-- 
-           ==============================================================-->
-        <!-- Se muestra la tabla con la informacion de los cursos -->
-        <!-- 
-           ==============================================================-->
+            <!-- 
+               ==============================================================-->
+            <!-- Se muestra la tabla con la informacion de los cursos -->
+            <!-- 
+               ==============================================================-->
 
 
 
@@ -117,20 +117,20 @@
                             </td>
                         </tr>
                 </table>
-            </div>
+                          </div>
         </section>
-        
-        
-        
-        
-        
+
+
+
+
+
 
         <!-- 
            ==============================================================-->
         <!-- Se edita y agrega el contendo del curso y sus modulos -->
         <!-- 
            ==============================================================-->
-        
+
         <section th:fragment="infoCurso">
             <div id="cuerpo-menu">
                 <div id="fondo-curso" class=" col-6 ms-auto">
@@ -144,13 +144,13 @@
                             <h3 style="color:black;">Se entrega certificado al finalizar.</h3>
                     </div>
                     <div class="offset-md-4 col-6 ms-auto py-4"><a href="index.html"><button id="btn2" type="button"
-                    class="btn  ">¡Suscríbete!</button></a></div>
+                                                                                             class="btn  ">¡Suscríbete!</button></a></div>
                 </div>
             </div>
 
         </section>
 
-        
+
 
         <section th:fragment="modulosCurso">
 
@@ -192,7 +192,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="gestionCursos" class="col-7 table-responsive">
                 <table class="table table-borderless table-dark border border-white"
                        th:each="CapituloPadre, contador : ${ListaPadres}">
@@ -220,74 +220,192 @@
             </div>
 
         </section>
-        
-        
+
+
         <!-- 
            ==============================================================-->
         <!-- Se edita y agrega el contendo de las clases y sus modulos -->
         <!-- 
            ==============================================================-->
-        
-        
-        
+
+
+
         <section th:fragment="editarClases">
-            
-            <div id="titulo1" class="fs-3 my-5">Editar Clases</div>
 
-            <div id="gestionCursos" class="col-7 table-responsive"
-                 th:each="CapituloPadre, contador : ${ListaPadres}">
-                <table class="table table-borderless table-dark border border-white" >
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody class="text-center">
-                        <tr  class="table-dark">
-                            <td></td>
-                            <td th:text="${capitulosEstruc.capituloPadre.nombre}"></td>
-                            <td></td>
-                            <td>
-                                <a th:href="@{/curso/modificar/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Editar</button></a>
-                                
-                                <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Agregar Clase</button></a>
-                            </td>
-                        </tr>
+            <div id="agregarClase" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Crear Curso</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}" 
+                              method="POST" class="was-validated" enctype="multipart/form-data">
 
-                        <!-- Iterate over capitulosHijos and generate a separate row for each item -->
-                        <tr>
-                            
-                            <td th:text="${capituloHijo.id}"></td>
-                            <td>
-                                <div th:href="@{/visualVideos/visualVideos/}+${capituloHijo.id}">
-                                    <strong th:text="${capituloHijo.nombre}"></strong>
-                                </div> <!-- Título del sub módulo -->
-                            </td>
-                            
-                            <td></td>
-                            
-                            <td class="col-6">
-                                <a th:href="@{/curso/modificar/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Editar</button></a>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre de la clase</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                </div>
 
-                                <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Eliminar</button></a>
-                            </td>
-                            
-                        </tr>
-                    </tbody>
-                    
-                </table>
+                                <div class="mb-3">
+                                    <label for="video">Url del video</label>                                    
+                                    <input type="text" class="form-control" name="video" required="true"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="numero">Poscion del capitulo</label>                                    
+                                    <input type="number" min="0" class="form-control" name="numero" required="true"/>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" 
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.id}" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
-        </section>
-        
-        
+
+
+
+            <div id="editarNombreCapituloPadre" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Editar Capitulo Padre</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre del capitulo Padre</label>
+                                    <input type="text" class="form-control" th:field="*{nombre}"
+                                           name="nombre" required="true"/>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" 
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.id}" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="editarCapituloHijo" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Editar Capitulo Hijo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/capituloPadre/guardar}" th:object="${object}"    
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre de la clase</label>
+                                    <input type="text" class="form-control" th:field="${object.nombre}"
+                                           name="nombre" required="true"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="video">Url del video</label>                                    
+                                    <input type="text" class="form-control" row="3" th:field="${object.video}"
+                                           name="video" required="true"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="numero">Poscion del capitulo</label>                                    
+                                    <input type="number" min="0" class="form-control" th:field="${object.numero}"
+                                           name="numero" required="true"/>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" 
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.id}" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                $(document).ready(function () {
+                    $('#editarCapituloHijo').on('show.bs.modal', function (event) {
+                        var button = $(event.relatedTarget);
+                        var capituloHijo = button.data('object');
+                        $(this).find('form').attr('th:object', capituloHijo);
+                    });
+                });
+                /*]]>*/
+            </script>
+
+
+
+            <div id="titulo1" class="fs-3 my-5">Detalle Capitulo Padre</div>
+
+            <div id="gestionCursos">
+                <p class="py-3" style="color: white" th:text="${capituloPadre.id}">Parent Module ID</p>
+                <h2 th:text="${capituloPadre.nombre}" id="detallePadre"
+                    class="col-6">Parent Module Name</h2>
+                <div class="col-6 ms-auto">
+                    <button class="btn my-2" id="btn2" data-bs-target="#editarNombreCapituloPadre" data-bs-toggle="modal">Editar</button>
+                    <button class="btn my-2" id="btn2" data-bs-target="#agregarClase" data-bs-toggle="modal">Agregar Clase</button>
+                </div>
+            </div>
+
+
+            <table class="table table-borderless table-dark border border-white">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr th:each="capituloHijo : ${listaHijos}">
+                        <td th:text="${capituloHijo.id}"></td>
+                        <td th:text="${capituloHijo.nombre}"></td>
+                        <td>
+                            <button class="btn my-2" 
+                                    id="btn2" 
+                                    data-bs-target="#editarCapituloHijo" 
+                                    data-bs-toggle="modal" 
+                                    th:attr="data-object=${capituloHijo}">Editar</button>
+                            <button class="btn my-2"  id="btn2"th:href="@{/curso/eliminar/}+${capituloHijo.id}">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+                  </section>
+
+
     </body>
 </html>

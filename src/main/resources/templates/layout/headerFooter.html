@@ -22,11 +22,11 @@
 
         <!-- Link para icon del titulo-->
         <link rel="icon" th:href="@{/img/icon.png}" type="image/x-icon"/>
-        
+
         <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet"/>
         <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"/>
-        
-        
+
+
         <title th:text="|Prolearn|"> Prolearn</title>
 
     </head>
@@ -57,7 +57,7 @@
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Precio</a></li>
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>
-                            
+
                             <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                                 <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Mis Cursos</a></li>
                                 <!--<li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>-->
@@ -75,9 +75,9 @@
 
                             <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
                                 <li class="nav-item px-2 py-2">
-                                <a class="nav-menu-link nav-link" th:href=@{/login}>
-                                    <i>Iniciar Sesion</i>
-                                </a>
+                                    <a class="nav-menu-link nav-link" th:href=@{/login}>
+                                        <i>Iniciar Sesion</i>
+                                    </a>
                                 </li>
                             </ul>
                         </ul>
@@ -96,16 +96,24 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-3">
-                        <p>POLÍTICA DE PRIVACIDAD</p>
+                        <a class="" th:href=@{/Footer/politicaPrivacidad}>
+                            <p>POLÍTICA DE PRIVACIDAD</p>
+                        </a>
                     </div>
                     <div class="col-sm-6 col-md-3">
-                        <p>CONDICIONES DE CONTRATACIÓN</p>
+                        <a class="" th:href=@{/Footer/condiContratacion}>
+                            <p>CONDICIONES DE CONTRATACIÓN</p>
+                        </a>
                     </div>
                     <div class="col-sm-6 col-md-3">
-                        <p>POLÍTICA DE COOKIES</p>
+                        <a class="" th:href=@{/Footer/cookies}>
+                            <p>POLÍTICA DE COOKIES</p>
+                        </a>
                     </div>
                     <div class="col-sm-6 col-md-3">
-                        <p>AVISO LEGAL</p>
+                        <a class="" th:href=@{/Footer/avisoLegal}>
+                            <p>AVISO LEGAL</p>
+                        </a>
                     </div>
                 </div>
                 <div class="my-3">
