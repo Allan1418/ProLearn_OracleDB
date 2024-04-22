@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-      <head th:replace="~{layout/headerFooter :: head}">
+    <head>
         <title>Pro Learn</title>
+
+        <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet"/>
+        <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet"/>
     </head>
 
 
     <body>
+
+
+
         <section th:fragment="visualVideos">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <video th:src="${CapituloHijo.video}" controls style="width: 100%; height: 60vh;"></video>
-                    </div>
-                </div>
+            <div th:if="${capituloHijo.video != null and !capituloHijo.video.isEmpty()}">
+                <video
+                    id="myVideo"
+                    class="video-js vjs-theme-forest vjs-big-play-centered  vjs-fluid vjs-layout-large vjs-flexwidth"
+                    controls
+                    preload="auto"
+                    width="100%"
+                    height="50%"
+                    data-setup="{}">
+                    <source th:src="${capituloHijo.video}" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank"
+                           >supports HTML5 video</a
+                        >
+                    </p>
+                </video>
+            </div>
+            <div th:class="col-12" th:if="${capituloHijo.video == null or capituloHijo.video.isEmpty()}">
+                <p>No se econtro el video</p>
             </div>
 
-            <section class="containerInfo">
-                <div class="row" style="background-color: #2D2C2E; color: white;">
-                    <div class="txtVideo">
-                        <h2 th:text="${capituloHijo.nombre}"></h2>
-                    </div>
-                </div>
-            </section>
+
         </section>
+        <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+
     </body>
 </html>

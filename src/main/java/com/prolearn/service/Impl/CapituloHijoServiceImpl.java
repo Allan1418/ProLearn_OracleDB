@@ -17,7 +17,17 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
     @Override
     @Transactional(readOnly = true)
     public CapituloHijo getCapituloHijo(Long id) {
-        return capituloHijoDao.findById(id).orElse(null);
+        CapituloHijo capituloHijo = capituloHijoDao.findById(id).orElse(null);
+//        if (capituloHijo != null) {
+//            System.out.println("ID: " + capituloHijo.getId());
+//            System.out.println("Nombre: " + capituloHijo.getNombre());
+//            System.out.println("Video: " + capituloHijo.getVideo());
+//            System.out.println("Número: " + capituloHijo.getNumero());
+//            System.out.println("Capítulo padre: " + capituloHijo.getCapituloPadre().getNombre());
+//        } else{
+//            System.out.println("nuloooooooooooooooooooo");
+//        }
+        return capituloHijo;
     }
     
 }
