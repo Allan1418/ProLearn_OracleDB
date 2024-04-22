@@ -59,7 +59,7 @@ public class CursoController {
 
         List<CapitulosEstruc> lista = new ArrayList<>();
 
-        for (CapituloPadre capituloPadre : getListaCapituloPadre(curso)) {
+        for (CapituloPadre capituloPadre : CapitulosEstruc.getListaCapituloPadre(curso)) {
             List<CapituloHijo> capitulosHijos = new ArrayList<>();
             for (CapituloHijo hijo : curso.getCapitulosHijos()) {
                 if (hijo.getCapituloPadre().getNombre().equals(capituloPadre.getNombre())) {
@@ -78,16 +78,6 @@ public class CursoController {
         return "curso/curso";
     }
 
-    private List<CapituloPadre> getListaCapituloPadre(Curso curso) {
-        List<CapituloPadre> listaCapituloPadre = new ArrayList<>();
-        for (CapituloHijo hijo : curso.getCapitulosHijos()) {
-            if (!listaCapituloPadre.contains(hijo.getCapituloPadre())) {
-                listaCapituloPadre.add(hijo.getCapituloPadre());
-            }
-        }
-        // Sort uniqueCapituloPadre by numero
-        listaCapituloPadre.sort(Comparator.comparingInt(CapituloPadre::getNumero));
-        return listaCapituloPadre;
-    }
+    
 
 }

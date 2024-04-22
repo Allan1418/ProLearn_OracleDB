@@ -56,10 +56,11 @@
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/curso/curso}">Cursos</a></li>
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Precio</a></li>
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
-                                                        
+                            <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>
+                            
                             <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                                 <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Mis Cursos</a></li>
-                                <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Vista Administrador</a></li>
+                                <!--<li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>-->
                                 <li class="nav-item text-white my-auto px-2 py-2">
                                     <span sec:authentication="name"></span>
                                 </li>

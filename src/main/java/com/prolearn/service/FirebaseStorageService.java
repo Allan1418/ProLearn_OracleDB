@@ -1,16 +1,12 @@
 
 package com.prolearn.service;
 
-/**
- *
- * @author Daniel Velasquez M
- */
 
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FirebaseStorageService {
 
-    public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id);
+    public String cargaArchivo(MultipartFile archivoLocalCliente, String carpeta, Long id, String contentType);
 
     //El BuketName es el <id_del_proyecto> + ".appspot.com"
     final String BucketName = "prolearn-1a8ca.appspot.com";

@@ -56,11 +56,11 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 CREATE TABLE prolearn.capitulo_hijo (
   id_capitulo INT AUTO_INCREMENT PRIMARY KEY,
-  id_categoria_padre INT NOT NULL,
+  id_capitulo_padre INT NOT NULL,
   nombre_capitulo VARCHAR(255) NOT NULL,
   video_capitulo varchar(1024),
   numero_capitulo INT NOT NULL,
-  FOREIGN KEY (id_categoria_padre) REFERENCES capitulo_padre(id_capitulo)
+  FOREIGN KEY (id_capitulo_padre) REFERENCES capitulo_padre(id_capitulo)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -115,7 +115,7 @@ INSERT INTO prolearn.capitulo_padre (nombre_capitulo, numero_capitulo) VALUES
 ('Machine Learning in python', 2),
 ('Building Machine Learning Models', 3);
 
-INSERT INTO prolearn.capitulo_hijo (id_categoria_padre, nombre_capitulo, video_capitulo, numero_capitulo) VALUES
+INSERT INTO prolearn.capitulo_hijo (id_capitulo_padre, nombre_capitulo, video_capitulo, numero_capitulo) VALUES
 (1, 'Getting Started with Web Development', 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Python%2FCapitulo%201%2F1.%20Programaci%C3%B3n%20en%20Python%20_%20Lenguaje%20de%20Programaci%C3%B3n%20Python.mp4?alt=media&token=ca67e1c9-5729-4407-bae4-e5f7ca39760c', 1),
 (1, 'HTML Basics', 'video2.mp4', 2),
 (2, 'HTML Tags', 'video3.mp4', 1),

@@ -1,7 +1,5 @@
 package com.prolearn.service.Impl;
 
-
-
 import com.google.auth.Credentials;
 import com.google.auth.ServiceAccountSigner;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -23,19 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FirebaseStorageServiceImpl implements FirebaseStorageService {
     @Override
-    public String cargaImagen(MultipartFile archivoLocalCliente, String carpeta, Long id) {
+    public String cargaArchivo(MultipartFile archivoLocalCliente, String carpeta, Long id, String contentType) {
         try {
             // El nombre original del archivo local del cliene
-            String extension = archivoLocalCliente.getOriginalFilename();
+            String extension = archivoLocalCliente.getOriginalFilename().substring(archivoLocalCliente.getOriginalFilename().lastIndexOf("."));
 
             // Se genera el nombre según el código del articulo. 
-            String fileName = "img" + sacaNumero(id) + extension;
+            String fileName = "art" + sacaNumero(id) + extension;
 
             // Se convierte/sube el archivo a un archivo temporal
             File file = this.convertToFile(archivoLocalCliente);
 
             // se copia a Firestore y se obtiene el url válido de la imagen (por 10 años) 
-            String URL = this.uploadFile(file, carpeta, fileName);
+            String URL = this.uploadFile(file, carpeta, fileName, contentType);
 
             // Se elimina el archivo temporal cargado desde el cliente
             file.delete();
@@ -47,11 +45,11 @@ public class FirebaseStorageServiceImpl implements FirebaseStorageService {
         }
     }
 
-    private String uploadFile(File file, String carpeta, String fileName) throws IOException {
+    private String uploadFile(File file, String carpeta, String fileName, String contentType) throws IOException {
         //Se define el lugar y acceso al archivo .jasper
         ClassPathResource json = new ClassPathResource(rutaJsonFile + File.separator + archivoJsonFile);
         BlobId blobId = BlobId.of(BucketName, rutaSuperiorStorage + "/" + carpeta + "/" + fileName);
-        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
+        BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(contentType).build();
 
         Credentials credentials = GoogleCredentials.fromStream(json.getInputStream());
         Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
@@ -62,7 +60,7 @@ public class FirebaseStorageServiceImpl implements FirebaseStorageService {
 
     //Método utilitario que convierte el archivo desde el equipo local del usuario a un archivo temporal en el servidor
     private File convertToFile(MultipartFile archivoLocalCliente) throws IOException {
-        File tempFile = File.createTempFile("img", null);
+        File tempFile = File.createTempFile("art", null);
         try (FileOutputStream fos = new FileOutputStream(tempFile)) {
             fos.write(archivoLocalCliente.getBytes());
             fos.close();

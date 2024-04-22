@@ -27,8 +27,8 @@ public class CapituloHijo implements Serializable {
     @Column(name = "numero_capitulo")
     private int numero;
     
-    @ManyToOne
-    @JoinColumn(name = "id_categoria_padre")
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_capitulo_padre")
     private CapituloPadre capituloPadre;
     
 
