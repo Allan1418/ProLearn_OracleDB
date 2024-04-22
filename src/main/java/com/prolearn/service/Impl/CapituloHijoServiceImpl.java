@@ -16,8 +16,8 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
     
     @Override
     @Transactional(readOnly = true)
-    public CapituloHijo getCapituloHijo(Long id) {
-        CapituloHijo capituloHijo = capituloHijoDao.findById(id).orElse(null);
+    public CapituloHijo getCapituloHijo(CapituloHijo capituloHijo) {
+        capituloHijo = capituloHijoDao.findById(capituloHijo.getId()).orElse(null);
 //        if (capituloHijo != null) {
 //            System.out.println("ID: " + capituloHijo.getId());
 //            System.out.println("Nombre: " + capituloHijo.getNombre());

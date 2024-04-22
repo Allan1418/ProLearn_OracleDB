@@ -6,6 +6,6 @@ import com.prolearn.domain.CapituloHijo;
 
 public interface CapituloHijoService {
     
-    public CapituloHijo getCapituloHijo(Long id);
+    public CapituloHijo getCapituloHijo(CapituloHijo capituloHijo);
     
 }

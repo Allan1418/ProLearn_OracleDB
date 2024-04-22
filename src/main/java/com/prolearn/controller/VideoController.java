@@ -18,9 +18,9 @@ public class VideoController {
     private CapituloHijoService capituloHijoService;
     
     @GetMapping("/visualVideos/{id}")
-    public String mostrarVideo(@PathVariable Long id, Model model) {
+    public String mostrarVideo(CapituloHijo capituloHijo, Model model) {
         
-        CapituloHijo capituloHijo = capituloHijoService.getCapituloHijo(id);
+        capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
         
 //        if (capituloHijo != null) {
 //            System.out.println("ID: " + capituloHijo.getId());

@@ -224,7 +224,7 @@
 
         <!-- 
            ==============================================================-->
-        <!-- Se edita y agrega el contendo de las clases y sus modulos -->
+        <!-- Se edita y agrega el contendo del modulo -->
         <!-- 
            ==============================================================-->
 
@@ -309,63 +309,6 @@
 
 
 
-            <div id="editarCapituloHijo" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
-                 aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Editar Capitulo Hijo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/capituloPadre/guardar}" th:object="${object}"    
-                              method="POST" class="was-validated" enctype="multipart/form-data">
-
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre de la clase</label>
-                                    <input type="text" class="form-control" th:field="${object.nombre}"
-                                           name="nombre" required="true"/>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="video">Url del video</label>                                    
-                                    <input type="text" class="form-control" row="3" th:field="${object.video}"
-                                           name="video" required="true"/>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="numero">Poscion del capitulo</label>                                    
-                                    <input type="number" min="0" class="form-control" th:field="${object.numero}"
-                                           name="numero" required="true"/>
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" 
-                                        th:href="@{/curso/eliminar/}+${capituloPadre.id}" type="submit">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <script th:inline="javascript">
-                /*<![CDATA[*/
-                $(document).ready(function () {
-                    $('#editarCapituloHijo').on('show.bs.modal', function (event) {
-                        var button = $(event.relatedTarget);
-                        var capituloHijo = button.data('object');
-                        $(this).find('form').attr('th:object', capituloHijo);
-                    });
-                });
-                /*]]>*/
-            </script>
-
-
 
             <div id="titulo1" class="fs-3 my-5">Detalle Capitulo Padre</div>
 
@@ -393,19 +336,57 @@
                         <td th:text="${capituloHijo.id}"></td>
                         <td th:text="${capituloHijo.nombre}"></td>
                         <td>
-                            <button class="btn my-2" 
-                                    id="btn2" 
-                                    data-bs-target="#editarCapituloHijo" 
-                                    data-bs-toggle="modal" 
-                                    th:attr="data-object=${capituloHijo}">Editar</button>
+                            <a th:href="@{/adminCurso/detalleCapituloHijo/}+${capituloHijo.id}"><button class="btn my-2" id="btn2" >Editar</button></a>
                             <button class="btn my-2"  id="btn2"th:href="@{/curso/eliminar/}+${capituloHijo.id}">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+        </section>
 
-                  </section>
 
+
+        <!-- 
+           ==============================================================-->
+        <!-- Se edita y agrega el contendo de las clases -->
+        <!-- 
+           ==============================================================-->
+
+
+
+        <section th:fragment="editarClaseHijo">
+            <div class="container">
+                <h1 class="text-center mt-5">Editar Capitulo Hijo</h1>
+                <form th:action="@{/adminCurso/save}" th:object="${capituloHijo}"    
+                      method="POST" class="was-validated" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="nombre">Nombre de la clase</label>
+                            <input type="text" class="form-control" th:field="*{nombre}"
+                                   name="nombre" required="true"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="video">Url del video</label>                                    
+                            <input type="text" class="form-control" row="3" th:field="*{video}"
+                                   name="video" required="true"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="numero">Poscion del capitulo</label>                                    
+                            <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                   name="numero" required="true"/>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </section>
 
     </body>
 </html>

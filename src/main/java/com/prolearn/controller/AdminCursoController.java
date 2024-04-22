@@ -25,6 +25,9 @@ public class AdminCursoController {
     @Autowired
     private CapituloPadreService capituloPadreService;
     
+    @Autowired
+    private CapituloHijoService capituloHijoServiceService;
+    
     @GetMapping("/listarCursos")
     public String listarCursos(Model model) {
         
@@ -67,6 +70,20 @@ public class AdminCursoController {
         
         
         return "/adminCurso/detalleCapitulos";
+    }
+    
+    @GetMapping("/detalleCapituloHijo/{id}")
+    public String detalleCapituloHijo(CapituloHijo capituloHijo, Model model) {
+        
+        
+        capituloHijo = capituloHijoServiceService.getCapituloHijo(capituloHijo);
+        
+        model.addAttribute("capituloHijo", capituloHijo);
+        
+        
+        
+        
+        return "/adminCurso/detalleCapituloHijo";
     }
     
     
