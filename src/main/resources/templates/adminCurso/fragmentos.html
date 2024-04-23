@@ -20,11 +20,12 @@
         <section th:fragment="agregarCurso">
 
 
-            <div id="titulo2" class="fs-2 my-5">Gestion de Cursos</div>
-
-            <div class="col-12 col-md-9 my-5 mx-5">
-                <button id="btnLogin" type="botton" class="btn btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#agregarCurso">Crear Curso</button>
+            <div id="titulo2" class="fs-2 mb-5 ">Gestion de Cursos</div>
+            <div class="row mb-3">
+                <div class="col-12 d-flex align-items-center mt-5 ms-5">
+                    <button id="btnCurso" type="botton" class="btn "
+                            data-bs-toggle="modal" data-bs-target="#agregarCurso">Crear Curso</button>
+                </div>
             </div>
 
 
@@ -35,7 +36,7 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
-                        <div class="modal-header bg-info text-white">
+                        <div id="popup" class="modal-header text-white">
                             <h5 class="modal-title">Crear Curso</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
@@ -76,7 +77,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
+                                <button id="btn2" class="btn" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -92,32 +93,36 @@
 
 
 
-            <div id="gestioCursos" class="col-7 table-responsive text-center mx-5">
+            <div id="gestioCursos" class="table-responsive text-center mx-5">
 
-                <table class="table table-borderless table-dark border border-white">
-                    <thead>
-                        <tr >
-                            <th scope="col">Nombre del Curso</th>
-                            <th scope="col">Estado del Curso</th>
-                            <th scope="col">Categoria del Curso</th>
-                            <th scope="col">Botones</th>
-                        </tr>
-                    </thead>
-                    <tbody th:each="curso, contador : ${cursos}">
-                        <tr>
-                            <th th:text="${curso.nombreCurso}" scope="row"></th>
-                            <td th:text="${curso.estadoCurso}"></td>
-                            <td th:text="${curso.categoriaCurso.nombre}"></td>
-                            <td>
-                                <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Editar</button></a>
+                <div id="gestionCursos" class="col-7 table-responsive text-center">
+                    <table class="table table-borderless table-dark border border-white
+                           text-center py-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Nombre del Curso</th>
+                                <th scope="col">Estado del Curso</th>
+                                <th scope="col">Categoria del Curso</th>
+                                <th scope="col">Botones</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="curso, contador : ${cursos}">
+                            <tr>
+                                <th th:text="${curso.nombreCurso}" scope="row"></th>
+                                <td th:text="${curso.estadoCurso}"></td>
+                                <td th:text="${curso.categoriaCurso.nombre}"></td>
+                                <td>
+                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Editar</button></a>
 
-                                <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Eliminar</button></a>
-                            </td>
-                        </tr>
-                </table>
-                          </div>
+                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+
         </section>
 
 
@@ -154,9 +159,10 @@
 
         <section th:fragment="modulosCurso">
 
-            <div class="col-12 col-md-9 my-5 mx-5">
-                <button id="btnLogin" type="botton" class="btn btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#agregarModulo">Crear Modulo</button>
+            <div class="col-12 d-flex align-items-center mt-5 ms-5">
+                <button id="btnModulo" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarModulo">
+                    Agregar Módulo
+                </button>
             </div>
 
             <div id="agregarModulo" 
@@ -167,7 +173,7 @@
                 <div class="modal-dialog modal-md">
                     <div class="modal-content">
                         <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Crear Curso</h5>
+                            <h5 class="modal-title">Crear Modulo</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
                         <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}"
@@ -193,26 +199,27 @@
                 </div>
             </div>
 
-            <div id="gestionCursos" class="col-7 table-responsive">
-                <table class="table table-borderless table-dark border border-white"
+            <div id="gestionCursos" class="col-7 table-responsive text-center">
+                <table class="table table-borderless table-dark border border-white
+                       text-center py-4"
                        th:each="CapituloPadre, contador : ${ListaPadres}">
                     <thead>
                         <tr>
                             <th scope="col">Posicion</th>
                             <th scope="col">Modulo</th>
-                            <th scope="col"></th>
+                            <th scope="col">Botones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr >
-                            <td th:text="${CapituloPadre.numero}"></td>
-                            <td th:text="${CapituloPadre.nombre}"></td>
-                            <td>
+                        <tr class="text-center">
+                            <td class="text-center col-4 my-2" th:text="${CapituloPadre.numero}"></td>
+                            <td class="text-center col-4 my-2"  th:text="${CapituloPadre.nombre}"></td>
+                            <td class="text-center col-4 my-2">
                                 <a th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
-                                    <button id="btn2" class="btn">Editar</button></a>
+                                    <button id="btn2" class="btn my-2">Editar</button></a>
 
                                 <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                    <button id="btn2" class="btn">Eliminar</button></a>
+                                    <button id="btn2" class="btn my-2">Eliminar</button></a>
                             </td>
                         </tr>
                     </tbody>
@@ -266,7 +273,7 @@
 
                             <div class="modal-footer">
                                 <button class="btn btn-primary" 
-                                        th:href="@{/curso/eliminar/}+${capituloPadre.id}" type="submit">Guardar</button>
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.numero}" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -306,7 +313,7 @@
 
                             <div class="modal-footer">
                                 <button class="btn btn-primary" 
-                                        th:href="@{/curso/eliminar/}+${capituloPadre.id}" type="submit">Guardar</button>
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.numero}" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -329,25 +336,29 @@
             </div>
 
 
-            <table class="table table-borderless table-dark border border-white">
-                <thead>
-                    <tr>
-                        <th scope="col">Posicion</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    <tr th:each="capituloHijo : ${listaHijos}">
-                        <td th:text="${capituloHijo.numero}"></td>
-                        <td th:text="${capituloHijo.nombre}"></td>
-                        <td>
-                            <a th:href="@{/adminCurso/detalleCapituloHijo/}+${capituloHijo.id}"><button class="btn my-2" id="btn2" >Editar</button></a>
-                            <button class="btn my-2"  id="btn2"th:href="@{/curso/eliminar/}+${capituloHijo.id}">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="gestionCursos" class="col-7 table-responsive text-center">
+                <table class="table table-borderless table-dark border border-white
+                       text-center py-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Posicion</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="capituloHijo : ${listaHijos}">
+                            <td th:text="${capituloHijo.numero}"></td>
+                            <td th:text="${capituloHijo.nombre}"></td>
+                            <td>
+                                <a th:href="@{/adminCurso/detalleCapituloHijo/}+${capituloHijo.numero}"><button class="btn my-2" id="btn2" >Editar</button></a>
+                                <button class="btn my-2"  id="btn2"th:href="@{/curso/eliminar/}+${capituloHijo.numero}">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </section>
 
 
@@ -361,39 +372,45 @@
 
 
         <section th:fragment="editarClaseHijo">
-            <div class="container">
-                <h1 class="text-center mt-5">Editar Capitulo Hijo</h1>
-                <form th:action="@{/adminCurso/save-capituloHijo}" th:object="${capituloHijo}"    
-                      method="POST" class="was-validated" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="nombre">Nombre de la clase</label>
-                            <input type="text" class="form-control" th:field="*{nombre}"
-                                   name="nombre" required="true"/>
+
+            <div id="titulo1" class="fs-3 my-5">Editar Capitulo Hijo</div>
+
+            <div id="detalleHijo" style="background-color: #23272A" 
+                 class="col-md-6 offset-md-4 table-responsive text-center">
+                <div class="container">
+                    <form th:action="@{/adminCurso/save-capituloHijo}" th:object="${capituloHijo}"    
+                          method="POST" class="was-validated" enctype="multipart/form-data">
+                        
+                        <div class="modal-body">
+                            <div class="mb-3 my-5">
+                                <label for="nombre" class="text-center" >Nombre de la clase</label>
+                                <input type="text" class="form-control" th:field="*{nombre}"
+                                       name="nombre" required="true"/>
+                            </div>
+
+                            <div class="mb-3 my-5">
+                                <label for="video">Url del video</label>                                    
+                                <textarea type="text" class="form-control" rows="3" th:field="*{video}"
+                                       name="video" required="true"/>
+                            </div>
+
+                            <div class="mb-3 my-5">
+                                <label for="numero" class="text-center" >Poscion del capitulo</label>                                    
+                                <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                       name="numero" required="true"/>
+                            </div>
+                            
+                            <input type="hidden" th:field="*{id}" />
+                            <input type="hidden" th:field="*{capituloPadre}" />
+
                         </div>
 
-                        <div class="mb-3">
-                            <label for="video">Url del video</label>                                    
-                            <input type="text" class="form-control" row="3" th:field="*{video}"
-                                   name="video" required="true"/>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="numero">Poscion del capitulo</label>                                    
-                            <input type="number" min="0" class="form-control" th:field="*{numero}"
-                                   name="numero" required="true"/>
-                        </div>
-
-                        <input type="hidden" th:field="*{id}" />
-                        <input type="hidden" th:field="*{capituloPadre}" />
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
-                    </div>
-
-                </form>
+                    </form>
+                </div>
             </div>
         </section>
 

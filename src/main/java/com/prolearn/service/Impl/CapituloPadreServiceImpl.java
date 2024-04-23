@@ -43,5 +43,10 @@ public class CapituloPadreServiceImpl implements CapituloPadreService{
     public List<CapituloHijo> getCapitulosHijos(CapituloPadre capituloPadre) {
         return capituloHijoDao.findAllByCapituloPadreId(capituloPadre.getId());
     }
+
+    @Override
+    public void delete(CapituloPadre capituloPadre) {
+        capituloPadreDao.delete(capituloPadre);
+    }
     
 }

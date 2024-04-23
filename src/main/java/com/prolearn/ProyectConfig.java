@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -37,17 +38,17 @@ public class ProyectConfig implements WebMvcConfigurer {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                .requestMatchers("/", "/index", "/login","/signup", "/js/**",
-                        "/webjars/**", "/css/**", "/img/**", "/layout/**", 
-                        "/curso/**", "/visualVideos/**","/Footer/**", "/adminCurso/**")
-                .permitAll().anyRequest())
+                .requestMatchers("/", "/index", "/login", "/signup", "/js/**",
+                        "/webjars/**", "/css/**", "/img/**", "/layout/**",
+                        "/curso/**", "/Footer/**", "/metodoPago/**", "/visualVideos/**")
+                .permitAll().requestMatchers("/adminCurso/**").hasRole("ADMIN")
+                )
                 .formLogin((form) -> form
                 .loginPage("/login").defaultSuccessUrl("/index", true).permitAll())
                 .logout((logout) -> logout.permitAll());
         return http.build();
     }
-    
-    
+
     @Autowired
     private UserDetailsService userDetailsService;
 

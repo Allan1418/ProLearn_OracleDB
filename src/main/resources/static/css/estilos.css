@@ -151,6 +151,11 @@
     background-color: #2D2C2E;
     color: white;
 }
+.fixed-size {
+  width: 100%;
+  height: 300px; 
+  object-fit: cover;
+}
 
 
 /*================Metodo Pago================*/
@@ -190,16 +195,57 @@
     padding-bottom: 10px;
 }
 
+
+/*================Admin Curso================*/
+
+#btnCurso{
+    margin-left: 63%;
+    color: rgb(0, 0, 0);
+    background-color: #00FF29;
+}
+
+#btnModulo{
+    margin-left: 62%;
+    color: rgb(0, 0, 0);
+    background-color: #00FF29;
+}
+
+#detalleHijo{
+    margin: 5%;
+    margin-left: 23%;
+    label{
+        color: white;
+        margin-bottom: 2%;
+    }
+    
+    
+}
 /*================Visual Videos================*/
 
-.txtVideo{
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    max-width: 50%; /* Ajusta según sea necesario */
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.tituloVideo{
     color: white;
-    font-size: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 70%;
-    margin-left: 13%;
-    margin-right: auto;
+    font-size: 40px;
+    padding-top: 40px;
+}
+
+#video{
+    margin-bottom: 8%;
 }
 
 /*================Estilo html Footer================*/
@@ -265,7 +311,11 @@
     position: inherit;
 }
 
-/*kk de anyelo*/
 #detallePadre{
     color: white;
+}
+
+#popup{
+    background-color:#2D2C2E;
+    
 }

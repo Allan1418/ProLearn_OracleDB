@@ -54,13 +54,14 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto ">
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/curso/curso}">Cursos</a></li>
-                            <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Precio</a></li>
+                            <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/metodoPago/metodoPago}">Precio</a></li>
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
-                            <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>
+                            <!--<li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>-->
 
                             <ul class="navbar-nav" sec:authorize="isAuthenticated()">
                                 <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">Mis Cursos</a></li>
-                                <!--<li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>-->
+                                <li class="nav-item px-2 py-2"><a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')"
+                                                                  th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>
                                 <li class="nav-item text-white my-auto px-2 py-2">
                                     <span sec:authentication="name"></span>
                                 </li>
@@ -92,7 +93,7 @@
         <!-- 
            ==============================================================-->
 
-        <footer th:fragment="footer" style="background-color: #2D2C2E; color: white;">
+        <footer class="mt-5" th:fragment="footer" style="background-color: #2D2C2E; color: white;">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-3">

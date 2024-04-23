@@ -10,4 +10,6 @@ public interface CapituloHijoService {
     
     public void save(CapituloHijo capituloHijo);
     
+    public void delete(CapituloHijo capituloHijo);
+    
 }

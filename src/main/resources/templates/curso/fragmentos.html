@@ -41,8 +41,9 @@
                             </h2>
                             <div id="panelsStayOpen-collapse" class="accordion-collapse collapse">
                                 <div class="accordion-body">
-                                    <th:block th:each="capituloHijo, contador : ${capitulosEstruc.capitulosHijos}"> <!-- Iterar sobre la lista de CapituloHijo -->
-                                        <a th:href="@{/visualVideos/visualVideos/}+${capituloHijo.id}"><strong th:text="${capituloHijo.nombre}"></strong></a><br/> <!-- Título del sub módulo -->
+                                    <th:block class="my-5" th:each="capituloHijo, contador : ${capitulosEstruc.capitulosHijos}"> <!-- Iterar sobre la lista de CapituloHijo -->
+                                        <a class="my-5" th:href="@{/visualVideos/visualVideos/}+${capituloHijo.id}" sec:authorize="isAuthenticated()"><strong class="my-5" th:text="${capituloHijo.nombre}"></strong></a><br/>
+                                        <strong class="my-5" th:text="${capituloHijo.nombre}" sec:authorize="!isAuthenticated()"></strong><br/>
                                     </th:block>
                                 </div>
                             </div>

@@ -60,7 +60,7 @@ CREATE TABLE prolearn.capitulo_hijo (
   nombre_capitulo VARCHAR(255) NOT NULL,
   video_capitulo varchar(1024),
   numero_capitulo INT NOT NULL,
-  FOREIGN KEY (id_capitulo_padre) REFERENCES capitulo_padre(id_capitulo)
+  FOREIGN KEY (id_capitulo_padre) REFERENCES capitulo_padre(id_capitulo) ON DELETE NO ACTION
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -82,7 +82,7 @@ CREATE TABLE prolearn.capitulo_x_curso (
   id_curso INT NOT NULL,
   id_capitulo INT NOT NULL,
   FOREIGN KEY (id_curso) REFERENCES cursos(id_curso),
-  FOREIGN KEY (id_capitulo) REFERENCES capitulo_hijo(id_capitulo)
+  FOREIGN KEY (id_capitulo) REFERENCES capitulo_hijo(id_capitulo) ON DELETE CASCADE
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -97,7 +97,7 @@ INSERT INTO prolearn.usuarios (nombre, apellidos, email, password)
 VALUES ('Juan', 'Perez', 'juan@example.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
  
 INSERT INTO prolearn.usuarios (nombre, apellidos, email, password)
-VALUES ('Maria', 'Gonzalez', 'maria@example.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
+VALUES ('admin', 'admin', 'admin@prolearn.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
 
 INSERT INTO prolearn.usuario_Rol(usuario_id,rol_id)
 values('1','1'),('2','2');
@@ -273,7 +273,7 @@ INSERT INTO prolearn.cursos (nombre_curso, descrp_curso, estado_curso, thumbnail
 
 /*Inserts de curso Python */
 ('Python', 'Python es un lenguaje de programación de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y fácil de leer, lo que lo hace ideal para principiantes y expertos por igual.',
- true, 'https://bairesdev.mo.cloudinary.net/blog/2023/08/What-Is-JavaScript-Used-For.jpg?tx=w_1920,q_auto', 2),
+ true, 'https://www.dongee.com/tutoriales/content/images/2023/01/que-es-python-1.png', 2),
  
  /*Inserts de curso MySql */
 ('MySql', 'MySQL es un sistema de gestión de bases de datos relacionales (RDBMS) de código abierto, ampliamente utilizado en el desarrollo de aplicaciones web, móviles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.',

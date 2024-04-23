@@ -17,14 +17,18 @@
 
 
         <section th:fragment="visualVideos">
-            <div th:if="${capituloHijo.video != null and !capituloHijo.video.isEmpty()}">
+            
+            <div id="video" class="video-container" 
+                 th:if="${capituloHijo.video != null and !capituloHijo.video.isEmpty()}">
+                <h2 id="titulo1" class="fs-3 my-5 tituloVideo"
+                    th:text="${capituloHijo.nombre}"></h2>
                 <video
                     id="myVideo"
-                    class="video-js vjs-theme-forest vjs-big-play-centered  vjs-fluid vjs-layout-large vjs-flexwidth"
+                    class="video-js vjs-theme-forest vjs-big-play-centered
+                    vjs-layout-large vjs-flexwidth vjs-fluid"
                     controls
                     preload="auto"
-                    width="100%"
-                    height="50%"
+                    style="width: 100%;"
                     data-setup="{}">
                     <source th:src="${capituloHijo.video}" type="video/mp4" />
                     <p class="vjs-no-js">
@@ -38,7 +42,7 @@
             </div>
             <div th:class="col-12" th:if="${capituloHijo.video == null or capituloHijo.video.isEmpty()}">
                 <p>No se econtro el video</p>
-            </div>
+            </div>
 
 
         </section>

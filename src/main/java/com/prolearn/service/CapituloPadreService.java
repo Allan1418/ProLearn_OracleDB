@@ -14,4 +14,6 @@ public interface CapituloPadreService {
     
     public void save(CapituloPadre capituloPadre);
     
+    public void delete(CapituloPadre capituloPadre);
+    
 }

@@ -34,5 +34,10 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
     public void save(CapituloHijo capituloHijo) {
         capituloHijoDao.save(capituloHijo);
     }
+
+    @Override
+    public void delete(CapituloHijo capituloHijo) {
+        capituloHijoDao.delete(capituloHijo);
+    }
     
 }

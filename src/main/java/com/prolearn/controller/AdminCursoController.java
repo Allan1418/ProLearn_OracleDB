@@ -145,9 +145,9 @@ public class AdminCursoController {
             
             CapituloPadre nuevoPadre = new CapituloPadre(capituloPadre.getNombre(), capituloPadre.getNumero());
             capituloPadreService.save(nuevoPadre);
-            System.out.println("####" + nuevoPadre.getId());
-            System.out.println("####" + nuevoPadre.getNumero());
-            System.out.println("####" + nuevoPadre.getNombre());
+//            System.out.println("####" + nuevoPadre.getId());
+//            System.out.println("####" + nuevoPadre.getNumero());
+//            System.out.println("####" + nuevoPadre.getNombre());
             
             for (CapituloHijo i : listaHijosCurso) {
                 
@@ -166,6 +166,24 @@ public class AdminCursoController {
         
         
         //capituloPadreService.save(capituloPadre);
+        
+        return "redirect:/adminCurso/detalleCapitulos/" + idCurso + "/" + id;
+    }
+    
+    @GetMapping("/deleteCapituloHijo/{id}")
+    public String deleteCapituloHijo(CapituloHijo capituloHijo, Model model) {
+        
+        capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
+        
+        Long id = capituloHijo.getCapituloPadre().getId();
+        
+        Curso curso = (Curso) session.getAttribute("curso-" + capituloHijo.getCapituloPadre().getId());
+        Long idCurso = curso.getIdCurso();
+        
+        capituloHijo.setCapituloPadre(null);
+        capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
+        
+        capituloHijoService.delete(capituloHijo);
         
         return "redirect:/adminCurso/detalleCapitulos/" + idCurso + "/" + id;
     }
