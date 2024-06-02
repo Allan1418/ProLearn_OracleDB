@@ -99,7 +99,7 @@ VALUES ('Juan', 'Perez', 'juan@example.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU
 INSERT INTO prolearn.usuarios (nombre, apellidos, email, password)
 VALUES ('admin', 'admin', 'admin@prolearn.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
 
-INSERT INTO prolearn.usuario_Rol(usuario_id,rol_id)
+INSERT INTO prolearn.usuario_rol(usuario_id,rol_id)
 values('1','1'),('2','2');
 
 
