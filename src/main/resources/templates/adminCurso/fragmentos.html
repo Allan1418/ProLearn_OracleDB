@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+
+    <body>
+
+        <!-- 
+           ==============================================================-->
+        <!-- Se muestra los cursos y se crean-->
+        <!-- 
+           ==============================================================-->
+
+
+        <section th:fragment="agregarCurso">
+
+
+            <div id="titulo2" class="fs-2 mb-5 ">Gestion de Cursos</div>
+            <div class="row mb-3">
+                <div class="col-12 d-flex align-items-center mt-5 ms-5">
+                    <button id="btnCurso" type="botton" class="btn "
+                            data-bs-toggle="modal" data-bs-target="#agregarCurso">Crear Curso</button>
+                </div>
+            </div>
+
+
+            <div id="agregarCurso" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div id="popup" class="modal-header text-white">
+                            <h5 class="modal-title">Crear Curso</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/curso/guardar}" th:object="${curso}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+
+                            <input type="hidden" name="nuevaImagen" value="NO"/>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="idCurso">Categorias</label>
+                                    <select name="curso.idCurso"
+                                            class="form-select"
+                                            aria-label="Default select example">
+                                        <option th:each="Categoria, contador : ${categorias}" th:value="${Categoria.id}" th:text="${Categoria.nombre}"></option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="nombreCurso">Nombre del curso</label>
+                                    <input type="text" class="form-control" name="nombreCurso" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="descrpCurso">Descripcion del curso</label>                                    
+                                    <textarea class="form-control" name="descrpCurso" rows="3" required="true"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagen">Url de la imagen</label>
+                                    <input class="form-control" type="file" name="imagenFile"
+                                           onchange="readURL(this);" required="true">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="estadoCurso">Estado del curso</label>
+                                    <input class="form-check-input" 
+                                           type="checkbox" 
+                                           name="estadoCurso" 
+                                           id="estadoCurso">
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button id="btn2" class="btn" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 
+               ==============================================================-->
+            <!-- Se muestra la tabla con la informacion de los cursos -->
+            <!-- 
+               ==============================================================-->
+
+
+
+            <div id="gestioCursos" class="table-responsive text-center mx-5">
+
+                <div id="gestionCursos" class="col-7 table-responsive text-center">
+                    <table class="table table-borderless table-dark border border-white
+                           text-center py-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Nombre del Curso</th>
+                                <th scope="col">Estado del Curso</th>
+                                <th scope="col">Categoria del Curso</th>
+                                <th scope="col">Botones</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="curso, contador : ${cursos}">
+                            <tr>
+                                <th th:text="${curso.nombreCurso}" scope="row"></th>
+                                <td th:text="${curso.estadoCurso}"></td>
+                                <td th:text="${curso.categoriaCurso.nombre}"></td>
+                                <td>
+                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Editar</button></a>
+
+                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+
+
+
+
+        <!-- 
+           ==============================================================-->
+        <!-- Se edita y agrega el contendo del curso y sus modulos -->
+        <!-- 
+           ==============================================================-->
+
+        <section th:fragment="infoCurso">
+            <div id="cuerpo-menu">
+                <div id="fondo-curso" class=" col-6 ms-auto">
+                    <img class="img-fluid fondo d-block w-100 px-2 " th:src="${curso.thumbnailCurso}" alt="">
+                </div>
+                <div class="container">
+                    <h1 class="fs-1 offset-md-3 col-10 ms-auto" th:text="${curso.nombreCurso}"></h1>
+                    <div class="fs-2 py-3 offset-md-3 col-10 ms-auto">
+                        <h2 th:text="${curso.descrpCurso}"></h2>
+                        <br>
+                            <h3 style="color:black;">Se entrega certificado al finalizar.</h3>
+                    </div>
+                    <div class="offset-md-4 col-6 ms-auto py-4"><a href="index.html"><button id="btn2" type="button"
+                                                                                             class="btn  ">¡Suscríbete!</button></a></div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <section th:fragment="modulosCurso">
+
+            <div class="col-12 d-flex align-items-center mt-5 ms-5">
+                <button id="btnModulo" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#agregarModulo">
+                    Agregar Módulo
+                </button>
+            </div>
+
+            <div id="agregarModulo" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Crear Modulo</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+
+                            <input type="hidden" name="nuevaImagen" value="NO"/>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre del Modulo</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numero">Numero del Capitulo</label>                                    
+                                    <input type="number" min="0" class="form-control" name="numero" required="true"/>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gestionCursos" class="col-7 table-responsive text-center">
+                <table class="table table-borderless table-dark border border-white
+                       text-center py-4"
+                       th:each="CapituloPadre, contador : ${ListaPadres}">
+                    <thead>
+                        <tr>
+                            <th scope="col">Posicion</th>
+                            <th scope="col">Modulo</th>
+                            <th scope="col">Botones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td class="text-center col-4 my-2" th:text="${CapituloPadre.numero}"></td>
+                            <td class="text-center col-4 my-2"  th:text="${CapituloPadre.nombre}"></td>
+                            <td class="text-center col-4 my-2">
+                                <a th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
+                                    <button id="btn2" class="btn my-2">Editar</button></a>
+
+                                <a th:href="@{/adminCurso/deleteCapituloHijo/}+${curso.idCurso}">
+                                    <button id="btn2" class="btn my-2">Eliminar</button></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+
+        <!-- 
+           ==============================================================-->
+        <!-- Se edita y agrega el contendo del modulo -->
+        <!-- 
+           ==============================================================-->
+
+
+
+        <section th:fragment="editarClases">
+
+            <div id="agregarClase" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Crear Curso</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}" 
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre de la clase</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="video">Url del video</label>                                    
+                                    <input type="text" class="form-control" name="video" required="true"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="numero">Poscion del capitulo</label>                                    
+                                    <input type="number" min="0" class="form-control" name="numero" required="true"/>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" 
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.numero}" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="editarNombreCapituloPadre" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title">Editar Capitulo Padre</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div> 
+                        <form th:action="@{/adminCurso/save-capituloPadre}" th:object="${capituloPadre}"
+                              method="POST" class="was-validated" enctype="multipart/form-data">
+
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nombre">Nombre del capitulo Padre</label>
+                                    <input type="text" class="form-control" th:field="*{nombre}"
+                                           name="nombre" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="numero">Poscion del capitulo</label>                                    
+                                    <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                           name="numero" required="true"/>
+                                </div>
+                                <input type="hidden" th:field="*{id}" />
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" 
+                                        th:href="@{/curso/eliminar/}+${capituloPadre.numero}" type="submit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="titulo1" class="fs-3 my-5">Detalle Capitulo Padre</div>
+
+            <div id="gestionCursos">
+                <p class="py-3" style="color: white" th:text="${capituloPadre.numero}">Parent Module ID</p>
+                <h2 th:text="${capituloPadre.nombre}" id="detallePadre"
+                    class="col-6">Parent Module Name</h2>
+                <div class="col-6 ms-auto">
+                    <button class="btn my-2" id="btn2" data-bs-target="#editarNombreCapituloPadre" data-bs-toggle="modal">Editar</button>
+                    <button class="btn my-2" id="btn2" data-bs-target="#agregarClase" data-bs-toggle="modal">Agregar Clase</button>
+                </div>
+            </div>
+
+
+            <div id="gestionCursos" class="col-7 table-responsive text-center">
+                <table class="table table-borderless table-dark border border-white
+                       text-center py-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">Posicion</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="capituloHijo : ${listaHijos}">
+                            <td th:text="${capituloHijo.numero}"></td>
+                            <td th:text="${capituloHijo.nombre}"></td>
+                            <td>
+                                <a th:href="@{/adminCurso/detalleCapituloHijo/}+${capituloHijo.numero}"><button class="btn my-2" id="btn2" >Editar</button></a>
+                                <button class="btn my-2"  id="btn2"th:href="@{/curso/eliminar/}+${capituloHijo.numero}">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+
+
+        <!-- 
+           ==============================================================-->
+        <!-- Se edita y agrega el contendo de las clases -->
+        <!-- 
+           ==============================================================-->
+
+
+
+        <section th:fragment="editarClaseHijo">
+
+            <div id="titulo1" class="fs-3 my-5">Editar Capitulo Hijo</div>
+
+            <div id="detalleHijo" style="background-color: #23272A" 
+                 class="col-md-6 offset-md-4 table-responsive text-center">
+                <div class="container">
+                    <form th:action="@{/adminCurso/save-capituloHijo}" th:object="${capituloHijo}"    
+                          method="POST" class="was-validated" enctype="multipart/form-data">
+                        
+                        <div class="modal-body">
+                            <div class="mb-3 my-5">
+                                <label for="nombre" class="text-center" >Nombre de la clase</label>
+                                <input type="text" class="form-control" th:field="*{nombre}"
+                                       name="nombre" required="true"/>
+                            </div>
+
+                            <div class="mb-3 my-5">
+                                <label for="video">Url del video</label>                                    
+                                <textarea type="text" class="form-control" rows="3" th:field="*{video}"
+                                       name="video" required="true"/>
+                            </div>
+
+                            <div class="mb-3 my-5">
+                                <label for="numero" class="text-center" >Poscion del capitulo</label>                                    
+                                <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                       name="numero" required="true"/>
+                            </div>
+                            
+                            <input type="hidden" th:field="*{id}" />
+                            <input type="hidden" th:field="*{capituloPadre}" />
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </body>
+</html>
