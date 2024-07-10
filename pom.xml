@@ -11,8 +11,8 @@
     <groupId>com.prolearn</groupId>
     <artifactId>Prolearn</artifactId>
     <version>1</version>
-    <name>Prolearn</name>
-    <description>Proyecto de curso de Desarrollo de Aplicaciones Web y Patrones, I Cuatrimestre 2024</description>
+    <name>ProLearn_OracleDB</name>
+    <description>Proyecto de curso de Lenguajes de Base de Datos, II Cuatrimestre 2024</description>
     <properties>
         <java.version>21</java.version>
     </properties>
