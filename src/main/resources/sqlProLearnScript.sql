@@ -95,6 +95,7 @@ CREATE TABLE PROLEARN.capitulo_x_curso (
 INSERT INTO PROLEARN.rol (nombre) VALUES ('ROLE_USER');
 INSERT INTO PROLEARN.rol (nombre) VALUES ('ROLE_ADMIN');
 
+
 INSERT INTO PROLEARN.usuarios (nombre, apellidos, email, password)
 VALUES ('Juan', 'Perez', 'juan@example.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
  
@@ -194,7 +195,7 @@ VALUES (  'Mr y Ms', 4);
 
 
  /*Inserts de Submodulos Python */
-
+set define off;
     INSERT INTO PROLEARN.capitulo_hijo (id_capitulo_padre, nombre_capitulo, video_capitulo, numero_capitulo) VALUES
     (1,'Lenguaje de Programacion', 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Python%2FCapitulo%201%2F1.%20Programaci%C3%B3n%20en%20Python%20_%20Lenguaje%20de%20Programaci%C3%B3n%20Python.mp4?alt=media&token=d123f6a2-939a-42fd-a65d-f7ab73203ef3', 1);
     
