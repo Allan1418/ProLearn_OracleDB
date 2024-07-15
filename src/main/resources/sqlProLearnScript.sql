@@ -7,8 +7,12 @@ DECLARE
   v_count NUMBER;
 BEGIN
   SELECT COUNT(*) INTO v_count FROM all_users WHERE username = 'PROLEARN';
-
+ 
   IF v_count > 0 THEN
+    FOR rec IN (SELECT sid, serial# FROM v$session WHERE username = 'PROLEARN') LOOP
+      EXECUTE IMMEDIATE 'ALTER SYSTEM KILL SESSION ''' || rec.sid || ',' || rec.serial# || ''' IMMEDIATE';
+    END LOOP;
+ 
     EXECUTE IMMEDIATE 'DROP USER PROLEARN CASCADE';
     DBMS_OUTPUT.PUT_LINE('Usuario PROLEARN y sus objetos eliminados.');
   ELSE
