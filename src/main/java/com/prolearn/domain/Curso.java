@@ -9,14 +9,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cursos")
+@Table(name = "FIDE_CURSOS_TB")
 public class Curso implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_curso")
+    @Column(name = "CURSOS_TB_ID_CUR_PK")
     private Long idCurso;
     
     
@@ -40,7 +40,7 @@ public class Curso implements Serializable {
     
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
-            name = "capitulo_x_curso",
+            name = "FIDE_CAPITULO_X_CURSO_TB",
             joinColumns = @JoinColumn(name = "id_curso"),
             inverseJoinColumns = @JoinColumn(name = "id_capitulo")
     )

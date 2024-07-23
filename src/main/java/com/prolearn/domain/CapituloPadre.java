@@ -9,14 +9,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "capitulo_padre")
+@Table(name = "FIDE_CAPITULO_PADRE_TB")
 public class CapituloPadre implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_capitulo")
+    @Column(name = "CAPITULO_PADRE_TB_ID_CP_PK")
     private Long id;
 
     @Column(name = "nombre_capitulo")

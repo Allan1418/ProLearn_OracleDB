@@ -7,14 +7,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "FIDE_USUARIOS_TB", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "USUARIOS_TB_ID_USER_PK")
     private Long id;
 
     private String nombre;
@@ -29,9 +29,9 @@ public class Usuario implements Serializable {
     //Revisar con tablas mysql!!!!!!!
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(
-            name = "usuario_rol",
-            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id")
+            name = "FIDE_USUARIO_ROL_TB",
+            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "USUARIOS_TB_ID_USER_PK"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "ROL_TB_ID_ROL_PK")
     )
     private Collection<Rol> roles;
 
