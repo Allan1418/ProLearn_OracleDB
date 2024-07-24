@@ -57,6 +57,10 @@ public class CapituloHijo implements Serializable {
         this.numero = numero;
         this.capituloPadre = capituloPadre;
     }
+
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
     
