@@ -9,6 +9,14 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "FIDE_CAPITULO_HIJO_TB")
+@NamedStoredProcedureQuery(
+    name = "findById",
+    procedureName = "CH_FINDBYID_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_HIJO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_CAPITULO_HIJO", type = CapituloHijo.class)
+    }
+)
 public class CapituloHijo implements Serializable {
     
     private static final long serialVersionUID = 1L;
