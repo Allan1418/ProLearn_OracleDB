@@ -9,20 +9,29 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "capitulo_padre")
+@Table(name = "FIDE_CAPITULO_PADRE_TB")
+@NamedStoredProcedureQuery(
+    name = "SPFindXIdCP",
+    procedureName = "CP_FINDBYID_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
+    },
+    resultClasses = { CapituloPadre.class } 
+)
 public class CapituloPadre implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_capitulo")
+    @Column(name = "CAPITULO_PADRE_TB_ID_CP_PK")
     private Long id;
 
-    @Column(name = "nombre_capitulo")
+    @Column(name = "NOMBRE_CAPITULO_PADRE")
     private String nombre;
 
-    @Column(name = "numero_capitulo")
+    @Column(name = "NUMERO_CAPITULO_PADRE")
     private int numero;
     
     

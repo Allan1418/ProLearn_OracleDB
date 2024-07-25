@@ -1,7 +1,7 @@
 
 package com.prolearn.service.Impl;
 
-import com.prolearn.dao.CapituloHijoDao;
+import com.prolearn.dao.*;
 import com.prolearn.domain.CapituloHijo;
 import com.prolearn.service.CapituloHijoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +13,20 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
 
     @Autowired
     private CapituloHijoDao capituloHijoDao;
+    @Autowired
+    private CategoriaDao categoriaDao;
+    @Autowired
+    private CapituloPadreDao capituloPadreDao;
     
     @Override
     @Transactional(readOnly = true)
     public CapituloHijo getCapituloHijo(CapituloHijo capituloHijo) {
-        capituloHijo = capituloHijoDao.findById(capituloHijo.getId()).orElse(null);
+        capituloHijo = capituloHijoDao.findXId(capituloHijo.getId()).orElse(null);
+        capituloHijo.setCapituloPadre(capituloPadreDao.findXId(capituloHijo.getCapituloPadreId()).orElse(null));
+        
+        //ejemplo de impl de SP con categora
+        //System.out.println(categoriaDao.findByid(1L).getNombre());
+        
 //        if (capituloHijo != null) {
 //            System.out.println("ID: " + capituloHijo.getId());
 //            System.out.println("Nombre: " + capituloHijo.getNombre());
