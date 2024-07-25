@@ -1,307 +1,405 @@
 
 
 /*USUARIOS*/
---Buscar por email
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.US_FIND_BY_EMAIL_SP(
-  p_email IN FIDE_USUARIOS_TB.EMAIL%TYPE,
-  p_usuario OUT SYS_REFCURSOR
+
+-- Procedimiento para añadir un usuario
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_ADD_SP (
+    P_NOMBRE IN VARCHAR2,
+    P_APELLIDOS IN VARCHAR2,
+    P_EMAIL IN VARCHAR2,
+    P_PASSWORD IN VARCHAR2
 ) AS
 BEGIN
-  OPEN p_usuario FOR
-  SELECT * FROM FIDE_USUARIOS_TB
-  WHERE EMAIL = p_email;
-END US_FIND_BY_EMAIL_SP;
-/
--- 
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.US_FIND_ALL_USUARIOS_SP(
-  p_usuarios OUT SYS_REFCURSOR
-) AS
-BEGIN
-  OPEN p_usuarios FOR
-  SELECT 
-    USUARIOS_TB_ID_USUARIOS_PK,
-    NOMBRE,
-    APELLIDOS,
-    EMAIL,
-    PASSWORD
-  FROM 
-    FIDE_USUARIOS_TB;
-END US_FIND_ALL_USUARIOS_SP;
-/
---recuperar todas las entidades
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.US_FIND_USUARIO_BY_ID_SP(
-  p_id IN NUMBER,
-  p_usuario OUT SYS_REFCURSOR
-) AS
-BEGIN
-  OPEN p_usuario FOR
-  SELECT 
-    USUARIOS_TB_ID_USUARIOS_PK,
-    NOMBRE,
-    APELLIDOS,
-    EMAIL,
-    PASSWORD
-  FROM 
-    FIDE_USUARIOS_TB
-  WHERE 
-    USUARIOS_TB_ID_USUARIOS_PK = p_id;
-END US_FIND_USUARIO_BY_ID_SP;
-
---
-
-
-/*ROL*/
--- Procedimiento para eliminar un rol de un usuario
-CREATE OR REPLACE PROCEDURE sp_remove_role_from_user(
-    p_usuario_id IN INT,
-    p_rol_id IN INT
-) IS
-BEGIN
-    DELETE FROM PROLEARN.usuario_rol
-    WHERE usuario_id = p_usuario_id AND rol_id = p_rol_id;
+    INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (NOMBRE, APELLIDOS, EMAIL, PASSWORD)
+    VALUES (P_NOMBRE, P_APELLIDOS, P_EMAIL, P_PASSWORD);
     COMMIT;
 END;
 /
 
--- Procedimiento para listar todos los roles
-CREATE OR REPLACE PROCEDURE sp_list_roles IS
 BEGIN
-    FOR rec IN (SELECT * FROM PROLEARN.rol) LOOP
-        DBMS_OUTPUT.PUT_LINE('ID: ' || rec.id || ', Nombre: ' || rec.nombre);
-    END LOOP;
+  FIDE_PROLEARN_FINAL_PROF.USER_ADD_SP(
+    'Juan',
+    'Pérez',
+    'juan.perez@example.com',
+    'i_contraseña'
+  );
 END;
 /
 
--- Procedimiento para eliminar un rol
-CREATE OR REPLACE PROCEDURE sp_delete_role(
-    p_id IN INT
-) IS
+-- Procedimiento para eliminar un usuario
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_DELETE_SP (
+  P_ID IN NUMBER
+) AS
 BEGIN
-    DELETE FROM PROLEARN.rol WHERE id = p_id;
-    COMMIT;
+
+  DELETE FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB
+  WHERE USUARIO_ID = P_ID;
+
+  DELETE FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
+  WHERE USUARIOS_TB_ID_USER_PK = P_ID;
+
+  COMMIT;
 END;
 /
+
+
+BEGIN
+  FIDE_PROLEARN_FINAL_PROF.USER_DELETE_SP(4);
+END;
+/
+
+
+-- Procedimiento para listar todos los usuarios
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_FINDAL_SP(
+    P_CURSOR OUT SYS_REFCURSOR) AS
+BEGIN
+    OPEN P_CURSOR FOR SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB;
+END;
+/
+BEGIN
+    DECLARE
+    V_CURSOR   SYS_REFCURSOR; 
+    V_REGISTRO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB%ROWTYPE;
+    BEGIN FIDE_PROLEARN_FINAL_PROF.SP_FINDALL_USER(
+    V_CURSOR);
+        LOOP
+            FETCH V_CURSOR INTO V_REGISTRO;
+            EXIT WHEN V_CURSOR%NOTFOUND;
+            dbms_output.put_line('ID: '
+                                 || V_REGISTRO.USUARIOS_TB_ID_USER_PK|| ', NOMBRE: ' || V_REGISTRO.NOMBRE ||
+                                 ', APELLIDOS: '|| V_REGISTRO.APELLIDOS || ', EMAIL: '|| V_REGISTRO.EMAIL);
+        END LOOP;
+        CLOSE V_CURSOR;
+    END;
+END;
+/
+
+-- Procedimiento para obtener un usuario por correo electrónico
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_GET_BY_EMAILL_SP(
+    P_EMAIL VARCHAR2)
+AS
+    V_NOMBRE     VARCHAR2(250);
+    V_APELLIDOS  VARCHAR2(250);
+    V_ID_USUARIO NUMBER;
+BEGIN
+    SELECT NOMBRE, APELLIDOS, USUARIOS_TB_ID_USER_PK
+    INTO V_NOMBRE, V_APELLIDOS, V_ID_USUARIO
+    FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
+    WHERE EMAIL = P_EMAIL;
+
+    DBMS_OUTPUT.PUT_LINE('ID Usuario: ' || V_ID_USUARIO);
+    DBMS_OUTPUT.PUT_LINE('Nombre: ' || V_NOMBRE);
+    DBMS_OUTPUT.PUT_LINE('Apellidos: ' || V_APELLIDOS);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró el usuario con correo electrónico ' || P_EMAIL);
+END;
+/
+
+BEGIN
+     FIDE_PROLEARN_FINAL_PROF.USER_GET_BY_EMAILL_SP('admin@PROLEARN.com');  
+END;
+/
+
+/*ROL*/ 
+
 -- Procedimiento para crear un nuevo rol
-CREATE OR REPLACE PROCEDURE sp_create_role(
-    p_nombre IN VARCHAR2
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.ROLE_CREATE_SP(
+    P_NOMBRE IN VARCHAR2
 ) IS
 BEGIN
-    INSERT INTO PROLEARN.rol (nombre)
-    VALUES (p_nombre);
+    INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (NOMBRE)
+    VALUES (P_Nombre);
     COMMIT;
+END;
+/
+
+BEGIN
+     FIDE_PROLEARN_FINAL_PROF.ROLE_CREATE_SP('ADMIN_USER');  
+END;
+/
+SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB;
+
+
+
+-- Procedimiento para obtener un rol por nombre
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.ROL_FINDBY_NOMBRE_SP(
+    P_NOMBRE VARCHAR2
+)
+AS
+    V_ID_ROL NUMBER;
+    V_NOMBRE_ROL VARCHAR2(255);
+BEGIN
+    SELECT ROL_TB_ID_ROL_PK, NOMBRE
+    INTO V_ID_ROL, V_NOMBRE_ROL
+    FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB
+    WHERE NOMBRE = P_NOMBRE;
+
+    DBMS_OUTPUT.PUT_LINE('ID Rol: ' || V_ID_ROL);
+    DBMS_OUTPUT.PUT_LINE('Nombre Rol: ' || V_NOMBRE_ROL);
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('No se encontró el rol con nombre ' || P_NOMBRE);
+END;
+/
+
+BEGIN
+     FIDE_PROLEARN_FINAL_PROF.ROL_FINDBY_NOMBRE_SP('ROLE_USER');  
 END;
 /
 
 /*USUARIO_ROL*/
+
 -- Procedimiento para asignar un rol a un usuario
-CREATE OR REPLACE PROCEDURE sp_assign_role(
-    p_usuario_id IN INT,
-    p_rol_id IN INT
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.ROLE_ASSIGN_SP(
+    P_USUARIO_ID IN INT,
+    P_ROL_ID IN INT
 ) IS
 BEGIN
-    INSERT INTO PROLEARN.usuario_rol (usuario_id, rol_id)
-    VALUES (p_usuario_id, p_rol_id);
+    INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (USUARIO_ID, ROL_ID)
+    VALUES (P_USUARIO_ID, P_ROL_ID);
     COMMIT;
 END;
 /
 
--- Procedimiento para listar todos los roles de un usuario
-CREATE OR REPLACE PROCEDURE sp_list_roles_of_user(
-    p_usuario_id IN INT
-) IS
 BEGIN
-    FOR rec IN (SELECT ur.usuario_id, ur.rol_id, r.nombre
-                FROM PROLEARN.usuario_rol ur
-                JOIN PROLEARN.rol r ON ur.rol_id = r.id
-                WHERE ur.usuario_id = p_usuario_id) LOOP
-        DBMS_OUTPUT.PUT_LINE('Usuario ID: ' || rec.usuario_id || ', Rol ID: ' || rec.rol_id || ', Nombre Rol: ' || rec.nombre);
-    END LOOP;
+     FIDE_PROLEARN_FINAL_PROF.ROLE_ASSIGN_SP(3,3);  
 END;
 /
-
-
 
 
 /*CATEGORIAS*/
--- Procedimiento para eliminar una categoría
-CREATE OR REPLACE PROCEDURE sp_delete_category(
-    p_id_categoria IN INT
+
+--Procedimiento para crear una categoria
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_SAVE_SP(
+  P_Nombre_Categoria VARCHAR2
 ) IS
 BEGIN
-    DELETE FROM PROLEARN.categorias WHERE id_categoria = p_id_categoria;
-    COMMIT;
+
+  INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (
+    NOMBRE_CATEGORIA
+  ) VALUES (
+    P_Nombre_Categoria
+  );
+  
+  COMMIT;
 END;
 /
 
--- Procedimiento para actualizar una categoría
-CREATE OR REPLACE PROCEDURE sp_update_category(
-    p_id_categoria IN INT,
-    p_nombre_categoria IN VARCHAR2
-) IS
 BEGIN
-    UPDATE PROLEARN.categorias
-    SET nombre_categoria = p_nombre_categoria
-    WHERE id_categoria = p_id_categoria;
-    COMMIT;
+  FIDE_PROLEARN_FINAL_PROF.CATEGORIA_SAVE_SP('Nombre de la categoría');
 END;
 /
 
+--Procedimiento para eliminar una categoria por su ID
 
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_DELET_SP (
+P_ID_CATEGORIA NUMBER) 
+IS
+  V_CURSOS_ASOCIADOS NUMBER;
+BEGIN
+
+  SELECT COUNT(*) INTO V_CURSOS_ASOCIADOS
+  FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
+  WHERE CATEGORIA_CURSO = P_ID_CATEGORIA;
+  
+  IF V_CURSOS_ASOCIADOS > 0 THEN
+  
+    RAISE_APPLICATION_ERROR(-20001, 'No se puede eliminar la categoría porque hay cursos asociados.');
+  ELSE
+  
+    DELETE FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
+    WHERE CATEGORIAS_TB_ID_CAT_PK = P_ID_CATEGORIA;
+    
+    COMMIT;
+  END IF;
+END;
+/
+
+BEGIN
+  FIDE_PROLEARN_FINAL_PROF.CATEGORIA_DELET_SP(4);
+END;
+/
+
+-- Procedimiento para buscar todas las categorias
+DECLARE
+  V_CURSOR   SYS_REFCURSOR; 
+  V_REGISTRO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB%ROWTYPE;
+BEGIN
+  FOR v_registro IN (
+    SELECT *
+    FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE('ID: ' || v_registro.CATEGORIAS_TB_ID_CAT_PK || ', NOMBRE: ' || v_registro.NOMBRE_CATEGORIA);
+  END LOOP;
+END;
+/
 
 
 /*CAPITULO_PADRE*/
--- Procedimiento para eliminar un capítulo padre
-CREATE OR REPLACE PROCEDURE sp_delete_parent_chapter(
-    p_id_capitulo IN INT
-) IS
+
+-- Procedimiento para eliminar un capÃ­tulo padre
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_DELET_SP(
+  P_ID_CAPITULO_PADRE NUMBER
+) AS
 BEGIN
-    DELETE FROM PROLEARN.capitulo_padre WHERE id_capitulo = p_id_capitulo;
-    COMMIT;
+
+  DELETE FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB 
+  WHERE ID_CAPITULO_PADRE = P_ID_CAPITULO_PADRE;
+  
+  DELETE FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB 
+  WHERE CAPITULO_PADRE_TB_ID_CP_PK = P_ID_CAPITULO_PADRE;
+  
+  COMMIT;
 END;
 /
 
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_FINDBYID_SP (
-  P_ID_CAPITULO_PADRE IN NUMBER,
-  P_RESULTADO OUT SYS_REFCURSOR
-) IS
 BEGIN
-    OPEN P_RESULTADO FOR
-        SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
-        WHERE CAPITULO_PADRE_TB_ID_CP_PK = P_ID_CAPITULO_PADRE;
-    
-    INSERT INTO FIDE_PROLEARN_FINAL_PROF.TESTI (PARA) VALUES ('B');
-    COMMIT; 
-
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        OPEN P_RESULTADO FOR SELECT NULL FROM DUAL WHERE 1=0;
+  FIDE_PROLEARN_FINAL_PROF.SP_DELET_CP(2);
 END;
+/
 
+
+-- Crear procedimiento para crear un capítulo padre
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_SAVE_SP(
+  P_NOMBRE_CAPITULO VARCHAR2,
+  P_NUMERO_CAPITULO INT
+) AS
+  V_ID_CAPITULO_PADRE NUMBER;
+BEGIN
+  INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (
+    NOMBRE_CAPITULO_PADRE,
+    NUMERO_CAPITULO_PADRE
+  ) VALUES (
+    P_NOMBRE_CAPITULO,
+    P_NUMERO_CAPITULO
+  ) RETURNING CAPITULO_PADRE_TB_ID_CP_PK INTO V_ID_CAPITULO_PADRE;
+  
+  COMMIT;
+END;
+/
+
+BEGIN
+  FIDE_PROLEARN_FINAL_PROF.CP_SAVE_SP('Primera Prueba', 5);
+END;
+/
+COMMIT;
 
 
 
 /*CAPITULO_HIJO*/
-CREATE TABLE FIDE_PROLEARN_FINAL_PROF.TESTI (
-  PARA VARCHAR2(2)
-);
 
 
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_FINDBYID_SP (
-    P_ID_CAPITULO_HIJO IN NUMBER,
-    P_RESULTADO OUT SYS_REFCURSOR
-) IS
-BEGIN
-    OPEN P_RESULTADO FOR
-        SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH
-        WHERE CH.CAPITULO_HIJO_TB_ID_CH_PK = P_ID_CAPITULO_HIJO;
-    
-    INSERT INTO FIDE_PROLEARN_FINAL_PROF.TESTI (PARA) VALUES ('A');
-    COMMIT; 
+-- Procedimiento para guardar un hijo
 
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        OPEN P_RESULTADO FOR SELECT NULL FROM DUAL WHERE 1=0; 
-END;    
-
-select * from FIDE_PROLEARN_FINAL_PROF.TESTI;
-
---recuperar una entidad
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_FINDALLBYCAPITULOPADREID_SP(
-  p_id_capitulo_padre IN FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE,
-  p_result OUT SYS_REFCURSOR
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_SAVE_SP(
+  P_ID_CAPITULO_PADRE IN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE,
+  P_NOMBRE_CAPITULO IN VARCHAR2,
+  P_NUMERO_CAPITULO IN INT
 ) AS
 BEGIN
-  OPEN p_result FOR
-  SELECT 
-    CAPITULO_HIJO_TB_ID_CAPITULO_PK,
-    ID_CAPITULO_PADRE,
-    NOMBRE_CAPITULO,
-    VIDEO_CAPITULO,
-    NUMERO_CAPITULO
-  FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
-  WHERE ID_CAPITULO_PADRE = p_id_capitulo_padre;
-END CH_FINDALLBYCAPITULOPADREID_SP;
-
---save
-
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_SAVE_CAPITULO_HIJO_SP(
-  p_id_capitulo_padre IN FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE,
-  p_nombre_capitulo IN FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO%TYPE,
-  p_video_capitulo IN FIDE_CAPITULO_HIJO_TB.VIDEO_CAPITULO%TYPE,
-  p_numero_capitulo IN FIDE_CAPITULO_HIJO_TB.NUMERO_CAPITULO%TYPE,
-  p_capitulo_hijo_id OUT FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CAPITULO_PK%TYPE
-) AS
-BEGIN
-  IF p_capitulo_hijo_id IS NULL THEN
-    -- Insertar nuevo registro
-    INSERT INTO FIDE_CAPITULO_HIJO_TB (
-      ID_CAPITULO_PADRE,
-      NOMBRE_CAPITULO,
-      VIDEO_CAPITULO,
-      NUMERO_CAPITULO
-    ) VALUES (
-      p_id_capitulo_padre,
-      p_nombre_capitulo,
-      p_video_capitulo,
-      p_numero_capitulo
-    ) RETURNING CAPITULO_HIJO_TB_ID_CAPITULO_PK INTO p_capitulo_hijo_id;
-  ELSE
-    -- Actualizar registro existente
-    UPDATE FIDE_CAPITULO_HIJO_TB
-    SET
-      ID_CAPITULO_PADRE = p_id_capitulo_padre,
-      NOMBRE_CAPITULO = p_nombre_capitulo,
-      VIDEO_CAPITULO = p_video_capitulo,
-      NUMERO_CAPITULO = p_numero_capitulo
-    WHERE CAPITULO_HIJO_TB_ID_CAPITULO_PK = p_capitulo_hijo_id;
-  END IF;
-END CH_SAVE_CAPITULO_HIJO_SP;
-
--- Procedimiento para eliminar un capítulo hijo
-CREATE OR REPLACE PROCEDURE sp_delete_child_chapter(
-    p_id_capitulo IN INT
-) IS
-BEGIN
-    DELETE FROM PROLEARN.capitulo_hijo WHERE id_capitulo = p_id_capitulo;
-    COMMIT;
+  INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (
+  ID_CAPITULO_PADRE,
+  NOMBRE_CAPITULO_HIJO,
+  NUMERO_CAPITULO_HIJO)
+  VALUES (P_ID_CAPITULO_PADRE, P_NOMBRE_CAPITULO, P_NUMERO_CAPITULO);
+  COMMIT;
 END;
 /
 
--- Procedimiento para actualizar un capítulo hijo
-CREATE OR REPLACE PROCEDURE sp_update_child_chapter(
-    p_id_capitulo IN INT,
-    p_id_capitulo_padre IN INT,
-    p_nombre_capitulo IN VARCHAR2,
-    p_video_capitulo IN VARCHAR2,
-    p_numero_capitulo IN INT
-) IS
 BEGIN
-    UPDATE PROLEARN.capitulo_hijo
-    SET id_capitulo_padre = p_id_capitulo_padre,
-        nombre_capitulo = p_nombre_capitulo,
-        video_capitulo = p_video_capitulo,
-        numero_capitulo = p_numero_capitulo
-    WHERE id_capitulo = p_id_capitulo;
-    COMMIT;
+  FIDE_PROLEARN_FINAL_PROF.CH_SAVE_SP(5, 'Primera Prueba', 2);
 END;
 /
+COMMIT;
 
+-- Procedimiento para eliminar un capÃ­tulo hijo
 
-
-
---delete
-CREATE OR REPLACE PROCEDURE CH_DELETE_CAPITULO_HIJO_SP(
-  p_capitulo_hijo_id IN FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CAPITULO_PK%TYPE
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_DELETE_SP(
+  P_ID_CAPITULO_HIJO IN FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CH_PK%TYPE
 ) AS
 BEGIN
+
   DELETE FROM FIDE_CAPITULO_HIJO_TB
-  WHERE CAPITULO_HIJO_TB_ID_CAPITULO_PK = p_capitulo_hijo_id;
-END CH_DELETE_CAPITULO_HIJO_SP;
+  WHERE CAPITULO_HIJO_TB_ID_CH_PK = P_ID_CAPITULO_HIJO;
+  
+  COMMIT;
+END;
+/
 
---
+BEGIN
+  FIDE_PROLEARN_FINAL_PROF.CH_DELETE_SP(80);
+END;
+/
+
+
+-- Procedimiento para llamar a todos los capÃ­tulo hijo
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.APITULOS_HIJOS_FIND_ALL AS
+  CURSOR CUR_CAPITULOS_HIJOS IS
+    SELECT *
+    FROM FIDE_CAPITULO_HIJO_TB;
+  
+  V_REGISTRO FIDE_CAPITULO_HIJO_TB%ROWTYPE;
+BEGIN
+  OPEN CUR_CAPITULOS_HIJOS;
+  
+  DBMS_OUTPUT.PUT_LINE('ID  || Nombre ');
+  
+  LOOP
+    FETCH CUR_CAPITULOS_HIJOS INTO V_REGISTRO;
+    EXIT WHEN CUR_CAPITULOS_HIJOS%NOTFOUND;
+    
+    DBMS_OUTPUT.PUT_LINE(V_REGISTRO.CAPITULO_HIJO_TB_ID_CH_PK || ' || '
+    || V_REGISTRO.NOMBRE_CAPITULO_HIJO );
+  END LOOP;
+  
+  CLOSE CUR_CAPITULOS_HIJOS;
+END APITULOS_HIJOS_FIND_ALL;
+/
+
+BEGIN
+  FIDE_PROLEARN_FINAL_PROF.APITULOS_HIJOS_FIND_ALL;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_CP_FIND_ID_SP AS
+  CURSOR CUR_CAPITULOS_HIJOS IS
+    SELECT *
+    FROM FIDE_CAPITULO_HIJO_TB;
+  
+  V_REGISTRO FIDE_CAPITULO_HIJO_TB%ROWTYPE;
+BEGIN
+  OPEN CUR_CAPITULOS_HIJOS;
+  
+  DBMS_OUTPUT.PUT_LINE('ID padre');
+  
+  LOOP
+    FETCH CUR_CAPITULOS_HIJOS INTO V_REGISTRO;
+    EXIT WHEN CUR_CAPITULOS_HIJOS%NOTFOUND;
+    
+    DBMS_OUTPUT.PUT_LINE( v_registro.ID_CAPITULO_PADRE );
+  END LOOP;
+  
+  CLOSE CUR_CAPITULOS_HIJOS;
+END CH_CP_FIND_ID_SP;
+/
+
+BEGIN
+  FIDE_PROLEARN_FINAL_PROF.CH_CP_FIND_ID_SP;
+END;
+/
+
 
 /*CURSOS*/
--- Procedimiento para añadir un curso
+-- Procedimiento para aÃ±adir un curso
+
 CREATE OR REPLACE PROCEDURE AddCurso(
     p_nombre_curso IN VARCHAR2,
     p_descrp_curso IN VARCHAR2,
@@ -315,6 +413,7 @@ BEGIN
     COMMIT;
 END;
 /
+
 -- Procedimiento para actualizar un curso
 CREATE OR REPLACE PROCEDURE UpdateCurso(
     p_id_curso IN NUMBER,
@@ -346,7 +445,7 @@ END;
 CREATE OR REPLACE PROCEDURE sp_list_courses IS
 BEGIN
     FOR rec IN (SELECT * FROM PROLEARN.cursos) LOOP
-        DBMS_OUTPUT.PUT_LINE('ID: ' || rec.id_curso || ', Nombre: ' || rec.nombre_curso || ', Descripción: ' || rec.descrp_curso || ', Estado: ' || rec.estado_curso || ', Categoría: ' || rec.categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('ID: ' || rec.id_curso || ', Nombre: ' || rec.nombre_curso || ', DescripciÃ³n: ' || rec.descrp_curso || ', Estado: ' || rec.estado_curso || ', CategorÃ­a: ' || rec.categoria_curso);
     END LOOP;
 END;
 /
@@ -356,7 +455,7 @@ D;
 
 
 /*CAPITULO_X_CURSO*/
--- Procedimiento para listar todos los capítulos de un curso
+-- Procedimiento para listar todos los capÃ­tulos de un curso
 CREATE OR REPLACE PROCEDURE sp_list_chapters_of_course(
     p_id_curso IN INT
 ) IS
@@ -365,10 +464,10 @@ BEGIN
                 FROM PROLEARN.capitulo_x_curso cxc
                 JOIN PROLEARN.capitulo_hijo ch ON cxc.id_capitulo = ch.id_capitulo
                 WHERE cxc.id_curso = p_id_curso) LOOP
-        DBMS_OUTPUT.PUT_LINE('ID Capítulo: ' || rec.id_capitulo || 
-                             ', Nombre Capítulo: ' || rec.nombre_capitulo || 
-                             ', Video Capítulo: ' || rec.video_capitulo || 
-                             ', Número Capítulo: ' || rec.numero_capitulo);
+        DBMS_OUTPUT.PUT_LINE('ID CapÃ­tulo: ' || rec.id_capitulo || 
+                             ', Nombre CapÃ­tulo: ' || rec.nombre_capitulo || 
+                             ', Video CapÃ­tulo: ' || rec.video_capitulo || 
+                             ', NÃºmero CapÃ­tulo: ' || rec.numero_capitulo);
     END LOOP;
 END;
 /
@@ -378,6 +477,8 @@ END;
 
 
 /*OTROS*/
+
+
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_FINDBYID_SP(
     P_ID_CATEGORIA IN NUMBER,
     P_CATEGORIA OUT SYS_REFCURSOR
