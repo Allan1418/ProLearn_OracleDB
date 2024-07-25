@@ -15,14 +15,17 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
     private CapituloHijoDao capituloHijoDao;
     @Autowired
     private CategoriaDao categoriaDao;
+    @Autowired
+    private CapituloPadreDao capituloPadreDao;
     
     @Override
     @Transactional(readOnly = true)
     public CapituloHijo getCapituloHijo(CapituloHijo capituloHijo) {
-        capituloHijo = capituloHijoDao.findById(capituloHijo.getId()).orElse(null);
+        capituloHijo = capituloHijoDao.findXId(capituloHijo.getId()).orElse(null);
+        capituloHijo.setCapituloPadre(capituloPadreDao.findXId(capituloHijo.getCapituloPadreId()).orElse(null));
         
         //ejemplo de impl de SP con categora
-        System.out.println(categoriaDao.findByid(1L).getNombre());
+        //System.out.println(categoriaDao.findByid(1L).getNombre());
         
 //        if (capituloHijo != null) {
 //            System.out.println("ID: " + capituloHijo.getId());
