@@ -374,3 +374,175 @@ END;
 
 
 
+--------------------------paquetes----------------------------------------------
+-------------Paquetes uauraios----------
+
+--Paquete Crear usuario 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_usuarios AS
+    PROCEDURE crear_usuario(
+        p_nombre IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.NOMBRE%TYPE,
+        p_apellidos IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.APELLIDOS%TYPE,
+        p_email IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.EMAIL%TYPE,
+        p_password IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.PASSWORD%TYPE
+    );
+END pkg_creacion_usuarios;
+/
+
+--Paquete Actualiar usuario
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_usuarios AS
+    PROCEDURE actualizar_usuario(
+        p_id_usuario IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.USUARIOS_TB_ID_USER_PK%TYPE,
+        p_nombre IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.NOMBRE%TYPE,
+        p_apellidos IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.APELLIDOS%TYPE,
+        p_email IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.EMAIL%TYPE
+    );
+END pkg_actualizacion_usuarios;
+/
+
+--Paquete Consultar usuario
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_usuarios AS
+    FUNCTION obtener_usuario_por_id(
+        p_id_usuario IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.USUARIOS_TB_ID_USER_PK%TYPE
+    ) RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB%ROWTYPE;
+
+    FUNCTION obtener_usuario_por_email(
+        p_email IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.EMAIL%TYPE
+    ) RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB%ROWTYPE;
+END pkg_consulta_usuarios;
+/
+
+------Paquetes categoria------
+--Paquete crear categoria
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_categorias AS
+    PROCEDURE crear_categoria(p_nombre_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE);
+END pkg_creacion_categorias;
+/
+
+--Paquete actualizar categoria
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_categorias AS
+    PROCEDURE actualizar_categoria(p_id_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.CATEGORIAS_TB_ID_CAT_PK%TYPE, 
+    p_nombre_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE);
+END pkg_actualizacion_categorias;
+/
+
+--Paquete consultar categoria
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_categorias AS
+    FUNCTION obtener_categoria_por_id(p_id_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.CATEGORIAS_TB_ID_CAT_PK%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB%ROWTYPE;
+    FUNCTION obtener_categoria_por_nombre(p_nombre_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB%ROWTYPE;
+END pkg_consulta_categorias;
+/
+
+-------Paquete capitulo padre-----
+--Paquete crear capitulo padre
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_capitulo_padre AS
+    PROCEDURE crear_capitulo_padre(p_nombre_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NOMBRE_CAPITULO_PADRE%TYPE, 
+    p_numero_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NUMERO_CAPITULO_PADRE%TYPE);
+END pkg_creacion_capitulo_padre;
+/
+
+--Paquete actualiza capitulo padre
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_capitulo_padre AS
+    PROCEDURE actualizar_capitulo_padre(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.CAPITULO_PADRE_TB_ID_CP_PK%TYPE, 
+    p_nombre_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NOMBRE_CAPITULO_PADRE%TYPE,
+    p_numero_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NUMERO_CAPITULO_PADRE%TYPE);
+END pkg_actualizacion_capitulo_padre;
+/
+
+--Paquete consulta capitulo padre
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_capitulo_padre AS
+    FUNCTION obtener_capitulo_padre_por_id(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.CAPITULO_PADRE_TB_ID_CP_PK%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB%ROWTYPE;
+    FUNCTION obtener_capitulo_padre_por_nombre(p_nombre_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NOMBRE_CAPITULO_PADRE%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB%ROWTYPE;
+    
+END pkg_consulta_capitulo_padre;
+/
+
+------Paqute capitulo hijo ----------------
+-- Paquete crear capitulo hijo 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_capitulo_hijo AS
+    PROCEDURE crear_capitulo_hijo(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE, 
+    p_nombre_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO_HIJO%TYPE, p_video_capitulo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.VIDEO_CAPITULO%TYPE, p_numero_capitulo_hijo IN
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NUMERO_CAPITULO_HIJO%TYPE);
+END pkg_creacion_capitulo_hijo;
+/
+--Paquete actualizar capitulo hijo 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_capitulo_hijo AS
+    PROCEDURE actualizar_capitulo_hijo(p_id_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CH_PK%TYPE, 
+    p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE, 
+    p_nombre_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO_HIJO%TYPE, 
+    p_video_capitulo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.VIDEO_CAPITULO%TYPE, 
+    p_numero_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NUMERO_CAPITULO_HIJO%TYPE);
+END pkg_actualizacion_capitulo_hijo;
+/
+--Paquete consultar capitulo hijo 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_capitulo_hijo AS
+    FUNCTION obtener_capitulo_hijo_por_id(p_id_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CH_PK%TYPE)
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB%ROWTYPE;
+    FUNCTION obtener_capitulo_hijo_por_nombre(p_nombre_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO_HIJO%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB%ROWTYPE;
+    FUNCTION obtener_capitulo_hijo_por_id_capitulo_padre(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE) 
+    RETURN SYS_REFCURSOR;
+END pkg_consulta_capitulo_hijo;
+/
+
+------Paquete cusrsos----
+--Paquete crear curso
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_cursos AS
+    PROCEDURE crear_curso(p_nombre_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.NOMBRE_CURSO%TYPE, p_descripcion_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.DESCRP_CURSO%TYPE, p_estado_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.ESTADO_CURSO%TYPE, p_thumbnail_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.THUMBNAIL_CURSO%TYPE, p_categoria_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CATEGORIA_CURSO%TYPE);
+END pkg_creacion_cursos;
+/
+--Paquete actualizar curso
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_cursos AS
+    PROCEDURE actualizar_curso(p_id_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CURSOS_TB_ID_CUR_PK%TYPE, p_nombre_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.NOMBRE_CURSO%TYPE, p_descripcion_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.DESCRP_CURSO%TYPE, p_estado_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.ESTADO_CURSO%TYPE, p_thumbnail_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.THUMBNAIL_CURSO%TYPE, p_categoria_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CATEGORIA_CURSO%TYPE);
+END pkg_actualizacion_cursos;
+/
+--Paquete consultar cusrso
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_cursos AS
+    FUNCTION obtener_curso_por_id(p_id_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CURSOS_TB_ID_CUR_PK%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB%ROWTYPE;
+    FUNCTION obtener_curso_por_nombre(p_nombre_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.NOMBRE_CURSO%TYPE)
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB%ROWTYPE;
+    FUNCTION obtener_cursos_por_categoria(p_categoria_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CATEGORIA_CURSO%TYPE) 
+    RETURN SYS_REFCURSOR;
+END pkg_consulta_cursos;
+/
