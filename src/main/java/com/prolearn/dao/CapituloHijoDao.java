@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.data.repository.query.Param;
+import org.springframework.jdbc.core.SqlOutParameter;
 
 
 public interface CapituloHijoDao extends JpaRepository<CapituloHijo, Long> {
@@ -19,9 +20,8 @@ public interface CapituloHijoDao extends JpaRepository<CapituloHijo, Long> {
     
     List<CapituloHijo> findAllByCapituloPadreId(Long capituloPadreId);
 
-    @Override
-    @Procedure(procedureName = "CH_FINDBYID_SP")
-    public Optional<CapituloHijo> findById(@Param( "P_ID_CAPITULO_HIJO" )Long id);
+    @Procedure(name = "SPFindXIdCH")
+    Optional<CapituloHijo> findXId(@Param("P_ID_CAPITULO_HIJO") Long id);
     
     
     
