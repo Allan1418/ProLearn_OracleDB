@@ -546,3 +546,252 @@ CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_cursos AS
     RETURN SYS_REFCURSOR;
 END pkg_consulta_cursos;
 /
+
+-------------------------Cursores-------------------------------------
+--Cursor recuperar los datos de la tabla  usuarios
+SET SERVEROUTPUT ON
+DECLARE
+    -- Declaración del cursor
+    CURSOR usuarios_cursor IS
+        SELECT USUARIOS_TB_ID_USER_PK, NOMBRE, APELLIDOS, EMAIL, PASSWORD
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_usuario NUMBER;
+    v_nombre VARCHAR2(250);
+    v_apellidos VARCHAR2(250);
+    v_email VARCHAR2(25);
+    v_password VARCHAR2(512);
+BEGIN
+    -- Abrir el cursor
+    OPEN usuarios_cursor;
+
+    -- Recuperar y mostrar los datos de los usuarios
+    LOOP
+        FETCH usuarios_cursor INTO v_id_usuario, v_nombre, v_apellidos, v_email, v_password;
+        EXIT WHEN usuarios_cursor%NOTFOUND;
+
+        -- Mostrar los datos del usuario
+        DBMS_OUTPUT.PUT_LINE('ID Usuario: ' || v_id_usuario);
+        DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_nombre);
+        DBMS_OUTPUT.PUT_LINE('Apellidos: ' || v_apellidos);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || v_email);
+        DBMS_OUTPUT.PUT_LINE('Password: ' || v_password);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE usuarios_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla rol
+DECLARE
+    -- Declaración del cursor
+    CURSOR roles_cursor IS
+        SELECT ROL_TB_ID_ROL_PK, NOMBRE
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_rol NUMBER;
+    v_nombre VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN roles_cursor;
+
+    -- Recuperar y mostrar los datos de los roles
+    LOOP
+        FETCH roles_cursor INTO v_id_rol, v_nombre;
+        EXIT WHEN roles_cursor%NOTFOUND;
+
+        -- Mostrar los datos del rol
+        DBMS_OUTPUT.PUT_LINE('ID Rol: '|| v_id_rol);
+        DBMS_OUTPUT.PUT_LINE('Nombre: '|| v_nombre);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE roles_cursor;
+END;
+/
+
+--cursor recuperar los datos de la tabla catergoria 
+DECLARE
+    -- Declaración del cursor
+    CURSOR categorias_cursor IS
+        SELECT CATEGORIAS_TB_ID_CAT_PK, NOMBRE_CATEGORIA
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB;
+    
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_categoria NUMBER;
+    v_nombre_categoria VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN categorias_cursor;
+    
+    -- Recuperar y mostrar los datos de las categorías
+    LOOP
+        FETCH categorias_cursor INTO v_id_categoria, v_nombre_categoria;
+        EXIT WHEN categorias_cursor%NOTFOUND;
+        
+        -- Mostrar los datos de la categoría
+        DBMS_OUTPUT.PUT_LINE('ID Categoría: ' || v_id_categoria);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categoría: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+    
+    -- Cerrar el cursor
+    CLOSE categorias_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla capitulos_padre
+DECLARE
+    -- Declaración del cursor
+    CURSOR capitulos_padre_cursor IS
+        SELECT CAPITULO_PADRE_TB_ID_CP_PK, NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB;
+    
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_capitulo_padre NUMBER;
+    v_nombre_capitulo_padre VARCHAR2(255);
+    v_numero_capitulo_padre INT;
+BEGIN
+    -- Abrir el cursor
+    OPEN capitulos_padre_cursor;
+    
+    -- Recuperar y mostrar los datos de los capítulos padre
+    LOOP
+        FETCH capitulos_padre_cursor INTO v_id_capitulo_padre, v_nombre_capitulo_padre, v_numero_capitulo_padre;
+        EXIT WHEN capitulos_padre_cursor%NOTFOUND;
+        
+        -- Mostrar los datos del capítulo padre
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo Padre: '|| v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Padre: '|| v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Número Capítulo Padre: '|| v_numero_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+    
+    -- Cerrar el cursor
+    CLOSE capitulos_padre_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla capitulos_hijo
+DECLARE
+    -- Declaración del cursor
+    CURSOR capitulos_hijo_cursor IS
+        SELECT CH.CAPITULO_HIJO_TB_ID_CH_PK, CH.ID_CAPITULO_PADRE, CH.NOMBRE_CAPITULO_HIJO, CH.VIDEO_CAPITULO, CH.NUMERO_CAPITULO_HIJO, CP.NOMBRE_CAPITULO_PADRE
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB CP ON CH.ID_CAPITULO_PADRE = CP.CAPITULO_PADRE_TB_ID_CP_PK;
+    
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_capitulo_hijo NUMBER;
+    v_id_capitulo_padre INT;
+    v_nombre_capitulo_hijo VARCHAR2(255);
+    v_video_capitulo VARCHAR2(1024);
+    v_numero_capitulo_hijo INT;
+    v_nombre_capitulo_padre VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN capitulos_hijo_cursor;
+    
+    -- Recuperar y mostrar los datos de los capítulos hijo
+    LOOP
+        FETCH capitulos_hijo_cursor INTO v_id_capitulo_hijo, v_id_capitulo_padre, v_nombre_capitulo_hijo, v_video_capitulo, v_numero_capitulo_hijo, v_nombre_capitulo_padre;
+        EXIT WHEN capitulos_hijo_cursor%NOTFOUND;
+        
+        -- Mostrar los datos del capítulo hijo
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo Hijo: ' || v_id_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo Padre: ' || v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Hijo: ' || v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Video Capítulo: ' || v_video_capitulo);
+        DBMS_OUTPUT.PUT_LINE('Número Capítulo Hijo: ' || v_numero_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Padre: ' || v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+    
+    -- Cerrar el cursor
+    CLOSE capitulos_hijo_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla Cursos
+DECLARE
+    -- Declaración del cursor
+    CURSOR cursos_cursor IS
+        SELECT C.CURSOS_TB_ID_CUR_PK, C.NOMBRE_CURSO, C.DESCRP_CURSO, C.ESTADO_CURSO, C.THUMBNAIL_CURSO, C.CATEGORIA_CURSO, CG.NOMBRE_CATEGORIA
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB C
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB CG ON C.CATEGORIA_CURSO = CG.CATEGORIAS_TB_ID_CAT_PK;
+    
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_curso NUMBER;
+    v_nombre_curso VARCHAR2(250);
+    v_descripcion_curso VARCHAR2(1000);
+    v_estado_curso NUMBER(1);
+    v_thumbnail_curso VARCHAR2(1024);
+    v_categoria_curso INT;
+    v_nombre_categoria VARCHAR2(250);
+BEGIN
+    -- Abrir el cursor
+    OPEN cursos_cursor;
+    
+    -- Recuperar y mostrar los datos de los cursos
+    LOOP
+        FETCH cursos_cursor INTO v_id_curso, v_nombre_curso, v_descripcion_curso, v_estado_curso, v_thumbnail_curso, v_categoria_curso, v_nombre_categoria;
+        EXIT WHEN cursos_cursor%NOTFOUND;
+        
+        -- Mostrar los datos del curso
+        DBMS_OUTPUT.PUT_LINE('ID Curso: ' || v_id_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Curso: ' || v_nombre_curso);
+        DBMS_OUTPUT.PUT_LINE('Descripción Curso: ' || v_descripcion_curso);
+        DBMS_OUTPUT.PUT_LINE('Estado Curso: ' || v_estado_curso);
+        DBMS_OUTPUT.PUT_LINE('Thumbnail Curso: ' || v_thumbnail_curso);
+        DBMS_OUTPUT.PUT_LINE('Categoría Curso: ' || v_categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categoría: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+    
+    -- Cerrar el cursor
+    CLOSE cursos_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla capitulos_x_cursos
+DECLARE
+    -- Declaración del cursor
+    CURSOR capitulos_x_cursos_cursor IS
+        SELECT CXC.CAP_X_CUR_TB_ID_PK, CXC.ID_CURSO, CXC.ID_CAPITULO, C.NOMBRE_CURSO, CH.NOMBRE_CAPITULO_HIJO
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB CXC
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB C ON CXC.ID_CURSO = C.CURSOS_TB_ID_CUR_PK
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH ON CXC.ID_CAPITULO = CH.CAPITULO_HIJO_TB_ID_CH_PK;
+    
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_capitulo_x_curso NUMBER;
+    v_id_curso INT;
+    v_id_capitulo INT;
+    v_nombre_curso VARCHAR2(250);
+    v_nombre_capitulo_hijo VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN capitulos_x_cursos_cursor;
+    
+    -- Recuperar y mostrar los datos de los capítulos por curso
+    LOOP
+        FETCH capitulos_x_cursos_cursor INTO v_id_capitulo_x_curso, v_id_curso, v_id_capitulo, v_nombre_curso, v_nombre_capitulo_hijo;
+        EXIT WHEN capitulos_x_cursos_cursor%NOTFOUND;
+        
+        -- Mostrar los datos del capítulo por curso
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo x Curso: '|| v_id_capitulo_x_curso);
+        DBMS_OUTPUT.PUT_LINE('ID Curso: '|| v_id_curso);
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo: '|| v_id_capitulo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Curso: '|| v_nombre_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Hijo: '|| v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+    
+    -- Cerrar el cursor
+    CLOSE capitulos_x_cursos_cursor;
+END;
+/
+
