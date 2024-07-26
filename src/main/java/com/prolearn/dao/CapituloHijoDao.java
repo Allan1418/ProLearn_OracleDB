@@ -24,5 +24,9 @@ public interface CapituloHijoDao extends JpaRepository<CapituloHijo, Long> {
     Optional<CapituloHijo> findXId(@Param("P_ID_CAPITULO_HIJO") Long id);
     
     
+    @Procedure(name = "SPFindAllXIdCursoYIdCapPadreCH")
+    List<CapituloHijo> findAllByCapituloPadreIdYCursoId(@Param("falta")Long capituloPadreId, @Param("falta")Long cursoId);
+    
+    
     
 }

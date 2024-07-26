@@ -20,6 +20,16 @@ import org.springframework.beans.factory.annotation.Autowired;
     },
     resultClasses = { CapituloHijo.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "SPFindAllXIdCursoYIdCapPadreCH",
+    procedureName = "falta",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "falta", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "falta", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "falta", type = void.class)
+    },
+    resultClasses = { CapituloHijo.class } 
+)
 public class CapituloHijo implements Serializable {
     
     private static final long serialVersionUID = 1L;

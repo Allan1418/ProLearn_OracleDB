@@ -10,6 +10,15 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "FIDE_CURSOS_TB")
+@NamedStoredProcedureQuery(
+    name = "SPFindXIdCurso",
+    procedureName = "falta",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "falta", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "falta", type = void.class)
+    },
+    resultClasses = { Curso.class } 
+)
 public class Curso implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -38,35 +47,35 @@ public class Curso implements Serializable {
     private Categoria categoriaCurso;
     
     
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "FIDE_CAPITULO_X_CURSO_TB",
-            joinColumns = @JoinColumn(name = "id_curso"),
-            inverseJoinColumns = @JoinColumn(name = "id_capitulo")
-    )
-    private List<CapituloHijo> capitulosHijos;
+//    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "FIDE_CAPITULO_X_CURSO_TB",
+//            joinColumns = @JoinColumn(name = "id_curso"),
+//            inverseJoinColumns = @JoinColumn(name = "id_capitulo")
+//    )
+//    private List<CapituloHijo> capitulosHijos;
     
 
     public Curso() {
     }
 
-    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso, List<CapituloHijo> capitulosHijos) {
+    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
         this.categoriaCurso = categoriaCurso;
-        this.capitulosHijos = capitulosHijos;
+        /*this.capitulosHijos = capitulosHijos;*/
     }
 
-    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso, List<CapituloHijo> capitulosHijos) {
+    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
         this.categoriaCurso = categoriaCurso;
-        this.capitulosHijos = capitulosHijos;
+        /*this.capitulosHijos = capitulosHijos;*/
     }
     
     

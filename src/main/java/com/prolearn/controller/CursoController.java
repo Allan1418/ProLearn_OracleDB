@@ -5,8 +5,7 @@ import com.prolearn.domain.CapituloPadre;
 import com.prolearn.domain.CapitulosEstruc;
 import com.prolearn.domain.Curso;
 import com.prolearn.service.CursoService;
-import com.prolearn.service.FirebaseStorageService;
-import com.prolearn.service.Impl.FirebaseStorageServiceImpl;
+import com.prolearn.service.CapitulosEstrucService;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +25,9 @@ public class CursoController {
 
     @Autowired
     private CursoService cursoService;
+    
+    @Autowired
+    private CapitulosEstrucService capitulosEstrucService;
 
 //    @GetMapping("/curso")
 //    private String getCursos(Model model) {
@@ -59,19 +61,12 @@ public class CursoController {
 
         List<CapitulosEstruc> lista = new ArrayList<>();
 
-        for (CapituloPadre capituloPadre : CapitulosEstruc.getListaCapituloPadre(curso)) {
-            List<CapituloHijo> capitulosHijos = new ArrayList<>();
-            for (CapituloHijo hijo : curso.getCapitulosHijos()) {
-                if (hijo.getCapituloPadre().getNombre().equals(capituloPadre.getNombre())) {
-                    capitulosHijos.add(hijo);
-                }
-            }
-            // Ordenar capitulosHijos por numero
-            capitulosHijos.sort(Comparator.comparingInt(CapituloHijo::getNumero));
-            lista.add(new CapitulosEstruc(capituloPadre, capitulosHijos));
+        for (CapituloPadre capituloPadre : capitulosEstrucService.getPadres(curso.getIdCurso())) {
+            
+            List<CapituloHijo> listaHijos = capitulosEstrucService.getHijos(curso.getIdCurso(), capituloPadre.getId());
+            
+            lista.add(new CapitulosEstruc(capituloPadre, listaHijos));
         }
-        // Ordenar CapituloPadre por numero
-        lista.sort(Comparator.comparingInt(e -> e.getCapituloPadre().getNumero()));
 
         model.addAttribute("lista", lista);
         model.addAttribute("curso", curso);
