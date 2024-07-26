@@ -144,7 +144,7 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (USUARIO_ID, ROL_ID)
 VALUES (2, 2);
 
 
-INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('DiseÒo');
+INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Dise√±o');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Programacion');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Idiomas');
 COMMIT;
@@ -173,13 +173,13 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PAD
 VALUES ( 'Crear Base de datos', 2 );
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Conceptos b·sicos de MySQL', 3);
+VALUES ( 'Conceptos b√°sicos de MySQL', 3);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
 VALUES ( 'Consultas SQL', 4);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Funciones de agregaciÛn', 5);
+VALUES ( 'Funciones de agregaci√≥n', 5);
 COMMIT;
 
 /*Inserts de Padres JavaScript */
@@ -437,36 +437,36 @@ COMMIT;
 
 /*Inserts de curso Python */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, ESTADO_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Python', 'Python es un lenguaje de programaciÛn de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y f·cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
+('Python', 'Python es un lenguaje de programaci√≥n de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y f√°cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
 ,1, 'https://www.dongee.com/tutoriales/content/images/2023/01/que-es-python-1.png', 2);
      
 /*Inserts de curso MySql */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, ESTADO_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('MySql', 'MySQL es un sistema de gestiÛn de bases de datos relacionales (RDBMS) de cÛdigo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, mÛviles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
+('MySql', 'MySQL es un sistema de gesti√≥n de bases de datos relacionales (RDBMS) de c√≥digo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, m√≥viles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
 ,1, 'https://datascientest.com/en/wp-content/uploads/sites/9/2023/11/mysql.webp', 2);
 COMMIT;
 
 /*Inserts de curso JavaScript */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, ESTADO_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('JavaScript','JavaScript es un lenguaje de programaciÛn vers·til utilizado para crear p·ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear p·ginas web din·micas y receptivas. JavaScript tambiÈn se utiliza para la programaciÛn del lado del servidor, lo que lo convierte en un lenguaje de programaciÛn de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones mÛviles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creaciÛn de aplicaciones de IA utilizando JavaScript.'
+('JavaScript','JavaScript es un lenguaje de programaci√≥n vers√°til utilizado para crear p√°ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear p√°ginas web din√°micas y receptivas. JavaScript tambi√©n se utiliza para la programaci√≥n del lado del servidor, lo que lo convierte en un lenguaje de programaci√≥n de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones m√≥viles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creaci√≥n de aplicaciones de IA utilizando JavaScript.'
  ,1,'https://miro.medium.com/v2/resize:fit:1200/1*LyZcwuLWv2FArOumCxobpA.png',2);
  COMMIT;
      
 /*Inserts de curso AI */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, ESTADO_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computaciÛn que se centra en la creaciÛn de m·quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervenciÛn mÌnima de humanos. Con la IA, las m·quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepciÛn visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robÛtica, la atenciÛn mÈdica, las finanzas y el transporte.'
+('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computaci√≥n que se centra en la creaci√≥n de m√°quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervenci√≥n m√≠nima de humanos. Con la IA, las m√°quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepci√≥n visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la rob√≥tica, la atenci√≥n m√©dica, las finanzas y el transporte.'
  ,1,'https://www.tarlogic.com/wp-content/uploads/2023/09/riesgos-seguridad-IA-3.jpg', 1);
  COMMIT;
     
 /*Inserts de curso AutoCad */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, ESTADO_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AutoCad', ' Este curso es una introducciÛn al software de diseÒo asistido por computadora AutoCAD, utilizado para crear diseÒos detallados 2D y 3D. Los estudiantes aprender·n los conceptos b·sicos de AutoCAD, incluyendo cÛmo crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A travÈs de ejercicios pr·cticos y ejemplos del mundo real, los estudiantes adquirir·n las habilidades necesarias para producir dibujos tÈcnicos y diseÒos para diversas industrias, como arquitectura, ingenierÌa y construcciÛn.'
+('Curso de AutoCad', ' Este curso es una introducci√≥n al software de dise√±o asistido por computadora AutoCAD, utilizado para crear dise√±os detallados 2D y 3D. Los estudiantes aprender√°n los conceptos b√°sicos de AutoCAD, incluyendo c√≥mo crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A trav√©s de ejercicios pr√°cticos y ejemplos del mundo real, los estudiantes adquirir√°n las habilidades necesarias para producir dibujos t√©cnicos y dise√±os para diversas industrias, como arquitectura, ingenier√≠a y construcci√≥n.'
 ,1,'https://www.flashforge-eu.com/image/cache/catalog/product/autodesk/autocad/autodesk_autocad-1280x720.jpg', 2);
 COMMIT;
     
 /*Inserts de curso Ingles */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, ESTADO_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de Ingles', 'Este curso est· diseÒado para ayudar a los estudiantes a mejorar sus habilidades de idioma inglÈs de manera comprehensiva y atractiva. A travÈs de una variedad de lecciones interactivas, los estudiantes desarrollar·n sus habilidades de lectura, escritura, habla y escucha. El curso cubrir· gram·tica, vocabulario, pronunciaciÛn y aspectos culturales del idioma inglÈs. Para el final del curso, los estudiantes tendr·n la confianza y la competencia para comunicarse efectivamente en inglÈs en entornos personales y profesionales.'
+('Curso de Ingles', 'Este curso est√° dise√±ado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingl√©s de manera comprehensiva y atractiva. A trav√©s de una variedad de lecciones interactivas, los estudiantes desarrollar√°n sus habilidades de lectura, escritura, habla y escucha. El curso cubrir√° gram√°tica, vocabulario, pronunciaci√≥n y aspectos culturales del idioma ingl√©s. Para el final del curso, los estudiantes tendr√°n la confianza y la competencia para comunicarse efectivamente en ingl√©s en entornos personales y profesionales.'
 ,1, 'https://www.magisnet.com/wp-content/uploads/2020/11/ingle??s.jpg', 3);
 COMMIT;
 
