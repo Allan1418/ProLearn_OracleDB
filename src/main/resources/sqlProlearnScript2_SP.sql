@@ -2,7 +2,7 @@
 
 /*USUARIOS*/
 
--- Procedimiento para añadir un usuario
+-- Procedimiento para aÃ±adir un usuario
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_ADD_SP (
     P_NOMBRE IN VARCHAR2,
     P_APELLIDOS IN VARCHAR2,
@@ -19,9 +19,9 @@ END;
 BEGIN
   FIDE_PROLEARN_FINAL_PROF.USER_ADD_SP(
     'Juan',
-    'Pérez',
+    'PÃ©rez',
     'juan.perez@example.com',
-    'i_contraseña'
+    'i_contraseÃ±a'
   );
 END;
 /
@@ -75,7 +75,7 @@ BEGIN
 END;
 /
 
--- Procedimiento para obtener un usuario por correo electrónico
+-- Procedimiento para obtener un usuario por correo electrÃ³nico
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_GET_BY_EMAILL_SP(
     P_EMAIL VARCHAR2)
@@ -94,7 +94,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Apellidos: ' || V_APELLIDOS);
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('No se encontró el usuario con correo electrónico ' || P_EMAIL);
+        DBMS_OUTPUT.PUT_LINE('No se encontrÃ³ el usuario con correo electrÃ³nico ' || P_EMAIL);
 END;
 /
 
@@ -102,6 +102,9 @@ BEGIN
      FIDE_PROLEARN_FINAL_PROF.USER_GET_BY_EMAILL_SP('admin@PROLEARN.com');  
 END;
 /
+
+
+
 
 /*ROL*/ 
 
@@ -142,7 +145,7 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Nombre Rol: ' || V_NOMBRE_ROL);
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('No se encontró el rol con nombre ' || P_NOMBRE);
+        DBMS_OUTPUT.PUT_LINE('No se encontrÃ³ el rol con nombre ' || P_NOMBRE);
 END;
 /
 
@@ -150,6 +153,9 @@ BEGIN
      FIDE_PROLEARN_FINAL_PROF.ROL_FINDBY_NOMBRE_SP('ROLE_USER');  
 END;
 /
+
+
+
 
 /*USUARIO_ROL*/
 
@@ -169,6 +175,8 @@ BEGIN
      FIDE_PROLEARN_FINAL_PROF.ROLE_ASSIGN_SP(3,3);  
 END;
 /
+
+
 
 
 /*CATEGORIAS*/
@@ -191,7 +199,7 @@ END;
 /
 
 BEGIN
-  FIDE_PROLEARN_FINAL_PROF.CATEGORIA_SAVE_SP('Nombre de la categoría');
+  FIDE_PROLEARN_FINAL_PROF.CATEGORIA_SAVE_SP('Nombre de la categorÃ­a');
 END;
 /
 
@@ -209,7 +217,7 @@ BEGIN
   
   IF V_CURSOS_ASOCIADOS > 0 THEN
   
-    RAISE_APPLICATION_ERROR(-20001, 'No se puede eliminar la categoría porque hay cursos asociados.');
+    RAISE_APPLICATION_ERROR(-20001, 'No se puede eliminar la categorÃ­a porque hay cursos asociados.');
   ELSE
   
     DELETE FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
@@ -240,9 +248,11 @@ END;
 /
 
 
+
+
 /*CAPITULO_PADRE*/
 
--- Procedimiento para eliminar un capÃ­tulo padre
+-- Procedimiento para eliminar un capÃƒÂ­tulo padre
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_DELET_SP(
   P_ID_CAPITULO_PADRE NUMBER
@@ -260,12 +270,12 @@ END;
 /
 
 BEGIN
-  FIDE_PROLEARN_FINAL_PROF.SP_DELET_CP(2);
+  FIDE_PROLEARN_FINAL_PROF.CP_DELET_SP(2);
 END;
 /
 
 
--- Crear procedimiento para crear un capítulo padre
+-- Crear procedimiento para crear un capÃ­tulo padre
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_SAVE_SP(
   P_NOMBRE_CAPITULO VARCHAR2,
@@ -290,6 +300,27 @@ BEGIN
 END;
 /
 COMMIT;
+
+---Se obtiene los padre mediante el ID del curso
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.GET_CAP_PADRE_X_CURSO_SP(
+  p_id_curso IN NUMBER
+)
+AS
+  CURSOR c_capitulos_padres IS
+    SELECT DISTINCT cp.*
+    FROM FIDE_CAPITULO_PADRE_TB cp
+    JOIN FIDE_CAPITULO_HIJO_TB ch ON cp.CAPITULO_PADRE_TB_ID_CP_PK = ch.ID_CAPITULO_PADRE
+    JOIN FIDE_CAPITULO_X_CURSO_TB cc ON ch.CAPITULO_HIJO_TB_ID_CH_PK = cc.ID_CAPITULO
+    WHERE cc.ID_CURSO = p_id_curso
+    ORDER BY cp.NUMERO_CAPITULO_PADRE;
+BEGIN
+  FOR r_capitulo_padre IN c_capitulos_padres LOOP
+    NULL;
+  END LOOP;
+END;
+/
+
 
 
 
@@ -319,7 +350,7 @@ END;
 /
 COMMIT;
 
--- Procedimiento para eliminar un capÃ­tulo hijo
+-- Procedimiento para eliminar un capÃƒÂ­tulo hijo
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CH_DELETE_SP(
   P_ID_CAPITULO_HIJO IN FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CH_PK%TYPE
@@ -339,7 +370,7 @@ END;
 /
 
 
--- Procedimiento para llamar a todos los capÃ­tulo hijo
+-- Procedimiento para llamar a todos los capÃƒÂ­tulo hijo
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.APITULOS_HIJOS_FIND_ALL AS
   CURSOR CUR_CAPITULOS_HIJOS IS
@@ -356,8 +387,7 @@ BEGIN
     FETCH CUR_CAPITULOS_HIJOS INTO V_REGISTRO;
     EXIT WHEN CUR_CAPITULOS_HIJOS%NOTFOUND;
     
-    DBMS_OUTPUT.PUT_LINE(V_REGISTRO.CAPITULO_HIJO_TB_ID_CH_PK || ' || '
-    || V_REGISTRO.NOMBRE_CAPITULO_HIJO );
+    DBMS_OUTPUT.PUT_LINE(V_REGISTRO.CAPITULO_HIJO_TB_ID_CH_PK || ' || ' || V_REGISTRO.NOMBRE_CAPITULO_HIJO );
   END LOOP;
   
   CLOSE CUR_CAPITULOS_HIJOS;
@@ -397,8 +427,33 @@ END;
 /
 
 
+---Se obtiene los hijos mediante el ID del curso y del padre
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.GET_CAPITULOS_HIJOS_SP(
+  p_id_curso IN NUMBER,
+  p_id_capitulo_padre IN NUMBER
+)
+AS
+  CURSOR c_capitulos_hijos IS
+    SELECT ch.*
+    FROM FIDE_CAPITULO_HIJO_TB ch
+    JOIN FIDE_CAPITULO_X_CURSO_TB cc ON ch.CAPITULO_HIJO_TB_ID_CH_PK = cc.ID_CAPITULO
+    WHERE cc.ID_CURSO = p_id_curso
+    AND ch.ID_CAPITULO_PADRE = p_id_capitulo_padre
+    ORDER BY ch.NUMERO_CAPITULO_HIJO;
+BEGIN
+  FOR r_capitulo_hijo IN c_capitulos_hijos LOOP
+    NULL;
+  END LOOP;
+END;
+/
+
+
+
+
 /*CURSOS*/
--- Procedimiento para aÃ±adir un curso
+
+-- Procedimiento para aÃƒÂ±adir un curso
 
 CREATE OR REPLACE PROCEDURE AddCurso(
     p_nombre_curso IN VARCHAR2,
@@ -445,17 +500,41 @@ END;
 CREATE OR REPLACE PROCEDURE sp_list_courses IS
 BEGIN
     FOR rec IN (SELECT * FROM PROLEARN.cursos) LOOP
-        DBMS_OUTPUT.PUT_LINE('ID: ' || rec.id_curso || ', Nombre: ' || rec.nombre_curso || ', DescripciÃ³n: ' || rec.descrp_curso || ', Estado: ' || rec.estado_curso || ', CategorÃ­a: ' || rec.categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('ID: ' || rec.id_curso || ', Nombre: ' 
+|| rec.nombre_curso || ', DescripciÃƒÂ³n: ' || rec.descrp_curso || ', Estado: ' 
+|| rec.estado_curso || ', CategorÃƒÂ­a: ' || rec.categoria_curso);
     END LOOP;
 END;
 /
 
-D;
+---Se obtiene el curso mediante el ID
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.GET_CURSO_BY_ID_SP(
+  p_id_curso IN NUMBER
+)
+AS
+  v_curso FIDE_CURSOS_TB%ROWTYPE;
+BEGIN
+  SELECT 
+    *
+  INTO 
+    v_curso
+  FROM 
+    FIDE_CURSOS_TB
+  WHERE 
+    CURSOS_TB_ID_CUR_PK = p_id_curso;
+  NULL;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    NULL;
+END;
 /
 
 
+
+
 /*CAPITULO_X_CURSO*/
--- Procedimiento para listar todos los capÃ­tulos de un curso
+-- Procedimiento para listar todos los capÃƒÂ­tulos de un curso
 CREATE OR REPLACE PROCEDURE sp_list_chapters_of_course(
     p_id_curso IN INT
 ) IS
@@ -464,14 +543,13 @@ BEGIN
                 FROM PROLEARN.capitulo_x_curso cxc
                 JOIN PROLEARN.capitulo_hijo ch ON cxc.id_capitulo = ch.id_capitulo
                 WHERE cxc.id_curso = p_id_curso) LOOP
-        DBMS_OUTPUT.PUT_LINE('ID CapÃ­tulo: ' || rec.id_capitulo || 
-                             ', Nombre CapÃ­tulo: ' || rec.nombre_capitulo || 
-                             ', Video CapÃ­tulo: ' || rec.video_capitulo || 
-                             ', NÃºmero CapÃ­tulo: ' || rec.numero_capitulo);
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo: ' || rec.id_capitulo || 
+                             ', Nombre CapÃƒÂ­tulo: ' || rec.nombre_capitulo || 
+                             ', Video CapÃƒÂ­tulo: ' || rec.video_capitulo || 
+                             ', NÃƒÂºmero CapÃƒÂ­tulo: ' || rec.numero_capitulo);
     END LOOP;
 END;
 /
-
 
 
 
@@ -495,6 +573,7 @@ EXCEPTION
     WHEN NO_DATA_FOUND THEN P_CATEGORIA := NULL;
 
 END;
+/
 
 
 
