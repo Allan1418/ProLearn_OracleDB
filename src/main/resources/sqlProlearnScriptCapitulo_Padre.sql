@@ -6,6 +6,8 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.TESTI (
 
 /*CAPITULO_PADRE*/
 
+
+--- Procedimiento para buscar al Capitulo Padre mediante el id
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_FINDBYID_SP (
   P_ID_CAPITULO_PADRE IN NUMBER,
   P_RESULTADO OUT SYS_REFCURSOR
@@ -42,7 +44,7 @@ END;
 /
 
 
--- Crear procedimiento para crear un capitulo padre
+-- Crear procedimiento para guardar un Capitulo padre
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CP_SAVE_SP(
   P_NOMBRE_CAPITULO VARCHAR2,
@@ -63,7 +65,7 @@ END;
 /
 
 
----Se obtiene los padre mediante el ID del curso
+---Se busca el ID del Curso y el Padre relacionado al Curso
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.GET_CAP_PADRE_X_CURSO_SP(
   P_ID_CURSO IN NUMBER,
