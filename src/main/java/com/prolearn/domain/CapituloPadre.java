@@ -21,10 +21,10 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllXIdCursoCP",
-    procedureName = "CP_FINDBYID_SP",
+    procedureName = "GET_CAP_PADRE_X_CURSO_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "falta", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "falta", type = void.class)
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CAPITULOS_PADRES", type = void.class)
     },
     resultClasses = { CapituloPadre.class } 
 )

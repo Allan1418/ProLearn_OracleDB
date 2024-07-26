@@ -12,10 +12,10 @@ import lombok.Data;
 @Table(name = "FIDE_CURSOS_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdCurso",
-    procedureName = "falta",
+    procedureName = "GET_CURSO_BY_ID_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "falta", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "falta", type = void.class)
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOS", type = void.class)
     },
     resultClasses = { Curso.class } 
 )

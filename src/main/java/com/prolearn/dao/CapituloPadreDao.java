@@ -17,6 +17,6 @@ public interface CapituloPadreDao extends JpaRepository<CapituloPadre, Long> {
     
     
     @Procedure(name = "SPFindAllXIdCursoCP")
-    List<CapituloPadre> findAllXCursoID(@Param("falta")Long idCurso);
+    List<CapituloPadre> findAllXCursoID(@Param("P_ID_CURSO")Long idCurso);
     
 }

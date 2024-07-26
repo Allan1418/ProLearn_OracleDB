@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 public interface CursoDao extends JpaRepository<Curso, Long>{
     
     @Procedure(name = "SPFindXIdCurso")
-    Optional<Curso> findXId(@Param("falta") Long id);
+    Optional<Curso> findXId(@Param("P_ID_CURSO") Long id);
     
 }
