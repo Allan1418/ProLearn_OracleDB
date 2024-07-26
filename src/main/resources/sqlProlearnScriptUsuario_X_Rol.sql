@@ -5,7 +5,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.TESTI (
 
 /*USUARIOS*/
 
--- Procedimiento paraagregar un usuario
+-- Procedimiento para agregar un usuario
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USER_ADD_SP (
     P_NOMBRE IN VARCHAR2,
     P_APELLIDOS IN VARCHAR2,
@@ -56,7 +56,7 @@ BEGIN
         LOOP
             FETCH V_CURSOR INTO V_REGISTRO;
             EXIT WHEN V_CURSOR%NOTFOUND;
-            dbms_output.put_line('ID: '
+            DBMS_OUTPUT.PUT_LINE('ID: '
                                  || V_REGISTRO.USUARIOS_TB_ID_USER_PK|| ', NOMBRE: ' || V_REGISTRO.NOMBRE ||
                                  ', APELLIDOS: '|| V_REGISTRO.APELLIDOS || ', EMAIL: '|| V_REGISTRO.EMAIL);
         END LOOP;
@@ -97,7 +97,7 @@ CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.ROLE_CREATE_SP(
 ) IS
 BEGIN
     INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (NOMBRE)
-    VALUES (P_Nombre);
+    VALUES (P_NOMBRE);
     COMMIT;
 END;
 /
