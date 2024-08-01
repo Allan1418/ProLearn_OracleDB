@@ -19,6 +19,15 @@ import lombok.Data;
     },
     resultClasses = { CapituloPadre.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "SPFindAllXIdCursoCP",
+    procedureName = "GET_CAP_PADRE_X_CURSO_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CAPITULOS_PADRES", type = void.class)
+    },
+    resultClasses = { CapituloPadre.class } 
+)
 public class CapituloPadre implements Serializable {
     
     private static final long serialVersionUID = 1L;

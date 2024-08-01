@@ -22,6 +22,9 @@ END;
 /
 COMMIT;
 
+/*creacion de tablas*/
+
+
 CREATE USER FIDE_PROLEARN_FINAL_PROF IDENTIFIED BY contra_1;
 GRANT DBA TO FIDE_PROLEARN_FINAL_PROF;
 BEGIN
@@ -30,31 +33,57 @@ END;
 /
 COMMIT;
 
-/*creacion de tablas*/
-
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_USUARIO_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (
-    USUARIOS_TB_ID_USER_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_USUARIO_SEQ.NEXTVAL PRIMARY KEY,
+   USUARIOS_TB_ID_USER_PK NUMBER PRIMARY KEY,
     NOMBRE VARCHAR2(250) NOT NULL,
     APELLIDOS VARCHAR2(250) NOT NULL,
     EMAIL VARCHAR2(25) NOT NULL,
     PASSWORD VARCHAR2(512) NOT NULL 
 );
 
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_USUARIO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
+FOR EACH ROW
+BEGIN
+    :NEW.USUARIOS_TB_ID_USER_PK := FIDE_PROLEARN_FINAL_PROF.ID_USUARIO_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_ROL_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (
-    ROL_TB_ID_ROL_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_ROL_SEQ.NEXTVAL PRIMARY KEY,
+    ROL_TB_ID_ROL_PK NUMBER PRIMARY KEY,
     NOMBRE VARCHAR2(255)
 );
 
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_ROL_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB
+FOR EACH ROW
+BEGIN
+    :NEW.ROL_TB_ID_ROL_PK := FIDE_PROLEARN_FINAL_PROF.ID_ROL_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (
     USUARIO_ID INT,
     ROL_ID INT,
@@ -62,34 +91,65 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (
     FOREIGN KEY (ROL_ID) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB(ROL_TB_ID_ROL_PK)
 );
 
+-----------------------------------------------------------------------------------------------
+
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CATEGORIA_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (
-  CATEGORIAS_TB_ID_CAT_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_CATEGORIA_SEQ.NEXTVAL PRIMARY KEY,
+  CATEGORIAS_TB_ID_CAT_PK NUMBER PRIMARY KEY,
   NOMBRE_CATEGORIA VARCHAR2(255) NOT NULL
 );
 
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CATEGORIA_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
+FOR EACH ROW
+BEGIN
+  :NEW.CATEGORIAS_TB_ID_CAT_PK := FIDE_PROLEARN_FINAL_PROF.ID_CATEGORIA_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (
-  CAPITULO_PADRE_TB_ID_CP_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ.NEXTVAL PRIMARY KEY,
+  CAPITULO_PADRE_TB_ID_CP_PK NUMBER PRIMARY KEY,
   NOMBRE_CAPITULO_PADRE VARCHAR2(255) NOT NULL,
   NUMERO_CAPITULO_PADRE INT NOT NULL
 );
 
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
+FOR EACH ROW
+BEGIN
+  :NEW.CAPITULO_PADRE_TB_ID_CP_PK := FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_HIJO_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (
-  CAPITULO_HIJO_TB_ID_CH_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_HIJO_SEQ.NEXTVAL PRIMARY KEY,
+  CAPITULO_HIJO_TB_ID_CH_PK NUMBER PRIMARY KEY,
   ID_CAPITULO_PADRE INT NOT NULL,
   NOMBRE_CAPITULO_HIJO VARCHAR2(255) NOT NULL,
   VIDEO_CAPITULO VARCHAR2(1024),
@@ -97,13 +157,26 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (
   FOREIGN KEY (ID_CAPITULO_PADRE) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB(CAPITULO_PADRE_TB_ID_CP_PK)
 );
 
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_HIJO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
+FOR EACH ROW
+BEGIN
+  :NEW.CAPITULO_HIJO_TB_ID_CH_PK := FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_HIJO_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CURSO_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (
-  CURSOS_TB_ID_CUR_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_CURSO_SEQ.NEXTVAL PRIMARY KEY,
+  CURSOS_TB_ID_CUR_PK NUMBER PRIMARY KEY,
   NOMBRE_CURSO VARCHAR2(250) NOT NULL,
   DESCRP_CURSO VARCHAR2(1000),
   ESTADO_CURSO NUMBER(1),
@@ -112,18 +185,46 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (
   FOREIGN KEY (CATEGORIA_CURSO) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB(CATEGORIAS_TB_ID_CAT_PK)
 );
 
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CURSO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
+FOR EACH ROW
+BEGIN
+  :NEW.CURSOS_TB_ID_CUR_PK := FIDE_PROLEARN_FINAL_PROF.ID_CURSO_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+-- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_X_CURSO_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
 
+-- Crear tabla
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB (
-  CAP_X_CUR_TB_ID_PK NUMBER DEFAULT FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_X_CURSO_SEQ.NEXTVAL PRIMARY KEY,
+  CAP_X_CUR_TB_ID_PK NUMBER PRIMARY KEY,
   ID_CURSO INT NOT NULL,
   ID_CAPITULO INT NOT NULL,
   FOREIGN KEY (ID_CURSO) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB(CURSOS_TB_ID_CUR_PK),
   FOREIGN KEY (ID_CAPITULO) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB(CAPITULO_HIJO_TB_ID_CH_PK) ON DELETE CASCADE
 );
+
+-- Crear trigger para insertar valor del secuenciador
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_X_CURSO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB
+FOR EACH ROW
+BEGIN
+  :NEW.CAP_X_CUR_TB_ID_PK := FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_X_CURSO_SEQ.NEXTVAL;
+END;
+/
+
+-----------------------------------------------------------------------------------------------
+
+
+
+
 
 /*insercion de datos*/
 
@@ -751,3 +852,434 @@ VALUES(6, 78);
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB (ID_CURSO, ID_CAPITULO) 
 VALUES(6, 79);
 COMMIT;
+
+/*
+
+--------------------------paquetes----------------------------------------------
+-------------Paquetes uauraios----------
+
+--Paquete Crear usuario 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_usuarios AS
+    PROCEDURE crear_usuario(
+        p_nombre IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.NOMBRE%TYPE,
+        p_apellidos IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.APELLIDOS%TYPE,
+        p_email IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.EMAIL%TYPE,
+        p_password IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.PASSWORD%TYPE
+    );
+END pkg_creacion_usuarios;
+/
+
+--Paquete Actualiar usuario
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_usuarios AS
+    PROCEDURE actualizar_usuario(
+        p_id_usuario IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.USUARIOS_TB_ID_USER_PK%TYPE,
+        p_nombre IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.NOMBRE%TYPE,
+        p_apellidos IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.APELLIDOS%TYPE,
+        p_email IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.EMAIL%TYPE
+    );
+END pkg_actualizacion_usuarios;
+/
+
+--Paquete Consultar usuario
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_usuarios AS
+    FUNCTION obtener_usuario_por_id(
+        p_id_usuario IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.USUARIOS_TB_ID_USER_PK%TYPE
+    ) RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB%ROWTYPE;
+
+    FUNCTION obtener_usuario_por_email(
+        p_email IN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB.EMAIL%TYPE
+    ) RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB%ROWTYPE;
+END pkg_consulta_usuarios;
+/
+
+------Paquetes categoria------
+--Paquete crear categoria
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_categorias AS
+    PROCEDURE crear_categoria(p_nombre_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE);
+END pkg_creacion_categorias;
+/
+
+--Paquete actualizar categoria
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_categorias AS
+    PROCEDURE actualizar_categoria(p_id_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.CATEGORIAS_TB_ID_CAT_PK%TYPE, 
+    p_nombre_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE);
+END pkg_actualizacion_categorias;
+/
+
+--Paquete consultar categoria
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_categorias AS
+    FUNCTION obtener_categoria_por_id(p_id_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.CATEGORIAS_TB_ID_CAT_PK%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB%ROWTYPE;
+    FUNCTION obtener_categoria_por_nombre(p_nombre_categoria IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB.NOMBRE_CATEGORIA%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB%ROWTYPE;
+END pkg_consulta_categorias;
+/
+
+-------Paquete capitulo padre-----
+--Paquete crear capitulo padre
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_capitulo_padre AS
+    PROCEDURE crear_capitulo_padre(p_nombre_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NOMBRE_CAPITULO_PADRE%TYPE, 
+    p_numero_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NUMERO_CAPITULO_PADRE%TYPE);
+END pkg_creacion_capitulo_padre;
+/
+
+--Paquete actualiza capitulo padre
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_capitulo_padre AS
+    PROCEDURE actualizar_capitulo_padre(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.CAPITULO_PADRE_TB_ID_CP_PK%TYPE, 
+    p_nombre_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NOMBRE_CAPITULO_PADRE%TYPE,
+    p_numero_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NUMERO_CAPITULO_PADRE%TYPE);
+END pkg_actualizacion_capitulo_padre;
+/
+
+--Paquete consulta capitulo padre
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_capitulo_padre AS
+    FUNCTION obtener_capitulo_padre_por_id(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.CAPITULO_PADRE_TB_ID_CP_PK%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB%ROWTYPE;
+    FUNCTION obtener_capitulo_padre_por_nombre(p_nombre_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB.NOMBRE_CAPITULO_PADRE%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB%ROWTYPE;
+
+END pkg_consulta_capitulo_padre;
+/
+
+------Paqute capitulo hijo ----------------
+-- Paquete crear capitulo hijo 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_capitulo_hijo AS
+    PROCEDURE crear_capitulo_hijo(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE, 
+    p_nombre_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO_HIJO%TYPE, p_video_capitulo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.VIDEO_CAPITULO%TYPE, p_numero_capitulo_hijo IN
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NUMERO_CAPITULO_HIJO%TYPE);
+END pkg_creacion_capitulo_hijo;
+/
+--Paquete actualizar capitulo hijo 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_capitulo_hijo AS
+    PROCEDURE actualizar_capitulo_hijo(p_id_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CH_PK%TYPE, 
+    p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE, 
+    p_nombre_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO_HIJO%TYPE, 
+    p_video_capitulo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.VIDEO_CAPITULO%TYPE, 
+    p_numero_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NUMERO_CAPITULO_HIJO%TYPE);
+END pkg_actualizacion_capitulo_hijo;
+/
+--Paquete consultar capitulo hijo 
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_capitulo_hijo AS
+    FUNCTION obtener_capitulo_hijo_por_id(p_id_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.CAPITULO_HIJO_TB_ID_CH_PK%TYPE)
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB%ROWTYPE;
+    FUNCTION obtener_capitulo_hijo_por_nombre(p_nombre_capitulo_hijo IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.NOMBRE_CAPITULO_HIJO%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB%ROWTYPE;
+    FUNCTION obtener_capitulo_hijo_por_id_capitulo_padre(p_id_capitulo_padre IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB.ID_CAPITULO_PADRE%TYPE) 
+    RETURN SYS_REFCURSOR;
+END pkg_consulta_capitulo_hijo;
+/
+
+------Paquete cusrsos----
+--Paquete crear curso
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_creacion_cursos AS
+    PROCEDURE crear_curso(p_nombre_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.NOMBRE_CURSO%TYPE, p_descripcion_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.DESCRP_CURSO%TYPE, p_estado_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.ESTADO_CURSO%TYPE, p_thumbnail_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.THUMBNAIL_CURSO%TYPE, p_categoria_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CATEGORIA_CURSO%TYPE);
+END pkg_creacion_cursos;
+/
+--Paquete actualizar curso
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_actualizacion_cursos AS
+    PROCEDURE actualizar_curso(p_id_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CURSOS_TB_ID_CUR_PK%TYPE, p_nombre_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.NOMBRE_CURSO%TYPE, p_descripcion_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.DESCRP_CURSO%TYPE, p_estado_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.ESTADO_CURSO%TYPE, p_thumbnail_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.THUMBNAIL_CURSO%TYPE, p_categoria_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CATEGORIA_CURSO%TYPE);
+END pkg_actualizacion_cursos;
+/
+--Paquete consultar cusrso
+CREATE OR REPLACE PACKAGE FIDE_PROLEARN_FINAL_PROF.pkg_consulta_cursos AS
+    FUNCTION obtener_curso_por_id(p_id_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CURSOS_TB_ID_CUR_PK%TYPE) 
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB%ROWTYPE;
+    FUNCTION obtener_curso_por_nombre(p_nombre_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.NOMBRE_CURSO%TYPE)
+    RETURN FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB%ROWTYPE;
+    FUNCTION obtener_cursos_por_categoria(p_categoria_curso IN 
+    FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB.CATEGORIA_CURSO%TYPE) 
+    RETURN SYS_REFCURSOR;
+END pkg_consulta_cursos;
+/
+
+
+
+
+
+-------------------------Cursores-------------------------------------
+--Cursor recuperar los datos de la tabla  usuarios
+SET SERVEROUTPUT ON
+DECLARE
+    -- Declaración del cursor
+    CURSOR usuarios_cursor IS
+        SELECT USUARIOS_TB_ID_USER_PK, NOMBRE, APELLIDOS, EMAIL, PASSWORD
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_usuario NUMBER;
+    v_nombre VARCHAR2(250);
+    v_apellidos VARCHAR2(250);
+    v_email VARCHAR2(25);
+    v_password VARCHAR2(512);
+BEGIN
+    -- Abrir el cursor
+    OPEN usuarios_cursor;
+
+    -- Recuperar y mostrar los datos de los usuarios
+    LOOP
+        FETCH usuarios_cursor INTO v_id_usuario, v_nombre, v_apellidos, v_email, v_password;
+        EXIT WHEN usuarios_cursor%NOTFOUND;
+
+        -- Mostrar los datos del usuario
+        DBMS_OUTPUT.PUT_LINE('ID Usuario: ' || v_id_usuario);
+        DBMS_OUTPUT.PUT_LINE('Nombre: ' || v_nombre);
+        DBMS_OUTPUT.PUT_LINE('Apellidos: ' || v_apellidos);
+        DBMS_OUTPUT.PUT_LINE('Email: ' || v_email);
+        DBMS_OUTPUT.PUT_LINE('Password: ' || v_password);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE usuarios_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla rol
+DECLARE
+    -- Declaración del cursor
+    CURSOR roles_cursor IS
+        SELECT ROL_TB_ID_ROL_PK, NOMBRE
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_rol NUMBER;
+    v_nombre VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN roles_cursor;
+
+    -- Recuperar y mostrar los datos de los roles
+    LOOP
+        FETCH roles_cursor INTO v_id_rol, v_nombre;
+        EXIT WHEN roles_cursor%NOTFOUND;
+
+        -- Mostrar los datos del rol
+        DBMS_OUTPUT.PUT_LINE('ID Rol: '|| v_id_rol);
+        DBMS_OUTPUT.PUT_LINE('Nombre: '|| v_nombre);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE roles_cursor;
+END;
+/
+
+--cursor recuperar los datos de la tabla catergoria 
+DECLARE
+    -- Declaración del cursor
+    CURSOR categorias_cursor IS
+        SELECT CATEGORIAS_TB_ID_CAT_PK, NOMBRE_CATEGORIA
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_categoria NUMBER;
+    v_nombre_categoria VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN categorias_cursor;
+
+    -- Recuperar y mostrar los datos de las categorías
+    LOOP
+        FETCH categorias_cursor INTO v_id_categoria, v_nombre_categoria;
+        EXIT WHEN categorias_cursor%NOTFOUND;
+
+        -- Mostrar los datos de la categoría
+        DBMS_OUTPUT.PUT_LINE('ID Categoría: ' || v_id_categoria);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categoría: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE categorias_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla capitulos_padre
+DECLARE
+    -- Declaración del cursor
+    CURSOR capitulos_padre_cursor IS
+        SELECT CAPITULO_PADRE_TB_ID_CP_PK, NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_capitulo_padre NUMBER;
+    v_nombre_capitulo_padre VARCHAR2(255);
+    v_numero_capitulo_padre INT;
+BEGIN
+    -- Abrir el cursor
+    OPEN capitulos_padre_cursor;
+
+    -- Recuperar y mostrar los datos de los capítulos padre
+    LOOP
+        FETCH capitulos_padre_cursor INTO v_id_capitulo_padre, v_nombre_capitulo_padre, v_numero_capitulo_padre;
+        EXIT WHEN capitulos_padre_cursor%NOTFOUND;
+
+        -- Mostrar los datos del capítulo padre
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo Padre: '|| v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Padre: '|| v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Número Capítulo Padre: '|| v_numero_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE capitulos_padre_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla capitulos_hijo
+DECLARE
+    -- Declaración del cursor
+    CURSOR capitulos_hijo_cursor IS
+        SELECT CH.CAPITULO_HIJO_TB_ID_CH_PK, CH.ID_CAPITULO_PADRE, CH.NOMBRE_CAPITULO_HIJO, CH.VIDEO_CAPITULO, CH.NUMERO_CAPITULO_HIJO, CP.NOMBRE_CAPITULO_PADRE
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB CP ON CH.ID_CAPITULO_PADRE = CP.CAPITULO_PADRE_TB_ID_CP_PK;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_capitulo_hijo NUMBER;
+    v_id_capitulo_padre INT;
+    v_nombre_capitulo_hijo VARCHAR2(255);
+    v_video_capitulo VARCHAR2(1024);
+    v_numero_capitulo_hijo INT;
+    v_nombre_capitulo_padre VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN capitulos_hijo_cursor;
+
+    -- Recuperar y mostrar los datos de los capítulos hijo
+    LOOP
+        FETCH capitulos_hijo_cursor INTO v_id_capitulo_hijo, v_id_capitulo_padre, v_nombre_capitulo_hijo, v_video_capitulo, v_numero_capitulo_hijo, v_nombre_capitulo_padre;
+        EXIT WHEN capitulos_hijo_cursor%NOTFOUND;
+
+        -- Mostrar los datos del capítulo hijo
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo Hijo: ' || v_id_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo Padre: ' || v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Hijo: ' || v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Video Capítulo: ' || v_video_capitulo);
+        DBMS_OUTPUT.PUT_LINE('Número Capítulo Hijo: ' || v_numero_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Padre: ' || v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE capitulos_hijo_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla Cursos
+DECLARE
+    -- Declaración del cursor
+    CURSOR cursos_cursor IS
+        SELECT C.CURSOS_TB_ID_CUR_PK, C.NOMBRE_CURSO, C.DESCRP_CURSO, C.ESTADO_CURSO, C.THUMBNAIL_CURSO, C.CATEGORIA_CURSO, CG.NOMBRE_CATEGORIA
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB C
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB CG ON C.CATEGORIA_CURSO = CG.CATEGORIAS_TB_ID_CAT_PK;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_curso NUMBER;
+    v_nombre_curso VARCHAR2(250);
+    v_descripcion_curso VARCHAR2(1000);
+    v_estado_curso NUMBER(1);
+    v_thumbnail_curso VARCHAR2(1024);
+    v_categoria_curso INT;
+    v_nombre_categoria VARCHAR2(250);
+BEGIN
+    -- Abrir el cursor
+    OPEN cursos_cursor;
+
+    -- Recuperar y mostrar los datos de los cursos
+    LOOP
+        FETCH cursos_cursor INTO v_id_curso, v_nombre_curso, v_descripcion_curso, v_estado_curso, v_thumbnail_curso, v_categoria_curso, v_nombre_categoria;
+        EXIT WHEN cursos_cursor%NOTFOUND;
+
+        -- Mostrar los datos del curso
+        DBMS_OUTPUT.PUT_LINE('ID Curso: ' || v_id_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Curso: ' || v_nombre_curso);
+        DBMS_OUTPUT.PUT_LINE('Descripción Curso: ' || v_descripcion_curso);
+        DBMS_OUTPUT.PUT_LINE('Estado Curso: ' || v_estado_curso);
+        DBMS_OUTPUT.PUT_LINE('Thumbnail Curso: ' || v_thumbnail_curso);
+        DBMS_OUTPUT.PUT_LINE('Categoría Curso: ' || v_categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categoría: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE cursos_cursor;
+END;
+/
+
+--Cursor recuperar los datos de la tabla capitulos_x_cursos
+DECLARE
+    -- Declaración del cursor
+    CURSOR capitulos_x_cursos_cursor IS
+        SELECT CXC.CAP_X_CUR_TB_ID_PK, CXC.ID_CURSO, CXC.ID_CAPITULO, C.NOMBRE_CURSO, CH.NOMBRE_CAPITULO_HIJO
+        FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB CXC
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB C ON CXC.ID_CURSO = C.CURSOS_TB_ID_CUR_PK
+        JOIN FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH ON CXC.ID_CAPITULO = CH.CAPITULO_HIJO_TB_ID_CH_PK;
+
+    -- Variables para almacenar los datos recuperados por el cursor
+    v_id_capitulo_x_curso NUMBER;
+    v_id_curso INT;
+    v_id_capitulo INT;
+    v_nombre_curso VARCHAR2(250);
+    v_nombre_capitulo_hijo VARCHAR2(255);
+BEGIN
+    -- Abrir el cursor
+    OPEN capitulos_x_cursos_cursor;
+
+    -- Recuperar y mostrar los datos de los capítulos por curso
+    LOOP
+        FETCH capitulos_x_cursos_cursor INTO v_id_capitulo_x_curso, v_id_curso, v_id_capitulo, v_nombre_curso, v_nombre_capitulo_hijo;
+        EXIT WHEN capitulos_x_cursos_cursor%NOTFOUND;
+
+        -- Mostrar los datos del capítulo por curso
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo x Curso: '|| v_id_capitulo_x_curso);
+        DBMS_OUTPUT.PUT_LINE('ID Curso: '|| v_id_curso);
+        DBMS_OUTPUT.PUT_LINE('ID Capítulo: '|| v_id_capitulo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Curso: '|| v_nombre_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capítulo Hijo: '|| v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('------------------------');
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE capitulos_x_cursos_cursor;
+END;
+/
+
+
+
+*/

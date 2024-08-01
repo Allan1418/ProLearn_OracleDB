@@ -26,7 +26,7 @@ public class CursoServiceImpl implements CursoService{
     @Override
     @Transactional(readOnly = true)
     public Curso getCurso(Curso curso) {
-        return cursoDao.findById(curso.getIdCurso()).orElse(null);
+        return cursoDao.findXId(curso.getIdCurso()).orElse(null);
     }
 
     @Override
