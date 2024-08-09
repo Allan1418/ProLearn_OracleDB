@@ -12,7 +12,8 @@ CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_FINDBYID_SP(
 )IS
 BEGIN
     OPEN P_CATEGORIA FOR
-    SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB 
+    SELECT CATEGORIAS_TB_ID_CAT_PK, NOMBRE_CATEGORIA 
+    FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB 
     WHERE CATEGORIAS_TB_ID_CAT_PK = P_ID_CATEGORIA;
     
     INSERT INTO FIDE_PROLEARN_FINAL_PROF.TESTI (PARA) VALUES ('A');
@@ -83,7 +84,13 @@ CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.GET_CURSO_BY_ID_SP(
 AS
 BEGIN
   OPEN P_CURSOS FOR
-    SELECT *
+    SELECT 
+        CURSOS_TB_ID_CUR_PK,
+        NOMBRE_CURSO,
+        DESCRP_CURSO,
+        THUMBNAIL_CURSO,
+        CATEGORIA_CURSO,
+        ESTADO_CURSO
     FROM FIDE_CURSOS_TB
     WHERE CURSOS_TB_ID_CUR_PK = P_ID_CURSO;
 END;
@@ -156,8 +163,8 @@ CREATE OR REPLACE PROCEDURE SP_LIST_COURSES IS
 BEGIN
     FOR REC IN (SELECT * FROM PROLEARN.CURSOS) LOOP
         DBMS_OUTPUT.PUT_LINE('ID: ' || REC.ID_CURSO || ', Nombre: ' 
-|| REC.NOMBRE_CURSO || ', DescripciÃ³n: ' || REC.DESCRP_CURSO || ', Estado: ' 
-|| REC.ESTADO_CURSO || ', CategorÃ­a: ' || REC.CATEGORIA_CURSO);
+|| REC.NOMBRE_CURSO || ', DescripciÃƒÂ³n: ' || REC.DESCRP_CURSO || ', Estado: ' 
+|| REC.ESTADO_CURSO || ', CategorÃƒÂ­a: ' || REC.CATEGORIA_CURSO);
     END LOOP;
 END;
 /
@@ -175,10 +182,10 @@ BEGIN
                 FROM PROLEARN.CAPITULO_X_CURSO CXC
                 JOIN PROLEARN.CAPITULO_HIJO CH ON CXC.ID_CAPITULO = CH.ID_CAPITULO
                 WHERE CXC.ID_CURSO = P_ID_CURSO) LOOP
-        DBMS_OUTPUT.PUT_LINE('ID CapÃ­tulo: ' || REC.ID_CAPITULO || 
-                             ', Nombre CapÃ­tulo: ' || REC.NOMBRE_CAPITULO || 
-                             ', Video CapÃ­tulo: ' || REC.VIDEO_CAPITULO || 
-                             ', NÃºmero CapÃ­tulo: ' || REC.NUMERO_CAPITULO);
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo: ' || REC.ID_CAPITULO || 
+                             ', Nombre CapÃƒÂ­tulo: ' || REC.NOMBRE_CAPITULO || 
+                             ', Video CapÃƒÂ­tulo: ' || REC.VIDEO_CAPITULO || 
+                             ', NÃƒÂºmero CapÃƒÂ­tulo: ' || REC.NUMERO_CAPITULO);
     END LOOP;
 END;
 /
