@@ -67,7 +67,7 @@ END;
 /
 
 
--- Crear trigger para establecer ESTADO en TRUE despuÃƒÂ©s de la inserciÃƒÂ³n
+-- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
 CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_USUARIO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
 FOR EACH ROW
@@ -248,7 +248,7 @@ BEGIN
 END;
 /
 
--- Crear trigger para establecer ESTADO en TRUE despuÃƒÂ©s de la inserciÃƒÂ³n
+-- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
 CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_PADRE_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
@@ -315,7 +315,7 @@ END;
 /
 
 
--- Crear trigger para establecer ESTADO en TRUE despuÃƒÂ©s de la inserciÃƒÂ³n
+-- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
 CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_HIJO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
@@ -379,7 +379,7 @@ END;
 /
 
 
--- Crear trigger para establecer ESTADO en TRUE despuÃƒÂ©s de la inserciÃƒÂ³n
+-- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
 CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_CURSO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
 FOR EACH ROW
@@ -479,7 +479,7 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (USUARIO_ID, ROL_ID)
 VALUES (2, 2);
 
 
-INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('DiseÃƒÆ’Ã‚Â±o');
+INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('DiseÃƒÂ±o');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Programacion');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Idiomas');
 COMMIT;
@@ -508,13 +508,13 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PAD
 VALUES ( 'Crear Base de datos', 2 );
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Conceptos bÃƒÆ’Ã‚Â¡sicos de MySQL', 3);
+VALUES ( 'Conceptos bÃƒÂ¡sicos de MySQL', 3);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
 VALUES ( 'Consultas SQL', 4);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Funciones de agregaciÃƒÆ’Ã‚Â³n', 5);
+VALUES ( 'Funciones de agregaciÃƒÂ³n', 5);
 COMMIT;
 
 /*Inserts de Padres JavaScript */
@@ -772,36 +772,36 @@ COMMIT;
 
 /*Inserts de curso Python */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Python', 'Python es un lenguaje de programaciÃƒÆ’Ã‚Â³n de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y fÃƒÆ’Ã‚Â¡cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
+('Python', 'Python es un lenguaje de programaciÃƒÂ³n de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y fÃƒÂ¡cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
 , 'https://www.dongee.com/tutoriales/content/images/2023/01/que-es-python-1.png', 2);
      
 /*Inserts de curso MySql */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('MySql', 'MySQL es un sistema de gestiÃƒÆ’Ã‚Â³n de bases de datos relacionales (RDBMS) de cÃƒÆ’Ã‚Â³digo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, mÃƒÆ’Ã‚Â³viles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
+('MySql', 'MySQL es un sistema de gestiÃƒÂ³n de bases de datos relacionales (RDBMS) de cÃƒÂ³digo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, mÃƒÂ³viles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
 , 'https://datascientest.com/en/wp-content/uploads/sites/9/2023/11/mysql.webp', 2);
 COMMIT;
 
 /*Inserts de curso JavaScript */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('JavaScript','JavaScript es un lenguaje de programaciÃƒÆ’Ã‚Â³n versÃƒÆ’Ã‚Â¡til utilizado para crear pÃƒÆ’Ã‚Â¡ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear pÃƒÆ’Ã‚Â¡ginas web dinÃƒÆ’Ã‚Â¡micas y receptivas. JavaScript tambiÃƒÆ’Ã‚Â©n se utiliza para la programaciÃƒÆ’Ã‚Â³n del lado del servidor, lo que lo convierte en un lenguaje de programaciÃƒÆ’Ã‚Â³n de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones mÃƒÆ’Ã‚Â³viles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creaciÃƒÆ’Ã‚Â³n de aplicaciones de IA utilizando JavaScript.'
+('JavaScript','JavaScript es un lenguaje de programaciÃƒÂ³n versÃƒÂ¡til utilizado para crear pÃƒÂ¡ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear pÃƒÂ¡ginas web dinÃƒÂ¡micas y receptivas. JavaScript tambiÃƒÂ©n se utiliza para la programaciÃƒÂ³n del lado del servidor, lo que lo convierte en un lenguaje de programaciÃƒÂ³n de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones mÃƒÂ³viles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creaciÃƒÂ³n de aplicaciones de IA utilizando JavaScript.'
  ,'https://miro.medium.com/v2/resize:fit:1200/1*LyZcwuLWv2FArOumCxobpA.png',2);
  COMMIT;
      
 /*Inserts de curso AI */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computaciÃƒÆ’Ã‚Â³n que se centra en la creaciÃƒÆ’Ã‚Â³n de mÃƒÆ’Ã‚Â¡quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervenciÃƒÆ’Ã‚Â³n mÃƒÆ’Ã‚Â­nima de humanos. Con la IA, las mÃƒÆ’Ã‚Â¡quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepciÃƒÆ’Ã‚Â³n visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robÃƒÆ’Ã‚Â³tica, la atenciÃƒÆ’Ã‚Â³n mÃƒÆ’Ã‚Â©dica, las finanzas y el transporte.'
+('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computaciÃƒÂ³n que se centra en la creaciÃƒÂ³n de mÃƒÂ¡quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervenciÃƒÂ³n mÃƒÂ­nima de humanos. Con la IA, las mÃƒÂ¡quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepciÃƒÂ³n visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robÃƒÂ³tica, la atenciÃƒÂ³n mÃƒÂ©dica, las finanzas y el transporte.'
  ,'https://www.tarlogic.com/wp-content/uploads/2023/09/riesgos-seguridad-IA-3.jpg', 1);
  COMMIT;
     
 /*Inserts de curso AutoCad */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AutoCad', ' Este curso es una introducciÃƒÆ’Ã‚Â³n al software de diseÃƒÆ’Ã‚Â±o asistido por computadora AutoCAD, utilizado para crear diseÃƒÆ’Ã‚Â±os detallados 2D y 3D. Los estudiantes aprenderÃƒÆ’Ã‚Â¡n los conceptos bÃƒÆ’Ã‚Â¡sicos de AutoCAD, incluyendo cÃƒÆ’Ã‚Â³mo crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A travÃƒÆ’Ã‚Â©s de ejercicios prÃƒÆ’Ã‚Â¡cticos y ejemplos del mundo real, los estudiantes adquirirÃƒÆ’Ã‚Â¡n las habilidades necesarias para producir dibujos tÃƒÆ’Ã‚Â©cnicos y diseÃƒÆ’Ã‚Â±os para diversas industrias, como arquitectura, ingenierÃƒÆ’Ã‚Â­a y construcciÃƒÆ’Ã‚Â³n.'
+('Curso de AutoCad', ' Este curso es una introducciÃƒÂ³n al software de diseÃƒÂ±o asistido por computadora AutoCAD, utilizado para crear diseÃƒÂ±os detallados 2D y 3D. Los estudiantes aprenderÃƒÂ¡n los conceptos bÃƒÂ¡sicos de AutoCAD, incluyendo cÃƒÂ³mo crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A travÃƒÂ©s de ejercicios prÃƒÂ¡cticos y ejemplos del mundo real, los estudiantes adquirirÃƒÂ¡n las habilidades necesarias para producir dibujos tÃƒÂ©cnicos y diseÃƒÂ±os para diversas industrias, como arquitectura, ingenierÃƒÂ­a y construcciÃƒÂ³n.'
 ,'https://www.flashforge-eu.com/image/cache/catalog/product/autodesk/autocad/autodesk_autocad-1280x720.jpg', 2);
 COMMIT;
     
 /*Inserts de curso Ingles */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de Ingles', 'Este curso estÃƒÆ’Ã‚Â¡ diseÃƒÆ’Ã‚Â±ado para ayudar a los estudiantes a mejorar sus habilidades de idioma inglÃƒÆ’Ã‚Â©s de manera comprehensiva y atractiva. A travÃƒÆ’Ã‚Â©s de una variedad de lecciones interactivas, los estudiantes desarrollarÃƒÆ’Ã‚Â¡n sus habilidades de lectura, escritura, habla y escucha. El curso cubrirÃƒÆ’Ã‚Â¡ gramÃƒÆ’Ã‚Â¡tica, vocabulario, pronunciaciÃƒÆ’Ã‚Â³n y aspectos culturales del idioma inglÃƒÆ’Ã‚Â©s. Para el final del curso, los estudiantes tendrÃƒÆ’Ã‚Â¡n la confianza y la competencia para comunicarse efectivamente en inglÃƒÆ’Ã‚Â©s en entornos personales y profesionales.'
+('Curso de Ingles', 'Este curso estÃƒÂ¡ diseÃƒÂ±ado para ayudar a los estudiantes a mejorar sus habilidades de idioma inglÃƒÂ©s de manera comprehensiva y atractiva. A travÃƒÂ©s de una variedad de lecciones interactivas, los estudiantes desarrollarÃƒÂ¡n sus habilidades de lectura, escritura, habla y escucha. El curso cubrirÃƒÂ¡ gramÃƒÂ¡tica, vocabulario, pronunciaciÃƒÂ³n y aspectos culturales del idioma inglÃƒÂ©s. Para el final del curso, los estudiantes tendrÃƒÂ¡n la confianza y la competencia para comunicarse efectivamente en inglÃƒÂ©s en entornos personales y profesionales.'
 , 'https://www.magisnet.com/wp-content/uploads/2020/11/ingle??s.jpg', 3);
 COMMIT;
 
@@ -1270,7 +1270,7 @@ END pkg_consulta_cursos;
 --Cursor recuperar los datos de la tabla  usuarios
 SET SERVEROUTPUT ON
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR usuarios_cursor IS
         SELECT USUARIOS_TB_ID_USER_PK, NOMBRE, APELLIDOS, EMAIL, PASSWORD
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB;
@@ -1306,7 +1306,7 @@ END;
 
 --Cursor recuperar los datos de la tabla rol
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR roles_cursor IS
         SELECT ROL_TB_ID_ROL_PK, NOMBRE
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB;
@@ -1336,7 +1336,7 @@ END;
 
 --cursor recuperar los datos de la tabla catergoria 
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR categorias_cursor IS
         SELECT CATEGORIAS_TB_ID_CAT_PK, NOMBRE_CATEGORIA
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB;
@@ -1348,14 +1348,14 @@ BEGIN
     -- Abrir el cursor
     OPEN categorias_cursor;
 
-    -- Recuperar y mostrar los datos de las categorÃƒÆ’Ã‚Â­as
+    -- Recuperar y mostrar los datos de las categorÃƒÂ­as
     LOOP
         FETCH categorias_cursor INTO v_id_categoria, v_nombre_categoria;
         EXIT WHEN categorias_cursor%NOTFOUND;
 
-        -- Mostrar los datos de la categorÃƒÆ’Ã‚Â­a
-        DBMS_OUTPUT.PUT_LINE('ID CategorÃƒÆ’Ã‚Â­a: ' || v_id_categoria);
-        DBMS_OUTPUT.PUT_LINE('Nombre CategorÃƒÆ’Ã‚Â­a: ' || v_nombre_categoria);
+        -- Mostrar los datos de la categorÃƒÂ­a
+        DBMS_OUTPUT.PUT_LINE('ID CategorÃƒÂ­a: ' || v_id_categoria);
+        DBMS_OUTPUT.PUT_LINE('Nombre CategorÃƒÂ­a: ' || v_nombre_categoria);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1366,7 +1366,7 @@ END;
 
 --Cursor recuperar los datos de la tabla capitulos_padre
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR capitulos_padre_cursor IS
         SELECT CAPITULO_PADRE_TB_ID_CP_PK, NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB;
@@ -1379,15 +1379,15 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_padre_cursor;
 
-    -- Recuperar y mostrar los datos de los capÃƒÆ’Ã‚Â­tulos padre
+    -- Recuperar y mostrar los datos de los capÃƒÂ­tulos padre
     LOOP
         FETCH capitulos_padre_cursor INTO v_id_capitulo_padre, v_nombre_capitulo_padre, v_numero_capitulo_padre;
         EXIT WHEN capitulos_padre_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capÃƒÆ’Ã‚Â­tulo padre
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÆ’Ã‚Â­tulo Padre: '|| v_id_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÆ’Ã‚Â­tulo Padre: '|| v_nombre_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('NÃƒÆ’Ã‚Âºmero CapÃƒÆ’Ã‚Â­tulo Padre: '|| v_numero_capitulo_padre);
+        -- Mostrar los datos del capÃƒÂ­tulo padre
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo Padre: '|| v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Padre: '|| v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('NÃƒÂºmero CapÃƒÂ­tulo Padre: '|| v_numero_capitulo_padre);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1398,7 +1398,7 @@ END;
 
 --Cursor recuperar los datos de la tabla capitulos_hijo
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR capitulos_hijo_cursor IS
         SELECT CH.CAPITULO_HIJO_TB_ID_CH_PK, CH.ID_CAPITULO_PADRE, CH.NOMBRE_CAPITULO_HIJO, CH.VIDEO_CAPITULO, CH.NUMERO_CAPITULO_HIJO, CP.NOMBRE_CAPITULO_PADRE
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH
@@ -1415,18 +1415,18 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_hijo_cursor;
 
-    -- Recuperar y mostrar los datos de los capÃƒÆ’Ã‚Â­tulos hijo
+    -- Recuperar y mostrar los datos de los capÃƒÂ­tulos hijo
     LOOP
         FETCH capitulos_hijo_cursor INTO v_id_capitulo_hijo, v_id_capitulo_padre, v_nombre_capitulo_hijo, v_video_capitulo, v_numero_capitulo_hijo, v_nombre_capitulo_padre;
         EXIT WHEN capitulos_hijo_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capÃƒÆ’Ã‚Â­tulo hijo
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÆ’Ã‚Â­tulo Hijo: ' || v_id_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÆ’Ã‚Â­tulo Padre: ' || v_id_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÆ’Ã‚Â­tulo Hijo: ' || v_nombre_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('Video CapÃƒÆ’Ã‚Â­tulo: ' || v_video_capitulo);
-        DBMS_OUTPUT.PUT_LINE('NÃƒÆ’Ã‚Âºmero CapÃƒÆ’Ã‚Â­tulo Hijo: ' || v_numero_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÆ’Ã‚Â­tulo Padre: ' || v_nombre_capitulo_padre);
+        -- Mostrar los datos del capÃƒÂ­tulo hijo
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo Hijo: ' || v_id_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo Padre: ' || v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Hijo: ' || v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Video CapÃƒÂ­tulo: ' || v_video_capitulo);
+        DBMS_OUTPUT.PUT_LINE('NÃƒÂºmero CapÃƒÂ­tulo Hijo: ' || v_numero_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Padre: ' || v_nombre_capitulo_padre);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1437,7 +1437,7 @@ END;
 
 --Cursor recuperar los datos de la tabla Cursos
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR cursos_cursor IS
         SELECT C.CURSOS_TB_ID_CUR_PK, C.NOMBRE_CURSO, C.DESCRP_CURSO, C.ESTADO_CURSO, C.THUMBNAIL_CURSO, C.CATEGORIA_CURSO, CG.NOMBRE_CATEGORIA
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB C
@@ -1463,11 +1463,11 @@ BEGIN
         -- Mostrar los datos del curso
         DBMS_OUTPUT.PUT_LINE('ID Curso: ' || v_id_curso);
         DBMS_OUTPUT.PUT_LINE('Nombre Curso: ' || v_nombre_curso);
-        DBMS_OUTPUT.PUT_LINE('DescripciÃƒÆ’Ã‚Â³n Curso: ' || v_descripcion_curso);
+        DBMS_OUTPUT.PUT_LINE('DescripciÃƒÂ³n Curso: ' || v_descripcion_curso);
         DBMS_OUTPUT.PUT_LINE('Estado Curso: ' || v_estado_curso);
         DBMS_OUTPUT.PUT_LINE('Thumbnail Curso: ' || v_thumbnail_curso);
-        DBMS_OUTPUT.PUT_LINE('CategorÃƒÆ’Ã‚Â­a Curso: ' || v_categoria_curso);
-        DBMS_OUTPUT.PUT_LINE('Nombre CategorÃƒÆ’Ã‚Â­a: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('CategorÃƒÂ­a Curso: ' || v_categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre CategorÃƒÂ­a: ' || v_nombre_categoria);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1478,7 +1478,7 @@ END;
 
 --Cursor recuperar los datos de la tabla capitulos_x_cursos
 DECLARE
-    -- DeclaraciÃƒÆ’Ã‚Â³n del cursor
+    -- DeclaraciÃƒÂ³n del cursor
     CURSOR capitulos_x_cursos_cursor IS
         SELECT CXC.CAP_X_CUR_TB_ID_PK, CXC.ID_CURSO, CXC.ID_CAPITULO, C.NOMBRE_CURSO, CH.NOMBRE_CAPITULO_HIJO
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB CXC
@@ -1495,17 +1495,17 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_x_cursos_cursor;
 
-    -- Recuperar y mostrar los datos de los capÃƒÆ’Ã‚Â­tulos por curso
+    -- Recuperar y mostrar los datos de los capÃƒÂ­tulos por curso
     LOOP
         FETCH capitulos_x_cursos_cursor INTO v_id_capitulo_x_curso, v_id_curso, v_id_capitulo, v_nombre_curso, v_nombre_capitulo_hijo;
         EXIT WHEN capitulos_x_cursos_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capÃƒÆ’Ã‚Â­tulo por curso
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÆ’Ã‚Â­tulo x Curso: '|| v_id_capitulo_x_curso);
+        -- Mostrar los datos del capÃƒÂ­tulo por curso
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo x Curso: '|| v_id_capitulo_x_curso);
         DBMS_OUTPUT.PUT_LINE('ID Curso: '|| v_id_curso);
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÆ’Ã‚Â­tulo: '|| v_id_capitulo);
+        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo: '|| v_id_capitulo);
         DBMS_OUTPUT.PUT_LINE('Nombre Curso: '|| v_nombre_curso);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÆ’Ã‚Â­tulo Hijo: '|| v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Hijo: '|| v_nombre_capitulo_hijo);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
