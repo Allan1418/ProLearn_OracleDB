@@ -19,6 +19,14 @@ import lombok.Data;
     },
     resultClasses = { Curso.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "SPFindAllCurso",
+    procedureName = "OBTENER_CURSOS_ACTIVOS_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Curso.class } 
+)
 public class Curso implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -42,9 +50,9 @@ public class Curso implements Serializable {
     @Column(name = "thumbnail_curso")
     private String thumbnailCurso;
     
-    @ManyToOne
-    @JoinColumn(name = "categoria_curso")
-    private Categoria categoriaCurso;
+//    @ManyToOne
+//    @JoinColumn(name = "categoria_curso")
+//    private Categoria categoriaCurso;
     
     
 //    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -59,22 +67,22 @@ public class Curso implements Serializable {
     public Curso() {
     }
 
-    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
+    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso/*, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        this.categoriaCurso = categoriaCurso;
+        /*this.categoriaCurso = categoriaCurso;
         /*this.capitulosHijos = capitulosHijos;*/
     }
 
-    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
+    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso/*, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        this.categoriaCurso = categoriaCurso;
+        /*this.categoriaCurso = categoriaCurso;
         /*this.capitulosHijos = capitulosHijos;*/
     }
     

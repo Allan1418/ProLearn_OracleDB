@@ -2,6 +2,7 @@
 package com.prolearn.dao;
 
 import com.prolearn.domain.Curso;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -11,5 +12,8 @@ public interface CursoDao extends JpaRepository<Curso, Long>{
     
     @Procedure(name = "SPFindXIdCurso")
     Optional<Curso> findXId(@Param("P_ID_CURSO") Long id);
+    
+    @Procedure(name = "SPFindAllCurso")
+    List<Curso> getAll();
     
 }
