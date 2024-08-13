@@ -319,3 +319,67 @@
     background-color:#2D2C2E;
     
 }
+/*================Perfile usaurio================*/
+
+/* Contenedor principal para el formulario de perfil */
+#contenedor-formulario {
+background-color: #34495e; /* Fondo ligeramente más claro */
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+width: 100%;
+max-width: 500px;
+}
+
+/* Fondo decorativo (opcional) */
+#fondoCuenta {
+display: none; /* Oculto por ahora */
+}
+
+/* Estilo de fuente para elementos con clase .fs-2 */
+.fs-2 {
+font-size: 24px;
+margin-bottom: 20px;
+text-align: center;
+}
+
+/* Contenedor principal de la página */
+.wrapper {
+margin-bottom: 10px;
+}
+
+/* Estilo para las etiquetas del formulario */
+label {
+display: block;
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+/* Estilo para los campos de entrada */
+input[type="text"], input[type="number"], input[type="email"] {
+width: 95%;
+padding: 10px;
+border-radius: 5px;
+border: 3px solid #7f8c8d;
+background-color: #ecf0f1;
+color: #2c3e50;
+font-size: 16px;
+}
+
+
+/* Estilo para el botón */
+#btn1 {
+width: 100%;
+padding: 10px;
+border: none;
+border-radius: 5px;
+background-color: #00FF29;
+color: #2c3e50;
+font-weight: bold;
+cursor: pointer;
+font-size: 16px;
+}
+
+#btn1:hover {
+background-color: #27ae60;
+}
