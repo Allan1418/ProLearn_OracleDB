@@ -102,7 +102,6 @@
                             <tr >
                                 <th scope="col">Nombre del Curso</th>
                                 <th scope="col">Estado del Curso</th>
-                                <th scope="col">Categoria del Curso</th>
                                 <th scope="col">Botones</th>
                             </tr>
                         </thead>
@@ -110,7 +109,6 @@
                             <tr>
                                 <th th:text="${curso.nombreCurso}" scope="row"></th>
                                 <td th:text="${curso.estadoCurso}"></td>
-                                <td th:text="${curso.categoriaCurso.nombre}"></td>
                                 <td>
                                     <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
                                         <button id="btn2" class="btn my-2">Editar</button></a>
