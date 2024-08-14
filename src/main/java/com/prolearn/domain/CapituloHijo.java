@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllXIdCursoYIdCapPadreCH",
-    procedureName = "GET_CAPITULOS_HIJOS_SP",
+    procedureName = "CH_GET_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
