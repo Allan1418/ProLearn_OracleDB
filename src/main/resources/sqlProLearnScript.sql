@@ -57,6 +57,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (
     ACCION VARCHAR2(100)
 );
 
+
 -- Crear trigger para insertar valor del secuenciador
 CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
@@ -253,7 +254,7 @@ END;
 
 
 -- Crear secuenciador
-CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CP_SEQ
+CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
@@ -272,16 +273,16 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CP_ID_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
 BEGIN
-  :NEW.CAPITULO_PADRE_TB_ID_CP_PK := FIDE_PROLEARN_FINAL_PROF.ID_CP_SEQ.NEXTVAL;
+  :NEW.CAPITULO_PADRE_TB_ID_CP_PK := FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ.NEXTVAL;
 END;
 /
 
 -- Crear trigger para establecer ESTADO en TRUE despues de la insercion
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CP_ESTADO_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_ESTADO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
 BEGIN
@@ -292,7 +293,7 @@ END;
 
 
 -- Crear trigger para FIDE_CAPITULO_PADRE_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CP_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
 BEGIN
@@ -338,7 +339,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CH_ID_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
 BEGIN
@@ -348,7 +349,7 @@ END;
 
 
 -- Crear trigger para establecer ESTADO en TRUE despues de la insercion
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CH_ESTADO_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_ESTADO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
 BEGIN
@@ -358,7 +359,7 @@ END;
 
 
 -- Crear trigger para FIDE_CAPITULO_HIJO_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CH_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
 BEGIN
@@ -478,7 +479,7 @@ END;
 
 
 -- Crear trigger para establecer ESTADO en TRUE despues de la insercion
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CxC_ESTADO__DELET_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_ESTADO_DELET_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB
 FOR EACH ROW
 BEGIN
@@ -844,13 +845,13 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO,
     
 /*Inserts de curso AutoCad */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AutoCad', ' Este curso es una introduccion al software de diseno asistido por computadora AutoCAD, utilizado para crear disenos detallados 2D y 3D. Los estudiantes aprendera¡n los conceptos ba¡sicos de AutoCAD, incluyendo como crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A traves de ejercicios pra¡cticos y ejemplos del mundo real, los estudiantes adquirira¡n las habilidades necesarias para producir dibujos tecnicos y disenos para diversas industrias, como arquitectura, ingeniera­a y construccion.'
+('Curso de AutoCad', ' Este curso es una introduccion al software de diseno asistido por computadora AutoCAD, utilizado para crear disenos detallados 2D y 3D. Los estudiantes aprendera¡n los conceptos ba¡sicos de AutoCAD, incluyendo como crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A traves de ejercicios pra¡cticos y ejemplos del mundo real, los estudiantes adquirira¡n las habilidades necesarias para producir dibujos tecnicos y disenos para diversas industrias, como arquitectura, ingenieria y construccion.'
 ,'https://www.flashforge-eu.com/image/cache/catalog/product/autodesk/autocad/autodesk_autocad-1280x720.jpg', 2);
 COMMIT;
     
 /*Inserts de curso Ingles */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de Ingles', 'Este curso esta¡ disenado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingles de manera comprehensiva y atractiva. A traves de una variedad de lecciones interactivas, los estudiantes desarrollara¡n sus habilidades de lectura, escritura, habla y escucha. El curso cubrira¡ grama¡tica, vocabulario, pronunciacion y aspectos culturales del idioma ingles. Para el final del curso, los estudiantes tendra¡n la confianza y la competencia para comunicarse efectivamente en ingles en entornos personales y profesionales.'
+('Curso de Ingles', 'Este curso esta disenado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingles de manera comprehensiva y atractiva. A traves de una variedad de lecciones interactivas, los estudiantes desarrollara¡n sus habilidades de lectura, escritura, habla y escucha. El curso cubrira¡ grama¡tica, vocabulario, pronunciacion y aspectos culturales del idioma ingles. Para el final del curso, los estudiantes tendra¡n la confianza y la competencia para comunicarse efectivamente en ingles en entornos personales y profesionales.'
 , 'https://fundacioncarlosslim.org/wp-content/uploads/2021/04/curso-ingles-b1-1.jpg', 3);
 COMMIT;
 
