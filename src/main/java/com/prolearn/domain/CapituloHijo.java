@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Table(name = "FIDE_CAPITULO_HIJO_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdCH",
-    procedureName = "CH_FINDBYID_SP",
+    procedureName = "CAPITULO_HIJO_GET_BYID_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_HIJO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
@@ -22,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllXIdCursoYIdCapPadreCH",
-    procedureName = "GET_CAPITULOS_HIJOS_SP",
+    procedureName = "CAPITULO_HIJO_GETALL_BYID_CP_X_CAP_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),

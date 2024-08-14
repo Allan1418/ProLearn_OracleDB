@@ -1,3 +1,101 @@
 
+/*USUARIO*/
+
+
+
+-- Se creo la vista de las categorias que estan en estado 1
+
+CREATE OR REPLACE VIEW FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_V AS
+ SELECT 
+    USUARIOS_TB_ID_USER_PK,
+    NOMBRE,
+    APELLIDOS,
+    EMAIL,
+    PASSWORD
+  FROM  FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
+  WHERE ESTADO_DELET_USUARIOS = 1;
+/
+
+
+
+-- Procedimiento para buscar un usuario mediante su email con su estado en 1
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_GET_BY_EMAIL_SP(
+  P_EMAIL IN VARCHAR2,
+  P_CURSOR OUT SYS_REFCURSOR
+) AS
+BEGIN
+  OPEN P_CURSOR FOR
+  SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_V
+  WHERE EMAIL = P_EMAIL;
+END;
+/
+
+-- Procedimiento para buscar todos los usuarios en la tabal con su estado en 1
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_FINDALL_SP(
+  P_CURSOR OUT SYS_REFCURSOR
+) AS
+BEGIN
+  OPEN P_CURSOR FOR
+  SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_V;
+END;
+/
+
+
+-- Procedimiento para eliminar un usuario
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_DELET_SP(
+  p_id_usuario IN NUMBER
+) AS
+BEGIN
+  UPDATE FIDE_USUARIOS_TB
+  SET ESTADO_DELET_USUARIOS = 0
+  WHERE USUARIOS_TB_ID_USER_PK = p_id_usuario;
+  COMMIT;
+END;
+/
+
+
+-- Este procedimiento tiene un parámetro adicional P_ID_USUARIO que indica si se debe crear un nuevo usuario
+-- (si es 0) o actualizar uno existente (si es un valor diferente de 0).
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_UPSER_SP(
+  P_ID_USUARIO IN NUMBER,
+  P_NOMBRE IN VARCHAR2,
+  P_APELLIDOS IN VARCHAR2,
+  P_EMAIL IN VARCHAR2,
+  P_PASSWORD IN VARCHAR2
+) AS
+BEGIN
+  IF P_ID_USUARIO = 0 THEN
+    INSERT INTO FIDE_USUARIOS_TB (
+      NOMBRE,
+      APELLIDOS,
+      EMAIL,
+      PASSWORD
+    ) VALUES (
+      P_NOMBRE,
+      P_APELLIDOS,
+      P_EMAIL,
+      P_PASSWORD
+    );
+  ELSE
+    UPDATE FIDE_USUARIOS_TB
+    SET NOMBRE = P_NOMBRE,
+        APELLIDOS = P_APELLIDOS,
+        EMAIL = P_EMAIL,
+        PASSWORD = P_PASSWORD
+    WHERE USUARIOS_TB_ID_USER_PK = P_ID_USUARIO;
+  END IF;
+  COMMIT;
+EXCEPTION
+  WHEN OTHERS THEN
+    ROLLBACK;
+END;
+/
+
+--------- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\--------
+
 /*USUARIO_ROL*/
 

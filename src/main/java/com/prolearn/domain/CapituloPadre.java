@@ -12,7 +12,7 @@ import lombok.Data;
 @Table(name = "FIDE_CAPITULO_PADRE_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdCP",
-    procedureName = "CP_FINDBYID_SP",
+    procedureName = "CAPITULO_PADRE_GET_BYID_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
@@ -21,7 +21,7 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllXIdCursoCP",
-    procedureName = "GET_CAP_PADRE_X_CURSO_SP",
+    procedureName = "CAPITULO_PADRE_GETALL_BY_CURSO_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CAPITULOS_PADRES", type = void.class)

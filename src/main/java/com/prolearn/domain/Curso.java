@@ -12,7 +12,7 @@ import lombok.Data;
 @Table(name = "FIDE_CURSOS_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdCurso",
-    procedureName = "GET_CURSO_BY_ID_SP",
+    procedureName = "CURSO_GET_BYID_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOS", type = void.class)
@@ -21,7 +21,7 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllCurso",
-    procedureName = "OBTENER_CURSOS_ACTIVOS_SP",
+    procedureName = "CURSOS_GETALL_PUBLICO_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
     },
@@ -44,7 +44,7 @@ public class Curso implements Serializable {
     @Column(name = "descrp_curso")
     private String descrpCurso;
     
-    @Column(name = "estado_curso")
+    @Column(name = "estado_publico")
     private boolean estadoCurso;
     
     @Column(name = "thumbnail_curso")
