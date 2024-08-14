@@ -49,7 +49,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (
     APELLIDOS VARCHAR2(250) NOT NULL,
     EMAIL VARCHAR2(25) NOT NULL,
     PASSWORD VARCHAR2(512) NOT NULL,
-    ESTADO_USUARIOS_TB NUMBER(1)  NOT NULL,
+    ESTADO_DELET_USUARIOS NUMBER(1)  NOT NULL,
     LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -58,7 +58,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_USUARIO_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
 FOR EACH ROW
 BEGIN
@@ -67,17 +67,17 @@ END;
 /
 
 
--- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_USUARIO_TRG
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ESTADO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
 FOR EACH ROW
 BEGIN
-    :NEW.ESTADO_USUARIOS_TB := 1;
+    :NEW.ESTADO_DELET_USUARIOS := 1;
 END;
 /
 
 --Creacion del trigger auditoria
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB
 FOR EACH ROW
 BEGIN
@@ -95,7 +95,6 @@ END;
 -----------------------------------------------------------------------------------------------
 
 
-
 -- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_ROL_SEQ
 START WITH 1
@@ -106,6 +105,7 @@ NOCACHE;
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (
     ROL_TB_ID_ROL_PK NUMBER PRIMARY KEY,
     NOMBRE VARCHAR2(255),
+    ESTADO_DELET_ROL NUMBER(1),
     LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -113,8 +113,18 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (
     ACCION VARCHAR2(100)
 );
 
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_ESTADO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB
+FOR EACH ROW
+BEGIN
+    :NEW.ESTADO_DELET_ROL := 1;
+END;
+/
+
+
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_ROL_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_IO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB
 FOR EACH ROW
 BEGIN
@@ -145,6 +155,7 @@ END;
 CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (
     USUARIO_ID INT,
     ROL_ID INT,
+    ESTADO_DELET_USUARIO_ROL NUMBER(1),
     LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -153,6 +164,16 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (
     FOREIGN KEY (USUARIO_ID) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB(USUARIOS_TB_ID_USER_PK),
     FOREIGN KEY (ROL_ID) REFERENCES FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB(ROL_TB_ID_ROL_PK)
 );
+
+
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_ESTADO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB
+FOR EACH ROW
+BEGIN
+    :NEW.ESTADO_DELET_USUARIO_ROL := 1;
+END;
+/
 
 
 CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB_AUDIT_TRG
@@ -183,6 +204,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (
   CATEGORIAS_TB_ID_CAT_PK NUMBER PRIMARY KEY,
   NOMBRE_CATEGORIA VARCHAR2(255) NOT NULL,
   LAST_UPDATE_BY VARCHAR2(100),
+  ESTADO_DELET_CATEGORIA NUMBER(1),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
     CREATION_DATE DATE,
@@ -190,7 +212,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CATEGORIA_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIA_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
 FOR EACH ROW
 BEGIN
@@ -199,8 +221,18 @@ END;
 /
 
 
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CATEROGRIA_ROL_ESTADO_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
+FOR EACH ROW
+BEGIN
+    :NEW.ESTADO_DELET_CATEGORIA := 1;
+END;
+/
+
+
 -- Crear trigger para FIDE_CATEGORIAS_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB
 FOR EACH ROW
 BEGIN
@@ -221,7 +253,7 @@ END;
 
 
 -- Crear secuenciador
-CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ
+CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CP_SEQ
 START WITH 1
 INCREMENT BY 1
 NOCACHE;
@@ -231,7 +263,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (
   CAPITULO_PADRE_TB_ID_CP_PK NUMBER PRIMARY KEY,
   NOMBRE_CAPITULO_PADRE VARCHAR2(255) NOT NULL,
   NUMERO_CAPITULO_PADRE INT NOT NULL,
-  ESTADO_PADRE_TB NUMBER(1)  NOT NULL,
+  ESTADO_DELET_PADRE NUMBER(1)  NOT NULL,
   LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -240,27 +272,27 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CP_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
 BEGIN
-  :NEW.CAPITULO_PADRE_TB_ID_CP_PK := FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_PADRE_SEQ.NEXTVAL;
+  :NEW.CAPITULO_PADRE_TB_ID_CP_PK := FIDE_PROLEARN_FINAL_PROF.ID_CP_SEQ.NEXTVAL;
 END;
 /
 
--- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_PADRE_TRG
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CP_ESTADO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
 BEGIN
-    :NEW.ESTADO_PADRE_TB := 1 ;
+    :NEW.ESTADO_DELET_PADRE := 1 ;
 END;
 /
 
 
 
 -- Crear trigger para FIDE_CAPITULO_PADRE_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_PADRE_TB_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CP_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
 FOR EACH ROW
 BEGIN
@@ -295,7 +327,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (
   NOMBRE_CAPITULO_HIJO VARCHAR2(255) NOT NULL,
   VIDEO_CAPITULO VARCHAR2(1024),
   NUMERO_CAPITULO_HIJO INT NOT NULL,
-  ESTADO_HIJO_TB NUMBER(1) NOT NULL,
+  ESTADO_DELET_HIJO NUMBER(1) NOT NULL,
   LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -306,7 +338,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_HIJO_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CH_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
 BEGIN
@@ -315,18 +347,18 @@ END;
 /
 
 
--- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_HIJO_TRG
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CH_ESTADO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
 BEGIN
-    :NEW.ESTADO_HIJO_TB := 1 ;
+    :NEW.ESTADO_DELET_HIJO := 1 ;
 END;
 /
 
 
 -- Crear trigger para FIDE_CAPITULO_HIJO_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_HIJO_TB_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CH_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB
 FOR EACH ROW
 BEGIN
@@ -345,8 +377,6 @@ END;
 
 
 
-
-
 -- Crear secuenciador
 CREATE SEQUENCE FIDE_PROLEARN_FINAL_PROF.ID_CURSO_SEQ
 START WITH 1
@@ -360,7 +390,8 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (
   DESCRP_CURSO VARCHAR2(1000),
   THUMBNAIL_CURSO VARCHAR2(1024),
   CATEGORIA_CURSO INT NOT NULL,
-  ESTADO_CURSO NUMBER(1) NOT NULL,
+  ESTADO_PUBLICO NUMBER(1) NOT NULL,
+  ESTADO_DELET_CURSO NUMBER(1) NOT NULL,
   LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -370,7 +401,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CURSO_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CURSO_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
 FOR EACH ROW
 BEGIN
@@ -379,19 +410,26 @@ END;
 /
 
 
--- Crear trigger para establecer ESTADO en TRUE despuÃ©s de la inserciÃ³n
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ESTADO_CURSO_TRG
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CURSO_ESTADO_PUBLICO_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
 FOR EACH ROW
 BEGIN
-    :NEW.ESTADO_CURSO := 1 ;
+    :NEW.ESTADO_PUBLICO := 1 ;
 END;
 /
 
-
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CURSO_ESTADO__DELET_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
+FOR EACH ROW
+BEGIN
+    :NEW.ESTADO_DELET_CURSO := 1 ;
+END;
+/
 
 -- Crear trigger para FIDE_CURSOS_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CURSO_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB
 FOR EACH ROW
 BEGIN
@@ -419,6 +457,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB (
   CAP_X_CUR_TB_ID_PK NUMBER PRIMARY KEY,
   ID_CURSO INT NOT NULL,
   ID_CAPITULO INT NOT NULL,
+  ESTADO_DELET_CAPITULO_X_CURSO NUMBER(1) NOT NULL,
   LAST_UPDATE_BY VARCHAR2(100),
     LAST_UPDATE_DATE DATE,
     CREATED_BY VARCHAR2(100),
@@ -429,7 +468,7 @@ CREATE TABLE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB (
 );
 
 -- Crear trigger para insertar valor del secuenciador
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.ID_CAPITULO_X_CURSO_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_ID_TRG
 BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB
 FOR EACH ROW
 BEGIN
@@ -438,8 +477,18 @@ END;
 /
 
 
+-- Crear trigger para establecer ESTADO en TRUE despues de la insercion
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CxC_ESTADO__DELET_TRG
+BEFORE INSERT ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB
+FOR EACH ROW
+BEGIN
+    :NEW.ESTADO_DELET_CAPITULO_X_CURSO := 1 ;
+END;
+/
+
+
 -- Crear trigger para FIDE_CAPITULO_X_CURSO_TB
-CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB_AUDIT_TRG
+CREATE OR REPLACE TRIGGER FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_AUDIT_TRG
 BEFORE INSERT OR UPDATE ON FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB
 FOR EACH ROW
 BEGIN
@@ -470,7 +519,7 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (NOMBRE, APELLIDOS, EMAIL,
 VALUES ('Juan', 'Perez', 'juan@example.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
  
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (NOMBRE, APELLIDOS, EMAIL, PASSWORD)
-VALUES ('admin', 'admin', 'admin@PROLEARN.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
+VALUES ('admin', 'admin', 'admin@prolearn.com', '$2a$12$kmdtxMDZnpAz1vjlLBAUGu77/NU2hn0yFSHewvEJbvdNXckwteJHS');
 
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (USUARIO_ID, ROL_ID)
@@ -479,7 +528,7 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB (USUARIO_ID, ROL_ID)
 VALUES (2, 2);
 
 
-INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('DiseÃƒÂ±o');
+INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Diseno');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Programacion');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB (NOMBRE_CATEGORIA) VALUES  ('Idiomas');
 COMMIT;
@@ -508,13 +557,13 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PAD
 VALUES ( 'Crear Base de datos', 2 );
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Conceptos bÃƒÂ¡sicos de MySQL', 3);
+VALUES ( 'Conceptos ba�sicos de MySQL', 3);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
 VALUES ( 'Consultas SQL', 4);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Funciones de agregaciÃƒÂ³n', 5);
+VALUES ( 'Funciones de agregacion', 5);
 COMMIT;
 
 /*Inserts de Padres JavaScript */
@@ -772,37 +821,37 @@ COMMIT;
 
 /*Inserts de curso Python */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Python', 'Python es un lenguaje de programaciÃƒÂ³n de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y fÃƒÂ¡cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
+('Python', 'Python es un lenguaje de programacion de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y fa�cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
 , 'https://www.dongee.com/tutoriales/content/images/2023/01/que-es-python-1.png', 2);
      
 /*Inserts de curso MySql */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('MySql', 'MySQL es un sistema de gestiÃƒÂ³n de bases de datos relacionales (RDBMS) de cÃƒÂ³digo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, mÃƒÂ³viles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
-, 'https://datascientest.com/en/wp-content/uploads/sites/9/2023/11/mysql.webp', 2);
+('MySql', 'MySQL es un sistema de gestion de bases de datos relacionales (RDBMS) de codigo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, moviles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
+, 'https://miro.medium.com/v2/resize:fit:1200/1*LyZcwuLWv2FArOumCxobpA.png', 2);
 COMMIT;
 
 /*Inserts de curso JavaScript */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('JavaScript','JavaScript es un lenguaje de programaciÃƒÂ³n versÃƒÂ¡til utilizado para crear pÃƒÂ¡ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear pÃƒÂ¡ginas web dinÃƒÂ¡micas y receptivas. JavaScript tambiÃƒÂ©n se utiliza para la programaciÃƒÂ³n del lado del servidor, lo que lo convierte en un lenguaje de programaciÃƒÂ³n de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones mÃƒÂ³viles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creaciÃƒÂ³n de aplicaciones de IA utilizando JavaScript.'
- ,'https://miro.medium.com/v2/resize:fit:1200/1*LyZcwuLWv2FArOumCxobpA.png',2);
+('JavaScript','JavaScript es un lenguaje de programacion versa�til utilizado para crear pa�ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear pa�ginas web dina�micas y receptivas. JavaScript tambien se utiliza para la programacion del lado del servidor, lo que lo convierte en un lenguaje de programacion de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones moviles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creacion de aplicaciones de IA utilizando JavaScript.'
+ ,'https://d1.awsstatic.com/asset-repository/products/amazon-rds/1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png',2);
  COMMIT;
      
 /*Inserts de curso AI */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computaciÃƒÂ³n que se centra en la creaciÃƒÂ³n de mÃƒÂ¡quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervenciÃƒÂ³n mÃƒÂ­nima de humanos. Con la IA, las mÃƒÂ¡quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepciÃƒÂ³n visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robÃƒÂ³tica, la atenciÃƒÂ³n mÃƒÂ©dica, las finanzas y el transporte.'
+('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computacion que se centra en la creacion de ma�quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervencion ma�nima de humanos. Con la IA, las ma�quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepcion visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robotica, la atencion medica, las finanzas y el transporte.'
  ,'https://www.tarlogic.com/wp-content/uploads/2023/09/riesgos-seguridad-IA-3.jpg', 1);
  COMMIT;
     
 /*Inserts de curso AutoCad */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AutoCad', ' Este curso es una introducciÃƒÂ³n al software de diseÃƒÂ±o asistido por computadora AutoCAD, utilizado para crear diseÃƒÂ±os detallados 2D y 3D. Los estudiantes aprenderÃƒÂ¡n los conceptos bÃƒÂ¡sicos de AutoCAD, incluyendo cÃƒÂ³mo crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A travÃƒÂ©s de ejercicios prÃƒÂ¡cticos y ejemplos del mundo real, los estudiantes adquirirÃƒÂ¡n las habilidades necesarias para producir dibujos tÃƒÂ©cnicos y diseÃƒÂ±os para diversas industrias, como arquitectura, ingenierÃƒÂ­a y construcciÃƒÂ³n.'
+('Curso de AutoCad', ' Este curso es una introduccion al software de diseno asistido por computadora AutoCAD, utilizado para crear disenos detallados 2D y 3D. Los estudiantes aprendera�n los conceptos ba�sicos de AutoCAD, incluyendo como crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A traves de ejercicios pra�cticos y ejemplos del mundo real, los estudiantes adquirira�n las habilidades necesarias para producir dibujos tecnicos y disenos para diversas industrias, como arquitectura, ingeniera�a y construccion.'
 ,'https://www.flashforge-eu.com/image/cache/catalog/product/autodesk/autocad/autodesk_autocad-1280x720.jpg', 2);
 COMMIT;
     
 /*Inserts de curso Ingles */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de Ingles', 'Este curso estÃƒÂ¡ diseÃƒÂ±ado para ayudar a los estudiantes a mejorar sus habilidades de idioma inglÃƒÂ©s de manera comprehensiva y atractiva. A travÃƒÂ©s de una variedad de lecciones interactivas, los estudiantes desarrollarÃƒÂ¡n sus habilidades de lectura, escritura, habla y escucha. El curso cubrirÃƒÂ¡ gramÃƒÂ¡tica, vocabulario, pronunciaciÃƒÂ³n y aspectos culturales del idioma inglÃƒÂ©s. Para el final del curso, los estudiantes tendrÃƒÂ¡n la confianza y la competencia para comunicarse efectivamente en inglÃƒÂ©s en entornos personales y profesionales.'
-, 'https://www.magisnet.com/wp-content/uploads/2020/11/ingle??s.jpg', 3);
+('Curso de Ingles', 'Este curso esta� disenado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingles de manera comprehensiva y atractiva. A traves de una variedad de lecciones interactivas, los estudiantes desarrollara�n sus habilidades de lectura, escritura, habla y escucha. El curso cubrira� grama�tica, vocabulario, pronunciacion y aspectos culturales del idioma ingles. Para el final del curso, los estudiantes tendra�n la confianza y la competencia para comunicarse efectivamente en ingles en entornos personales y profesionales.'
+, 'https://fundacioncarlosslim.org/wp-content/uploads/2021/04/curso-ingles-b1-1.jpg', 3);
 COMMIT;
 
 
@@ -1270,7 +1319,7 @@ END pkg_consulta_cursos;
 --Cursor recuperar los datos de la tabla  usuarios
 SET SERVEROUTPUT ON
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR usuarios_cursor IS
         SELECT USUARIOS_TB_ID_USER_PK, NOMBRE, APELLIDOS, EMAIL, PASSWORD
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB;
@@ -1306,7 +1355,7 @@ END;
 
 --Cursor recuperar los datos de la tabla rol
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR roles_cursor IS
         SELECT ROL_TB_ID_ROL_PK, NOMBRE
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB;
@@ -1336,7 +1385,7 @@ END;
 
 --cursor recuperar los datos de la tabla catergoria 
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR categorias_cursor IS
         SELECT CATEGORIAS_TB_ID_CAT_PK, NOMBRE_CATEGORIA
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_TB;
@@ -1348,14 +1397,14 @@ BEGIN
     -- Abrir el cursor
     OPEN categorias_cursor;
 
-    -- Recuperar y mostrar los datos de las categorÃƒÂ­as
+    -- Recuperar y mostrar los datos de las categora�as
     LOOP
         FETCH categorias_cursor INTO v_id_categoria, v_nombre_categoria;
         EXIT WHEN categorias_cursor%NOTFOUND;
 
-        -- Mostrar los datos de la categorÃƒÂ­a
-        DBMS_OUTPUT.PUT_LINE('ID CategorÃƒÂ­a: ' || v_id_categoria);
-        DBMS_OUTPUT.PUT_LINE('Nombre CategorÃƒÂ­a: ' || v_nombre_categoria);
+        -- Mostrar los datos de la categora�a
+        DBMS_OUTPUT.PUT_LINE('ID Categora�a: ' || v_id_categoria);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categora�a: ' || v_nombre_categoria);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1366,7 +1415,7 @@ END;
 
 --Cursor recuperar los datos de la tabla capitulos_padre
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR capitulos_padre_cursor IS
         SELECT CAPITULO_PADRE_TB_ID_CP_PK, NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB;
@@ -1379,15 +1428,15 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_padre_cursor;
 
-    -- Recuperar y mostrar los datos de los capÃƒÂ­tulos padre
+    -- Recuperar y mostrar los datos de los capa�tulos padre
     LOOP
         FETCH capitulos_padre_cursor INTO v_id_capitulo_padre, v_nombre_capitulo_padre, v_numero_capitulo_padre;
         EXIT WHEN capitulos_padre_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capÃƒÂ­tulo padre
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo Padre: '|| v_id_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Padre: '|| v_nombre_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('NÃƒÂºmero CapÃƒÂ­tulo Padre: '|| v_numero_capitulo_padre);
+        -- Mostrar los datos del capa�tulo padre
+        DBMS_OUTPUT.PUT_LINE('ID Capa�tulo Padre: '|| v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capa�tulo Padre: '|| v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Na�mero Capa�tulo Padre: '|| v_numero_capitulo_padre);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1398,7 +1447,7 @@ END;
 
 --Cursor recuperar los datos de la tabla capitulos_hijo
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR capitulos_hijo_cursor IS
         SELECT CH.CAPITULO_HIJO_TB_ID_CH_PK, CH.ID_CAPITULO_PADRE, CH.NOMBRE_CAPITULO_HIJO, CH.VIDEO_CAPITULO, CH.NUMERO_CAPITULO_HIJO, CP.NOMBRE_CAPITULO_PADRE
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB CH
@@ -1415,18 +1464,18 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_hijo_cursor;
 
-    -- Recuperar y mostrar los datos de los capÃƒÂ­tulos hijo
+    -- Recuperar y mostrar los datos de los capa�tulos hijo
     LOOP
         FETCH capitulos_hijo_cursor INTO v_id_capitulo_hijo, v_id_capitulo_padre, v_nombre_capitulo_hijo, v_video_capitulo, v_numero_capitulo_hijo, v_nombre_capitulo_padre;
         EXIT WHEN capitulos_hijo_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capÃƒÂ­tulo hijo
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo Hijo: ' || v_id_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo Padre: ' || v_id_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Hijo: ' || v_nombre_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('Video CapÃƒÂ­tulo: ' || v_video_capitulo);
-        DBMS_OUTPUT.PUT_LINE('NÃƒÂºmero CapÃƒÂ­tulo Hijo: ' || v_numero_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Padre: ' || v_nombre_capitulo_padre);
+        -- Mostrar los datos del capa�tulo hijo
+        DBMS_OUTPUT.PUT_LINE('ID Capa�tulo Hijo: ' || v_id_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('ID Capa�tulo Padre: ' || v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capa�tulo Hijo: ' || v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Video Capa�tulo: ' || v_video_capitulo);
+        DBMS_OUTPUT.PUT_LINE('Na�mero Capa�tulo Hijo: ' || v_numero_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capa�tulo Padre: ' || v_nombre_capitulo_padre);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1437,7 +1486,7 @@ END;
 
 --Cursor recuperar los datos de la tabla Cursos
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR cursos_cursor IS
         SELECT C.CURSOS_TB_ID_CUR_PK, C.NOMBRE_CURSO, C.DESCRP_CURSO, C.ESTADO_CURSO, C.THUMBNAIL_CURSO, C.CATEGORIA_CURSO, CG.NOMBRE_CATEGORIA
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB C
@@ -1463,11 +1512,11 @@ BEGIN
         -- Mostrar los datos del curso
         DBMS_OUTPUT.PUT_LINE('ID Curso: ' || v_id_curso);
         DBMS_OUTPUT.PUT_LINE('Nombre Curso: ' || v_nombre_curso);
-        DBMS_OUTPUT.PUT_LINE('DescripciÃƒÂ³n Curso: ' || v_descripcion_curso);
+        DBMS_OUTPUT.PUT_LINE('Descripcion Curso: ' || v_descripcion_curso);
         DBMS_OUTPUT.PUT_LINE('Estado Curso: ' || v_estado_curso);
         DBMS_OUTPUT.PUT_LINE('Thumbnail Curso: ' || v_thumbnail_curso);
-        DBMS_OUTPUT.PUT_LINE('CategorÃƒÂ­a Curso: ' || v_categoria_curso);
-        DBMS_OUTPUT.PUT_LINE('Nombre CategorÃƒÂ­a: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('Categora�a Curso: ' || v_categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categora�a: ' || v_nombre_categoria);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1478,7 +1527,7 @@ END;
 
 --Cursor recuperar los datos de la tabla capitulos_x_cursos
 DECLARE
-    -- DeclaraciÃƒÂ³n del cursor
+    -- Declaracion del cursor
     CURSOR capitulos_x_cursos_cursor IS
         SELECT CXC.CAP_X_CUR_TB_ID_PK, CXC.ID_CURSO, CXC.ID_CAPITULO, C.NOMBRE_CURSO, CH.NOMBRE_CAPITULO_HIJO
         FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_X_CURSO_TB CXC
@@ -1495,17 +1544,17 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_x_cursos_cursor;
 
-    -- Recuperar y mostrar los datos de los capÃƒÂ­tulos por curso
+    -- Recuperar y mostrar los datos de los capa�tulos por curso
     LOOP
         FETCH capitulos_x_cursos_cursor INTO v_id_capitulo_x_curso, v_id_curso, v_id_capitulo, v_nombre_curso, v_nombre_capitulo_hijo;
         EXIT WHEN capitulos_x_cursos_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capÃƒÂ­tulo por curso
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo x Curso: '|| v_id_capitulo_x_curso);
+        -- Mostrar los datos del capa�tulo por curso
+        DBMS_OUTPUT.PUT_LINE('ID Capa�tulo x Curso: '|| v_id_capitulo_x_curso);
         DBMS_OUTPUT.PUT_LINE('ID Curso: '|| v_id_curso);
-        DBMS_OUTPUT.PUT_LINE('ID CapÃƒÂ­tulo: '|| v_id_capitulo);
+        DBMS_OUTPUT.PUT_LINE('ID Capa�tulo: '|| v_id_capitulo);
         DBMS_OUTPUT.PUT_LINE('Nombre Curso: '|| v_nombre_curso);
-        DBMS_OUTPUT.PUT_LINE('Nombre CapÃƒÂ­tulo Hijo: '|| v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capa�tulo Hijo: '|| v_nombre_capitulo_hijo);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
