@@ -28,12 +28,21 @@ import lombok.Data;
     },
     resultClasses = { CapituloPadre.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "pend",
+    procedureName = "CAPITULO_PADRE_GETALL_BY_CURSO_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CAPITULOS_PADRES", type = void.class)
+    },
+    resultClasses = { CapituloPadre.class } 
+)
 public class CapituloPadre implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CAPITULO_PADRE_TB_ID_CP_PK")
     private Long id;
 

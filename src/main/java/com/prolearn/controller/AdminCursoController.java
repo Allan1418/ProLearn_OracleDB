@@ -195,4 +195,16 @@ public class AdminCursoController {
     }
     
     
+    @PostMapping("/detalleCapitulos/{idCurso}")
+    public String newCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        
+        System.out.println("----------"+ curso.getNombreCurso());
+        
+        
+        
+        return "redirect:/adminCurso/detalleCapitulos/";
+    }
+    
 }
