@@ -60,14 +60,16 @@ END;
 /
 
 
--- Este procedimiento tiene un parámetro adicional P_ID_CAPITULO_PADRE que indica si se debe crear un
--- nuevo capítulo padre (si es 0) o actualizar uno existente (si es un valor diferente de 0).
+-- Este procedimiento tiene un parametro adicional P_ID_CAPITULO_PADRE que indica si se debe crear un
+-- nuevo capatulo padre (si es 0) o actualizar uno existente (si es un valor diferente de 0).
 
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CAPITULO_PADRE_UPSER_SP(
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CAPITULO_PADRE_UPSERT_SP(
   P_ID_CAPITULO_PADRE IN NUMBER,
   P_NOMBRE_CAPITULO_PADRE IN VARCHAR2,
-  P_NUMERO_CAPITULO_PADRE IN INT
+  P_NUMERO_CAPITULO_PADRE IN INT,
+  P_ID_CURSO IN NUMBER
 ) AS
+  V_ID_NUEVO_PADRE NUMBER;
 BEGIN
   IF P_ID_CAPITULO_PADRE = 0 THEN
     INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (
@@ -76,7 +78,17 @@ BEGIN
     ) VALUES (
       P_NOMBRE_CAPITULO_PADRE,
       P_NUMERO_CAPITULO_PADRE
+    ) RETURNING CAPITULO_PADRE_TB_ID_CP_PK INTO V_ID_NUEVO_PADRE;
+    
+    FIDE_PROLEARN_FINAL_PROF.CAPITULO_HIJO_UPSERT_SP(
+      0,
+      V_ID_NUEVO_PADRE,
+      'Ejemplo',
+      1,
+      NULL,
+      P_ID_CURSO
     );
+    
   ELSE
     UPDATE FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB
     SET NOMBRE_CAPITULO_PADRE = P_NOMBRE_CAPITULO_PADRE,

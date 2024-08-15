@@ -57,16 +57,17 @@ END;
 /
 
 
--- Este procedimiento tiene un parámetro adicional P_ID_USUARIO que indica si se debe crear un nuevo usuario
+-- Este procedimiento tiene un parï¿½metro adicional P_ID_USUARIO que indica si se debe crear un nuevo usuario
 -- (si es 0) o actualizar uno existente (si es un valor diferente de 0).
 
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_UPSER_SP(
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_UPSERT_SP(
   P_ID_USUARIO IN NUMBER,
   P_NOMBRE IN VARCHAR2,
   P_APELLIDOS IN VARCHAR2,
   P_EMAIL IN VARCHAR2,
   P_PASSWORD IN VARCHAR2
 ) AS
+    V_ID_NUEVO_USUARIO NUMBER;
 BEGIN
   IF P_ID_USUARIO = 0 THEN
     INSERT INTO FIDE_USUARIOS_TB (
@@ -79,7 +80,17 @@ BEGIN
       P_APELLIDOS,
       P_EMAIL,
       P_PASSWORD
+    )RETURNING USUARIOS_TB_ID_USER_PK INTO V_ID_NUEVO_USUARIO;
+    
+    INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_ROL_TB(
+      USUARIO_ID,
+      ROL_ID
+    )
+    VALUES(
+    V_ID_NUEVO_USUARIO,
+    1
     );
+    
   ELSE
     UPDATE FIDE_USUARIOS_TB
     SET NOMBRE = P_NOMBRE,

@@ -44,7 +44,7 @@ END;
 /
 
 
--- Este procedimiento tiene un parámetro adicional P_ID_CATEGORIA que indica si se debe crear una nueva categoria
+-- Este procedimiento tiene un parï¿½metro adicional P_ID_CATEGORIA que indica si se debe crear una nueva categoria
 -- (si es 0) o actualizar uno existente (si es un valor diferente de 0).
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_UPSER_SP(
@@ -146,10 +146,10 @@ END;
 /
 
 
--- Este procedimiento tiene un parámetro adicional P_ID_CURSO que indica si se debe crear un nuevo curso
+-- Este procedimiento tiene un parametro adicional P_ID_CURSO que indica si se debe crear un nuevo curso
 -- (si es 0) o actualizar uno existente (si es un valor diferente de 0).
 
-CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CURSO_UPSER_SP(
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CURSO_UPSERT_SP(
   P_ID_CURSO IN NUMBER,
   P_NOMBRE_CURSO IN VARCHAR2,
   P_DESCRP_CURSO IN VARCHAR2,
