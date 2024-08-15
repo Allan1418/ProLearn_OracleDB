@@ -514,6 +514,7 @@ END;
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (NOMBRE) VALUES ('ROLE_USER');
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (NOMBRE) VALUES ('ROLE_ADMIN');
+INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_TB (NOMBRE) VALUES ('ROLE_PREMIU');
 
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIOS_TB (NOMBRE, APELLIDOS, EMAIL, PASSWORD)
@@ -558,7 +559,7 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PAD
 VALUES ( 'Crear Base de datos', 2 );
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
-VALUES ( 'Conceptos ba¡sicos de MySQL', 3);
+VALUES ( 'Conceptos baasicos de MySQL', 3);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_PADRE_TB (NOMBRE_CAPITULO_PADRE, NUMERO_CAPITULO_PADRE)
 VALUES ( 'Consultas SQL', 4);
@@ -822,7 +823,7 @@ COMMIT;
 
 /*Inserts de curso Python */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Python', 'Python es un lenguaje de programacion de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y fa¡cil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
+('Python', 'Python es un lenguaje de programacion de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y faacil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
 , 'https://www.dongee.com/tutoriales/content/images/2023/01/que-es-python-1.png', 2);
      
 /*Inserts de curso MySql */
@@ -833,25 +834,25 @@ COMMIT;
 
 /*Inserts de curso JavaScript */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('JavaScript','JavaScript es un lenguaje de programacion versa¡til utilizado para crear pa¡ginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear pa¡ginas web dina¡micas y receptivas. JavaScript tambien se utiliza para la programacion del lado del servidor, lo que lo convierte en un lenguaje de programacion de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones moviles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creacion de aplicaciones de IA utilizando JavaScript.'
+('JavaScript','JavaScript es un lenguaje de programacion versaatil utilizado para crear paaginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear paaginas web dinaamicas y receptivas. JavaScript tambien se utiliza para la programacion del lado del servidor, lo que lo convierte en un lenguaje de programacion de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones moviles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creacion de aplicaciones de IA utilizando JavaScript.'
  ,'https://d1.awsstatic.com/asset-repository/products/amazon-rds/1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png',2);
  COMMIT;
      
 /*Inserts de curso AI */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computacion que se centra en la creacion de ma¡quinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervencion ma­nima de humanos. Con la IA, las ma¡quinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepcion visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robotica, la atencion medica, las finanzas y el transporte.'
+('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computacion que se centra en la creacion de maaquinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervencion maanima de humanos. Con la IA, las maaquinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepcion visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robotica, la atencion medica, las finanzas y el transporte.'
  ,'https://www.tarlogic.com/wp-content/uploads/2023/09/riesgos-seguridad-IA-3.jpg', 1);
  COMMIT;
     
 /*Inserts de curso AutoCad */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de AutoCad', ' Este curso es una introduccion al software de diseno asistido por computadora AutoCAD, utilizado para crear disenos detallados 2D y 3D. Los estudiantes aprendera¡n los conceptos ba¡sicos de AutoCAD, incluyendo como crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A traves de ejercicios pra¡cticos y ejemplos del mundo real, los estudiantes adquirira¡n las habilidades necesarias para producir dibujos tecnicos y disenos para diversas industrias, como arquitectura, ingenieria y construccion.'
+('Curso de AutoCad', ' Este curso es una introduccion al software de diseno asistido por computadora AutoCAD, utilizado para crear disenos detallados 2D y 3D. Los estudiantes aprenderaan los conceptos baasicos de AutoCAD, incluyendo como crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A traves de ejercicios praacticos y ejemplos del mundo real, los estudiantes adquiriraan las habilidades necesarias para producir dibujos tecnicos y disenos para diversas industrias, como arquitectura, ingenieria y construccion.'
 ,'https://www.flashforge-eu.com/image/cache/catalog/product/autodesk/autocad/autodesk_autocad-1280x720.jpg', 2);
 COMMIT;
     
 /*Inserts de curso Ingles */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
-('Curso de Ingles', 'Este curso esta disenado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingles de manera comprehensiva y atractiva. A traves de una variedad de lecciones interactivas, los estudiantes desarrollara¡n sus habilidades de lectura, escritura, habla y escucha. El curso cubrira¡ grama¡tica, vocabulario, pronunciacion y aspectos culturales del idioma ingles. Para el final del curso, los estudiantes tendra¡n la confianza y la competencia para comunicarse efectivamente en ingles en entornos personales y profesionales.'
+('Curso de Ingles', 'Este curso esta disenado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingles de manera comprehensiva y atractiva. A traves de una variedad de lecciones interactivas, los estudiantes desarrollaraan sus habilidades de lectura, escritura, habla y escucha. El curso cubriraa gramaatica, vocabulario, pronunciacion y aspectos culturales del idioma ingles. Para el final del curso, los estudiantes tendraan la confianza y la competencia para comunicarse efectivamente en ingles en entornos personales y profesionales.'
 , 'https://fundacioncarlosslim.org/wp-content/uploads/2021/04/curso-ingles-b1-1.jpg', 3);
 COMMIT;
 
@@ -1398,14 +1399,14 @@ BEGIN
     -- Abrir el cursor
     OPEN categorias_cursor;
 
-    -- Recuperar y mostrar los datos de las categora­as
+    -- Recuperar y mostrar los datos de las categoraaas
     LOOP
         FETCH categorias_cursor INTO v_id_categoria, v_nombre_categoria;
         EXIT WHEN categorias_cursor%NOTFOUND;
 
-        -- Mostrar los datos de la categora­a
-        DBMS_OUTPUT.PUT_LINE('ID Categora­a: ' || v_id_categoria);
-        DBMS_OUTPUT.PUT_LINE('Nombre Categora­a: ' || v_nombre_categoria);
+        -- Mostrar los datos de la categoraaa
+        DBMS_OUTPUT.PUT_LINE('ID Categoraaa: ' || v_id_categoria);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categoraaa: ' || v_nombre_categoria);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1429,15 +1430,15 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_padre_cursor;
 
-    -- Recuperar y mostrar los datos de los capa­tulos padre
+    -- Recuperar y mostrar los datos de los capaatulos padre
     LOOP
         FETCH capitulos_padre_cursor INTO v_id_capitulo_padre, v_nombre_capitulo_padre, v_numero_capitulo_padre;
         EXIT WHEN capitulos_padre_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capa­tulo padre
-        DBMS_OUTPUT.PUT_LINE('ID Capa­tulo Padre: '|| v_id_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Nombre Capa­tulo Padre: '|| v_nombre_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Naºmero Capa­tulo Padre: '|| v_numero_capitulo_padre);
+        -- Mostrar los datos del capaatulo padre
+        DBMS_OUTPUT.PUT_LINE('ID Capaatulo Padre: '|| v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capaatulo Padre: '|| v_nombre_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Naamero Capaatulo Padre: '|| v_numero_capitulo_padre);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1465,18 +1466,18 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_hijo_cursor;
 
-    -- Recuperar y mostrar los datos de los capa­tulos hijo
+    -- Recuperar y mostrar los datos de los capaatulos hijo
     LOOP
         FETCH capitulos_hijo_cursor INTO v_id_capitulo_hijo, v_id_capitulo_padre, v_nombre_capitulo_hijo, v_video_capitulo, v_numero_capitulo_hijo, v_nombre_capitulo_padre;
         EXIT WHEN capitulos_hijo_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capa­tulo hijo
-        DBMS_OUTPUT.PUT_LINE('ID Capa­tulo Hijo: ' || v_id_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('ID Capa­tulo Padre: ' || v_id_capitulo_padre);
-        DBMS_OUTPUT.PUT_LINE('Nombre Capa­tulo Hijo: ' || v_nombre_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('Video Capa­tulo: ' || v_video_capitulo);
-        DBMS_OUTPUT.PUT_LINE('Naºmero Capa­tulo Hijo: ' || v_numero_capitulo_hijo);
-        DBMS_OUTPUT.PUT_LINE('Nombre Capa­tulo Padre: ' || v_nombre_capitulo_padre);
+        -- Mostrar los datos del capaatulo hijo
+        DBMS_OUTPUT.PUT_LINE('ID Capaatulo Hijo: ' || v_id_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('ID Capaatulo Padre: ' || v_id_capitulo_padre);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capaatulo Hijo: ' || v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Video Capaatulo: ' || v_video_capitulo);
+        DBMS_OUTPUT.PUT_LINE('Naamero Capaatulo Hijo: ' || v_numero_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capaatulo Padre: ' || v_nombre_capitulo_padre);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1516,8 +1517,8 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE('Descripcion Curso: ' || v_descripcion_curso);
         DBMS_OUTPUT.PUT_LINE('Estado Curso: ' || v_estado_curso);
         DBMS_OUTPUT.PUT_LINE('Thumbnail Curso: ' || v_thumbnail_curso);
-        DBMS_OUTPUT.PUT_LINE('Categora­a Curso: ' || v_categoria_curso);
-        DBMS_OUTPUT.PUT_LINE('Nombre Categora­a: ' || v_nombre_categoria);
+        DBMS_OUTPUT.PUT_LINE('Categoraaa Curso: ' || v_categoria_curso);
+        DBMS_OUTPUT.PUT_LINE('Nombre Categoraaa: ' || v_nombre_categoria);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
@@ -1545,17 +1546,17 @@ BEGIN
     -- Abrir el cursor
     OPEN capitulos_x_cursos_cursor;
 
-    -- Recuperar y mostrar los datos de los capa­tulos por curso
+    -- Recuperar y mostrar los datos de los capaatulos por curso
     LOOP
         FETCH capitulos_x_cursos_cursor INTO v_id_capitulo_x_curso, v_id_curso, v_id_capitulo, v_nombre_curso, v_nombre_capitulo_hijo;
         EXIT WHEN capitulos_x_cursos_cursor%NOTFOUND;
 
-        -- Mostrar los datos del capa­tulo por curso
-        DBMS_OUTPUT.PUT_LINE('ID Capa­tulo x Curso: '|| v_id_capitulo_x_curso);
+        -- Mostrar los datos del capaatulo por curso
+        DBMS_OUTPUT.PUT_LINE('ID Capaatulo x Curso: '|| v_id_capitulo_x_curso);
         DBMS_OUTPUT.PUT_LINE('ID Curso: '|| v_id_curso);
-        DBMS_OUTPUT.PUT_LINE('ID Capa­tulo: '|| v_id_capitulo);
+        DBMS_OUTPUT.PUT_LINE('ID Capaatulo: '|| v_id_capitulo);
         DBMS_OUTPUT.PUT_LINE('Nombre Curso: '|| v_nombre_curso);
-        DBMS_OUTPUT.PUT_LINE('Nombre Capa­tulo Hijo: '|| v_nombre_capitulo_hijo);
+        DBMS_OUTPUT.PUT_LINE('Nombre Capaatulo Hijo: '|| v_nombre_capitulo_hijo);
         DBMS_OUTPUT.PUT_LINE('------------------------');
     END LOOP;
 
