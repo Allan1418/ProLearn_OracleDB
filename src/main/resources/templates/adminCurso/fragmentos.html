@@ -174,7 +174,7 @@
                             <h5 class="modal-title">Crear Modulo</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}" th:object="${capituloPadre}"
+                        <form th:action="@{/adminCurso/detalleCurso/}+${curso.idCurso}" th:object="${capituloPadre}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
 
                             <!--<input type="hidden" name="nuevaImagen" value="NO"/>-->
@@ -216,7 +216,7 @@
                                 <a th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
                                     <button id="btn2" class="btn my-2">Editar</button></a>
 
-                                <a th:href="@{/adminCurso/deleteCapituloHijo/}+${curso.idCurso}">
+                                <a th:href="@{/adminCurso/deleteCapituloPadre/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
                                     <button id="btn2" class="btn my-2">Eliminar</button></a>
                             </td>
                         </tr>

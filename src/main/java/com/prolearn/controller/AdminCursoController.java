@@ -100,6 +100,7 @@ public class AdminCursoController {
         return "/adminCurso/detalleCapituloHijo";
     }
     
+    @Deprecated
     @PostMapping("/save-capituloHijo")
     public String saveCapituloHijo(CapituloHijo capituloHijo) {
         
@@ -176,6 +177,7 @@ public class AdminCursoController {
 //        return "redirect:/adminCurso/detalleCapitulos/" + idCurso + "/" + id;
 //    }
     
+    @Deprecated
     @GetMapping("/deleteCapituloHijo/{id}")
     public String deleteCapituloHijo(CapituloHijo capituloHijo, Model model) {
         
@@ -195,16 +197,26 @@ public class AdminCursoController {
     }
     
     
-    @PostMapping("/detalleCapitulos/{idCurso}")
+    @PostMapping("/detalleCurso/{idCurso}")
     public String newCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
         
-        curso = cursoService.getCurso(curso);
+        capituloPadre.setId(0L);
         
-        System.out.println("----------"+ curso.getNombreCurso());
+        capituloPadreService.save(capituloPadre, curso);
         
-        
-        
-        return "redirect:/adminCurso/detalleCapitulos/";
+        return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
     }
     
+    
+    @GetMapping("/deleteCapituloPadre/{idCurso}/{id}")
+    public String deleteCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
+        
+        capituloPadreService.delete(capituloPadre);
+        
+        
+        return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
+    }
 }

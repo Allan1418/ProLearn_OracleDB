@@ -29,13 +29,21 @@ import lombok.Data;
     resultClasses = { CapituloPadre.class } 
 )
 @NamedStoredProcedureQuery(
-    name = "pend",
-    procedureName = "CAPITULO_PADRE_GETALL_BY_CURSO_SP",
+    name = "SPUpsertCP",
+    procedureName = "CAPITULO_PADRE_UPSERT_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CAPITULOS_PADRES", type = void.class)
-    },
-    resultClasses = { CapituloPadre.class } 
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CAPITULO_PADRE", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NUMERO_CAPITULO_PADRE", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class)
+    }
+)
+@NamedStoredProcedureQuery(
+    name = "SPDeleteCP",
+    procedureName = "CAPITULO_PADRE_DELET_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
+    }
 )
 public class CapituloPadre implements Serializable {
     
