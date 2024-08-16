@@ -19,109 +19,69 @@
 
         <section th:fragment="agregarCurso">
 
-
-            <div id="titulo2" class="fs-2 mb-5 ">Gestion de Cursos</div>
-            <div class="row mb-3">
-                <div class="col-12 d-flex align-items-center mt-5 ms-5">
-                    <button id="btnCurso" type="botton" class="btn "
-                            data-bs-toggle="modal" data-bs-target="#agregarCurso">Crear Curso</button>
+            <div class="row g-0 text-center">
+                <div>
+                    <a th:href="@{/}"><button id="btnAdmin" 
+                    style="border-bottom: 4px solid #ff0000";
+                    class="col-2">Cursos</button></a>
+                    
+                    <a th:href="@{/}"><button id="btnAdmin" class="col-2">
+                    Usuarios</button></a>
+                    
+                    <a th:href="@{/}"><button id="btnAdmin" class="col-2">
+                    Categoria</button></a>
+                    
+                    <a th:href="@{/}"><button id="btnAdmin" class="col-2">
+                    Auditoria</button></a>
                 </div>
             </div>
+        
 
-
-            <div id="agregarCurso" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
-                 aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                        <div id="popup" class="modal-header text-white">
-                            <h5 class="modal-title">Crear Curso</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/curso/guardar}" th:object="${curso}"
-                              method="POST" class="was-validated" enctype="multipart/form-data">
-
-                            <input type="hidden" name="nuevaImagen" value="NO"/>
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="idCurso">Categorias</label>
-                                    <select name="curso.idCurso"
-                                            class="form-select"
-                                            aria-label="Default select example">
-                                        <option th:each="Categoria, contador : ${categorias}" th:value="${Categoria.id}" th:text="${Categoria.nombre}"></option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="nombreCurso">Nombre del curso</label>
-                                    <input type="text" class="form-control" name="nombreCurso" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="descrpCurso">Descripcion del curso</label>                                    
-                                    <textarea class="form-control" name="descrpCurso" rows="3" required="true"></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="imagen">Url de la imagen</label>
-                                    <input class="form-control" type="file" name="imagenFile"
-                                           onchange="readURL(this);" required="true">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="estadoCurso">Estado del curso</label>
-                                    <input class="form-check-input" 
-                                           type="checkbox" 
-                                           name="estadoCurso" 
-                                           id="estadoCurso">
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button id="btn2" class="btn" type="submit">Guardar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="row mb-3">
+            <div class="col-12 d-flex align-items-center mt-5 ms-5">
+                <button id="btnCurso" type="botton" class="btn "
+                        data-bs-toggle="modal" data-bs-target="#agregarCurso">Crear Curso</button>
             </div>
+        </div>
 
 
-            <!-- 
-               ==============================================================-->
-            <!-- Se muestra la tabla con la informacion de los cursos -->
-            <!-- 
-               ==============================================================-->
+        <!-- 
+           ==============================================================-->
+        <!-- Se muestra la tabla con la informacion de los cursos -->
+        <!-- 
+           ==============================================================-->
 
 
 
-            <div id="gestioCursos" class="table-responsive text-center mx-5">
+        <div id="gestioCursos" class="table-responsive text-center mx-5">
 
-                <div id="gestionCursos" class="col-7 table-responsive text-center">
-                    <table class="table table-borderless table-dark border border-white
-                           text-center py-4">
-                        <thead>
-                            <tr >
-                                <th scope="col">Nombre del Curso</th>
-                                <th scope="col">Estado del Curso</th>
-                                <th scope="col">Botones</th>
-                            </tr>
-                        </thead>
-                        <tbody th:each="curso, contador : ${cursos}">
-                            <tr>
-                                <th th:text="${curso.nombreCurso}" scope="row"></th>
-                                <td th:text="${curso.estadoCurso}"></td>
-                                <td>
-                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Editar</button></a>
+            <div id="gestionCursos" class="col-7 table-responsive text-center">
+                <table class="table table-borderless table-dark border border-white
+                       text-center py-4">
+                    <thead>
+                        <tr >
+                            <th scope="col">Nombre del Curso</th>
+                            <th scope="col">Estado del Curso</th>
+                            <th scope="col">Botones</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="curso, contador : ${cursos}">
+                        <tr>
+                            <th th:text="${curso.nombreCurso}" scope="row"></th>
+                            <td th:text="${curso.estadoCurso}"></td>
+                            <td>
+                                <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
+                                    <button id="btn2" class="btn my-2">Editar</button></a>
 
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
-                                </td>
-                            </tr>
-                    </table>
-                </div>
+                                <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                    <button id="btn2" class="btn my-2">Eliminar</button></a>
+                            </td>
+                        </tr>
+                </table>
             </div>
+        </div>
 
-        </section>
+    </section>
 
 
 

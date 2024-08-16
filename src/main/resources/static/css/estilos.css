@@ -18,8 +18,11 @@
     font-size: 18px;
     font-weight: bold;
     color: #00FF29;
+    opacity: 50%;
     }
-
+    a:hover{
+    opacity: 100%;
+    }
 }
 
 #Nav button{
@@ -196,38 +199,25 @@
 }
 
 
-/*================Admin Curso================*/
+/*================Visual perfil================*/
 
-#btnCurso{
-    margin-left: 63%;
-    color: rgb(0, 0, 0);
-    background-color: #00FF29;
-}
 
-#btnModulo{
-    margin-left: 62%;
-    color: rgb(0, 0, 0);
-    background-color: #00FF29;
-}
-
-#detalleHijo{
-    margin: 5%;
-    margin-left: 23%;
-    label{
-        color: white;
-        margin-bottom: 2%;
+#btnPerfil{
+    display: flex;
+    align-items: center;
+    p{
+        padding-right: 10%;
     }
-    
-    
 }
+
 /*================Visual Videos================*/
 
 
 .video-container {
     position: relative;
     overflow: hidden;
-    margin: 0 auto; /* Centra el contenedor horizontalmente */
-    max-width: 50%; /* Ajusta según sea necesario */
+    margin: 0 auto;
+    max-width: 70%;
 }
 
 .video-container video {
@@ -273,6 +263,39 @@
     margin-top: 5%;
     padding-left: 25%;
     
+}
+
+#btnCurso{
+    margin-left: 63%;
+    color: rgb(0, 0, 0);
+    background-color: #00FF29;
+}
+
+#btnModulo{
+    margin-left: 62%;
+    color: rgb(0, 0, 0);
+    background-color: #00FF29;
+}
+
+#detalleHijo{
+    margin: 5%;
+    margin-left: 23%;
+    label{
+        color: white;
+        margin-bottom: 2%;
+    }
+}
+
+#btnAdmin{
+    padding-top: 2%;
+    padding-bottom: 1%;
+    background-color: #2b2929;
+    opacity: 70%;
+}
+
+#btnAdmin:hover{
+    background-color: rgb(146, 143, 143);
+    opacity: 100%;
 }
 
 
