@@ -11,7 +11,7 @@ import lombok.Data;
 @Table(name = "FIDE_CATEGORIAS_TB")
 @NamedStoredProcedureQuery(
     name = "findByIdCat",
-    procedureName = "CATEGORIA_FINDBYID_SP",
+    procedureName = "CATEGORIA_GET_BYID_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CATEGORIA", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CATEGORIA", type = void.class)
