@@ -44,7 +44,7 @@ public String guardarFactura(@ModelAttribute Factura factura, @RequestParam("usu
     factura.setUsuario(usuario);
     factura.setFechaPago(new Date());
     factura.setFechaExpiracion(calcularFechaExpiracion());
-    factura.setMonto(0.0); // Asignar valor 0.0 a la propiedad monto
+    factura.setMonto(new Monto()); // Inicializa la propiedad monto con un objeto Monto vacío
     facturaService.save(factura);
     return "redirect:/factura/listado";
 }
