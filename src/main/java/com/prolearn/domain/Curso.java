@@ -12,10 +12,18 @@ import lombok.Data;
 @Table(name = "FIDE_CURSOS_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdCurso",
-    procedureName = "GET_CURSO_BY_ID_SP",
+    procedureName = "CURSO_GET_BYID_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOS", type = void.class)
+    },
+    resultClasses = { Curso.class } 
+)
+@NamedStoredProcedureQuery(
+    name = "SPFindAllCurso",
+    procedureName = "CURSOS_GETALL_PUBLICO_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
     },
     resultClasses = { Curso.class } 
 )
@@ -36,15 +44,15 @@ public class Curso implements Serializable {
     @Column(name = "descrp_curso")
     private String descrpCurso;
     
-    @Column(name = "estado_curso")
+    @Column(name = "estado_publico")
     private boolean estadoCurso;
     
     @Column(name = "thumbnail_curso")
     private String thumbnailCurso;
     
-    @ManyToOne
-    @JoinColumn(name = "categoria_curso")
-    private Categoria categoriaCurso;
+//    @ManyToOne
+//    @JoinColumn(name = "categoria_curso")
+//    private Categoria categoriaCurso;
     
     
 //    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -59,22 +67,22 @@ public class Curso implements Serializable {
     public Curso() {
     }
 
-    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
+    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso/*, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        this.categoriaCurso = categoriaCurso;
+        /*this.categoriaCurso = categoriaCurso;
         /*this.capitulosHijos = capitulosHijos;*/
     }
 
-    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
+    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso/*, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        this.categoriaCurso = categoriaCurso;
+        /*this.categoriaCurso = categoriaCurso;
         /*this.capitulosHijos = capitulosHijos;*/
     }
     

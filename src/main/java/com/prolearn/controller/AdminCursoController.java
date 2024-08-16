@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminCursoController {
     
     //arreglar metodos:
-    //detalleCurso(Curso curso, Model model)
-    //detalleCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model)
+    //-l detalleCurso(Curso curso, Model model)
+    //-l detalleCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model)
     //saveCapituloPadre(CapituloPadre capituloPadre)
     
     @Autowired
@@ -36,6 +36,9 @@ public class AdminCursoController {
     private CapituloHijoService capituloHijoService;
     
     @Autowired
+    private CapitulosEstrucService capitulosEstrucService;
+    
+    @Autowired
     private HttpSession session;
 
     
@@ -45,45 +48,43 @@ public class AdminCursoController {
         var cursos = cursoService.getCursos();
         model.addAttribute("cursos", cursos);
         
-        var categorias = categoriaService.getCategorias();
-        model.addAttribute("categorias", categorias);
+        //var categorias = categoriaService.getCategorias();
+        //model.addAttribute("categorias", categorias);
         
         return "/adminCurso/listarCursos";
     }
     
-//    @GetMapping("/detalleCurso/{idCurso}")
-//    public String detalleCurso(Curso curso, Model model) {
-//        
-//        curso = cursoService.getCurso(curso);
-//        model.addAttribute("curso", curso);
-//        
-//        List<CapituloPadre> listaPadres = CapitulosEstruc.getListaCapituloPadre(curso);
-//        model.addAttribute("ListaPadres", listaPadres);
-//        
-//        return "/adminCurso/detalleCurso";
-//    }
-//    
-//    @GetMapping("/detalleCapitulos/{idCurso}/{id}")
-//    public String detalleCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
-//        
-//        curso = cursoService.getCurso(curso);
-//        
-//        capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
-//        CapituloPadre padreLamnda = capituloPadre;
-//        
-//        List<CapituloHijo> listaHijos = curso.getCapitulosHijos();
-//        listaHijos.removeIf(ch ->!ch.getCapituloPadre().getNombre().equals(padreLamnda.getNombre()));
-//        
-//        session.setAttribute(("curso-"+capituloPadre.getId()), curso);
-//        
-//        model.addAttribute("capituloPadre", capituloPadre);
-//        model.addAttribute("listaHijos", listaHijos);
-//        
-//        
-//        
-//        
-//        return "/adminCurso/detalleCapitulos";
-//    }
+    @GetMapping("/detalleCurso/{idCurso}")
+    public String detalleCurso(Curso curso, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        model.addAttribute("curso", curso);
+        
+        List<CapituloPadre> listaPadres = capitulosEstrucService.getPadres(curso.getIdCurso());
+        model.addAttribute("ListaPadres", listaPadres);
+        
+        return "/adminCurso/detalleCurso";
+    }
+    
+    @GetMapping("/detalleCapitulos/{idCurso}/{id}")
+    public String detalleCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        
+        capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
+        
+        List<CapituloHijo> listaHijos = capitulosEstrucService.getHijos(curso.getIdCurso(), capituloPadre.getId());
+        
+        session.setAttribute(("curso-"+capituloPadre.getId()), curso);
+        
+        model.addAttribute("capituloPadre", capituloPadre);
+        model.addAttribute("listaHijos", listaHijos);
+        
+        
+        
+        
+        return "/adminCurso/detalleCapitulos";
+    }
     
     @GetMapping("/detalleCapituloHijo/{id}")
     public String detalleCapituloHijo(CapituloHijo capituloHijo, Model model) {
@@ -99,6 +100,7 @@ public class AdminCursoController {
         return "/adminCurso/detalleCapituloHijo";
     }
     
+    @Deprecated
     @PostMapping("/save-capituloHijo")
     public String saveCapituloHijo(CapituloHijo capituloHijo) {
         
@@ -175,6 +177,7 @@ public class AdminCursoController {
 //        return "redirect:/adminCurso/detalleCapitulos/" + idCurso + "/" + id;
 //    }
     
+    @Deprecated
     @GetMapping("/deleteCapituloHijo/{id}")
     public String deleteCapituloHijo(CapituloHijo capituloHijo, Model model) {
         
@@ -194,4 +197,26 @@ public class AdminCursoController {
     }
     
     
+    @PostMapping("/detalleCurso/{idCurso}")
+    public String newCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
+        
+        capituloPadre.setId(0L);
+        
+        capituloPadreService.save(capituloPadre, curso);
+        
+        return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
+    }
+    
+    
+    @GetMapping("/deleteCapituloPadre/{idCurso}/{id}")
+    public String deleteCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
+        
+        capituloPadreService.delete(capituloPadre);
+        
+        
+        return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
+    }
 }

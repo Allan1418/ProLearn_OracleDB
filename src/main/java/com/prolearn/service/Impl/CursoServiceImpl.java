@@ -19,7 +19,7 @@ public class CursoServiceImpl implements CursoService{
     @Override
     @Transactional(readOnly = true)
     public List<Curso> getCursos() {
-        var lista = cursoDao.findAll();
+        var lista = cursoDao.getAll();
         return lista;
     }
 

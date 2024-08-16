@@ -102,7 +102,6 @@
                             <tr >
                                 <th scope="col">Nombre del Curso</th>
                                 <th scope="col">Estado del Curso</th>
-                                <th scope="col">Categoria del Curso</th>
                                 <th scope="col">Botones</th>
                             </tr>
                         </thead>
@@ -110,7 +109,6 @@
                             <tr>
                                 <th th:text="${curso.nombreCurso}" scope="row"></th>
                                 <td th:text="${curso.estadoCurso}"></td>
-                                <td th:text="${curso.categoriaCurso.nombre}"></td>
                                 <td>
                                     <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
                                         <button id="btn2" class="btn my-2">Editar</button></a>
@@ -176,10 +174,10 @@
                             <h5 class="modal-title">Crear Modulo</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/capituloPadre/guardar}" th:object="${capituloPadre}"
+                        <form th:action="@{/adminCurso/detalleCurso/}+${curso.idCurso}" th:object="${capituloPadre}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
 
-                            <input type="hidden" name="nuevaImagen" value="NO"/>
+                            <!--<input type="hidden" name="nuevaImagen" value="NO"/>-->
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nombre">Nombre del Modulo</label>
@@ -218,7 +216,7 @@
                                 <a th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
                                     <button id="btn2" class="btn my-2">Editar</button></a>
 
-                                <a th:href="@{/adminCurso/deleteCapituloHijo/}+${curso.idCurso}">
+                                <a th:href="@{/adminCurso/deleteCapituloPadre/}+${curso.idCurso}+'/'+${CapituloPadre.id}">
                                     <button id="btn2" class="btn my-2">Eliminar</button></a>
                             </td>
                         </tr>

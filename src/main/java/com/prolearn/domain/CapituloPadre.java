@@ -12,7 +12,7 @@ import lombok.Data;
 @Table(name = "FIDE_CAPITULO_PADRE_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdCP",
-    procedureName = "CP_FINDBYID_SP",
+    procedureName = "CAPITULO_PADRE_GET_BYID_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
@@ -21,19 +21,36 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllXIdCursoCP",
-    procedureName = "GET_CAP_PADRE_X_CURSO_SP",
+    procedureName = "CAPITULO_PADRE_GETALL_BY_CURSO_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CAPITULOS_PADRES", type = void.class)
     },
     resultClasses = { CapituloPadre.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "SPUpsertCP",
+    procedureName = "CAPITULO_PADRE_UPSERT_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CAPITULO_PADRE", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NUMERO_CAPITULO_PADRE", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class)
+    }
+)
+@NamedStoredProcedureQuery(
+    name = "SPDeleteCP",
+    procedureName = "CAPITULO_PADRE_DELET_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
+    }
+)
 public class CapituloPadre implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CAPITULO_PADRE_TB_ID_CP_PK")
     private Long id;
 
