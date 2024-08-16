@@ -75,7 +75,7 @@ public class AdminCursoController {
         
         List<CapituloHijo> listaHijos = capitulosEstrucService.getHijos(curso.getIdCurso(), capituloPadre.getId());
         
-        session.setAttribute(("curso-"+capituloPadre.getId()), curso);
+        //session.setAttribute(("curso-"+capituloPadre.getId()), curso);
         
         model.addAttribute("capituloPadre", capituloPadre);
         model.addAttribute("listaHijos", listaHijos);
@@ -218,5 +218,15 @@ public class AdminCursoController {
         
         
         return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
+    }
+    
+    @PostMapping("/save-capituloPadre/{idCurso}/{id}")
+    public String saveCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        
+        capituloPadreService.save(capituloPadre, curso);
+        
+        return "redirect:adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
     }
 }

@@ -292,7 +292,7 @@
                             <h5 class="modal-title">Editar Capitulo Padre</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/adminCurso/save-capituloPadre}" th:object="${capituloPadre}"
+                        <form th:action="@{/adminCurso/save-capituloPadre/}+${curso.idCurso}+'/'+${CapituloPadre.id}" th:object="${capituloPadre}"
                               method="POST" class="was-validated" enctype="multipart/form-data">
 
                             <div class="modal-body">
@@ -306,12 +306,11 @@
                                     <input type="number" min="0" class="form-control" th:field="*{numero}"
                                            name="numero" required="true"/>
                                 </div>
-                                <input type="hidden" th:field="*{id}" />
+                                <input type="hidden" th:field="*{id}" name="id"/>
                             </div>
 
                             <div class="modal-footer">
-                                <button class="btn btn-primary" 
-                                        th:href="@{/curso/eliminar/}+${capituloPadre.numero}" type="submit">Guardar</button>
+                                <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
