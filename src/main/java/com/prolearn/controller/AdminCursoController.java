@@ -220,13 +220,13 @@ public class AdminCursoController {
         return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
     }
     
-    @PostMapping("/save-capituloPadre/{idCurso}/{id}")
+    @PostMapping("/save-capituloPadre/{idCurso}")
     public String saveCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model) {
         
         curso = cursoService.getCurso(curso);
         
         capituloPadreService.save(capituloPadre, curso);
         
-        return "redirect:adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
+        return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
     }
 }
