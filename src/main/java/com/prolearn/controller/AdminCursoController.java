@@ -45,7 +45,7 @@ public class AdminCursoController {
     @GetMapping("/listarCursos")
     public String listarCursos(Model model) {
         
-        var cursos = cursoService.getCursos();
+        var cursos = cursoService.getCursosAdmin();
         model.addAttribute("cursos", cursos);
         
         //var categorias = categoriaService.getCategorias();

@@ -25,7 +25,7 @@ public class indexController {
     
     @GetMapping("/")
     public String getCursos(Model model) {
-        var cursos = cursoService.getCursos();
+        var cursos = cursoService.getCursosPublico();
         model.addAttribute("cursos", cursos);
         
         

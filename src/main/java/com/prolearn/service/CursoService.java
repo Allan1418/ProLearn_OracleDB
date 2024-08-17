@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface CursoService {
     
-    public List<Curso> getCursos();
+    public List<Curso> getCursosPublico();
+    
+    public List<Curso> getCursosAdmin();
 
     public Curso getCurso(Curso curso);
     
