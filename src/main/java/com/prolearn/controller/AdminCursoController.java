@@ -141,7 +141,7 @@ public class AdminCursoController {
         return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
     }
     
-    @PostMapping("/newCapituloHijo/{idCurso}")
+    @PostMapping("/newCapituloHijo/{idCurso}/{id}")
     public String newCapituloHijo(Curso curso, 
                                     CapituloPadre capituloPadre, 
                                     CapituloHijo capituloHijo, 
@@ -150,21 +150,25 @@ public class AdminCursoController {
         
         curso = cursoService.getCurso(curso);
         capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
-        if (capituloPadre == null) {
-            System.out.println("capituloPadre nulooooooooo");
-        }
-        System.out.println("------------" + curso.getIdCurso());
         
         capituloHijo.setId(0L);
-        capituloHijoService.save(capituloHijo, curso);
+        capituloHijo.setCapituloPadreId(capituloPadre.getId());
+        
+        Long newId = capituloHijoService.save(capituloHijo, curso);
+        System.out.println(newId);
         
         
         if (!video.isEmpty()) {
             
+            capituloHijo.setId(newId);
             capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
+            
+            String DirecCarpt = curso.getIdCurso().toString();
+            Long idFirebase = Long.valueOf(curso.getIdCurso().toString() + capituloHijo.getId().toString());
+            
             String url = firebaseStorageService.cargaArchivo(video,
-                    curso.getIdCurso().toString(), 
-                        Long.valueOf(curso.getIdCurso().toString() + capituloHijo.getId().toString()), 
+                    DirecCarpt, 
+                        idFirebase, 
                  video.getContentType());
             
             capituloHijo.setVideo(url);
@@ -172,6 +176,6 @@ public class AdminCursoController {
         }
         
         
-        return "redirect:/adminCurso/detalleCapitulos";
+        return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
     }
 }

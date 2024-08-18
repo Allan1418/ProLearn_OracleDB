@@ -499,7 +499,7 @@
                             <h5 class="modal-title">Crear Clase</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/adminCurso/newCapituloHijo/}+${curso.idCurso}" th:object="${capituloHijo}" 
+                        <form th:action="@{/adminCurso/newCapituloHijo/}+${curso.idCurso}+'/'+${capituloPadre.id}" th:object="${capituloHijo}" 
                               method="POST" class="was-validated" enctype="multipart/form-data" id="uploadForm">
                             <div class="modal-body">
                                 <div class="mb-3">

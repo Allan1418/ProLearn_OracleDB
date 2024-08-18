@@ -41,14 +41,16 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
     }
 
     @Override
-    public void save(CapituloHijo capituloHijo, Curso curso) {
-        capituloHijoDao.upsert(capituloHijo.getId(),
+    public Long save(CapituloHijo capituloHijo, Curso curso) {
+        Long id = capituloHijoDao.upsert(capituloHijo.getId(),
                               capituloHijo.getCapituloPadreId(),
                                capituloHijo.getNombre(),
                                capituloHijo.getNumero(),
                                 capituloHijo.getVideo(),
                               curso.getIdCurso()
                 );
+        
+        return id;
     }
 
     @Override

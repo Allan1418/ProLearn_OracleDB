@@ -9,7 +9,7 @@ public interface CapituloHijoService {
     
     public CapituloHijo getCapituloHijo(CapituloHijo capituloHijo);
     
-    public void save(CapituloHijo capituloHijo, Curso curso);
+    public Long save(CapituloHijo capituloHijo, Curso curso);
     
     public void delete(CapituloHijo capituloHijo);
     
