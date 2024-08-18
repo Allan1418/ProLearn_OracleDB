@@ -499,7 +499,7 @@
                             <h5 class="modal-title">Crear Clase</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${CapituloPadre.id}" th:object="${capituloHijo}" 
+                        <form th:action="@{/adminCurso/newCapituloHijo/}+${curso.idCurso}" th:object="${capituloHijo}" 
                               method="POST" class="was-validated" enctype="multipart/form-data" id="uploadForm">
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -507,10 +507,10 @@
                                     <input type="text" class="form-control" name="nombre" required="true"/>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="video">Video de la clase</label>
+                                    <label for="videoNuevo">Video de la clase</label>
                                     <input class="form-control" type="file" 
-                                           name="video" accept="video/*" 
-                                           onchange="updateVideoPreview(this);" required="true">
+                                           name="videoNuevo" accept="video/*" 
+                                           onchange="updateVideoPreview(this);">
                                     <video width="100%" controls id="video-preview">
                                     </video>
                                 </div>

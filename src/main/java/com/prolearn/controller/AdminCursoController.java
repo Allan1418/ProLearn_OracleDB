@@ -141,16 +141,22 @@ public class AdminCursoController {
         return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
     }
     
-    @PostMapping("/detalleCapitulos/{idCurso}/{id}")
+    @PostMapping("/newCapituloHijo/{idCurso}")
     public String newCapituloHijo(Curso curso, 
                                     CapituloPadre capituloPadre, 
                                     CapituloHijo capituloHijo, 
-                                    @RequestParam("video")MultipartFile video, 
+                                    @RequestParam("videoNuevo")MultipartFile video, 
                                     Model model) {
         
         curso = cursoService.getCurso(curso);
+        capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
+        if (capituloPadre == null) {
+            System.out.println("capituloPadre nulooooooooo");
+        }
+        System.out.println("------------" + curso.getIdCurso());
+        
         capituloHijo.setId(0L);
-        capituloHijoService.save(capituloHijo);
+        capituloHijoService.save(capituloHijo, curso);
         
         
         if (!video.isEmpty()) {
@@ -162,10 +168,10 @@ public class AdminCursoController {
                  video.getContentType());
             
             capituloHijo.setVideo(url);
-            capituloHijoService.save(capituloHijo);
+            capituloHijoService.save(capituloHijo, curso);
         }
         
         
-        return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
+        return "redirect:/adminCurso/detalleCapitulos";
     }
 }

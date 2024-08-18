@@ -27,7 +27,7 @@ public interface CapituloHijoDao extends JpaRepository<CapituloHijo, Long> {
     @Procedure(name = "SPFindAllXIdCursoYIdCapPadreCH")
     List<CapituloHijo> findAllByCapituloPadreIdYCursoId(@Param("P_ID_CAPITULO_PADRE")Long capituloPadreId, @Param("P_ID_CURSO")Long cursoId);
     
-    @Procedure(name = "SPUpsertCP")
+    @Procedure(name = "SPUpsertCH")
     void upsert(@Param("P_ID_HIJO")Long idHijo, 
                 @Param("P_ID_CAPITULO_PADRE")Long idPadre, 
                 @Param("P_NOMBRE_CAPITULO")String nombre, 
