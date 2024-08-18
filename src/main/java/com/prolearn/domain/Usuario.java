@@ -8,6 +8,15 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "FIDE_USUARIOS_TB", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@NamedStoredProcedureQuery(
+    name = "SPFindXEmailUser",
+    procedureName = "USUARIO_GET_BY_EMAIL_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_EMAIL", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Usuario.class} 
+)
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,13 +35,14 @@ public class Usuario implements Serializable {
     private String password;
 
     
-    //Revisar con tablas mysql!!!!!!!
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "FIDE_USUARIO_ROL_TB",
-            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "USUARIOS_TB_ID_USER_PK"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "ROL_TB_ID_ROL_PK")
-    )
+//    //Revisar con tablas mysql!!!!!!!
+//    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "FIDE_USUARIO_ROL_TB",
+//            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "USUARIOS_TB_ID_USER_PK"),
+//            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "ROL_TB_ID_ROL_PK")
+//    )
+    @Transient
     private Collection<Rol> roles;
 
     public Usuario() {

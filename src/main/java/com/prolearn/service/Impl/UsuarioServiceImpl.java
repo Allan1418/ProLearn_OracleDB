@@ -50,7 +50,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional(readOnly = true)
     public Usuario getUsuario(Usuario usuario) {
-        return usuarioDao.findById(usuario.getId()).orElse(null);
+        usuario = usuarioDao.findById(usuario.getId()).orElse(null);
+        usuario.setRoles(rolDao.findAllByIdUser(usuario.getId()));
+        
+        return usuario;
     }
 
     @Override
@@ -63,10 +66,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioDao.findByEmail(username);
+        
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario o password inválidos");
         }
         
+        usuario.setRoles(rolDao.findAllByIdUser(usuario.getId()));
         
         return new User(usuario.getEmail(), usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
     }

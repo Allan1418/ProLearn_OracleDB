@@ -13,7 +13,10 @@ public interface CursoDao extends JpaRepository<Curso, Long>{
     @Procedure(name = "SPFindXIdCurso")
     Optional<Curso> findXId(@Param("P_ID_CURSO") Long id);
     
-    @Procedure(name = "SPFindAllCurso")
-    List<Curso> getAll();
+    @Procedure(name = "SPFindAllPublicoCurso")
+    List<Curso> getAllPublico();
+    
+    @Procedure(name = "SPFindAllAdminCurso")
+    List<Curso> getAllAdmin();
     
 }

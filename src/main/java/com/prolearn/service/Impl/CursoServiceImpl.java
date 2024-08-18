@@ -18,8 +18,8 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<Curso> getCursos() {
-        var lista = cursoDao.getAll();
+    public List<Curso> getCursosPublico() {
+        var lista = cursoDao.getAllPublico();
         return lista;
     }
 
@@ -39,6 +39,13 @@ public class CursoServiceImpl implements CursoService{
     @Transactional
     public void delete(Curso curso) {
         cursoDao.delete(curso);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Curso> getCursosAdmin() {
+        var lista = cursoDao.getAllAdmin();
+        return lista;
     }
     
     
