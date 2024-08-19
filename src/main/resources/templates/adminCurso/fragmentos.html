@@ -9,20 +9,20 @@
     </head>
 
     <body>
+
         
-        <!-- 
-           ==============================================================-->
-        <!-- Se muestra los cursos y se crean-->
-        <!-- 
-           ==============================================================-->
-
-
-        <section th:fragment="listadoCursos">
-
+        
+        <section th:fragment="CursosAuditoria">
+        
+            <!-- 
+               ==============================================================-->
+            <!-- Se muestra la informacion de los Curso Auditoria -->
+            <!-- 
+               ==============================================================-->
+            
             <div class="row text-center">
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    style="border-bottom: 4px solid #ff0000";
                     class="col-12">Cursos</button></a>
                 </div>
                 <div class="col-3">
@@ -39,9 +39,170 @@
                             Auditoria
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item" href="#">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item" href="#">Categoria Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-responsive text-center mx-5">
+                <div id="gestionAdmin" class="ms-auto table-responsive text-center">
+                    <table class="table table-borderless table-dark border border-white
+                           text-center py-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre Curso</th>
+                                <th scope="col">Descripcion Curso</th>
+                                <th scope="col">Thumnail Curso</th>
+                                <th scope="col">Categoria Curso</th>
+                                <th scope="col">Estado Publico</th>
+                                <th scope="col">Estado Delet</th>
+                                <th scope="col">Actualizado por</th>
+                                <th scope="col">Ultima Actualizacion</th>
+                                <th scope="col">Creado Por</th>
+                                <th scope="col">Fecha de Creacion </th>
+                                <th scope="col">Accion </th>
+                                <th scope="col">Botones</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="curso, contador : ${cursos}">
+                            <tr>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <td th:text="${set estadoCurso}"></td>
+                                <td>
+                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Editar</button></a>
+
+                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+
+
+        <section th:fragment="listadoCursos">
+            
+            <!-- 
+               ==============================================================-->
+            <!-- Se Crea un curso -->
+            <!-- 
+               ==============================================================-->
+            
+            
+            <div id="CrearCurso" 
+                 class="modal fade" 
+                 tabindex="-1" 
+                 aria-labelledby="exampleModalLabel" 
+                 aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                    <div <div class="modal-content fondo-modal">
+                            <div class="modal-header bg-info text-white">
+                                <h5 class="modal-title">Crear Curso</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <form>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nombre">Nombre del Curso</label>
+                                        <input type="text" class="form-control" name="nombre" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="descripcion">Descripcion del curso</label>
+                                        <textarea class="form-control" name="descripcion" rows="5" required="true"></textarea>
+                                    </div>
+                                    <div class="imagen-preview-container">
+                                        <img id="imagen-preview" width="100%" />
+                                    </div>
+                                    
+                                    <div class="mb-3 my-4">
+                                        <label for="imagenNuevo">Imagen del Curso</label>
+                                        <input class="form-control" type="file" 
+                                           name="imagenNuevo" accept="image/*" 
+                                           onchange="readURL(this);" required="true">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="categoria">Categoría del Curso</label>
+                                        <select class="form-control" id="categoria" name="categoria" required="true">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                </div>
+                                <script>
+                                  function readURL(input) {
+                                    if (input.files && input.files[0]) {
+                                      var reader = new FileReader();
+                                      reader.onload = function (e) {
+                                        document.getElementById('imagen-preview').src = e.target.result;
+                                        document.getElementById('imagen-preview').style.display = 'block';
+                                      };
+                                      reader.readAsDataURL(input.files[0]);
+                                    }
+                                  }
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <!-- 
+               ==============================================================-->
+            <!-- Botones de pagina Admin -->
+            <!-- 
+               ==============================================================-->
+  
+
+            <div id="btn4" class="row">
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
+                    style="border-bottom: 4px solid #ff0000";
+                    class="col-12 ms-auto">Cursos</button></a>
+                </div>
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
+                    class="col-12 ms-auto">Usuarios</button></a>
+                </div>
+                <div class="col-3"><button id="btnAdmin" 
+                    class="col-12 ms-auto">Categoria</button>
+                </div>
+                <div class="col-3">
+                    <div class="dropdown-center">
+                        <button id="btnAdmin" class="dropdown-toggle col-12 ms-auto"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Auditoria
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
                         </ul>
                     </div>
                 </div>
@@ -51,7 +212,7 @@
             <div class="row mb-3">
                 <div class="col-12 d-flex align-items-center mt-5 ms-5">
                     <button id="btnCurso" type="botton" class="btn "
-                            data-bs-toggle="modal" data-bs-target="#listadoCurso">Crear Curso</button>
+                            data-bs-toggle="modal" data-bs-target="#CrearCurso">Crear Curso</button>
                 </div>
             </div>
 
@@ -64,9 +225,8 @@
 
 
 
-            <div id="gestioCurso" class="table-responsive text-center mx-5">
-
-                <div id="gestionCursos" class="col-7 table-responsive text-center">
+            <div class="table-responsive text-center mx-5">
+                <div id="gestionAdmin" class="col-7 table-responsive text-center">
                     <table class="table table-borderless table-dark border border-white
                            text-center py-4">
                         <thead>
@@ -79,7 +239,107 @@
                         <tbody th:each="curso, contador : ${cursos}">
                             <tr>
                                 <th th:text="${curso.nombreCurso}" scope="row"></th>
-                                <td th:text="${curso.estadoCurso}"></td>
+                                <td th:text="${curso.estadoCurso ? 'Activo' : 'Inactivo'}"></td>
+                                <td>
+                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Editar</button></a>
+
+                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        
+
+
+        
+        
+        <section th:fragment="UsuariosAuditoria">
+
+            
+            <!-- 
+               ==============================================================-->
+            <!-- Botones de pagina Admin -->
+            <!-- 
+               ==============================================================-->
+  
+
+            
+            <div class="row text-center">
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
+                    class="col-12">Cursos</button></a>
+                </div>
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
+                    class="col-12">Usuarios</button></a>
+                </div>
+                <div class="col-3"><button id="btnAdmin" 
+                    class="col-12">Categoria</button>
+                </div>
+                <div class="col-3">
+                    <div class="dropdown-center">
+                        <button id="btnAdmin" class="dropdown-toggle col-12"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Auditoria
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+                    
+            <!-- 
+               ==============================================================-->
+            <!-- Se muestra la informacion de los Usuarios Auditoria -->
+            <!-- 
+               ==============================================================-->
+            
+            
+            <div class="table-responsive text-center mx-5">
+
+                <div id="gestionAdmin" class="ms-auto table-responsive text-center">
+                    <table class="table table-borderless table-dark border border-white
+                           text-center py-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Estado Usuario</th>
+                                <th scope="col">Actualizado por</th>
+                                <th scope="col">Ultima Actualizacion</th>
+                                <th scope="col">Creado Por</th>
+                                <th scope="col">Fecha de Creacion</th>
+                                <th scope="col">Accion </th>
+                                <th scope="col">Botones</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="curso, contador : ${cursos}">
+                            <tr>
+                                <th th:text="${set Id}" scope="row"></th>
+                                <th th:text="${set Nombre}" scope="row"></th>
+                                <th th:text="${set Apellidos}" scope="row"></th>
+                                <th th:text="${set Email}" scope="row"></th>
+                                <th th:text="${set EstadoUsuario}" scope="row"></th>
+                                <th th:text="${set Actualizadopor}" scope="row"></th>
+                                <th th:text="${set UltimaActualizacion}" scope="row"></th>
+                                <th th:text="${set CreadoPor}" scope="row"></th>
+                                <th th:text="${set FechadeCreacion}" scope="row"></th>
+                                <td th:text="${set Accion}"></td>
                                 <td>
                                     <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
                                         <button id="btn2" class="btn my-2">Editar</button></a>
@@ -96,15 +356,16 @@
 
 
 
-        <!-- 
-           ==============================================================-->
-        <!-- Se muestra los usuarios -->
-        <!-- 
-           ==============================================================-->
-
+        
         
         <section th:fragment="listadoUsuarios">
 
+            <!-- 
+               ==============================================================-->
+            <!-- Botones de pagina Admin -->
+            <!-- 
+               ==============================================================-->
+            
             <div class="row text-center">
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
@@ -126,9 +387,12 @@
                             Auditoria
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item" href="#">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item" href="#">Categoria Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
                         </ul>
                     </div>
                 </div>
@@ -137,11 +401,10 @@
 
             <!-- 
                ==============================================================-->
-            <!-- Se muestra la tabla con la informacion de los usuarios y se edita -->
+            <!-- Se edita el usuario -->
             <!-- 
                ==============================================================-->
 
-            <!--
             <div id="editarUsuario" 
                  class="modal fade" 
                  tabindex="-1" 
@@ -171,17 +434,24 @@
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" type="submit">Guardar</button>
                                 </div>
-                            </div>
+                            </form>
+                        </div>
                     </div>
-                        </form>
                 </div>
             </div>
-            -->
 
 
-            <div id="gestionCursos" class="table-responsive text-center mx-5">
+             <!-- 
+                ==============================================================-->
+             <!-- Se muestra los usuarios -->
+             <!-- 
+                ==============================================================-->
 
-                <div id="gestionCursos" class="col-7 table-responsive text-center">
+                
+                
+            <div class="table-responsive text-center mx-5">
+
+                <div id="gestionAdmin" class="col-7 table-responsive text-center">
                     <table class="table table-borderless table-dark border border-white
                            text-center py-4">
                         <thead>
@@ -195,10 +465,10 @@
                         </thead>
                         <tbody th:each="curso, contador : ${cursos}">
                             <tr>
-                                <th th:text="${curso.nombreCurso}" scope="row"></th>
-                                <td th:text="${curso.estadoCurso}"></td>
-                                <td th:text="${curso.estadoCurso}"></td>
-                                <td th:text="${curso.estadoCurso}"></td>
+                                <th th:text="${set id}" scope="row"></th>
+                                <td th:text="${set nombre}"></td>
+                                <td th:text="${set apellido}"></td>
+                                <td th:text="${set email}"></td>
                                 <td>
                                     <a href="#" data-bs-target="#editarUsuario" data-bs-toggle="modal">
                                         <button class="btn my-2" id="btn2">Editar</button>
@@ -214,17 +484,110 @@
 
         </section>
 
+        
 
         
+        <section th:fragment="CategoriaAuditoria">
+            
+            
+            <!-- 
+                ==============================================================-->
+            <!-- Botones de  Auditoria -->
+            <!-- 
+                ==============================================================-->
+
+            <div class="row text-center">
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
+                    class="col-12">Cursos</button></a>
+                </div>
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
+                    class="col-12">Usuarios</button></a>
+                </div>
+                <div class="col-3"><button id="btnAdmin" 
+                    class="col-12">Categoria</button>
+                </div>
+                <div class="col-3">
+                    <div class="dropdown-center">
+                        <button id="btnAdmin" class="dropdown-toggle col-12"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Auditoria
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 
+                ==============================================================-->
+            <!-- Se muestra la informacion de las Categorias Auditoria -->
+            <!-- 
+                ==============================================================-->
+            
+            
+            <div class="table-responsive text-center mx-5">
+
+                <div id="gestionAdmin" class="ms-auto table-responsive text-center">
+                    <table class="table table-borderless table-dark border border-white
+                           text-center py-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre Categoria</th>
+                                <th scope="col">Estado Delet</th>
+                                <th scope="col">Actualizado por</th>
+                                <th scope="col">Ultima Actualizacion</th>
+                                <th scope="col">Creado Por</th>
+                                <th scope="col">Fecha de Creacion </th>
+                                <th scope="col">Accion </th>
+                                <th scope="col">Botones</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="curso, contador : ${cursos}">
+                            <tr>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <th th:text="${set nombreCurso}" scope="row"></th>
+                                <td th:text="${set estadoCurso}"></td>
+                                <td>
+                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Editar</button></a>
+
+                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+       
+        
+        
+        
+        <section th:fragment="listadoCategorias">
+
         <!-- 
            ==============================================================-->
         <!-- Se muestra las Categorias -->
         <!-- 
            ==============================================================-->
-
-        
-        <section th:fragment="listadoCategorias">
-
             
             <div class="row text-center py-2 pb-2">
                 <div class="col-3">
@@ -247,9 +610,12 @@
                             Auditoria
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item" href="#">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item" href="#">Categoria Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
+                            <li><a class="dropdown-item"
+                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
                         </ul>
                     </div>
                 </div>
@@ -258,11 +624,11 @@
 
             <!-- 
                ==============================================================-->
-            <!-- Se muestra la tabla con la informacion de los usuariosy  se edita -->
+            <!-- Se muestra la tabla con la informacion de la categoria y se edita -->
             <!-- 
                ==============================================================-->
 
-            <!--
+            
             <div id="editarCategoria" 
                  class="modal fade" 
                  tabindex="-1" 
@@ -292,17 +658,16 @@
                                 <div class="modal-footer">
                                     <button class="btn btn-primary" type="submit">Guardar</button>
                                 </div>
-                            </div>
+                            </form>
+                        </div>
                     </div>
-                        </form>
                 </div>
             </div>
-            -->
 
 
-            <div id="gestionCategorias" class="table-responsive text-center mx-5">
+            <div class="table-responsive text-center mx-5">
 
-                <div id="gestionCursos" class="col-7 table-responsive text-center">
+                <div id="gestionAdmin" class="col-7 table-responsive text-center">
                     <table class="table table-borderless table-dark border border-white
                            text-center py-4">
                         <thead>
@@ -340,7 +705,6 @@
            ==============================================================-->
         
         <section th:fragment="infoCurso">
-
             
             <div id="editarInformacionCurso" 
                  class="modal fade" 
@@ -348,12 +712,11 @@
                  aria-labelledby="exampleModalLabel" 
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
-                    <div <div class="modal-content fondo-modal">
+                    <div class="modal-content fondo-modal">
                         <div class="modal-header bg-info text-white">
                             <h5 class="modal-title">Editar informacion del Curso</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        
                         <form >
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -364,19 +727,44 @@
                                     <label for="descripcion">Descripcion del curso</label>
                                     <textarea class="form-control" name="descripcion" rows="5" required="true"></textarea>
                                 </div>
-                                <div class="mb-3">
+                                <div class="imagen-preview-container">
+                                    <img id="imagen-preview"
+                                         th:src="${curso.thumbnailCurso}" width="100%" />
+                                </div>
+                                <div class="mb-3 my-4">
                                     <label for="imagen">Imagen del Curso</label>
                                     <input class="form-control" type="file" 
-                                           name="imagen" accept="image/*" 
-                                           onchange="readURL(this);" required="true">
+                                           name="imagenNuevo" accept="image/*" 
+                                           onchange="readURLImagen(this); updateImagePreview(this);">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="categoria">Categoría del Curso</label>
+                                    <select class="form-control" id="categoria" name="categoria" required="true">
+                                        <option value="">Seleccione una categoría</option>
+                                    </select>
                                 </div>
                             </div>
-
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
+                            <script>
+                                function readURLImagen(input) {
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            document.getElementById('imagen-preview').src = e.target.result;
+                                            document.getElementById('imagen-preview').style.display = 'block';
+                                        }
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+                                function updateImagePreview(input) {
+                                    if (input.files && input.files[0]) {
+                                        document.getElementById('imagen-preview').src = URL.createObjectURL(input.files[0]);
+                                    }
+                                }
+                            </script>
                         </form>
-                        
                     </div>
                 </div>
             </div>
@@ -422,33 +810,34 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div <div class="modal-content fondo-modal">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Crear Modulo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/adminCurso/detalleCurso/}+${curso.idCurso}" th:object="${capituloPadre}"
-                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-header bg-info text-white">
+                                <h5 class="modal-title">Crear Modulo</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <form th:action="@{/adminCurso/detalleCurso/}+${curso.idCurso}" th:object="${capituloPadre}"
+                                  method="POST" class="was-validated" enctype="multipart/form-data">
 
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre del Modulo</label>
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nombre">Nombre del Modulo</label>
+                                        <input type="text" class="form-control" name="nombre" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numero">Numero del Capitulo</label>                                    
+                                        <input type="number" min="0" class="form-control" name="numero" required="true"/>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="numero">Numero del Capitulo</label>                                    
-                                    <input type="number" min="0" class="form-control" name="numero" required="true"/>
-                                </div>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div id="gestionCursos" class="col-7 table-responsive text-center">
+            <div id="gestionAdmin" class="col-7 table-responsive text-center">
                 <table class="table table-borderless table-dark border border-white
                        text-center py-4"
                        th:each="CapituloPadre, contador : ${ListaPadres}">
@@ -506,6 +895,7 @@
                                     <label for="nombre">Nombre de la clase</label>
                                     <input type="text" class="form-control" name="nombre" required="true"/>
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="videoNuevo">Video de la clase</label>
                                     <input class="form-control" type="file" 
@@ -514,6 +904,7 @@
                                     <video width="100%" controls id="video-preview">
                                     </video>
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="numero">Poscion del capitulo</label>                                    
                                     <input type="number" min="1" class="form-control" name="numero" required="true"/>
@@ -529,7 +920,8 @@
                                     }
                                 }
                             </script>
-                        </form>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -544,31 +936,32 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div <div class="modal-content fondo-modal">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Editar Capitulo Padre</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/adminCurso/save-capituloPadre/}+${curso.idCurso}" th:object="${capituloPadre}"
-                              method="POST" class="was-validated" enctype="multipart/form-data">
+                            <div class="modal-header bg-info text-white">
+                                <h5 class="modal-title">Editar Capitulo Padre</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <form th:action="@{/adminCurso/save-capituloPadre/}+${curso.idCurso}" th:object="${capituloPadre}"
+                                  method="POST" class="was-validated" enctype="multipart/form-data">
 
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre del capitulo Padre</label>
-                                    <input type="text" class="form-control" th:field="*{nombre}"
-                                           name="nombre" required="true"/>
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nombre">Nombre del capitulo Padre</label>
+                                        <input type="text" class="form-control" th:field="*{nombre}"
+                                               name="nombre" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="numero">Poscion del capitulo</label>                                    
+                                        <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                               name="numero" required="true"/>
+                                    </div>
+                                    <input type="hidden" th:field="*{id}" name="id"/>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="numero">Poscion del capitulo</label>                                    
-                                    <input type="number" min="0" class="form-control" th:field="*{numero}"
-                                           name="numero" required="true"/>
-                                </div>
-                                <input type="hidden" th:field="*{id}" name="id"/>
-                            </div>
 
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
-                        </form>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -580,7 +973,7 @@
             <a class="nav-link mb-5 ms-5" th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
                 <button type="button" class="btn" id="btn2">Atras</button>
             </a>
-            <div id="gestionCursos">
+            <div id="gestionAdmin">
                 <p class="py-3" style="color: white" th:text="${capituloPadre.numero}">Parent Module ID</p>
                 <h2 th:text="${capituloPadre.nombre}" id="detallePadre"
                     class="col-6">Parent Module Name</h2>
@@ -591,7 +984,7 @@
             </div>
 
 
-            <div id="gestionCursos" class="col-7 table-responsive text-center">
+            <div id="gestionAdmin" class="col-7 table-responsive text-center">
                 <table class="table table-borderless table-dark border border-white
                        text-center py-4">
                     <thead>
@@ -606,8 +999,10 @@
                             <td th:text="${capituloHijo.numero}"></td>
                             <td th:text="${capituloHijo.nombre}"></td>
                             <td>
-                                <a th:href="@{/adminCurso/detalleCapituloHijo/}+${curso.idCurso}+'/'+${capituloHijo.id}"><button class="btn my-2" id="btn2" >Editar</button></a>
-                                <a th:href="@{/adminCurso/deleteCapituloHijo/}+${curso.idCurso}+'/'+${capituloHijo.id}"><button class="btn my-2"  id="btn2" >Eliminar</button></a>
+                                <a th:href="@{/adminCurso/detalleCapituloHijo/}+${curso.idCurso}+'/'+${capituloHijo.id}">
+                                    <button class="btn my-2" id="btn2" >Editar</button></a>
+                                <a th:href="@{/adminCurso/deleteCapituloHijo/}+${curso.idCurso}+'/'+${capituloHijo.id}">
+                                    <button class="btn my-2"  id="btn2" >Eliminar</button></a>
                             </td>
                         </tr>
                     </tbody>
@@ -629,7 +1024,7 @@
         <section th:fragment="editarClaseHijo">
 
         <div id="titulo1" class="fs-3 my-5">Editar Capitulo Hijo</div>
-        <a class="nav-link mb-5 ms-5" 
+         <a class="nav-link mb-5 ms-5" 
            th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${capituloHijo.capituloPadreId}">
             <button type="button" class="btn" id="btn2">Atras</button>
         </a>
@@ -702,3 +1097,5 @@
 
     </body>
 </html>
+
+

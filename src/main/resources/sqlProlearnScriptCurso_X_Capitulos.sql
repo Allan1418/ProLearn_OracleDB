@@ -30,6 +30,19 @@ END;
 /
 
 
+-- Procedimiento para listar todos las categorias
+
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_GETALL_SP(
+  P_CURSOR OUT SYS_REFCURSOR
+) AS
+BEGIN
+  OPEN P_CURSOR FOR
+    SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_CATEGORIAS_V;
+END;
+/
+
+
 -- Procedimiento para eliminar una categoria
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_DELET_SP(
@@ -44,7 +57,7 @@ END;
 /
 
 
--- Este procedimiento tiene un par�metro adicional P_ID_CATEGORIA que indica si se debe crear una nueva categoria
+-- Este procedimiento tiene un parametro adicional P_ID_CATEGORIA que indica si se debe crear una nueva categoria
 -- (si es 0) o actualizar uno existente (si es un valor diferente de 0).
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.CATEGORIA_UPSERT_SP(
