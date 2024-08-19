@@ -20,8 +20,16 @@ import lombok.Data;
     resultClasses = { Curso.class } 
 )
 @NamedStoredProcedureQuery(
-    name = "SPFindAllCurso",
+    name = "SPFindAllPublicoCurso",
     procedureName = "CURSOS_GETALL_PUBLICO_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Curso.class } 
+)
+@NamedStoredProcedureQuery(
+    name = "SPFindAllAdminCurso",
+    procedureName = "CURSOS_GETALL_ADMIN_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
     },

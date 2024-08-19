@@ -30,12 +30,32 @@ import org.springframework.beans.factory.annotation.Autowired;
     },
     resultClasses = { CapituloHijo.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "SPUpsertCH",
+    procedureName = "CAPITULO_HIJO_UPSERT_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_HIJO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CAPITULO_PADRE", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CAPITULO", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NUMERO_CAPITULO", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_VIDEO_CAPITULO", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_ID_RESULTADO", type = Long.class)
+    }
+)
+@NamedStoredProcedureQuery(
+    name = "SPDeleteCH",
+    procedureName = "CAPITULO_HIJO_DELET_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_HIJO", type = Long.class),
+    }
+)
 public class CapituloHijo implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CAPITULO_HIJO_TB_ID_CH_PK")
     private Long id;
 

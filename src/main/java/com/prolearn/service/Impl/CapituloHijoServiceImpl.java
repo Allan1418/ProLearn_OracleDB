@@ -3,6 +3,7 @@ package com.prolearn.service.Impl;
 
 import com.prolearn.dao.*;
 import com.prolearn.domain.CapituloHijo;
+import com.prolearn.domain.Curso;
 import com.prolearn.service.CapituloHijoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,16 @@ public class CapituloHijoServiceImpl implements CapituloHijoService{
     }
 
     @Override
-    public void save(CapituloHijo capituloHijo) {
-        capituloHijoDao.save(capituloHijo);
+    public Long save(CapituloHijo capituloHijo, Curso curso) {
+        Long id = capituloHijoDao.upsert(capituloHijo.getId(),
+                              capituloHijo.getCapituloPadreId(),
+                               capituloHijo.getNombre(),
+                               capituloHijo.getNumero(),
+                                capituloHijo.getVideo(),
+                              curso.getIdCurso()
+                );
+        
+        return id;
     }
 
     @Override

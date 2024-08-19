@@ -21,18 +21,21 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FirebaseStorageServiceImpl implements FirebaseStorageService {
     @Override
-    public String cargaArchivo(MultipartFile archivoLocalCliente, String carpeta, Long id, String contentType) {
+    public String cargaArchivo(MultipartFile archivoLocalCliente, String carpeta, String tipo, Long id, String contentType) {
         try {
             // El nombre original del archivo local del cliene
             String extension = archivoLocalCliente.getOriginalFilename().substring(archivoLocalCliente.getOriginalFilename().lastIndexOf("."));
 
-            // Se genera el nombre según el código del articulo. 
-            String fileName = "art" + sacaNumero(id) + extension;
+            // variable temporal para evitar conflictos entre desarrolladores
+            String username = System.getProperty("user.name");
+            
+            // Se genera el nombre del video
+            String fileName = username + tipo + sacaNumero(id) + extension;
 
             // Se convierte/sube el archivo a un archivo temporal
             File file = this.convertToFile(archivoLocalCliente);
 
-            // se copia a Firestore y se obtiene el url válido de la imagen (por 10 años) 
+            // se copia a Firestore y se obtiene el url valido(por 10 años) 
             String URL = this.uploadFile(file, carpeta, fileName, contentType);
 
             // Se elimina el archivo temporal cargado desde el cliente
@@ -70,6 +73,6 @@ public class FirebaseStorageServiceImpl implements FirebaseStorageService {
 
     //Método utilitario para obtener un string con ceros....
     private String sacaNumero(long id) {
-        return String.format("%019d", id);
+        return String.format("%09d", id);
     }
 }
