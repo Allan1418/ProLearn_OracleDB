@@ -91,14 +91,15 @@ public class AdminCursoController {
         return "/adminCurso/detalleCapitulos";
     }
     
-    @GetMapping("/detalleCapituloHijo/{id}")
-    public String detalleCapituloHijo(CapituloHijo capituloHijo, Model model) {
+    @GetMapping("/detalleCapituloHijo/{idCurso}/{id}")
+    public String detalleCapituloHijo(Curso curso, CapituloHijo capituloHijo, Model model) {
         
         
         capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
+        curso = cursoService.getCurso(curso);
         
         model.addAttribute("capituloHijo", capituloHijo);
-        
+        model.addAttribute("curso", curso);
         
         
         
@@ -141,7 +142,7 @@ public class AdminCursoController {
         return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
     }
     
-    @PostMapping("/newCapituloHijo/{idCurso}")
+    @PostMapping("/newCapituloHijo/{idCurso}/{id}")
     public String newCapituloHijo(Curso curso, 
                                     CapituloPadre capituloPadre, 
                                     CapituloHijo capituloHijo, 
@@ -150,21 +151,26 @@ public class AdminCursoController {
         
         curso = cursoService.getCurso(curso);
         capituloPadre = capituloPadreService.getCapituloPadre(capituloPadre);
-        if (capituloPadre == null) {
-            System.out.println("capituloPadre nulooooooooo");
-        }
-        System.out.println("------------" + curso.getIdCurso());
         
         capituloHijo.setId(0L);
-        capituloHijoService.save(capituloHijo, curso);
+        capituloHijo.setCapituloPadreId(capituloPadre.getId());
+        
+        Long newId = capituloHijoService.save(capituloHijo, curso);
+        //System.out.println(newId);
         
         
         if (!video.isEmpty()) {
             
+            capituloHijo.setId(newId);
             capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
+            
+            String DirecCarpt = curso.getIdCurso().toString();
+            Long idFirebase = Long.valueOf(curso.getIdCurso().toString() + capituloHijo.getId().toString());
+            
             String url = firebaseStorageService.cargaArchivo(video,
-                    curso.getIdCurso().toString(), 
-                        Long.valueOf(curso.getIdCurso().toString() + capituloHijo.getId().toString()), 
+                    DirecCarpt,
+                       "video",
+                        idFirebase, 
                  video.getContentType());
             
             capituloHijo.setVideo(url);
@@ -172,6 +178,56 @@ public class AdminCursoController {
         }
         
         
-        return "redirect:/adminCurso/detalleCapitulos";
+        return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloPadre.getId();
+    }
+    
+    @PostMapping("/detalleCapituloHijo/{idCurso}/{id}")
+    public String saveCapituloHijo(Curso curso,  
+                                    CapituloHijo capituloHijo, 
+                                    @RequestParam("videoNuevo")MultipartFile video, 
+                                    Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        
+//        System.out.println("ID: " + capituloHijo.getId());
+//        System.out.println("Nombre: " + capituloHijo.getNombre());
+//        System.out.println("Video: " + capituloHijo.getVideo());
+//        System.out.println("Número: " + capituloHijo.getNumero());
+//        System.out.println("ID Capítulo Padre: " + capituloHijo.getCapituloPadreId());
+        
+        
+        if (!video.isEmpty()) {
+            
+            
+            String DirecCarpt = curso.getIdCurso().toString();
+            Long idFirebase = Long.valueOf(curso.getIdCurso().toString() + capituloHijo.getId().toString());
+            
+            String url = firebaseStorageService.cargaArchivo(video,
+                    DirecCarpt,
+                       "video",
+                        idFirebase, 
+                 video.getContentType());
+            
+            capituloHijo.setVideo(url);
+            
+        }
+        
+        capituloHijoService.save(capituloHijo, curso);
+        
+        return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + capituloHijo.getCapituloPadreId();
+    }
+    
+    
+    @GetMapping("/deleteCapituloHijo/{idCurso}/{id}")
+    public String deleteCapituloHijo(Curso curso, CapituloHijo capituloHijo, Model model) {
+        
+        curso = cursoService.getCurso(curso);
+        capituloHijo = capituloHijoService.getCapituloHijo(capituloHijo);
+        
+        Long idPadre = capituloHijo.getCapituloPadreId();
+        
+        capituloHijoService.delete(capituloHijo);
+        
+        return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + idPadre;
     }
 }

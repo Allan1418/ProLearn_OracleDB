@@ -39,7 +39,8 @@ import org.springframework.beans.factory.annotation.Autowired;
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CAPITULO", type = String.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NUMERO_CAPITULO", type = Integer.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_VIDEO_CAPITULO", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class)
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_ID_RESULTADO", type = Long.class)
     }
 )
 @NamedStoredProcedureQuery(
