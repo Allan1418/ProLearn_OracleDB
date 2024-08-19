@@ -606,8 +606,8 @@
                             <td th:text="${capituloHijo.numero}"></td>
                             <td th:text="${capituloHijo.nombre}"></td>
                             <td>
-                                <a th:href="@{/adminCurso/detalleCapituloHijo/}+${capituloHijo.numero}"><button class="btn my-2" id="btn2" >Editar</button></a>
-                                <button class="btn my-2"  id="btn2"th:href="@{/curso/eliminar/}+${capituloHijo.numero}">Eliminar</button>
+                                <a th:href="@{/adminCurso/detalleCapituloHijo/}+${curso.idCurso}+'/'+${capituloHijo.id}"><button class="btn my-2" id="btn2" >Editar</button></a>
+                                <a th:href="@{/adminCurso/deleteCapituloHijo/}+${curso.idCurso}+'/'+${capituloHijo.id}"><button class="btn my-2"  id="btn2" >Eliminar</button></a>
                             </td>
                         </tr>
                     </tbody>
@@ -629,16 +629,16 @@
         <section th:fragment="editarClaseHijo">
 
         <div id="titulo1" class="fs-3 my-5">Editar Capitulo Hijo</div>
-         <!-- <a class="nav-link mb-5 ms-5" 
-           th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${capituloPadre.id}">
+        <a class="nav-link mb-5 ms-5" 
+           th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${capituloHijo.capituloPadreId}">
             <button type="button" class="btn" id="btn2">Atras</button>
-        </a> -->
+        </a>
             
             
         <div id="detalleHijo" class="col-md-6 offset-md-4 
              table-responsive text-center fondo-modal">
             <div class="container">
-                <form th:action="@{/adminCurso/save-capituloHijo}" th:object="${capituloHijo}"    
+                <form th:action="@{'/adminCurso/detalleCapituloHijo/' + ${curso.idCurso} + '/' + ${capituloHijo.id}}" th:object="${capituloHijo}"    
                       method="POST" class="was-validated" enctype="multipart/form-data">
                     <div class="modal-body">
                         <div class="mb-3 my-5">
@@ -654,8 +654,8 @@
                                 <source id="video-source" th:src="${capituloHijo.video}" type="video/mp4">
                             </video>
 
-                            <input class="form-control" type="file" required="true"
-                                   name="video" accept="video/*" th:field="*{video}"
+                            <input class="form-control" type="file"
+                                   name="videoNuevo" accept="video/*" 
                                    onchange="readURL(this); updateVideoPreview(this);" />
                         </div>
 
@@ -666,7 +666,8 @@
                         </div>
 
                         <input type="hidden" th:field="*{id}" />
-                        <input type="hidden" th:field="*{capituloPadre}" />
+                        <input type="hidden" th:field="*{capituloPadreId}" />
+                        <input type="hidden" th:field="*{video}" />
 
                     </div>
 
