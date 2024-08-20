@@ -53,8 +53,8 @@ public class AdminCursoController {
         var cursos = cursoService.getCursosAdmin();
         model.addAttribute("cursos", cursos);
         
-        //var categorias = categoriaService.getCategorias();
-        //model.addAttribute("categorias", categorias);
+        List<Categoria> categorias = categoriaService.getCategorias();
+        model.addAttribute("categorias", categorias);
         
         return "/adminCurso/listarCursos";
     }
