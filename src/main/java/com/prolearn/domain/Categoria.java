@@ -18,6 +18,14 @@ import lombok.Data;
     },
     resultClasses = Categoria.class 
 )
+@NamedStoredProcedureQuery(
+    name = "findAllCat",
+    procedureName = "CATEGORIA_GETALL_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = Categoria.class 
+)
 public class Categoria implements Serializable {
     
     private static final long serialVersionUID = 1L;

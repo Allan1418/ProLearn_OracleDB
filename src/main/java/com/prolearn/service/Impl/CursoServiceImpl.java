@@ -1,6 +1,7 @@
 
 package com.prolearn.service.Impl;
 
+import com.prolearn.dao.CategoriaDao;
 import com.prolearn.dao.CursoDao;
 import com.prolearn.domain.Curso;
 import com.prolearn.service.CursoService;
@@ -15,6 +16,9 @@ public class CursoServiceImpl implements CursoService{
     @Autowired
     private CursoDao cursoDao; 
     
+    @Autowired
+    private CategoriaDao categoriaDao;
+    
 
     @Override
     @Transactional(readOnly = true)
@@ -26,7 +30,11 @@ public class CursoServiceImpl implements CursoService{
     @Override
     @Transactional(readOnly = true)
     public Curso getCurso(Curso curso) {
-        return cursoDao.findXId(curso.getIdCurso()).orElse(null);
+        
+        curso = cursoDao.findXId(curso.getIdCurso()).orElse(null);
+        curso.setCategoriaCurso(categoriaDao.findByid(curso.getCategoriaId()));
+        
+        return curso;
     }
 
     @Override

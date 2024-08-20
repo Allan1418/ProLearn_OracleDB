@@ -68,6 +68,9 @@ public class AdminCursoController {
         List<CapituloPadre> listaPadres = capitulosEstrucService.getPadres(curso.getIdCurso());
         model.addAttribute("ListaPadres", listaPadres);
         
+        List<Categoria> categorias = categoriaService.getCategorias();
+        model.addAttribute("categorias", categorias);
+        
         return "/adminCurso/detalleCurso";
     }
     

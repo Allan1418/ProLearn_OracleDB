@@ -40,7 +40,7 @@ public class Curso implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CURSOS_TB_ID_CUR_PK")
     private Long idCurso;
     
@@ -58,41 +58,35 @@ public class Curso implements Serializable {
     @Column(name = "thumbnail_curso")
     private String thumbnailCurso;
     
-//    @ManyToOne
-//    @JoinColumn(name = "categoria_curso")
-//    private Categoria categoriaCurso;
+    @Transient
+    private Categoria categoriaCurso;
     
+    @Column(name = "CATEGORIA_CURSO")
+    private Long categoriaId;
     
-//    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "FIDE_CAPITULO_X_CURSO_TB",
-//            joinColumns = @JoinColumn(name = "id_curso"),
-//            inverseJoinColumns = @JoinColumn(name = "id_capitulo")
-//    )
-//    private List<CapituloHijo> capitulosHijos;
     
 
     public Curso() {
     }
 
-    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso/*, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
+    public Curso(String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Long categoriaId) {
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        /*this.categoriaCurso = categoriaCurso;
-        /*this.capitulosHijos = capitulosHijos;*/
+        this.categoriaId = categoriaId;
     }
 
-    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso/*, Categoria categoriaCurso/*, List<CapituloHijo> capitulosHijos*/) {
+    public Curso(Long idCurso, String nombreCurso, String descrpCurso, boolean estadoCurso, String thumbnailCurso, Long categoriaId) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
         this.descrpCurso = descrpCurso;
         this.estadoCurso = estadoCurso;
         this.thumbnailCurso = thumbnailCurso;
-        /*this.categoriaCurso = categoriaCurso;
-        /*this.capitulosHijos = capitulosHijos;*/
+        this.categoriaId = categoriaId;
     }
+    
+    
     
     
     
