@@ -39,8 +39,15 @@ public class CursoServiceImpl implements CursoService{
 
     @Override
     @Transactional
-    public void save(Curso curso) {
-        cursoDao.save(curso);
+    public Long save(Curso curso) {
+        Long id = cursoDao.upsert(curso.getIdCurso(),
+                curso.getNombreCurso(),
+                curso.getDescrpCurso(),
+                curso.getThumbnailCurso(),
+                curso.getCategoriaId(),
+                curso.getEstadoInt());
+        
+        return id;
     }
 
     @Override

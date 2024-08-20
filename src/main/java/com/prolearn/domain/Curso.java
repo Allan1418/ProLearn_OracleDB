@@ -35,6 +35,19 @@ import lombok.Data;
     },
     resultClasses = { Curso.class } 
 )
+@NamedStoredProcedureQuery(
+    name = "SPUpsertCU",
+    procedureName = "CURSO_UPSERT_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CURSO", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_DESCRP_CURSO", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_THUMBNAIL_CURSO", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CATEGORIA_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ESTADO_PUBLICO", type = Integer.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_ID_RESULTADO", type = Long.class)
+    }
+)
 public class Curso implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -87,7 +100,9 @@ public class Curso implements Serializable {
     }
     
     
-    
+    public int getEstadoInt(){
+        return (this.estadoCurso) ? 1 : 0;
+    }
     
     
 }

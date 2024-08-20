@@ -59,15 +59,43 @@ public class AdminCursoController {
     }
 
     @PostMapping("/newCurso")
-    public String newCurso(Curso curso, Model model) {
+    public String newCurso(Curso curso, @RequestParam("imagenNuevo")MultipartFile imagen, Model model) {
         
-        System.out.println("ID del curso: " + curso.getIdCurso());
-        System.out.println("Nombre del curso: " + curso.getNombreCurso());
-        System.out.println("Descripción del curso: " + curso.getDescrpCurso());
-        System.out.println("Estado del curso: " + curso.isEstadoCurso());
-        System.out.println("URL de la miniatura del curso: " + curso.getThumbnailCurso());
-        System.out.println("ID de la categoría del curso: " + curso.getCategoriaId());
+//        System.out.println("ID del curso: " + curso.getIdCurso());
+//        System.out.println("Nombre del curso: " + curso.getNombreCurso());
+//        System.out.println("Descripción del curso: " + curso.getDescrpCurso());
+//        System.out.println("Estado del curso: " + curso.isEstadoCurso());
+//        System.out.println("URL de la miniatura del curso: " + curso.getThumbnailCurso());
+//        System.out.println("ID de la categoría del curso: " + curso.getCategoriaId());
+        
+        curso.setIdCurso(0L);
+        Long newId = cursoService.save(curso);
 
+        if (!imagen.isEmpty()) {
+
+            curso.setIdCurso(newId);
+            curso = cursoService.getCurso(curso);
+
+            String DirecCarpt = curso.getIdCurso().toString();
+            Long idFirebase = curso.getIdCurso();
+
+            String url = firebaseStorageService.cargaArchivo(imagen,
+                    DirecCarpt,
+                    "image",
+                    idFirebase,
+                    imagen.getContentType());
+
+            curso.setThumbnailCurso(url);
+            
+            //System.out.println("-------------inicia");
+            cursoService.save(curso);
+            //System.out.println("-------------finaliza");
+        }
+        
+        
+        
+        
+        
         return "redirect:/adminCurso/listarCursos";
     }
 
