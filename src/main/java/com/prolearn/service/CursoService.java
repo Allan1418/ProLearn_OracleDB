@@ -12,7 +12,7 @@ public interface CursoService {
 
     public Curso getCurso(Curso curso);
     
-    public void save(Curso curso);
+    public Long save(Curso curso);
     
     public void delete(Curso curso);
     

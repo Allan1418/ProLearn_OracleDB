@@ -18,7 +18,7 @@ public class CategoriaServiceImpl implements CategoriaService{
     @Override
     @Transactional(readOnly = true)
     public List<Categoria> getCategorias() {
-        return categoriaDao.findAll();
+        return categoriaDao.getAllCat();
     }
 
     @Override

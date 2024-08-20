@@ -19,4 +19,16 @@ public interface CursoDao extends JpaRepository<Curso, Long>{
     @Procedure(name = "SPFindAllAdminCurso")
     List<Curso> getAllAdmin();
     
+    @Procedure(name = "SPUpsertCU")
+    Long upsert(
+            @Param("P_ID_CURSO") Long idCurso,
+            @Param("P_NOMBRE_CURSO") String nombre,
+            @Param("P_DESCRP_CURSO") String descrp,
+            @Param("P_THUMBNAIL_CURSO") String thumbnailCurso,
+            @Param("P_CATEGORIA_CURSO") Long idCategoria,
+            @Param("P_ESTADO_PUBLICO") int estadoPublico
+    );
+    
+    @Procedure(name = "SPDeleteCU")
+    void delete(@Param("P_ID_CURSO")Long idCurso);
 }

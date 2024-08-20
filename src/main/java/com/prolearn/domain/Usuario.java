@@ -17,53 +17,81 @@ import lombok.Data;
     },
     resultClasses = { Usuario.class} 
 )
+@NamedStoredProcedureQuery(
+    name = "SPFindAllUser",
+    procedureName = "USUARIO_FINDALL_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Usuario.class} 
+)
+@NamedStoredProcedureQuery(
+    name = "SPFindByIdUser",
+    procedureName = "USUARIO_GET_BYID_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USER", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Usuario.class} 
+)
+@NamedStoredProcedureQuery(
+    name = "SPUpsertUser",
+    procedureName = "USUARIO_UPSERT_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USUARIO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_APELLIDOS", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_EMAIL", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_PASSWORD", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ROL_ID", type = Long.class)
+    }
+)
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USUARIOS_TB_ID_USER_PK")
     private Long id;
 
+    @Column(name = "NOMBRE")
     private String nombre;
 
+    @Column(name = "APELLIDOS")
     private String apellidos;
 
+    @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "PASSWORD")
     private String password;
 
+    @Column(name = "ROL_ID")
+    private Long idRol;
     
-//    //Revisar con tablas mysql!!!!!!!
-//    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "FIDE_USUARIO_ROL_TB",
-//            joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "USUARIOS_TB_ID_USER_PK"),
-//            inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "ROL_TB_ID_ROL_PK")
-//    )
     @Transient
-    private Collection<Rol> roles;
+    private Rol rol;
 
     public Usuario() {
 
     }
 
-    public Usuario(Long idUsuario, String nombre, String apellidos, String username, String password, Collection<Rol> roles) {
+    public Usuario(Long idUsuario, String nombre, String apellidos, String username, String password, Long idRol) {
         this.id = idUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = username;
         this.password = password;
-        this.roles = roles;
+        this.idRol = idRol;
     }
 
-    public Usuario(String nombre, String apellidos, String username, String password, Collection<Rol> roles) {
+    public Usuario(String nombre, String apellidos, String username, String password, Long idRol) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = username;
         this.password = password;
-        this.roles = roles;
+        this.idRol = idRol;
     }
 
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+    <head th:replace="~{layout/headerFooter :: head}">
+        <title>Pro Learn</title>
+    </head>
+    <body id="cuerpo">
+        <header th:replace="~{layout/headerFooter :: header}"></header>
+        
+        <section th:replace="~{adminCurso/fragmentos :: CursosAuditoria}"></section>
+        
+        <footer th:replace="~{layout/headerFooter :: footer}"></footer>
+    </body>
+</html>
+
