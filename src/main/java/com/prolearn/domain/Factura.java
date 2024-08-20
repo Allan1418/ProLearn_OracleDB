@@ -48,7 +48,7 @@ public class Factura implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FACTURA_TB_ID_FACTURA_PK")
-    private Long id;
+    private Long idFactura;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", referencedColumnName = "USUARIOS_TB_ID_USER_PK")
@@ -67,4 +67,8 @@ public class Factura implements Serializable {
     private Date fechaExpiracion;
 
     // Constructores, getters y setters son generados por Lombok
+
+    public Factura(Long idFactura) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

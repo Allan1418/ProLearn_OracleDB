@@ -4,7 +4,9 @@ import com.prolearn.domain.Factura;
 import com.prolearn.domain.Usuario;
 import com.prolearn.domain.Monto;
 import com.prolearn.service.FacturaService;
+import com.prolearn.service.MontoService;
 import com.prolearn.service.UsuarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,41 +24,37 @@ public class FacturaController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listado")
-    public String listado(Model model) {
-        var facturas = facturaService.getFacturas();
+    @Autowired
+    private MontoService montoService;
+
+    @Autowired
+    private HttpSession session;
+
+    @GetMapping("/listarFacturas")
+    public String listarFacturas(Model model) {
+        Factura factura = null;
+        var facturas = facturaService.getFactura(factura);
         model.addAttribute("facturas", facturas);
-        return "/factura/listado";
+        return "/adminFactura/listarFacturas";
     }
 
-    @GetMapping("/nuevo")
-    public String nuevaFactura(Model model) {
-        model.addAttribute("factura", new Factura());
-        model.addAttribute("usuarios", usuarioService.getUsuarios());
-        return "/factura/modifica";
+    @GetMapping("/detalleFactura/{idFactura}")
+    public String detalleFactura(@RequestParam("idFactura") Long idFactura, Model model) {
+        Factura factura = facturaService.getFactura(new Factura(idFactura));
+        model.addAttribute("factura", factura);
+        return "/adminFactura/detalleFactura";
     }
 
-@PostMapping("/guardar")
-public String guardarFactura(@ModelAttribute Factura factura, @RequestParam("usuarioId") Long usuarioId) {
-    Usuario usuario = new Usuario();
-    usuario.setId(usuarioId);
-    usuario = usuarioService.getUsuario(usuario);
-    factura.setUsuario(usuario);
-    factura.setFechaPago(new Date());
-    factura.setFechaExpiracion(calcularFechaExpiracion());
-    factura.setMonto(new Monto()); // Inicializa la propiedad monto con un objeto Monto vacío
-    facturaService.save(factura);
-    return "redirect:/factura/listado";
-}
-
-    private Date calcularFechaExpiracion() {
-        // Lógica para calcular la fecha de expiración de la factura (puede depender de tu negocio)
-        return new Date(); // Placeholder
+    @PostMapping("/saveFactura")
+    public String saveFactura(Factura factura, Model model) {
+        facturaService.save(factura);
+        return "redirect:/adminFactura/listarFacturas";
     }
 
-    @GetMapping("/eliminar/{idFactura}")
-    public String eliminarFactura(@PathVariable("idFactura") Factura factura) {
+    @GetMapping("/deleteFactura/{idFactura}")
+    public String deleteFactura(@RequestParam("idFactura") Long idFactura, Model model) {
+        Factura factura = facturaService.getFactura(new Factura(idFactura));
         facturaService.delete(factura);
-        return "redirect:/factura/listado";
+        return "redirect:/adminFactura/listarFacturas";
     }
 }

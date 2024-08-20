@@ -4,9 +4,13 @@ import com.prolearn.domain.Factura;
 import java.util.List;
 
 public interface FacturaService {
-    void save(Factura factura);
-    List<Factura> getFacturas();
-    Factura getFacturaById(Long id);
-    void delete(Factura factura);
+    
+    public Factura getFactura(Factura factura);
+    
+    public List<Factura> getFacturasByUsuarioId(Long usuarioId);
+    
+    public void save(Factura factura);
+    
+    public void delete(Factura factura);
 }
 

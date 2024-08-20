@@ -18,32 +18,39 @@ public class MontoController {
 
     @Autowired
     private MontoService montoService;
-
-    @GetMapping("/listado")
-    public String listado(Model model) {
-        List<Monto> montos = montoService.getMontos();
+    
+    @GetMapping("/listarMontos")
+    public String listarMontos(Model model) {
+        Monto monto = null;
+        var montos = montoService.getMonto(monto);
         model.addAttribute("montos", montos);
-        return "/monto/listado";
+        return "/adminMonto/listarMontos";
     }
-
-    @GetMapping("/nuevo")
-    public String nuevoMonto(Model model) {
-        model.addAttribute("monto", new Monto());
-        return "/monto/modifica";
+    
+    @GetMapping("/detalleMonto/{idMonto}")
+    public String detalleMonto(Monto monto, Model model) {
+        monto = montoService.getMonto(monto);
+        model.addAttribute("monto", monto);
+        return "/adminMonto/detalleMonto";
     }
-
-    @PostMapping("/guardar")
-    public String guardarMonto(@ModelAttribute Monto monto) {
+    
+    @PostMapping("/detalleMonto/{idMonto}")
+    public String newMonto(Monto monto, Model model) {
+        monto.setId(0L);
         montoService.save(monto);
-        return "redirect:/monto/listado";
+        return "redirect:/adminMonto/detalleMonto/" + monto.getId();
     }
-
-    @GetMapping("/eliminar/{idMonto}")
-    public String eliminarMonto(@PathVariable("idMonto") Long idMonto) {
-        Monto monto = montoService.getMontoById(idMonto);
-        if (monto != null) {
-            montoService.delete(monto);
-        }
-        return "redirect:/monto/listado";
+    
+    @GetMapping("/deleteMonto/{idMonto}")
+    public String deleteMonto(Monto monto, Model model) {
+        monto = montoService.getMonto(monto);
+        montoService.delete(monto);
+        return "redirect:/adminMonto/listarMontos";
+    }
+    
+    @PostMapping("/save-monto/{idMonto}")
+    public String saveMonto(Monto monto, Model model) {
+        montoService.save(monto);
+        return "redirect:/adminMonto/detalleMonto/" + monto.getId();
     }
 }

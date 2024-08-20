@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class FacturaServiceImpl implements FacturaService {
+public abstract class FacturaServiceImpl implements FacturaService {
 
     @Autowired
     private FacturaDao facturaDao;
@@ -19,12 +19,10 @@ public class FacturaServiceImpl implements FacturaService {
         facturaDao.save(factura);
     }
 
-    @Override
     public List<Factura> getFacturas() {
         return facturaDao.findAll();
     }
 
-    @Override
     public Factura getFacturaById(Long id) {
         return facturaDao.findById(id).orElse(null);
     }
@@ -33,5 +31,5 @@ public class FacturaServiceImpl implements FacturaService {
     public void delete(Factura factura) {
         facturaDao.delete(factura);
     }
-}
 
+}

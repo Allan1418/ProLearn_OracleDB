@@ -6,7 +6,39 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "MONTO_TB")
+@NamedStoredProcedureQuery(
+    name = "SPFindXIdMT",
+    procedureName = "MONTO_GET_BYID_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_MONTO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
+    },
+    resultClasses = { Monto.class }
+)
+@NamedStoredProcedureQuery(
+    name = "SPFindAllXTipoSuscripcionMT",
+    procedureName = "MONTO_GETALL_BY_TIPO_SUSCRIPCION_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_TIPO_SUSCRIPCION", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_MONTOS", type = void.class)
+    },
+    resultClasses = { Monto.class }
+)
+@NamedStoredProcedureQuery(
+    name = "SPUpsertMT",
+    procedureName = "MONTO_UPSERT_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_MONTO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_TIPO_SUSCRIPCION", type = String.class)
+    }
+)
+@NamedStoredProcedureQuery(
+    name = "SPDeleteMT",
+    procedureName = "MONTO_DELETE_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_MONTO", type = Long.class)
+    }
+)
 public class Monto implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -29,5 +61,13 @@ public class Monto implements Serializable {
     public Monto(Double monto, Factura factura) {
         this.monto = monto;
         this.factura = factura;
+    }
+
+    public String getTipoSuscripcion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Long getId() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
