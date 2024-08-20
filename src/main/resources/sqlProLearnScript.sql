@@ -824,36 +824,36 @@ COMMIT;
 /*Inserts de curso Python */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
 ('Python', 'Python es un lenguaje de programacion de alto nivel, interpretado y multiparadigma, creado en 1989 por Guido van Rossum y mantenido actualmente por la Python Software Foundation. Python es conocido por su sintaxis clara y faacil de leer, lo que lo hace ideal para principiantes y expertos por igual.'
-, 'https://www.dongee.com/tutoriales/content/images/2023/01/que-es-python-1.png', 2);
+, 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Python%2Fque-es-python-1.webp?alt=media&token=e8bf96ac-ee0a-4dc1-9c82-5680981f317d', 2);
      
 /*Inserts de curso MySql */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
 ('MySql', 'MySQL es un sistema de gestion de bases de datos relacionales (RDBMS) de codigo abierto, ampliamente utilizado en el desarrollo de aplicaciones web, moviles y de escritorio. MySQL es conocido por su rendimiento, fiabilidad y facilidad de uso.'
-, 'https://miro.medium.com/v2/resize:fit:1200/1*LyZcwuLWv2FArOumCxobpA.png', 2);
+, 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/MySql%2F1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png?alt=media&token=4af9c2a3-50b9-4b25-aee3-4dc7e9aa109e', 2);
 COMMIT;
 
 /*Inserts de curso JavaScript */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
 ('JavaScript','JavaScript es un lenguaje de programacion versaatil utilizado para crear paaginas web interactivas y aplicaciones web. Es un lenguaje de scripting de lado del cliente que se ejecuta en los navegadores web, lo que permite a los desarrolladores crear paaginas web dinaamicas y receptivas. JavaScript tambien se utiliza para la programacion del lado del servidor, lo que lo convierte en un lenguaje de programacion de pila completa. Con su flexibilidad, JavaScript se utiliza en diversas aplicaciones, como juegos, aplicaciones moviles y aplicaciones de IA. Las bibliotecas de JavaScript, como TensorFlow.js y Brain.js, facilitan a los desarrolladores la creacion de aplicaciones de IA utilizando JavaScript.'
- ,'https://d1.awsstatic.com/asset-repository/products/amazon-rds/1024px-MySQL.ff87215b43fd7292af172e2a5d9b844217262571.png',2);
+ ,'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/JavaScript%2F1_LyZcwuLWv2FArOumCxobpA.png?alt=media&token=80a3acf4-1fc1-4493-b031-ec956f3f63ca',2);
  COMMIT;
      
 /*Inserts de curso AI */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
 ('Curso de AI', 'La inteligencia artificial (IA) es un campo de la ciencia de la computacion que se centra en la creacion de maaquinas inteligentes que pueden pensar y aprender como los humanos. La IA implica el desarrollo de algoritmos y modelos que pueden analizar datos, identificar patrones y tomar decisiones con una intervencion maanima de humanos. Con la IA, las maaquinas pueden realizar tareas que normalmente requieren inteligencia humana, como la percepcion visual, el reconocimiento de voz y el procesamiento de lenguaje natural. La IA se utiliza en diversas aplicaciones, como la robotica, la atencion medica, las finanzas y el transporte.'
- ,'https://www.tarlogic.com/wp-content/uploads/2023/09/riesgos-seguridad-IA-3.jpg', 1);
+ ,'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Ai%2Friesgos-seguridad-IA-3.jpg?alt=media&token=edc6312d-b241-41ed-99b5-8419d3a864ee', 1);
  COMMIT;
     
 /*Inserts de curso AutoCad */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
 ('Curso de AutoCad', ' Este curso es una introduccion al software de diseno asistido por computadora AutoCAD, utilizado para crear disenos detallados 2D y 3D. Los estudiantes aprenderaan los conceptos baasicos de AutoCAD, incluyendo como crear y modificar objetos, trabajar con capas, usar herramientas de dibujo y generar dibujos precisos. A traves de ejercicios praacticos y ejemplos del mundo real, los estudiantes adquiriraan las habilidades necesarias para producir dibujos tecnicos y disenos para diversas industrias, como arquitectura, ingenieria y construccion.'
-,'https://www.flashforge-eu.com/image/cache/catalog/product/autodesk/autocad/autodesk_autocad-1280x720.jpg', 2);
+,'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Autocad%2Fautodesk_autocad-1280x720.jpg?alt=media&token=8305d378-9506-4843-a31c-fdbcca1b4490', 2);
 COMMIT;
     
 /*Inserts de curso Ingles */
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CURSOS_TB (NOMBRE_CURSO, DESCRP_CURSO, THUMBNAIL_CURSO, CATEGORIA_CURSO) VALUES
 ('Curso de Ingles', 'Este curso esta disenado para ayudar a los estudiantes a mejorar sus habilidades de idioma ingles de manera comprehensiva y atractiva. A traves de una variedad de lecciones interactivas, los estudiantes desarrollaraan sus habilidades de lectura, escritura, habla y escucha. El curso cubriraa gramaatica, vocabulario, pronunciacion y aspectos culturales del idioma ingles. Para el final del curso, los estudiantes tendraan la confianza y la competencia para comunicarse efectivamente en ingles en entornos personales y profesionales.'
-, 'https://fundacioncarlosslim.org/wp-content/uploads/2021/04/curso-ingles-b1-1.jpg', 3);
+, 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Ingles%2Fcurso-ingles-b1-1.jpg?alt=media&token=02414c06-1444-4c33-b051-be8b5b0f6cd9', 3);
 COMMIT;
 
 
