@@ -30,13 +30,31 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="email" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com" onblur="verificarCorreo(this.value)">
+                                        <div class="row container text-center me-5 my-5" 
+                                             th:if="${usuario.idResultante == -1}">
+                                            <h3>Email en uso!</h3>
+                                        </div>
                                 </div>
                                 <div class="col-9 col-md-6">
                                     <label for="password" class="form-label">Contraseña</label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="password">
                                 </div>
-
+                                <div class="col-9 col-md-6">
+                                    <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="confirmar password">
+                                </div>
+                                <script>
+                                    function validatePassword() {
+                                        var password = document.getElementById("password").value;
+                                        var confirmPassword = document.getElementById("confirmPassword").value;
+                                        if (password !== confirmPassword) {
+                                            alert("Las contraseñas no coinciden");
+                                            return false;
+                                        }
+                                        return true;
+                                    }
+                                </script>
                                 <div class="col-12 col-md-9">
                                     <button id="btnSignUp" type="submit" class="btn btn-primary">Crear Cuenta</button>
                                 </div>
