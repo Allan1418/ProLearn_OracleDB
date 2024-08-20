@@ -15,7 +15,7 @@ import java.util.Date;
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
     },
-    resultClasses = { Factura.class } 
+    resultClasses = { Factura.class }
 )
 @NamedStoredProcedureQuery(
     name = "SPFindAllXIdCursoFT",
@@ -24,28 +24,21 @@ import java.util.Date;
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_FACTURAS", type = void.class)
     },
-    resultClasses = { Factura.class } 
+    resultClasses = { Factura.class }
 )
 @NamedStoredProcedureQuery(
     name = "SPUpsertFT",
     procedureName = "FACTURA_UPSERT_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MONTO", type = Double.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_PAGO", type = Time.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_EXPIRACION", type = Time.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_LAST_UPDATE_BY", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_LAST_UPDATE_DATE", type = Date.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CREATED_BY", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CREATION_DATE", type = Date.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ACCION", type = String.class)
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MONTO", type = Double.class)    
     }
 )
 @NamedStoredProcedureQuery(
     name = "SPDeleteFT",
     procedureName = "FACTURA_DELETE_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class)
     }
 )
 
