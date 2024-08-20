@@ -13,6 +13,6 @@ public interface CategoriaDao extends JpaRepository<Categoria, Long> {
     public Categoria findByid(@Param( "P_ID_CATEGORIA" )Long id);
     
     @Procedure(name = "findAllCat")
-    public List<Categoria> findAll();
+    public List<Categoria> getAllCat();
     
 }

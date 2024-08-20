@@ -120,15 +120,16 @@
                                 <h5 class="modal-title">Crear Curso</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div> 
-                            <form>
+                            <form th:action="@{/adminCurso/newCurso}" th:object="${curso}"
+                            method="POST" class="was-validated" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="nombre">Nombre del Curso</label>
-                                        <input type="text" class="form-control" name="nombre" required="true"/>
+                                        <input type="text" class="form-control" name="nombreCurso" required="true"/>
                                     </div>
                                     <div class="mb-3">
                                         <label for="descripcion">Descripcion del curso</label>
-                                        <textarea class="form-control" name="descripcion" rows="5" required="true"></textarea>
+                                        <textarea class="form-control" name="descrpCurso" rows="5" required="true"></textarea>
                                     </div>
                                     <div class="imagen-preview-container">
                                         <img id="imagen-preview" width="100%" />
@@ -138,14 +139,13 @@
                                         <label for="imagenNuevo">Imagen del Curso</label>
                                         <input class="form-control" type="file" 
                                            name="imagenNuevo" accept="image/*" 
-                                           onchange="readURL(this);" required="true">
+                                           onchange="readURL(this);">
                                     </div>
                                     
                                     <div class="mb-3">
                                         <label for="categorias">Categoría del Curso</label>
                                         <select class="form-control" 
-                                        id="categorias" name="categoria" required="true" 
-                                        th:field="*{categorias}">
+                                        id="categorias" name="categoriaId" required="true">
                                             <option value="">Seleccione una categoría</option>
                                             <option th:each="categoria : ${categorias}" 
                                             th:value="${categoria.id}" 
