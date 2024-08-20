@@ -142,9 +142,14 @@
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="categoria">Categoría del Curso</label>
-                                        <select class="form-control" id="categoria" name="categoria" required="true">
-                                            <option value=""></option>
+                                        <label for="categorias">Categoría del Curso</label>
+                                        <select class="form-control" 
+                                        id="categorias" name="categoria" required="true" 
+                                        th:field="*{categorias}">
+                                            <option value="">Seleccione una categoría</option>
+                                            <option th:each="categoria : ${categorias}" 
+                                            th:value="${categoria.id}" 
+                                            th:text="${categoria.nombre}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -640,7 +645,8 @@
                             <h5 class="modal-title">Editar Informacion</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form>
+                        <form th:action="@{/adminCurso/listarCursos/}+${curso.idCurso}" th:object="${curso}"
+                            method="POST" class="was-validated" enctype="multipart/form-data">
 
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -717,7 +723,8 @@
                             <h5 class="modal-title">Editar informacion del Curso</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form >
+                        <form th:action="@{/adminCurso/listarCursos/}+${curso.idCurso}" th:object="${curso}"
+                            method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="mb-3">
                                     <label for="nombre">Nombre del Curso</label>
@@ -738,12 +745,23 @@
                                            onchange="readURLImagen(this); updateImagePreview(this);">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="categoria">Categoría del Curso</label>
-                                    <select class="form-control" id="categoria" name="categoria" required="true">
+                                    <label for="categorias">Categoría del Curso</label>
+                                    <select class="form-control" 
+                                            id="categorias" name="categoria" required="true">
                                         <option value="">Seleccione una categoría</option>
+                                        <option th:each="categoria : ${categorias}" 
+                                            th:value="${categoria.id}" 
+                                            th:text="${categoria.nombre}"
+                                        </option>
                                     </select>
                                 </div>
                             </div>
+                            
+                            <input type="hidden" th:field="*{idCurso}" />
+                            <input type="hidden" th:field="*{thumbnailCurso}" />
+                            
+                            
+                            
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
