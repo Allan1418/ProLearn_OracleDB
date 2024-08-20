@@ -53,7 +53,7 @@ public class CursoServiceImpl implements CursoService{
     @Override
     @Transactional
     public void delete(Curso curso) {
-        cursoDao.delete(curso);
+        cursoDao.delete(curso.getIdCurso());
     }
 
     @Override

@@ -249,7 +249,7 @@
                                     <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
                                         <button id="btn2" class="btn my-2">Editar</button></a>
 
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                    <a th:href="@{/adminCurso/deleteCurso/}+${curso.idCurso}">
                                         <button id="btn2" class="btn my-2">Eliminar</button></a>
                                 </td>
                             </tr>
@@ -723,7 +723,7 @@
                             <h5 class="modal-title">Editar informacion del Curso</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/adminCurso/listarCursos/}+${curso.idCurso}" th:object="${curso}"
+                        <form th:action="@{/adminCurso/editarCurso/}+${curso.idCurso}" th:object="${curso}"
                             method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
                                 
@@ -755,7 +755,7 @@
                                 <div class="mb-3">
                                     <label for="categorias">Categoría del Curso</label>
                                     <select class="form-control" 
-                                            id="categorias" name="categoria" required="true">
+                                            id="categorias" name="categoriaId" required="true">
                                         <option value="">Seleccione una categoría</option>
                                         <option th:each="categoria : ${categorias}" 
                                                 th:value="${categoria.id}" 

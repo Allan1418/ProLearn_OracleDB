@@ -48,6 +48,13 @@ import lombok.Data;
         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_ID_RESULTADO", type = Long.class)
     }
 )
+@NamedStoredProcedureQuery(
+    name = "SPDeleteCU",
+    procedureName = "CURSO_DELET_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+    }
+)
 public class Curso implements Serializable {
     
     private static final long serialVersionUID = 1L;

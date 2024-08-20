@@ -93,9 +93,40 @@ public class AdminCursoController {
         }
         
         
+        return "redirect:/adminCurso/listarCursos";
+    }
+    
+    @PostMapping("/editarCurso/{idCurso}")
+    public String saveCurso(Curso curso, @RequestParam("imagenNuevo")MultipartFile imagen, Model model) {
         
+        if (!imagen.isEmpty()) {
+
+            
+            String DirecCarpt = curso.getIdCurso().toString();
+            Long idFirebase = curso.getIdCurso();
+
+            String url = firebaseStorageService.cargaArchivo(imagen,
+                    DirecCarpt,
+                    "image",
+                    idFirebase,
+                    imagen.getContentType());
+
+            curso.setThumbnailCurso(url);
+
+        }
         
-        
+        cursoService.save(curso);
+
+        return "redirect:/adminCurso/detalleCurso/" + curso.getIdCurso();
+    }
+    
+    @GetMapping("/deleteCurso/{idCurso}")
+    public String deleteCurso(Curso curso, Model model) {
+
+        curso = cursoService.getCurso(curso);
+
+        cursoService.delete(curso);
+
         return "redirect:/adminCurso/listarCursos";
     }
 
