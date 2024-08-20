@@ -36,13 +36,14 @@
                             <h2 class="accordion-header"> 
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#panelsStayOpen-collapse" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapse" th:text="${capitulosEstruc.capituloPadre.nombre}"> Modulo<!-- Título del módulo -->
+                                        aria-controls="panelsStayOpen-collapse" th:text="${capitulosEstruc.capituloPadre.nombre}"> Modulo
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapse" class="accordion-collapse collapse">
                                 <div class="accordion-body">
-                                    <th:block class="my-5" th:each="capituloHijo, contador : ${capitulosEstruc.capitulosHijos}"> <!-- Iterar sobre la lista de CapituloHijo -->
-                                        <a class="my-5" th:href="@{/visualVideos/visualVideos/}+${capituloHijo.id}" sec:authorize="isAuthenticated()"><strong class="my-5" th:text="${capituloHijo.nombre}"></strong></a><br/>
+                                    <th:block class="my-5" th:each="capituloHijo, contador : ${capitulosEstruc.capitulosHijos}"> 
+                                        <a class="my-5" th:href="@{/visualVideos/visualVideos/}+${capituloHijo.id}" 
+                                           sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"><strong class="my-5" th:text="${capituloHijo.nombre}"></strong></a><br/>
                                         <strong class="my-5" th:text="${capituloHijo.nombre}" sec:authorize="!isAuthenticated()"></strong><br/>
                                     </th:block>
                                 </div>
