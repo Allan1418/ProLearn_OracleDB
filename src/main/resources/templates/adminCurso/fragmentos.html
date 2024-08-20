@@ -726,34 +726,49 @@
                         <form th:action="@{/adminCurso/listarCursos/}+${curso.idCurso}" th:object="${curso}"
                             method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
+                                
                                 <div class="mb-3">
                                     <label for="nombre">Nombre del Curso</label>
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                                    <input type="text" class="form-control"
+                                        name="nombre" required="true"
+                                        th:field="*{nombreCurso}"/>
                                 </div>
+                                
                                 <div class="mb-3">
-                                    <label for="descripcion">Descripcion del curso</label>
-                                    <textarea class="form-control" name="descripcion" rows="5" required="true"></textarea>
+                                    <label for="descrpCurso">Descripcion del curso</label>
+                                    <textarea class="form-control" th:field="*{descrpCurso}"
+                                    name="descripcion" rows="5" required="true"></textarea>
                                 </div>
-                                <div class="imagen-preview-container">
-                                    <img id="imagen-preview"
-                                         th:src="${curso.thumbnailCurso}" width="100%" />
+                                
+                                <div id="imagen-preview-container" class="imagen-preview-container">
+                                    <img id="imagen-preview" width="100%" />
                                 </div>
+                                
                                 <div class="mb-3 my-4">
-                                    <label for="imagen">Imagen del Curso</label>
+                                    <label for="thumbnailCurso">Imagen del Curso</label>
                                     <input class="form-control" type="file" 
                                            name="imagenNuevo" accept="image/*" 
-                                           onchange="readURLImagen(this); updateImagePreview(this);">
+                                           th:src="@{curso.thumbnailCurso}"
+                                           onchange="readURL(this); updateImagePreview(this);">
                                 </div>
+                                
                                 <div class="mb-3">
                                     <label for="categorias">Categoría del Curso</label>
                                     <select class="form-control" 
                                             id="categorias" name="categoria" required="true">
                                         <option value="">Seleccione una categoría</option>
                                         <option th:each="categoria : ${categorias}" 
-                                            th:value="${categoria.id}" 
-                                            th:text="${categoria.nombre}"
+                                                th:value="${categoria.id}" 
+                                                th:text="${categoria.nombre}"
+                                                th:selected="${categoria.id == curso.categoriaId}">
                                         </option>
                                     </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label id="estado-label" th:text="${curso.estadoCurso ? 'Activo' : 'Inactivo'}"></label>
+                                    <input type="checkbox" name="estadoCurso" th:checked="${curso.estadoCurso}" 
+                                           onclick="document.getElementById('estado-label').textContent = this.checked ? 'Activo  ' : 'Inactivo';" />
                                 </div>
                             </div>
                             
@@ -766,16 +781,16 @@
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                             <script>
-                                function readURLImagen(input) {
+                                function readURL(input) {
                                     if (input.files && input.files[0]) {
-                                        var reader = new FileReader();
-                                        reader.onload = function(e) {
-                                            document.getElementById('imagen-preview').src = e.target.result;
-                                            document.getElementById('imagen-preview').style.display = 'block';
-                                        }
-                                        reader.readAsDataURL(input.files[0]);
+                                      var reader = new FileReader();
+                                      reader.onload = function (e) {
+                                        document.getElementById('imagen-preview').src = e.target.result;
+                                        document.getElementById('imagen-preview').style.display = 'block';
+                                      };
+                                      reader.readAsDataURL(input.files[0]);
                                     }
-                                }
+                                  }
                                 function updateImagePreview(input) {
                                     if (input.files && input.files[0]) {
                                         document.getElementById('imagen-preview').src = URL.createObjectURL(input.files[0]);
@@ -1105,10 +1120,6 @@
                 if (input.files && input.files[0]) {
                     document.getElementById('video-preview').src = URL.createObjectURL(input.files[0]);
                 }
-            }
-            function updateVideo() {
-                readURL(document.querySelector('input[name="video"]'));
-                document.getElementById("video-update-message").style.display = "block";
             }
         </script>
     </section>
