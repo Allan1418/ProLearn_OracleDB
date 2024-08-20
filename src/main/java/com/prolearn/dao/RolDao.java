@@ -10,9 +10,11 @@ import org.springframework.data.repository.query.Param;
 
 public interface RolDao extends JpaRepository<Rol, Long>{
     
-    Rol findByNombre(String nombre);
+    @Procedure(name = "SPFindByNombreRol")
+    Rol findByNombre(@Param("P_NOMBRE") String nombre);
     
-    @Procedure(name = "SPFindAllXIdUser")
-    Collection<Rol> findAllByIdUser(@Param("P_USUARIO_ID")Long idUser);
+    @Procedure(name = "SPFindByIdRol")
+    Rol getXId(@Param("P_ID_ROL") Long idRol);
+    
     
 }

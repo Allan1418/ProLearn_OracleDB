@@ -30,6 +30,28 @@ WHERE
     ESTADO_DELET_ROL = 1;
 /
 
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.ROL_GETBY_NOMBRE_SP(
+  P_NOMBRE IN VARCHAR2,
+  P_ROL OUT SYS_REFCURSOR
+) AS
+BEGIN
+  OPEN P_ROL FOR
+  SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_V
+  WHERE NOMBRE = P_NOMBRE;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.ROL_GETBY_ID_SP(
+  P_ID_ROL IN NUMBER,
+  P_CURSOR OUT SYS_REFCURSOR
+) AS
+BEGIN
+  OPEN P_CURSOR FOR
+  SELECT * FROM FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_V
+  WHERE ROL_TB_ID_ROL_PK = P_ID_ROL;
+END;
+/
+
 
 -- Procedimiento para buscar todos un rol por su id
 
@@ -41,7 +63,7 @@ BEGIN
     OPEN P_CURSOR FOR
     SELECT * FROM  FIDE_PROLEARN_FINAL_PROF.FIDE_ROL_V
     WHERE 
-        USUARIOS_TB_ID_USER_PK = P_ROL_ID;
+        ROL_TB_ID_ROL_PK = P_ROL_ID;
 END;
 /
 
@@ -55,6 +77,18 @@ BEGIN
 END;
 /
 
+
+CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_GET_BYID_SP(
+  P_ID_USER IN NUMBER,
+  P_CURSOR OUT SYS_REFCURSOR
+) AS
+BEGIN
+  OPEN P_CURSOR FOR
+  SELECT *
+  FROM FIDE_PROLEARN_FINAL_PROF.FIDE_USUARIO_V
+  WHERE USUARIOS_TB_ID_USER_PK = P_ID_USER;
+END;
+/
 
 -- Procedimiento para buscar un usuario mediante su email con su estado en 1
 
@@ -95,7 +129,7 @@ END;
 /
 
 
--- Este procedimiento tiene un par�metro adicional P_ID_USUARIO que indica si se debe crear un nuevo usuario
+-- Este procedimiento tiene un parametro adicional P_ID_USUARIO que indica si se debe crear un nuevo usuario
 -- (si es 0) o actualizar uno existente (si es un valor diferente de 0).
 
 CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_UPSERT_SP(
@@ -104,7 +138,7 @@ CREATE OR REPLACE PROCEDURE FIDE_PROLEARN_FINAL_PROF.USUARIO_UPSERT_SP(
   P_APELLIDOS IN VARCHAR2,
   P_EMAIL IN VARCHAR2,
   P_PASSWORD IN VARCHAR2,
-  P_ROL_ID IN NUMBER  -- Se agrega el parámetro para el rol
+  P_ROL_ID IN NUMBER
 ) AS
     V_ID_NUEVO_USUARIO NUMBER;
 BEGIN
@@ -114,7 +148,7 @@ BEGIN
       APELLIDOS,
       EMAIL,
       PASSWORD,
-      ROL_ID  -- Insertar el rol directamente
+      ROL_ID
     ) VALUES (
       P_NOMBRE,
       P_APELLIDOS,
@@ -129,7 +163,7 @@ BEGIN
         APELLIDOS = P_APELLIDOS,
         EMAIL = P_EMAIL,
         PASSWORD = P_PASSWORD,
-        ROL_ID = P_ROL_ID  -- Actualizar el rol directamente
+        ROL_ID = P_ROL_ID
     WHERE USUARIOS_TB_ID_USER_PK = P_ID_USUARIO;
   END IF;
   COMMIT;

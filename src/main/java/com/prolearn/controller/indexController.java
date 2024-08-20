@@ -40,7 +40,7 @@ public class indexController {
     @PostMapping("/signup")
     public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {
        
-        usuarioService.save(usuario);
+        usuarioService.nuevo(usuario);
         
         return "redirect:/";
     }

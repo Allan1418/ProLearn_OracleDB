@@ -10,6 +10,8 @@ public interface UsuarioService extends UserDetailsService{
     
     public void save(Usuario usuario);
     
+    public void nuevo(Usuario usuario);
+    
     public List<Usuario> getUsuarios();
     
     public Usuario getUsuario(Usuario usuario);

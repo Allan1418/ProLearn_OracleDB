@@ -7,6 +7,7 @@ import com.prolearn.domain.Usuario;
 import com.prolearn.service.UsuarioService;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,29 +30,51 @@ public class UsuarioServiceImpl implements UsuarioService {
     private RolDao rolDao;
     
     @Override
-    public void save(Usuario usuario) {
+    @Transactional
+    public void nuevo(Usuario usuario) {
         
-        Rol rolUsuario = rolDao.findByNombre("ROLE_USER");
+        usuario.setId(0L);
         
-        usuario.setRoles(Arrays.asList(rolUsuario));
+        Rol rol = rolDao.findByNombre("ROLE_USER");
+        
+        usuario.setIdRol(rol.getIdRol());
         
         var codigo = new BCryptPasswordEncoder();
         usuario.setPassword(codigo.encode(usuario.getPassword()));
         
-        usuarioDao.save(usuario);
+        usuarioDao.upsert(usuario.getId(),
+                usuario.getNombre(),
+                usuario.getApellidos(),
+                usuario.getEmail(),
+                usuario.getPassword(),
+                usuario.getIdRol());
+    }
+    
+    @Override
+    @Transactional
+    public void save(Usuario usuario) {
+        
+        usuarioDao.upsert(usuario.getId(),
+                usuario.getNombre(),
+                usuario.getApellidos(),
+                usuario.getEmail(),
+                usuario.getPassword(),
+                usuario.getIdRol());
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
-        return usuarioDao.findAll();
+        return usuarioDao.getAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Usuario getUsuario(Usuario usuario) {
-        usuario = usuarioDao.findById(usuario.getId()).orElse(null);
-        usuario.setRoles(rolDao.findAllByIdUser(usuario.getId()));
+        usuario = usuarioDao.getXId(usuario.getId()).orElse(null);
+        
+        
+        usuario.setRol(rolDao.getXId(usuario.getIdRol()));
         
         return usuario;
     }
@@ -59,25 +82,27 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public void delete(Usuario usuario) {
+        
+        //dao
         usuarioDao.delete(usuario);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Usuario usuario = usuarioDao.findByEmail(username);
+        Usuario usuario = usuarioDao.findByEmail(username).orElse(null);
         
         if (usuario == null) {
             throw new UsernameNotFoundException("Usuario o password inválidos");
         }
         
-        usuario.setRoles(rolDao.findAllByIdUser(usuario.getId()));
+        usuario.setRol(rolDao.getXId(usuario.getIdRol()));
         
-        return new User(usuario.getEmail(), usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
+        return new User(usuario.getEmail(), usuario.getPassword(), mapearAutoridadesRoles(usuario.getRol()));
     }
 
-    private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Rol> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).collect(Collectors.toList());
-    }
+    private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Rol rol) {
+    return Collections.singletonList(new SimpleGrantedAuthority(rol.getNombre())); 
+}
 
 }

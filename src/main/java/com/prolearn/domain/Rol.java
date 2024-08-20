@@ -9,10 +9,19 @@ import lombok.Data;
 @Entity
 @Table(name = "FIDE_ROL_TB")
 @NamedStoredProcedureQuery(
-    name = "SPFindAllXIdUser",
-    procedureName = "ROLES_POR_USUARIO_SP",
+    name = "SPFindByNombreRol",
+    procedureName = "ROL_GETBY_NOMBRE_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_USUARIO_ID", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Rol.class} 
+)
+@NamedStoredProcedureQuery(
+    name = "SPFindByIdRol",
+    procedureName = "ROL_GETBY_ID_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_ROL", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
     },
     resultClasses = { Rol.class} 
