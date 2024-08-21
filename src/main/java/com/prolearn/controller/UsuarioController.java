@@ -30,8 +30,11 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public String iniciarSesion(Usuario usuario) {
-        // Lógica para iniciar sesión (implementar según tus necesidades)
-        return "redirect:/"; // Redirige a la página principal después del inicio de sesión
+        //a
+        
+        
+        
+        return "redirect:/";
     }
 
     @GetMapping("/registro")

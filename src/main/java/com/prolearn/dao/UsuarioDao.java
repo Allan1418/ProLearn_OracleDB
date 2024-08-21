@@ -20,7 +20,7 @@ public interface UsuarioDao extends JpaRepository<Usuario, Long>{
     Optional<Usuario> getXId(@Param("P_ID_USER") Long idUser);
     
     @Procedure(name = "SPUpsertUser")
-    void upsert(
+    Long upsert(
             @Param("P_ID_USUARIO") Long idUsuario,
             @Param("P_NOMBRE") String nombre,
             @Param("P_APELLIDOS") String apellidos,

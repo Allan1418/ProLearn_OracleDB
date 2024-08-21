@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -31,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     
     @Override
     @Transactional
-    public void nuevo(Usuario usuario) {
+    public void nuevo(Usuario usuario) throws UserAlreadyExistAuthenticationException{
         
         usuario.setId(0L);
         
@@ -42,12 +43,16 @@ public class UsuarioServiceImpl implements UsuarioService {
         var codigo = new BCryptPasswordEncoder();
         usuario.setPassword(codigo.encode(usuario.getPassword()));
         
-        usuarioDao.upsert(usuario.getId(),
+        Long idNuevo = usuarioDao.upsert(usuario.getId(),
                 usuario.getNombre(),
                 usuario.getApellidos(),
                 usuario.getEmail(),
                 usuario.getPassword(),
                 usuario.getIdRol());
+        
+        if (idNuevo == -1L) {
+            throw new UserAlreadyExistAuthenticationException("El correo ya existe!");
+        }
     }
     
     @Override

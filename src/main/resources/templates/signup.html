@@ -30,10 +30,12 @@
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="email" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com" onblur="verificarCorreo(this.value)">
-                                        <div class="row container text-center me-5 my-5" 
-                                             th:if="${usuario.idResultante == -1}">
-                                            <h3>Email en uso!</h3>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com">
+                                        <div th:if="${error != null}" class="text-danger">
+                                            <span th:text="${error}"></span> 
+                                        </div>
+                                        <div th:if="${usuarioViejo != null}" class="text-danger">
+                                            <span th:text="${usuarioViejo.email}"></span> 
                                         </div>
                                 </div>
                                 <div class="col-9 col-md-6">

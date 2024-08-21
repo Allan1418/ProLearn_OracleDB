@@ -3,6 +3,7 @@ package com.prolearn.controller;
 
 import com.prolearn.domain.Usuario;
 import com.prolearn.service.CursoService;
+import com.prolearn.service.Impl.UserAlreadyExistAuthenticationException;
 import com.prolearn.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,11 +39,16 @@ public class indexController {
     }
     
     @PostMapping("/signup")
-    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {
-       
-        usuarioService.nuevo(usuario);
-        
-        return "redirect:/";
+    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model) {
+        try {
+            usuarioService.nuevo(usuario);
+            return "redirect:/";
+        } catch (UserAlreadyExistAuthenticationException e) {
+            model.addAttribute("error", e.getMessage());
+            usuario.setPassword(null);
+            model.addAttribute("usuarioViejo", usuario);
+            return "signup";
+        }
     }
     
 }

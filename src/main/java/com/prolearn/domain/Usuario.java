@@ -43,7 +43,8 @@ import lombok.Data;
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_APELLIDOS", type = String.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_EMAIL", type = String.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_PASSWORD", type = String.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ROL_ID", type = Long.class)
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ROL_ID", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_ID_RESULTANTE", type = Long.class)
     }
 )
 public class Usuario implements Serializable {
