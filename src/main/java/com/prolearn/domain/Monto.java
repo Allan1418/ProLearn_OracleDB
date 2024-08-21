@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
+@Table(name = "FIDE_MONTO_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdMT",
     procedureName = "MONTO_GET_BYID_SP",
@@ -40,34 +41,24 @@ import java.io.Serializable;
     }
 )
 public class Monto implements Serializable {
+    
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MONTO_TB_ID_MONTO_PK")
-    private Long id;
+    private Long idMonto;
 
+    @Column(name = "MONTO")
     private Double monto;
-
-    @ManyToOne
-    @JoinColumn(name = "factura_id", referencedColumnName = "FACTURA_TB_ID_FACTURA_PK")
-    private Factura factura;
-
-    // Constructor vacío
-    public Monto() {
-    }
-
-    // Constructor con parámetros
-    public Monto(Double monto, Factura factura) {
-        this.monto = monto;
-        this.factura = factura;
-    }
-
-    public String getTipoSuscripcion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Long getId() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
+    @Column(name = "NOMBRE")
+    private String nombre;
+    
+    @Column(name = "ESTADO_PUBLICO_MONTO")
+    private boolean estado;
+    
+    
+    
+    
 }

@@ -17,13 +17,15 @@ public class MontoServiceImpl implements MontoService {
     @Override
     @Transactional(readOnly = true)
     public Monto getMonto(Monto monto) {
-        monto = montoDao.findById(monto.getId()).orElse(null);
+        monto = montoDao.findById(monto.getIdMonto()).orElse(null);
         return monto;
     }
 
     @Override
     public void save(Monto monto) {
-        montoDao.upsert(monto.getId(), monto.getTipoSuscripcion());
+        
+        //arreglar
+        //montoDao.upsert(monto.getidMonto(), monto.getTipoSuscripcion());
     }
 
     @Override
@@ -33,6 +35,6 @@ public class MontoServiceImpl implements MontoService {
 
     @Override
     public void delete(Monto monto) {
-        montoDao.delete(monto.getId());
+        montoDao.delete(monto.getIdMonto());
     }
 }

@@ -3,11 +3,11 @@ package com.prolearn.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @Entity
+@Table(name = "FIDE_FACTURA_TB")
 @NamedStoredProcedureQuery(
     name = "SPFindXIdFT",
     procedureName = "FACTURA_GET_BYID_SP",
@@ -18,10 +18,9 @@ import java.util.Date;
     resultClasses = { Factura.class }
 )
 @NamedStoredProcedureQuery(
-    name = "SPFindAllXIdCursoFT",
-    procedureName = "FACTURA_GETALL_BY_CURSO_SP",
+    name = "SPFindAllFT",
+    procedureName = "FACTURA_GETALL_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_FACTURAS", type = void.class)
     },
     resultClasses = { Factura.class }
@@ -31,7 +30,8 @@ import java.util.Date;
     procedureName = "FACTURA_UPSERT_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MONTO", type = Double.class)    
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MONTO", type = Double.class),    
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_USUARIO_ID", type = Long.class)    
     }
 )
 @NamedStoredProcedureQuery(
@@ -41,8 +41,8 @@ import java.util.Date;
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class)
     }
 )
-
 public class Factura implements Serializable {
+    
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -50,25 +50,38 @@ public class Factura implements Serializable {
     @Column(name = "FACTURA_TB_ID_FACTURA_PK")
     private Long idFactura;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", referencedColumnName = "USUARIOS_TB_ID_USER_PK")
-    private Usuario usuario;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "monto_id", referencedColumnName = "MONTO_TB_ID_MONTO_PK")
+    @Column(name = "USUARIO_ID")
+    private Long idUser;
+    
+    @Column(name = "MONTO_ID")
+    private Long idMonto;
+    
+    @Transient
     private Monto monto;
-
-    private Double montoTotal;
-
-    @Temporal(TemporalType.TIMESTAMP)
+    
+    @Column(name = "FECHA_PAGO")
     private Date fechaPago;
+    
+    @Column(name = "FECHA_EXPIRACION")
+    private Date fechaExcp;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaExpiracion;
-
-    // Constructores, getters y setters son generados por Lombok
-
-    public Factura(Long idFactura) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Factura() {
     }
+
+    public Factura(Long idFactura, Long idUser, Long idMonto, Date fechaPago, Date fechaExcp) {
+        this.idFactura = idFactura;
+        this.idUser = idUser;
+        this.idMonto = idMonto;
+        this.fechaPago = fechaPago;
+        this.fechaExcp = fechaExcp;
+    }
+
+    public Factura(Long idUser, Long idMonto, Date fechaPago, Date fechaExcp) {
+        this.idUser = idUser;
+        this.idMonto = idMonto;
+        this.fechaPago = fechaPago;
+        this.fechaExcp = fechaExcp;
+    }
+    
+    
 }
