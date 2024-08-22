@@ -9,16 +9,22 @@ import org.springframework.data.repository.query.Param;
 
 public interface MontoDao extends JpaRepository<Monto, Long> {
 
-    @Procedure(name = "MONTO_GET_BYID_SP")
+    @Procedure(name = "SPFindXIdMT")
     Optional<Monto> findById(@Param("P_ID_MONTO") Long id);
 
-    @Procedure(name = "MONTO_GETALL_BY_TIPO_SUSCRIPCION_SP")
-    List<Monto> findAllByTipoSuscripcion(@Param("P_TIPO_SUSCRIPCION") String tipoSuscripcion);
+    @Procedure(name = "SPFindAllPublico")
+    List<Monto> findAllPublico();
+    
+    @Procedure(name = "SPFindAllAdmin")
+    List<Monto> findAllAdmin();
 
-    @Procedure(name = "MONTO_UPSERT_SP")
+    @Procedure(name = "SPUpsertMT")
     void upsert(@Param("P_ID_MONTO") Long idMonto,
-            @Param("P_TIPO_SUSCRIPCION") String tipoSuscripcion);
+            @Param("P_NOMBRE") String nombrre,
+            @Param("P_DESCUENTO") int descuento,
+            @Param("P_MONTO_SIN_DESCUENTO") Double montoSinDescuento,
+            @Param("P_ESTADO_PUBLICO") boolean estado);
 
-    @Procedure(name = "MONTO_DELETE_SP")
+    @Procedure(name = "SPDeleteMT")
     void delete(@Param("P_ID_MONTO") Long idMonto);
 }

@@ -19,10 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/adminCurso")
 public class AdminCursoController {
 
-    //arreglar metodos:
-    //-l detalleCurso(Curso curso, Model model)
-    //-l detalleCapituloPadre(Curso curso, CapituloPadre capituloPadre, Model model)
-    //saveCapituloPadre(CapituloPadre capituloPadre)
     @Autowired
     private CursoService cursoService;
 

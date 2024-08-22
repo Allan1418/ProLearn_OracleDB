@@ -6,7 +6,9 @@ import java.util.List;
 public interface MontoService {
     public Monto getMonto(Monto monto);
     
-    public List<Monto> getMontosByTipoSuscripcion(String tipoSuscripcion);
+    public List<Monto> getMontosPublico();
+    
+    public List<Monto> getMontosAdmin();
     
     public void save(Monto monto);
     

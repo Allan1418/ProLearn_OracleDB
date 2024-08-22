@@ -18,6 +18,15 @@ import java.sql.Date;
     resultClasses = { Factura.class }
 )
 @NamedStoredProcedureQuery(
+    name = "SPFindXIdUserFT",
+    procedureName = "FACTURA_GET_BYUSER_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USER", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_RESULTADO", type = void.class)
+    },
+    resultClasses = { Factura.class }
+)
+@NamedStoredProcedureQuery(
     name = "SPFindAllFT",
     procedureName = "FACTURA_GETALL_SP",
     parameters = {
@@ -26,11 +35,10 @@ import java.sql.Date;
     resultClasses = { Factura.class }
 )
 @NamedStoredProcedureQuery(
-    name = "SPUpsertFT",
-    procedureName = "FACTURA_UPSERT_SP",
+    name = "SPCrearFT",
+    procedureName = "FACTURA_CREAR_SP",
     parameters = {
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_FACTURA", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MONTO", type = Double.class),    
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MONTO_ID", type = Long.class),    
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_USUARIO_ID", type = Long.class)    
     }
 )

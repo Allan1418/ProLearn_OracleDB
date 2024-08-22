@@ -22,19 +22,31 @@ public class MontoServiceImpl implements MontoService {
     }
 
     @Override
+    @Transactional()
     public void save(Monto monto) {
         
-        //arreglar
-        //montoDao.upsert(monto.getidMonto(), monto.getTipoSuscripcion());
+        montoDao.upsert(monto.getIdMonto(), 
+                monto.getNombre(), 
+                monto.getDescuento(), 
+                monto.getMontoSinDescuento(), 
+                monto.isEstado());
     }
 
     @Override
-    public List<Monto> getMontosByTipoSuscripcion(String tipoSuscripcion) {
-        return montoDao.findAllByTipoSuscripcion(tipoSuscripcion);
-    }
-
-    @Override
+    @Transactional()
     public void delete(Monto monto) {
         montoDao.delete(monto.getIdMonto());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Monto> getMontosPublico() {
+        return montoDao.findAllPublico();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Monto> getMontosAdmin() {
+        return montoDao.findAllAdmin();
     }
 }

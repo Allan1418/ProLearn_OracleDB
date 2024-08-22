@@ -110,4 +110,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     return Collections.singletonList(new SimpleGrantedAuthority(rol.getNombre())); 
 }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Usuario getUsuarioByEmail(String email) {
+        Usuario usuario = usuarioDao.findByEmail(email).orElse(null);
+        usuario.setRol(rolDao.getXId(usuario.getIdRol()));
+
+        return usuario;
+    }
+
 }
