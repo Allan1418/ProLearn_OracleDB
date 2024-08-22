@@ -33,6 +33,9 @@ public class AdminCursoController {
 
     @Autowired
     private CapitulosEstrucService capitulosEstrucService;
+    
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private HttpSession session;
@@ -294,4 +297,28 @@ public class AdminCursoController {
 
         return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + idPadre;
     }
+    
+    @GetMapping("/listarUsuarios")
+    public String listarUsuarios(Model model) {
+        
+        List<Usuario> usuarios = usuarioService.getUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        
+        List<Rol> roles = usuarioService.getAllRoles();
+        model.addAttribute("roles", roles);
+
+        return "/adminCurso/listarUsuarios";
+    }
+    
+    @PostMapping("/listarUsuarios/{id}/{idRol}")
+    public String cambioRol(Usuario usuario, Rol rol, Model model) {
+        
+        usuario = usuarioService.getUsuario(usuario);
+        rol = usuarioService.getRolByIdRol(rol);
+        
+        usuarioService.cambiarRolAdmin(usuario, rol);
+
+        return "/adminCurso/listarUsuarios";
+    }
+    
 }

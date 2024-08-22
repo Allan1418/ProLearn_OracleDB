@@ -26,14 +26,24 @@ import lombok.Data;
     },
     resultClasses = { Rol.class} 
 )
+@NamedStoredProcedureQuery(
+    name = "SPFindAllRol",
+    procedureName = "ROL_GET_BYALL_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR", type = void.class)
+    },
+    resultClasses = { Rol.class} 
+)
 public class Rol implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROL_TB_ID_ROL_PK")
     private Long idRol;
+    
+    @Column(name = "NOMBRE")
     private String nombre;
 
     public Rol(Long idRol, String nombre) {

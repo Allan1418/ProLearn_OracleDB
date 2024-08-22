@@ -70,7 +70,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
-        return usuarioDao.getAll();
+        
+        List<Usuario> usuarios = usuarioDao.getAll();
+        
+        for (Usuario usuario : usuarios) {
+            usuario.setRol(rolDao.getXId(usuario.getIdRol()));
+        }
+        
+        
+        return usuarios;
     }
 
     @Override
@@ -117,6 +125,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setRol(rolDao.getXId(usuario.getIdRol()));
 
         return usuario;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Rol> getAllRoles() {
+        return rolDao.findXAll();
+    }
+
+    @Override
+    public void cambiarRolAdmin(Usuario usuario, Rol newRol) {
+        usuarioDao.cambioRolAdmin(usuario.getId(), newRol.getIdRol());
+    }
+
+    @Override
+    public Rol getRolByIdRol(Rol rol) {
+        return rolDao.getXId(rol.getIdRol());
     }
 
 }
