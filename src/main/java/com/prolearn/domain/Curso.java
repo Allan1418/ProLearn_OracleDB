@@ -55,6 +55,14 @@ import lombok.Data;
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
     }
 )
+@NamedStoredProcedureQuery(
+    name = "SPCrearRelCursoUser",
+    procedureName = "INSERTAR_RELACION_USUARIO_CURSO",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USUARIO", type = Long.class)
+    }
+)
 public class Curso implements Serializable {
     
     private static final long serialVersionUID = 1L;

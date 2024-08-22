@@ -192,8 +192,9 @@
                     <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
                     class="col-12 ms-auto">Usuarios</button></a>
                 </div>
-                <div class="col-3"><button id="btnAdmin" 
-                    class="col-12 ms-auto">Categoria</button>
+                <div class="col-3">
+                    <a th:href="@{/adminCurso/listarCategorias}"><button id="btnAdmin" 
+                    class="col-12 ms-auto">Categoria</button></a>
                 </div>
                 <div class="col-3">
                     <div class="dropdown-center">
@@ -465,25 +466,45 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellidos</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Rol</th>
                                 <th scope="col">Botones</th>
                             </tr>
                         </thead>
-                        <tbody th:each="curso, contador : ${cursos}">
+                        <tbody th:each="Usuario, contador : ${usuarios}">
                             <tr>
-                                <th th:text="${set id}" scope="row"></th>
-                                <td th:text="${set nombre}"></td>
-                                <td th:text="${set apellido}"></td>
-                                <td th:text="${set email}"></td>
+                                <th th:text="${Usuario.id}" scope="row"></th>
+                                <td th:text="${Usuario.nombre}"></td>
+                                <td th:text="${Usuario.apellidos}"></td>
+                                <td th:text="${Usuario.email}"></td>
+                                <td th:text="${Usuario.rol.nombre}"></td>
                                 <td>
                                     <a href="#" data-bs-target="#editarUsuario" data-bs-toggle="modal">
                                         <button class="btn my-2" id="btn2">Editar</button>
                                     </a>
 
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                    <!--<a th:href="@{/curso/eliminar/}+${curso.idCurso}">
+                                        <button id="btn2" class="btn my-2">Eliminar</button></a>-->
                                 </td>
                             </tr>
                     </table>
+                    
+                    <!-- Parte Allan no me diga nah-->
+                    <table class="table table-borderless table-dark border border-white
+                           text-center py-4">
+                        <thead>
+                            <tr >
+                                <th scope="col">Id</th>
+                                <th scope="col">Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="Rol, contador : ${roles}">
+                            <tr>
+                                <th th:text="${Rol.idRol}" scope="row"></th>
+                                <td th:text="${Rol.nombre}"></td>
+                            </tr>
+                    </table>
+                    <!-- Parte Allan no me diga nah-->
+                    
                 </div>
             </div>
 

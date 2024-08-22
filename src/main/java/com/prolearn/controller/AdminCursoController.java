@@ -2,9 +2,7 @@ package com.prolearn.controller;
 
 import com.prolearn.domain.*;
 import com.prolearn.service.*;
-import com.prolearn.domain.CapitulosEstruc;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +31,9 @@ public class AdminCursoController {
 
     @Autowired
     private CapitulosEstrucService capitulosEstrucService;
+    
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     private HttpSession session;
@@ -293,5 +294,63 @@ public class AdminCursoController {
         capituloHijoService.delete(capituloHijo);
 
         return "redirect:/adminCurso/detalleCapitulos/" + curso.getIdCurso() + "/" + idPadre;
+    }
+    
+    @GetMapping("/listarUsuarios")
+    public String listarUsuarios(Model model) {
+        
+        List<Usuario> usuarios = usuarioService.getUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        
+        List<Rol> roles = usuarioService.getAllRoles();
+        model.addAttribute("roles", roles);
+
+        return "/adminCurso/listarUsuarios";
+    }
+    
+    @PostMapping("/listarUsuarios/{id}/{idRol}")
+    public String cambioRol(Usuario usuario, Rol rol, Model model) {
+        
+        usuario = usuarioService.getUsuario(usuario);
+        rol = usuarioService.getRolByIdRol(rol);
+        
+        usuarioService.cambiarRolAdmin(usuario, rol);
+
+        return "/adminCurso/listarUsuarios";
+    }
+    
+    
+    @GetMapping("/listarCategorias")
+    public String listarCategorias(Model model) {
+        
+        List<Categoria> categorias = categoriaService.getCategorias();
+        model.addAttribute("categorias", categorias);
+
+        return "/adminCurso/listarCategorias";
+    }
+    
+    @PostMapping("/listarCategorias/newCategoria")
+    public String newCategoria(Model model, Categoria categoria) {
+        
+        categoria.setId(0L);
+        categoriaService.save(categoria);
+
+        return "/adminCurso/listarCategorias";
+    }
+    
+    @PostMapping("/listarCategorias/saveCategoria")
+    public String saveCategoria(Model model, Categoria categoria) {
+        
+        categoriaService.save(categoria);
+
+        return "/adminCurso/listarCategorias";
+    }
+    
+    @PostMapping("/listarCategorias/deleteCategoria")
+    public String deleteCategoria(Model model, Categoria categoria) {
+        
+        categoriaService.delete(categoria);
+
+        return "/adminCurso/listarCategorias";
     }
 }

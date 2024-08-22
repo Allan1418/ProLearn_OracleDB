@@ -1,6 +1,7 @@
 
 package com.prolearn.service;
 
+import com.prolearn.domain.Rol;
 import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,5 +21,10 @@ public interface UsuarioService extends UserDetailsService{
     
     public void delete(Usuario usuario);
     
+    public List<Rol> getAllRoles();
+    
+    public void cambiarRolAdmin(Usuario usuario, Rol newRol);
+    
+    public Rol getRolByIdRol(Rol rol);
     
 }

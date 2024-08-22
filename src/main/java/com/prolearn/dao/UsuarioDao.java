@@ -13,7 +13,7 @@ public interface UsuarioDao extends JpaRepository<Usuario, Long>{
     @Procedure(name = "SPFindXEmailUser")
     Optional<Usuario> findByEmail(@Param("P_EMAIL") String email);
     
-    @Procedure(name = "USUARIO_FINDALL_SP")
+    @Procedure(name = "SPFindAllUser")
     List<Usuario> getAll();
     
     @Procedure(name = "SPFindByIdUser")
@@ -28,5 +28,8 @@ public interface UsuarioDao extends JpaRepository<Usuario, Long>{
             @Param("P_PASSWORD") String password,
             @Param("P_ROL_ID") Long rolId
     );
+    
+    @Procedure(name = "SPCambioRolAdminUser")
+    void cambioRolAdmin(@Param("P_ID_USUARIO") Long idUser, @Param("P_ROL_ID") Long idRol);
     
 }

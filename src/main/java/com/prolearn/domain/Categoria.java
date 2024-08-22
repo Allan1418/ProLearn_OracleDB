@@ -26,6 +26,21 @@ import lombok.Data;
     },
     resultClasses = Categoria.class 
 )
+@NamedStoredProcedureQuery(
+    name = "SPUpsertCat",
+    procedureName = "CAPITULO_HIJO_UPSERT_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CATEGORIA", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CATEGORIA", type = String.class)
+    }
+)
+@NamedStoredProcedureQuery(
+    name = "SPDeleteCat",
+    procedureName = "CAPITULO_HIJO_DELET_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CATEGORIA", type = Long.class),
+    }
+)
 public class Categoria implements Serializable {
     
     private static final long serialVersionUID = 1L;

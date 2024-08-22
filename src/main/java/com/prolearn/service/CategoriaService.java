@@ -8,9 +8,9 @@ public interface CategoriaService {
 
     public List<Categoria> getCategorias();
 
-    public Categoria getCategoria(Long id);
+    public Categoria getCategoria(Categoria categoria);
 
     public void save(Categoria categoria);
 
-    public void delete(Long id);
+    public void delete(Categoria categoria);
 }

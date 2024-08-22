@@ -23,20 +23,20 @@ public class CategoriaServiceImpl implements CategoriaService{
 
     @Override
     @Transactional(readOnly = true)
-    public Categoria getCategoria(Long id) {
-        return categoriaDao.findById(id).orElse(null);
+    public Categoria getCategoria(Categoria categoria) {
+        return categoriaDao.findById(categoria.getId()).orElse(null);
     }
 
     @Override
     @Transactional()
     public void save(Categoria categoria) {
-        categoriaDao.save(categoria);
+        categoriaDao.upsert(categoria.getId(), categoria.getNombre());
     }
 
     @Override
     @Transactional()
-    public void delete(Long id) {
-        categoriaDao.deleteById(id);
+    public void delete(Categoria categoria) {
+        categoriaDao.delete(categoria.getId());
     }
     
 }

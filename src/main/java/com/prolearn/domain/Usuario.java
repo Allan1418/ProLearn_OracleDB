@@ -47,6 +47,14 @@ import lombok.Data;
         @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_ID_RESULTANTE", type = Long.class)
     }
 )
+@NamedStoredProcedureQuery(
+    name = "SPCambioRolAdminUser",
+    procedureName = "USUARIO_CAMBIO_ROL_ADMIN_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USUARIO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ROL_ID", type = Long.class)
+    }
+)
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
