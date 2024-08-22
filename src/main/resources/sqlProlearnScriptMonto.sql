@@ -1,9 +1,4 @@
-
-
-
-
 --------------------------------Otros procedimientos----------------------------
-
 -- Se creo la vista de Montos que estan en estado 1
 CREATE OR REPLACE VIEW FIDE_PROLEARN_FINAL_PROF.FIDE_MONTO_V AS
 SELECT 
