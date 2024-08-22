@@ -15,4 +15,10 @@ public interface CategoriaDao extends JpaRepository<Categoria, Long> {
     @Procedure(name = "findAllCat")
     public List<Categoria> getAllCat();
     
+    @Procedure(name = "SPUpsertCat")
+    public void upsert(@Param( "P_ID_CATEGORIA" )Long id, @Param( "P_NOMBRE_CATEGORIA" )String nombre);
+    
+    @Procedure(name = "SPDeleteCat")
+    public void delete(@Param( "P_ID_CATEGORIA" )Long id);
+    
 }
