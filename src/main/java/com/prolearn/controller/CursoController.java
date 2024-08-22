@@ -4,12 +4,15 @@ import com.prolearn.domain.CapituloHijo;
 import com.prolearn.domain.CapituloPadre;
 import com.prolearn.domain.CapitulosEstruc;
 import com.prolearn.domain.Curso;
+import com.prolearn.domain.Usuario;
 import com.prolearn.service.CursoService;
 import com.prolearn.service.CapitulosEstrucService;
+import com.prolearn.service.UsuarioService;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,36 +31,18 @@ public class CursoController {
     
     @Autowired
     private CapitulosEstrucService capitulosEstrucService;
-
-//    @GetMapping("/curso")
-//    private String getCursos(Model model) {
-//        var cursos = cursoService.getCursos();
-//        model.addAttribute("cursos", cursos);
-//        return "/curso/curso";
-//    }
-//    
-//    @GetMapping("/eliminar/{idCurso}")
-//    public String categoriaEliminar(Curso curso) {
-//        cursoService.delete(curso);
-//        return "redirect://";
-//    }
-//    
-//    
-//    @PostMapping("/guardar")
-//    public String categoriaGuardar(Curso curso) {        
-//        cursoService.save(curso);
-//        return "redirect://";
-//    }
-//    
-//    @GetMapping("/modificar/{idCurso}")
-//    public String categoriaModificar(Curso curso, Model model) {
-//        curso = cursoService.getCurso(curso);
-//        model.addAttribute("categoria", curso);
-//        return "//";
-//    }  
+    
+    @Autowired
+    private UsuarioService usuarioService;
+  
     @GetMapping("/curso/{idCurso}")
-    public String cursoMostrar(Curso curso, Model model) {
+    public String cursoMostrar(Curso curso, Model model, @CurrentSecurityContext(expression = "authentication?.name") String username) {
         curso = cursoService.getCurso(curso);
+        
+        Usuario usuario = usuarioService.getUsuarioByEmail(username);
+        if (usuario != null) {
+            cursoService.crearRelUser(curso, usuario);
+        }
 
         List<CapitulosEstruc> lista = new ArrayList<>();
 

@@ -31,4 +31,7 @@ public interface CursoDao extends JpaRepository<Curso, Long>{
     
     @Procedure(name = "SPDeleteCU")
     void delete(@Param("P_ID_CURSO")Long idCurso);
+    
+    @Procedure(name = "SPCrearRelCursoUser")
+    void crearRelUserCurso(@Param("P_ID_CURSO")Long idCurso, @Param("P_ID_USUARIO") Long idUser);
 }

@@ -4,6 +4,7 @@ package com.prolearn.service.Impl;
 import com.prolearn.dao.CategoriaDao;
 import com.prolearn.dao.CursoDao;
 import com.prolearn.domain.Curso;
+import com.prolearn.domain.Usuario;
 import com.prolearn.service.CursoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,12 @@ public class CursoServiceImpl implements CursoService{
     public List<Curso> getCursosAdmin() {
         var lista = cursoDao.getAllAdmin();
         return lista;
+    }
+
+    @Override
+    @Transactional
+    public void crearRelUser(Curso curso, Usuario usuario) {
+        cursoDao.crearRelUserCurso(curso.getIdCurso(), usuario.getId());
     }
     
     
