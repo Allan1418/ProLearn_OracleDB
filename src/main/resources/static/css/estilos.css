@@ -162,43 +162,65 @@
 
 
 /*================Metodo Pago================*/
-
-#formulario-pago{
-    padding-left: 25%;
-
-
-    p, label{
-        padding-top: 5%;
-        text-align: center;
-        font-size: 20px;
+#planesCard {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 40px;
+    width: 500px;
+    max-width: 90%;
+    text-align: center;
+    .h2 {
+        color: #333;
+        margin-bottom: 30px;
     }
-    input{
-        margin-left: 10%;
-        text-align: center;
+    .plan {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f7f7f7;
     }
-
+    .plan h3 {
+        margin: 0;
+        font-size: 24px;
+        color: #16A9D8;
+    }
+    
+    .plan p {
+        font-size: 18px;
+        color: #555;
+    }
+    
+    .plan .price {
+        font-size: 28px;
+        font-weight: bold;
+        margin: 15px 0;
+        color: #16A9D8;
+    }
+    
+    .plan button {
+        background-color: #00FF29;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .plan button:hover {
+        background-color: #00CC21;
+    }
+    
+    .plan .discount {
+        color: #E74C3C;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    
 }
-
-#MetodoPago{
-
-    background-color: grey;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 8px;
-    padding-left: 38%;
-}
-
-.button-container{
-    display: flex;
-    justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 10px;
-}
-
-
 /*================Visual perfil================*/
 
 
@@ -380,66 +402,3 @@
     
 }
 /*================Perfile usaurio================*/
-
-/* Contenedor principal para el formulario de perfil */
-#contenedor-formulario {
-background-color: #34495e; /* Fondo ligeramente más claro */
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-width: 100%;
-max-width: 500px;
-}
-
-/* Fondo decorativo (opcional) */
-#fondoCuenta {
-display: none; /* Oculto por ahora */
-}
-
-/* Estilo de fuente para elementos con clase .fs-2 */
-.fs-2 {
-font-size: 24px;
-margin-bottom: 20px;
-text-align: center;
-}
-
-/* Contenedor principal de la página */
-.wrapper {
-margin-bottom: 10px;
-}
-
-/* Estilo para las etiquetas del formulario */
-label {
-display: block;
-margin-bottom: 5px;
-font-weight: bold;
-}
-
-/* Estilo para los campos de entrada */
-input[type="text"], input[type="number"], input[type="email"] {
-width: 95%;
-padding: 10px;
-border-radius: 5px;
-border: 3px solid #7f8c8d;
-background-color: #ecf0f1;
-color: #2c3e50;
-font-size: 16px;
-}
-
-
-/* Estilo para el botón */
-#btn1 {
-width: 100%;
-padding: 10px;
-border: none;
-border-radius: 5px;
-background-color: #00FF29;
-color: #2c3e50;
-font-weight: bold;
-cursor: pointer;
-font-size: 16px;
-}
-
-#btn1:hover {
-background-color: #27ae60;
-}

@@ -45,7 +45,7 @@ import java.io.Serializable;
 )
 @NamedStoredProcedureQuery(
     name = "SPDeleteMT",
-    procedureName = "MONTO_DELETE_SP",
+    procedureName = "MONTO_DELET_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_MONTO", type = Long.class)
     }
@@ -56,7 +56,7 @@ public class Monto implements Serializable {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MONTO_TB_ID_MONTO_PK")
+    @Column(name = "MONTO_TB_ID_MT_PK")
     private Long idMonto;
 
     @Column(name = "MONTO")

@@ -19,32 +19,30 @@
                     </div>
                     <div class="container">
                         <div id="contenedor-formulario">
-                            <form id="input" class="row g-2" th:action="@{/signup}" th:object="${Usuario}" method="POST">
+                            <form id="input" class="row g-2" th:action="@{/signup}" th:object="${Usuario}" method="POST" onsubmit="return validatePassword();">
                                 <div class="col-6 col-md-6">
                                     <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
                                 </div>
                                 <div class="col-6 col-md-6">
                                     <label for="apellidos" class="form-label">Apellidos</label>
-                                    <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos">
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Apellidos" required>
                                 </div>
                                 <div class="col-12 col-md-9">
                                     <label for="email" class="form-label">Correo</label>
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="usuario@ejemplo.com"
+                                           th:value="${usuarioViejo != null ? usuarioViejo.email : ''}" required>
                                         <div th:if="${error != null}" class="text-danger">
                                             <span th:text="${error}"></span> 
-                                        </div>
-                                        <div th:if="${usuarioViejo != null}" class="text-danger">
-                                            <span th:text="${usuarioViejo.email}"></span> 
                                         </div>
                                 </div>
                                 <div class="col-9 col-md-6">
                                     <label for="password" class="form-label">Contraseña</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
                                 </div>
                                 <div class="col-9 col-md-6">
                                     <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
-                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="confirmar password">
+                                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirmar Contraseña" required>
                                 </div>
                                 <script>
                                     function validatePassword() {
@@ -56,12 +54,19 @@
                                         }
                                         return true;
                                     }
+
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        var usuarioViejoEmail = '';
+                                        if (usuarioViejoEmail) {
+                                            document.getElementById("email").focus();
+                                        }
+                                    });
                                 </script>
                                 <div class="col-12 col-md-9">
                                     <button id="btnSignUp" type="submit" class="btn btn-primary">Crear Cuenta</button>
                                 </div>
                             </form>
-                        </div>
+                       </div>
                     </div>
                 </div>
                 <div id="fondoCuenta">
