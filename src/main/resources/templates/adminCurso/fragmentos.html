@@ -10,21 +10,21 @@
 
     <body>
 
-        
-        
-        
-        
+
+
+
+
 
 
         <section th:fragment="listadoCursos">
-            
+
             <!-- 
                ==============================================================-->
             <!-- Se Crea un curso -->
             <!-- 
                ==============================================================-->
-            
-            
+
+
             <div id="CrearCurso" 
                  class="modal fade" 
                  tabindex="-1" 
@@ -37,7 +37,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div> 
                             <form th:action="@{/adminCurso/newCurso}" th:object="${curso}"
-                            method="POST" class="was-validated" enctype="multipart/form-data">
+                                  method="POST" class="was-validated" enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <div class="mb-3">
                                         <label for="nombre">Nombre del Curso</label>
@@ -50,22 +50,22 @@
                                     <div class="imagen-preview-container">
                                         <img id="imagen-preview" width="100%" />
                                     </div>
-                                    
+
                                     <div class="mb-3 my-4">
                                         <label for="imagenNuevo">Imagen del Curso</label>
                                         <input class="form-control" type="file" 
-                                           name="imagenNuevo" accept="image/*" 
-                                           onchange="readURL(this);">
+                                               name="imagenNuevo" accept="image/*" 
+                                               onchange="readURL(this);">
                                     </div>
-                                    
+
                                     <div class="mb-3">
                                         <label for="categorias">Categoría del Curso</label>
                                         <select class="form-control" 
-                                        id="categorias" name="categoriaId" required="true">
+                                                id="categorias" name="categoriaId" required="true">
                                             <option value="">Seleccione una categoría</option>
                                             <option th:each="categoria : ${categorias}" 
-                                            th:value="${categoria.id}" 
-                                            th:text="${categoria.nombre}"></option>
+                                                    th:value="${categoria.id}" 
+                                                    th:text="${categoria.nombre}"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -74,43 +74,43 @@
                                     <button class="btn btn-primary" type="submit">Guardar</button>
                                 </div>
                                 <script>
-                                  function readURL(input) {
-                                    if (input.files && input.files[0]) {
-                                      var reader = new FileReader();
-                                      reader.onload = function (e) {
-                                        document.getElementById('imagen-preview').src = e.target.result;
-                                        document.getElementById('imagen-preview').style.display = 'block';
-                                      };
-                                      reader.readAsDataURL(input.files[0]);
+                                    function readURL(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                document.getElementById('imagen-preview').src = e.target.result;
+                                                document.getElementById('imagen-preview').style.display = 'block';
+                                            };
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
                                     }
-                                  }
                                 </script>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-                
+
             <!-- 
                ==============================================================-->
             <!-- Botones de pagina Admin -->
             <!-- 
                ==============================================================-->
-  
+
 
             <div id="btn4" class="row">
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    style="border-bottom: 4px solid #ff0000";
-                    class="col-12 ms-auto">Cursos</button></a>
+                                                                     style="border-bottom: 4px solid #ff0000";
+                                                                     class="col-12 ms-auto">Cursos</button></a>
                 </div>
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
-                    class="col-12 ms-auto">Usuarios</button></a>
+                                                                       class="col-12 ms-auto">Usuarios</button></a>
                 </div>
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCategorias}"><button id="btnAdmin" 
-                    class="col-12 ms-auto">Categoria</button></a>
+                                                                         class="col-12 ms-auto">Categoria</button></a>
                 </div>
             </div>
 
@@ -158,9 +158,9 @@
                 </div>
             </div>
         </section>
-        
-        
-        
+
+
+
         <section th:fragment="listadoUsuarios">
 
             <!-- 
@@ -168,20 +168,20 @@
             <!-- Botones de pagina Admin -->
             <!-- 
                ==============================================================-->
-            
+
             <div class="row text-center">
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    class="col-12">Cursos</button></a>
+                                                                     class="col-12">Cursos</button></a>
                 </div>
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
-                    style="border-bottom: 4px solid #ff0000";
-                    class="col-12">Usuarios</button></a>
+                                                                       style="border-bottom: 4px solid #ff0000";
+                                                                       class="col-12">Usuarios</button></a>
                 </div>
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCategoria}"><button id="btnAdmin" 
-                    class="col-12">Categoria</button></a>
+                                                                        class="col-12">Categoria</button></a>
                 </div>
             </div>
 
@@ -209,27 +209,27 @@
                                             th:value="${rol.idRol}" 
                                             th:text="${rol.nombre}"></option>
                                 </select>
-                                
-                             </div>
+
+                            </div>
                             <div class="modal-footer">
-                                
+
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                         </form>
                     </div>
                 </div>
-           </div>
+            </div>
 
 
 
-             <!-- 
-                ==============================================================-->
-             <!-- Se muestra los usuarios -->
-             <!-- 
-                ==============================================================-->
+            <!-- 
+               ==============================================================-->
+            <!-- Se muestra los usuarios -->
+            <!-- 
+               ==============================================================-->
 
-                
-                
+
+
             <div class="table-responsive text-center mx-5">
 
                 <div id="gestionAdmin" class="col-7 table-responsive text-center">
@@ -260,7 +260,7 @@
                                 </td>
                             </tr>
                     </table>
-                    
+
                     <!-- Parte Allan no me diga nah-->
                     <table class="table table-borderless table-dark border border-white
                            text-center py-4">
@@ -277,40 +277,40 @@
                             </tr>
                     </table>
                     <!-- Parte Allan no me diga nah-->
-                    
+
                 </div>
             </div>
 
         </section>
 
-        
 
-        
-       
-        
-        
-        
+
+
+
+
+
+
         <section th:fragment="listadoCategorias">
 
-        <!-- 
-           ==============================================================-->
-        <!-- Se muestra las Categorias -->
-        <!-- 
-           ==============================================================-->
-            
+            <!-- 
+               ==============================================================-->
+            <!-- Se muestra las Categorias -->
+            <!-- 
+               ==============================================================-->
+
             <div class="row text-center py-2 pb-2">
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    class="col-12">Cursos</button></a>
+                                                                     class="col-12">Cursos</button></a>
                 </div>
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
-                    class="col-12">Usuarios</button></a>
+                                                                       class="col-12">Usuarios</button></a>
                 </div>
                 <div class="col-3">
                     <a th:href="@{/adminCurso/listarCategoria}"><button id="btnAdmin" 
-                    style="border-bottom: 4px solid #ff0000";
-                    class="col-12">Categoria</button></a>
+                                                                        style="border-bottom: 4px solid #ff0000";
+                                                                        class="col-12">Categoria</button></a>
                 </div>
             </div>
 
@@ -321,43 +321,6 @@
             <!-- 
                ==============================================================-->
 
-            
-            <div id="editarCategoria" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
-                 aria-hidden="true">
-                <div class="modal-dialog modal-md">
-                    <div <div class="modal-content fondo-modal">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Editar Informacion</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/adminCurso/listarCursos/}+${curso.idCurso}" th:object="${curso}"
-                            method="POST" class="was-validated" enctype="multipart/form-data">
-
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre del usuario</label>
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numero">Apellido del usuario</label>                                    
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email del Usuario</label>
-                                    <input type="email" class="form-control" name="username" id="email" placeholder="ejemplo@.com">
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit">Guardar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
             <div class="table-responsive text-center mx-5">
 
@@ -366,40 +329,68 @@
                            text-center py-4">
                         <thead>
                             <tr >
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre</th>
+                                <th scope="col">Id del Categoria</th>
+                                <th scope="col">Nombre Categoria</th>
                                 <th scope="col">Botones</th>
                             </tr>
                         </thead>
-                        <tbody th:each="curso, contador : ${cursos}">
+                        <tbody th:each="categoria, contador : ${categorias}">
                             <tr>
-                                <th th:text="${curso.nombreCurso}" scope="row"></th>
-                                <td th:text="${curso.estadoCurso}"></td>
+                                <th th:text="${categoria.id}" scope="row"></th>
+                                <td th:text="${categoria.nombre}"></td>
                                 <td>
                                     <a href="#" data-bs-target="#editarCategoria" data-bs-toggle="modal">
                                         <button class="btn my-2" id="btn2">Editar</button>
                                     </a>
-
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
+                                    <a>
+                                        <button id="btn2" class="btn my-2">Eliminar</button>
+                                    </a>
                                 </td>
+                                <div id="editarCategoria" 
+                                     class="modal fade" 
+                                     tabindex="-1" 
+                                     aria-labelledby="exampleModalLabel" 
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-md">
+                                        <div class="modal-content fondo-modal">
+                                            <div class="modal-header bg-info text-white">
+                                                <h5 class="modal-title">Editar Informacion</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div> 
+                                            <form th:action="@{/adminCurso/listarCategorias/saveCategoria}"
+                                                  th:object="${categoria}" method="POST">
+                                                <input type="hidden" th:value="${categoria.id}" name="id" />
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="nombre">Nombre de la categoria</label>
+                                                        <input type="text" class="form-control" name="nombre" required="true" th:value="${categoria.nombre}"/>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                     </table>
                 </div>
             </div>
 
         </section>
-        
-        
+
+
 
         <!-- 
            ==============================================================-->
         <!-- Se edita y agrega el contendo del curso y sus modulos -->
         <!-- 
            ==============================================================-->
-        
+
         <section th:fragment="infoCurso">
-            
+
             <div id="editarInformacionCurso" 
                  class="modal fade" 
                  tabindex="-1" 
@@ -412,34 +403,35 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
                         <form th:action="@{/adminCurso/editarCurso/}+${curso.idCurso}" th:object="${curso}"
-                            method="POST" class="was-validated" enctype="multipart/form-data">
+                              method="POST" class="was-validated" enctype="multipart/form-data">
                             <div class="modal-body">
-                                
+
                                 <div class="mb-3">
                                     <label for="nombre">Nombre del Curso</label>
                                     <input type="text" class="form-control"
-                                        name="nombre" required="true"
-                                        th:field="*{nombreCurso}"/>
+                                           name="nombre" required="true"
+                                           th:field="*{nombreCurso}"/>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label for="descrpCurso">Descripcion del curso</label>
                                     <textarea class="form-control" th:field="*{descrpCurso}"
-                                    name="descripcion" rows="5" required="true"></textarea>
+                                              name="descripcion" rows="5" required="true"></textarea>
                                 </div>
-                                
+
                                 <div id="imagen-preview-container" class="imagen-preview-container">
                                     <img id="imagen-preview" width="100%" />
                                 </div>
-                                
+
                                 <div class="mb-3 my-4">
                                     <label for="thumbnailCurso">Imagen del Curso</label>
                                     <input class="form-control" type="file" 
                                            name="imagenNuevo" accept="image/*" 
                                            th:src="@{curso.thumbnailCurso}"
-                                           onchange="readURL(this); updateImagePreview(this);">
+                                           onchange="readURL(this);
+                                                   updateImagePreview(this);">
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label for="categorias">Categoría del Curso</label>
                                     <select class="form-control" 
@@ -452,33 +444,33 @@
                                         </option>
                                     </select>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label id="estado-label" th:text="${curso.estadoCurso ? 'Activo' : 'Inactivo'}"></label>
                                     <input type="checkbox" name="estadoCurso" th:checked="${curso.estadoCurso}" 
                                            onclick="document.getElementById('estado-label').textContent = this.checked ? 'Activo  ' : 'Inactivo';" />
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" th:field="*{idCurso}" />
                             <input type="hidden" th:field="*{thumbnailCurso}" />
-                            
-                            
-                            
+
+
+
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit">Guardar</button>
                             </div>
                             <script>
                                 function readURL(input) {
                                     if (input.files && input.files[0]) {
-                                      var reader = new FileReader();
-                                      reader.onload = function (e) {
-                                        document.getElementById('imagen-preview').src = e.target.result;
-                                        document.getElementById('imagen-preview').style.display = 'block';
-                                      };
-                                      reader.readAsDataURL(input.files[0]);
+                                        var reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            document.getElementById('imagen-preview').src = e.target.result;
+                                            document.getElementById('imagen-preview').style.display = 'block';
+                                        };
+                                        reader.readAsDataURL(input.files[0]);
                                     }
-                                  }
+                                }
                                 function updateImagePreview(input) {
                                     if (input.files && input.files[0]) {
                                         document.getElementById('imagen-preview').src = URL.createObjectURL(input.files[0]);
@@ -490,7 +482,7 @@
                 </div>
             </div>
 
-            
+
             <div class="row">
                 <div id="fondo-curso" class=" col-6 py-3">
                     <a class="nav-link" th:href="@{/adminCurso/listarCursos}">
@@ -605,42 +597,42 @@
                  aria-hidden="true">
                 <div class="modal-dialog modal-md">
                     <div <div class="modal-content fondo-modal">
-                        <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title">Crear Clase</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form th:action="@{/adminCurso/newCapituloHijo/}+${curso.idCurso}+'/'+${capituloPadre.id}" th:object="${capituloHijo}" 
-                              method="POST" class="was-validated" enctype="multipart/form-data" id="uploadForm">
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre de la clase</label>
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
+                            <div class="modal-header bg-info text-white">
+                                <h5 class="modal-title">Crear Clase</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div> 
+                            <form th:action="@{/adminCurso/newCapituloHijo/}+${curso.idCurso}+'/'+${capituloPadre.id}" th:object="${capituloHijo}" 
+                                  method="POST" class="was-validated" enctype="multipart/form-data" id="uploadForm">
+                                <div class="modal-body">
+                                    <div class="mb-3">
+                                        <label for="nombre">Nombre de la clase</label>
+                                        <input type="text" class="form-control" name="nombre" required="true"/>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="videoNuevo">Video de la clase</label>
+                                        <input class="form-control" type="file" 
+                                               name="videoNuevo" accept="video/*" 
+                                               onchange="updateVideoPreview(this);">
+                                            <video width="100%" controls id="video-preview">
+                                            </video>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="numero">Poscion del capitulo</label>                                    
+                                        <input type="number" min="1" class="form-control" name="numero" required="true"/>
+                                    </div>
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label for="videoNuevo">Video de la clase</label>
-                                    <input class="form-control" type="file" 
-                                           name="videoNuevo" accept="video/*" 
-                                           onchange="updateVideoPreview(this);">
-                                    <video width="100%" controls id="video-preview">
-                                    </video>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit">Guardar</button>
                                 </div>
-                                
-                                <div class="mb-3">
-                                    <label for="numero">Poscion del capitulo</label>                                    
-                                    <input type="number" min="1" class="form-control" name="numero" required="true"/>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Guardar</button>
-                            </div>
-                            <script>
-                                function updateVideoPreview(input) {
-                                    if (input.files && input.files[0]) {
-                                        document.getElementById('video-preview').src = URL.createObjectURL(input.files[0]);
+                                <script>
+                                    function updateVideoPreview(input) {
+                                        if (input.files && input.files[0]) {
+                                            document.getElementById('video-preview').src = URL.createObjectURL(input.files[0]);
+                                        }
                                     }
-                                }
-                            </script>
+                                </script>
                             </form>
                         </div>
                     </div>
@@ -744,73 +736,74 @@
 
         <section th:fragment="editarClaseHijo">
 
-        <div id="titulo1" class="fs-3 my-5">Editar Capitulo Hijo</div>
-         <a class="nav-link mb-5 ms-5" 
-           th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${capituloHijo.capituloPadreId}">
-            <button type="button" class="btn" id="btn2">Atras</button>
-        </a>
-            
-            
-        <div id="detalleHijo" class="col-md-6 offset-md-4 
-             table-responsive text-center fondo-modal">
-            <div class="container">
-                <form th:action="@{'/adminCurso/detalleCapituloHijo/' + ${curso.idCurso} + '/' + ${capituloHijo.id}}" th:object="${capituloHijo}"    
-                      method="POST" class="was-validated" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="mb-3 my-5">
-                            <label for="nombre" class="text-center" >Nombre de la clase</label>
-                            <input type="text" class="form-control" th:field="*{nombre}"
-                                   name="nombre" required="true"/>
+            <div id="titulo1" class="fs-3 my-5">Editar Capitulo Hijo</div>
+            <a class="nav-link mb-5 ms-5" 
+               th:href="@{/adminCurso/detalleCapitulos/}+${curso.idCurso}+'/'+${capituloHijo.capituloPadreId}">
+                <button type="button" class="btn" id="btn2">Atras</button>
+            </a>
+
+
+            <div id="detalleHijo" class="col-md-6 offset-md-4 
+                 table-responsive text-center fondo-modal">
+                <div class="container">
+                    <form th:action="@{'/adminCurso/detalleCapituloHijo/' + ${curso.idCurso} + '/' + ${capituloHijo.id}}" th:object="${capituloHijo}"    
+                          method="POST" class="was-validated" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <div class="mb-3 my-5">
+                                <label for="nombre" class="text-center" >Nombre de la clase</label>
+                                <input type="text" class="form-control" th:field="*{nombre}"
+                                       name="nombre" required="true"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="video">Video de la clase</label>
+
+                                <video width="100%" controls id="video-preview">
+                                    <source id="video-source" th:src="${capituloHijo.video}" type="video/mp4">
+                                </video>
+
+                                <input class="form-control" type="file"
+                                       name="videoNuevo" accept="video/*" 
+                                       onchange="readURL(this);
+                                           updateVideoPreview(this);" />
+                            </div>
+
+                            <div class="mb-3 my-5">
+                                <label for="numero" class="text-center" >Poscion del capitulo</label>                                    
+                                <input type="number" min="0" class="form-control" th:field="*{numero}"
+                                       name="numero" required="true"/>
+                            </div>
+
+                            <input type="hidden" th:field="*{id}" />
+                            <input type="hidden" th:field="*{capituloPadreId}" />
+                            <input type="hidden" th:field="*{video}" />
+
                         </div>
 
-                        <div class="mb-3">
-                            <label for="video">Video de la clase</label>
-
-                            <video width="100%" controls id="video-preview">
-                                <source id="video-source" th:src="${capituloHijo.video}" type="video/mp4">
-                            </video>
-
-                            <input class="form-control" type="file"
-                                   name="videoNuevo" accept="video/*" 
-                                   onchange="readURL(this); updateVideoPreview(this);" />
+                        <div class="modal-footer mb-3 my-5">
+                            <button class="btn btn-primary" type="submit">Guardar</button>
                         </div>
 
-                        <div class="mb-3 my-5">
-                            <label for="numero" class="text-center" >Poscion del capitulo</label>                                    
-                            <input type="number" min="0" class="form-control" th:field="*{numero}"
-                                   name="numero" required="true"/>
-                        </div>
-
-                        <input type="hidden" th:field="*{id}" />
-                        <input type="hidden" th:field="*{capituloPadreId}" />
-                        <input type="hidden" th:field="*{video}" />
-
-                    </div>
-
-                    <div class="modal-footer mb-3 my-5">
-                        <button class="btn btn-primary" type="submit">Guardar</button>
-                    </div>
-
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
             <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById('video-source').src = e.target.result;
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            document.getElementById('video-source').src = e.target.result;
+                        }
+                        reader.readAsDataURL(input.files[0]);
                     }
-                    reader.readAsDataURL(input.files[0]);
                 }
-            }
-            function updateVideoPreview(input) {
-                if (input.files && input.files[0]) {
-                    document.getElementById('video-preview').src = URL.createObjectURL(input.files[0]);
+                function updateVideoPreview(input) {
+                    if (input.files && input.files[0]) {
+                        document.getElementById('video-preview').src = URL.createObjectURL(input.files[0]);
+                    }
                 }
-            }
-        </script>
-    </section>
+            </script>
+        </section>
 
     </body>
 </html>

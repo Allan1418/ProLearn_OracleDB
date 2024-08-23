@@ -340,9 +340,12 @@ public class AdminCursoController {
     @PostMapping("/listarCategorias/saveCategoria")
     public String saveCategoria(Model model, Categoria categoria) {
         
+        System.out.println("'''''''''''''''''''''''''"+ categoria.getId());
+        System.out.println("'''''''''''''''''''''''''"+ categoria.getNombre());
+        
         categoriaService.save(categoria);
 
-        return "/adminCurso/listarCategorias";
+        return "redirect:/adminCurso/listarCategorias";
     }
     
     @PostMapping("/listarCategorias/deleteCategoria")

@@ -28,7 +28,7 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPUpsertCat",
-    procedureName = "CAPITULO_HIJO_UPSERT_SP",
+    procedureName = "CATEGORIA_UPSERT_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CATEGORIA", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_CATEGORIA", type = String.class)
@@ -36,7 +36,7 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPDeleteCat",
-    procedureName = "CAPITULO_HIJO_DELET_SP",
+    procedureName = "CATEGORIA_DELET_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CATEGORIA", type = Long.class),
     }
