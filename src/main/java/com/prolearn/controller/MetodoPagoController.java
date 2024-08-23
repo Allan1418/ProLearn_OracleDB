@@ -65,8 +65,6 @@ public class MetodoPagoController {
             return "/metodoPago/planesCurso";
         }
 
-        System.out.println("------------------------------"+ monto.getIdMonto());
-        System.out.println("------------------------------"+ usuario.getId());
         facturaService.crear(monto, usuario);
 
         return "redirect:/index";

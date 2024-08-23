@@ -180,7 +180,7 @@
                                                                        class="col-12">Usuarios</button></a>
                 </div>
                 <div class="col-3">
-                    <a th:href="@{/adminCurso/listarCategoria}"><button id="btnAdmin" 
+                    <a th:href="@{/adminCurso/listarCategorias}"><button id="btnAdmin" 
                                                                         class="col-12">Categoria</button></a>
                 </div>
             </div>
@@ -254,13 +254,13 @@
                                 <td th:text="${usuario.email}"></td>
                                 <td th:text="${usuario.rol.nombre}"></td>
                                 <td>
-                                    <a href="#" data-bs-target="#editarUsuario" data-bs-toggle="modal">
+                                    <a href="#" th:attr="data-bs-target='#editarUsuario' + ${usuario.id}" data-bs-toggle="modal">
                                         <button class="btn my-2" id="btn2">Editar</button>
                                     </a>
 
                                 </td>
                                 
-                                <div id="editarUsuario" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div th:id="'editarUsuario' + ${usuario.id}" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-md">
                                         <div class="modal-content fondo-modal">
                                             <div class="modal-header bg-info text-white">
@@ -347,19 +347,19 @@
                                 <th scope="col">Botones</th>
                             </tr>
                         </thead>
-                        <tbody th:each="categoria, contador : ${categorias}">
+                        <tbody th:each="Categoria, contador : ${categorias}">
                             <tr>
-                                <th th:text="${categoria.id}" scope="row"></th>
-                                <td th:text="${categoria.nombre}"></td>
+                                <th th:text="${Categoria.id}" scope="row"></th>
+                                <td th:text="${Categoria.nombre}"></td>
                                 <td>
-                                    <a href="#" data-bs-target="#editarCategoria" data-bs-toggle="modal">
+                                    <a href="#" th:attr="data-bs-target='#editarCategoria' + ${Categoria.id}" data-bs-toggle="modal">
                                         <button class="btn my-2" id="btn2">Editar</button>
                                     </a>
                                     <a>
-                                        <button id="btn2" class="btn my-2">Eliminar</button>
+                                        <!-- <button id="btn2" class="btn my-2">Eliminar</button> -->
                                     </a>
                                 </td>
-                                <div id="editarCategoria" 
+                                <div th:id="'editarCategoria' + ${Categoria.id}" 
                                      class="modal fade" 
                                      tabindex="-1" 
                                      aria-labelledby="exampleModalLabel" 
@@ -370,13 +370,13 @@
                                                 <h5 class="modal-title">Editar Informacion</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div> 
-                                            <form th:action="@{/adminCurso/listarCategorias/saveCategoria}"
+                                            <form th:action="@{/adminCurso/listarCategorias/saveCategoria/}+${Categoria.id}"
                                                   th:object="${categoria}" method="POST">
-                                                <input type="hidden" th:value="${categoria.id}" name="id" />
+                                                <input type="hidden" th:value="${Categoria.id}" name="id" />
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <label for="nombre">Nombre de la categoria</label>
-                                                        <input type="text" class="form-control" name="nombre" required="true" th:value="${categoria.nombre}"/>
+                                                        <input type="text" class="form-control" name="nombre" required="true" th:value="${Categoria.nombre}"/>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
