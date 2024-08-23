@@ -12,91 +12,7 @@
 
         
         
-        <section th:fragment="CursosAuditoria">
         
-            <!-- 
-               ==============================================================-->
-            <!-- Se muestra la informacion de los Curso Auditoria -->
-            <!-- 
-               ==============================================================-->
-            
-            <div class="row text-center">
-                <div class="col-3">
-                    <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    class="col-12">Cursos</button></a>
-                </div>
-                <div class="col-3">
-                    <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
-                    class="col-12">Usuarios</button></a>
-                </div>
-                <div class="col-3"><button id="btnAdmin" 
-                    class="col-12">Categoria</button>
-                </div>
-                <div class="col-3">
-                    <div class="dropdown-center">
-                        <button id="btnAdmin" class="dropdown-toggle col-12"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Auditoria
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="table-responsive text-center mx-5">
-                <div id="gestionAdmin" class="ms-auto table-responsive text-center">
-                    <table class="table table-borderless table-dark border border-white
-                           text-center py-4">
-                        <thead>
-                            <tr >
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre Curso</th>
-                                <th scope="col">Descripcion Curso</th>
-                                <th scope="col">Thumnail Curso</th>
-                                <th scope="col">Categoria Curso</th>
-                                <th scope="col">Estado Publico</th>
-                                <th scope="col">Estado Delet</th>
-                                <th scope="col">Actualizado por</th>
-                                <th scope="col">Ultima Actualizacion</th>
-                                <th scope="col">Creado Por</th>
-                                <th scope="col">Fecha de Creacion </th>
-                                <th scope="col">Accion </th>
-                                <th scope="col">Botones</th>
-                            </tr>
-                        </thead>
-                        <tbody th:each="curso, contador : ${cursos}">
-                            <tr>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <td th:text="${set estadoCurso}"></td>
-                                <td>
-                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Editar</button></a>
-
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
-                                </td>
-                            </tr>
-                    </table>
-                </div>
-            </div>
-        </section>
         
 
 
@@ -196,22 +112,6 @@
                     <a th:href="@{/adminCurso/listarCategorias}"><button id="btnAdmin" 
                     class="col-12 ms-auto">Categoria</button></a>
                 </div>
-                <div class="col-3">
-                    <div class="dropdown-center">
-                        <button id="btnAdmin" class="dropdown-toggle col-12 ms-auto"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Auditoria
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
-                        </ul>
-                    </div>
-                </div>
             </div>
 
 
@@ -260,109 +160,6 @@
         </section>
         
         
-
-
-        
-        
-        <section th:fragment="UsuariosAuditoria">
-
-            
-            <!-- 
-               ==============================================================-->
-            <!-- Botones de pagina Admin -->
-            <!-- 
-               ==============================================================-->
-  
-
-            
-            <div class="row text-center">
-                <div class="col-3">
-                    <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    class="col-12">Cursos</button></a>
-                </div>
-                <div class="col-3">
-                    <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
-                    class="col-12">Usuarios</button></a>
-                </div>
-                <div class="col-3"><button id="btnAdmin" 
-                    class="col-12">Categoria</button>
-                </div>
-                <div class="col-3">
-                    <div class="dropdown-center">
-                        <button id="btnAdmin" class="dropdown-toggle col-12"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Auditoria
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-                    
-            <!-- 
-               ==============================================================-->
-            <!-- Se muestra la informacion de los Usuarios Auditoria -->
-            <!-- 
-               ==============================================================-->
-            
-            
-            <div class="table-responsive text-center mx-5">
-
-                <div id="gestionAdmin" class="ms-auto table-responsive text-center">
-                    <table class="table table-borderless table-dark border border-white
-                           text-center py-4">
-                        <thead>
-                            <tr >
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellidos</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Estado Usuario</th>
-                                <th scope="col">Actualizado por</th>
-                                <th scope="col">Ultima Actualizacion</th>
-                                <th scope="col">Creado Por</th>
-                                <th scope="col">Fecha de Creacion</th>
-                                <th scope="col">Accion </th>
-                                <th scope="col">Botones</th>
-                            </tr>
-                        </thead>
-                        <tbody th:each="curso, contador : ${cursos}">
-                            <tr>
-                                <th th:text="${set Id}" scope="row"></th>
-                                <th th:text="${set Nombre}" scope="row"></th>
-                                <th th:text="${set Apellidos}" scope="row"></th>
-                                <th th:text="${set Email}" scope="row"></th>
-                                <th th:text="${set EstadoUsuario}" scope="row"></th>
-                                <th th:text="${set Actualizadopor}" scope="row"></th>
-                                <th th:text="${set UltimaActualizacion}" scope="row"></th>
-                                <th th:text="${set CreadoPor}" scope="row"></th>
-                                <th th:text="${set FechadeCreacion}" scope="row"></th>
-                                <td th:text="${set Accion}"></td>
-                                <td>
-                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Editar</button></a>
-
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
-                                </td>
-                            </tr>
-                    </table>
-                </div>
-            </div>
-
-        </section>
-
-
-
-        
         
         <section th:fragment="listadoUsuarios">
 
@@ -383,24 +180,8 @@
                     class="col-12">Usuarios</button></a>
                 </div>
                 <div class="col-3">
-                    <a th:href="@{/}"><button id="btnAdmin" 
+                    <a th:href="@{/adminCurso/listarCategoria}"><button id="btnAdmin" 
                     class="col-12">Categoria</button></a>
-                </div>
-                <div class="col-3">
-                    <div class="dropdown-center">
-                        <button id="btnAdmin" class="dropdown-toggle col-12"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Auditoria
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 
@@ -411,40 +192,34 @@
             <!-- 
                ==============================================================-->
 
-            <div id="editarUsuario" 
-                 class="modal fade" 
-                 tabindex="-1" 
-                 aria-labelledby="exampleModalLabel" 
-                 aria-hidden="true">
+            <div id="editarUsuario" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md">
-                    <div <div class="modal-content fondo-modal">
+                    <div class="modal-content fondo-modal">
                         <div class="modal-header bg-info text-white">
                             <h5 class="modal-title">Editar Informacion</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div> 
-                        <form>
-
-                            <div class="modal-body">
-                                <div class="mb-3">
-                                    <label for="nombre">Nombre del usuario</label>
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="numero">Apellido del usuario</label>                                    
-                                    <input type="text" class="form-control" name="nombre" required="true"/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email del Usuario</label>
-                                    <input type="email" class="form-control" name="username" id="email" placeholder="ejemplo@.com">
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-primary" type="submit">Guardar</button>
-                                </div>
-                            </form>
                         </div>
+                        <form th:action="@{/adminCurso/listarUsuarios/}+${usuario.id}"
+                              method="POST" th:object="${rol}">
+                            <div class="modal-body">
+                                <select class="form-control" id="roles" 
+                                        name="idRol" required="true">
+                                    <option value="">Seleccione un rol</option>
+                                    <option th:each="rol : ${roles}" 
+                                            th:value="${rol.idRol}" 
+                                            th:text="${rol.nombre}"></option>
+                                </select>
+                                
+                             </div>
+                            <div class="modal-footer">
+                                
+                                <button class="btn btn-primary" type="submit">Guardar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
+           </div>
+
 
 
              <!-- 
@@ -482,8 +257,6 @@
                                         <button class="btn my-2" id="btn2">Editar</button>
                                     </a>
 
-                                    <!--<a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>-->
                                 </td>
                             </tr>
                     </table>
@@ -513,96 +286,6 @@
         
 
         
-        <section th:fragment="CategoriaAuditoria">
-            
-            
-            <!-- 
-                ==============================================================-->
-            <!-- Botones de  Auditoria -->
-            <!-- 
-                ==============================================================-->
-
-            <div class="row text-center">
-                <div class="col-3">
-                    <a th:href="@{/adminCurso/listarCursos}"><button id="btnAdmin"
-                    class="col-12">Cursos</button></a>
-                </div>
-                <div class="col-3">
-                    <a th:href="@{/adminCurso/listarUsuarios}"><button id="btnAdmin"
-                    class="col-12">Usuarios</button></a>
-                </div>
-                <div class="col-3"><button id="btnAdmin" 
-                    class="col-12">Categoria</button>
-                </div>
-                <div class="col-3">
-                    <div class="dropdown-center">
-                        <button id="btnAdmin" class="dropdown-toggle col-12"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Auditoria
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- 
-                ==============================================================-->
-            <!-- Se muestra la informacion de las Categorias Auditoria -->
-            <!-- 
-                ==============================================================-->
-            
-            
-            <div class="table-responsive text-center mx-5">
-
-                <div id="gestionAdmin" class="ms-auto table-responsive text-center">
-                    <table class="table table-borderless table-dark border border-white
-                           text-center py-4">
-                        <thead>
-                            <tr >
-                                <th scope="col">Id</th>
-                                <th scope="col">Nombre Categoria</th>
-                                <th scope="col">Estado Delet</th>
-                                <th scope="col">Actualizado por</th>
-                                <th scope="col">Ultima Actualizacion</th>
-                                <th scope="col">Creado Por</th>
-                                <th scope="col">Fecha de Creacion </th>
-                                <th scope="col">Accion </th>
-                                <th scope="col">Botones</th>
-                            </tr>
-                        </thead>
-                        <tbody th:each="curso, contador : ${cursos}">
-                            <tr>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <th th:text="${set nombreCurso}" scope="row"></th>
-                                <td th:text="${set estadoCurso}"></td>
-                                <td>
-                                    <a th:href="@{/adminCurso/detalleCurso/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Editar</button></a>
-
-                                    <a th:href="@{/curso/eliminar/}+${curso.idCurso}">
-                                        <button id="btn2" class="btn my-2">Eliminar</button></a>
-                                </td>
-                            </tr>
-                    </table>
-                </div>
-            </div>
-
-        </section>
-
        
         
         
@@ -625,25 +308,9 @@
                     class="col-12">Usuarios</button></a>
                 </div>
                 <div class="col-3">
-                    <a th:href="@{/}"><button id="btnAdmin" 
+                    <a th:href="@{/adminCurso/listarCategoria}"><button id="btnAdmin" 
                     style="border-bottom: 4px solid #ff0000";
                     class="col-12">Categoria</button></a>
-                </div>
-                <div class="col-3">
-                    <div class="dropdown-center">
-                        <button id="btnAdmin" class="dropdown-toggle col-12"
-                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Auditoria
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CursosAuditoria}">Cursos Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/UsuariosAuditoria}">Usuarios Auditorias</a></li>
-                            <li><a class="dropdown-item"
-                            th:href="@{/adminCurso/Auditoria/CategoriaAuditoria}">Categoria Auditorias</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 

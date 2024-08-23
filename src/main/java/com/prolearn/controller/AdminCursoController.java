@@ -308,17 +308,16 @@ public class AdminCursoController {
         return "/adminCurso/listarUsuarios";
     }
     
-    @PostMapping("/listarUsuarios/{id}/{idRol}")
+    @PostMapping("/listarUsuarios/{id}")
     public String cambioRol(Usuario usuario, Rol rol, Model model) {
-        
+
         usuario = usuarioService.getUsuario(usuario);
         rol = usuarioService.getRolByIdRol(rol);
-        
+
         usuarioService.cambiarRolAdmin(usuario, rol);
 
         return "/adminCurso/listarUsuarios";
     }
-    
     
     @GetMapping("/listarCategorias")
     public String listarCategorias(Model model) {
