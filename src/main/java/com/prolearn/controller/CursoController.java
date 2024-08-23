@@ -28,28 +28,32 @@ public class CursoController {
 
     @Autowired
     private CursoService cursoService;
-    
+
     @Autowired
     private CapitulosEstrucService capitulosEstrucService;
-    
+
     @Autowired
     private UsuarioService usuarioService;
-  
+
     @GetMapping("/curso/{idCurso}")
     public String cursoMostrar(Curso curso, Model model, @CurrentSecurityContext(expression = "authentication?.name") String username) {
         curso = cursoService.getCurso(curso);
-        
-        Usuario usuario = usuarioService.getUsuarioByEmail(username);
-        if (usuario != null) {
-            cursoService.crearRelUser(curso, usuario);
+
+        if (!username.equals("anonymousUser")) {
+            Usuario usuario = usuarioService.getUsuarioByEmail(username);
+
+            if (usuario != null) {
+
+                cursoService.crearRelUser(curso, usuario);
+            }
         }
 
         List<CapitulosEstruc> lista = new ArrayList<>();
 
         for (CapituloPadre capituloPadre : capitulosEstrucService.getPadres(curso.getIdCurso())) {
-            
+
             List<CapituloHijo> listaHijos = capitulosEstrucService.getHijos(curso.getIdCurso(), capituloPadre.getId());
-            
+
             lista.add(new CapitulosEstruc(capituloPadre, listaHijos));
         }
 
@@ -57,7 +61,5 @@ public class CursoController {
         model.addAttribute("curso", curso);
         return "curso/curso";
     }
-
-    
 
 }
