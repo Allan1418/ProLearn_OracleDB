@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
@@ -8,11 +7,19 @@
         <title>Pro Learn</title>
     </head>
 
+
     <body>
-        
+        <!-- 
+           ==============================================================-->
+        <!-- Mis Cursos -->
+        <!-- 
+           ==============================================================-->
+        <section th:fragment="cursos">
+            <div id="titulo1" class="fs-3 my-5">Mis cursos</div>
+
         <section th:fragment="MisCursos">
             <div id="titulo2" class="fs-2 my-5">Mi aprendizaje Cursos Matriculados</div>
         </section>
-        
+
     </body>
 </html>

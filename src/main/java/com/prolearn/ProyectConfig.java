@@ -40,7 +40,8 @@ public class ProyectConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/login", "/signup", "/js/**",
                         "/webjars/**", "/css/**", "/img/**", "/layout/**",
-                        "/curso/**", "/Footer/**", "/metodoPago/**", "/visualVideos/**")
+                        "/curso/**", "/Footer/**", "/metodoPago/**", "/visualVideos/**",
+                        "/vistaPerfilUser/**")
                 .permitAll().requestMatchers("/adminCurso/**").hasRole("ADMIN")
                 )
                 .formLogin((form) -> form

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/VistaPerfilUser")
+@RequestMapping("/vistaPerfilUser")
 public class VistaPerfilController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class VistaPerfilController {
     public String mostrar(Model model, @CurrentSecurityContext(expression = "authentication?.name") String username) {
         
         Usuario usuario = usuarioService.getUsuarioByEmail(username);
-        if (usuario != null) {
+        if (usuario == null) {
             return "redirect:/index";
         }
         
@@ -42,7 +42,7 @@ public class VistaPerfilController {
         model.addAttribute("facturas", facturas);
         
         
-        return "/VistaPerfilUser/info";
+        return "/vistaPerfilUser/info";
     }
 
     

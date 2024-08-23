@@ -6,51 +6,102 @@
 
       <head th:replace="~{layout/headerFooter :: head}">
         <title>Pro Learn</title>
-    </head>cc
+    </head>
 
 
-</head>
     <body id="cuerpo">
-
-        <header th:replace="~{layout/headerFooter :: header}"></header>
-
-    <div id="contenedor-formulario">
-        <h2 class="fs-2">Editar Perfil</h2>
-        <form th:action="@{/perfil}" th:object="${user}" method="post">
-            <div class="wrapper">
+        
+    <section th:fragment="usuario">
+        
+        <div class="container py-4">
+        <div class="row">
+          <div class="col-9 py-4">Mi perfil</div>
+          <div class="col-5"> 
+            <div class="wrapper py-4">
                 <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" th:field="*{nombre}" required />
+                <p>hola</p>
             </div>
-
-            <div class="wrapper">
+  
+            <div class="wrapper py-4">
                 <label for="apellidos">Apellidos:</label>
-                <input type="text" id="apellidos" th:field="*{apellidos}" required />
+                <p>hola</p>
             </div>
-
-            <div class="wrapper">
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" th:field="*{edad}" required />
+  
+            <div class="wrapper py-4">
+                <label for="edad">Email</label>
+                <p>hola</p>
             </div>
-
-            <div class="wrapper">
-                <label for="nacionalidad">Nacionalidad:</label>
-                <input type="text" id="nacionalidad" th:field="*{nacionalidad}" required />
+  
+            <div class="wrapper py-4">
+                <label for="nacionalidad">Rol</label>
+                <p>hola</p>
             </div>
-
-            <div class="wrapper">
-                <label for="anoNacimiento">Año de Nacimiento:</label>
-                <input type="number" id="anoNacimiento" th:field="*{anoNacimiento}" required />
+  
+            <div class="wrapper py-4">
+                <label for="anoNacimiento">Vencimiento Suscripción</label>
+                <p>hola</p>
             </div>
-
-            <div class="wrapper">
-                <label for="correo">Correo Electrónico:</label>
-                <input type="email" id="correo" th:field="*{correo}" required />
+  
+            <div class="wrapper py-4">
+                <label for="correo">Fecha de Creacion:</label>
+                <p>hola</p>
             </div>
-
-            <div>
-                <button id="btn1" type="submit">Guardar Cambios</button>
+        </div>
+          <div class="col-6 px-5">
+            <div class="fs-3 my-5">Facturacion de tu plan </div>
+            <div id="planesCard" class="plans-container">
+            <h2 id="tituloPago">Selecciona tu Plan de Suscripción</h2>
+            <div th:each="monto, contador : ${montos}">
+                <div class="plan">
+                    <h3 th:text="${monto.idMonto}"></h3>
+                    <p th:text="${monto.nombre}"></p>
+                    <p>% Porcentaje de descuento</p>
+                    <p th:text="${monto.descuento}"></p>
+                    <p>Precio original</p>
+                    <p th:text="${monto.montoSinDescuento}"></p>
+                    <p>Monto total</p>
+                    <div th:text="${monto.monto}" class="price"></div>
+                    
+                    <form th:action="@{/metodoPago/listarPlanes/{idMonto}(idMonto=${monto.idMonto})}" 
+                          th:object="${monto}" method="POST">
+                        <input type="hidden" name="idMonto" th:value="${monto.idMonto}"/>
+                        <button type="submit">Seleccionar</button>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div></div>
+        </div>
     </div>
-</body>
+      <footer class="mt-5" th:fragment="footer" style="background-color: #2D2C2E; color: white;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <a class="" th:href=@{/Footer/politicaPrivacidad}>
+                        <p>POLÍTICA DE PRIVACIDAD</p>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a class="" th:href=@{/Footer/condiContratacion}>
+                        <p>CONDICIONES DE CONTRATACIÓN</p>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a class="" th:href=@{/Footer/cookies}>
+                        <p>POLÍTICA DE COOKIES</p>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a class="" th:href=@{/Footer/avisoLegal}>
+                        <p>AVISO LEGAL</p>
+                    </a>
+                </div>
+            </div>
+            <div class="my-3">
+                &COPY; Copyright Prolearn 2023
+            </div>
+        </div>
+          
+    </section>
+        
+    </body>
 </html>
