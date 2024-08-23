@@ -57,11 +57,20 @@ import lombok.Data;
 )
 @NamedStoredProcedureQuery(
     name = "SPCrearRelCursoUser",
-    procedureName = "INSERTAR_RELACION_USUARIO_CURSO",
+    procedureName = "INSERTAR_RELACION_USUARIO_CURSO_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CURSO", type = Long.class),
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USUARIO", type = Long.class)
     }
+)
+@NamedStoredProcedureQuery(
+    name = "SPFindAllXUserCurso",
+    procedureName = "OBTENER_CURSOS_USUARIO_SP",
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USUARIO", type = Long.class),
+        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_CURSOR_CURSOS", type = void.class)
+    },
+    resultClasses = { Curso.class } 
 )
 public class Curso implements Serializable {
     

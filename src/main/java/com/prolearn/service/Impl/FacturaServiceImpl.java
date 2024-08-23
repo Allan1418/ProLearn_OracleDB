@@ -24,7 +24,7 @@ public class FacturaServiceImpl implements FacturaService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional()
     public List<Factura> getFacturasByUserId(Usuario user) {
         
         return facturaDao.findAllXUser(user.getId());

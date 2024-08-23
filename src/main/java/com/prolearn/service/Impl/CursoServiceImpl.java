@@ -69,6 +69,12 @@ public class CursoServiceImpl implements CursoService{
     public void crearRelUser(Curso curso, Usuario usuario) {
         cursoDao.crearRelUserCurso(curso.getIdCurso(), usuario.getId());
     }
+
+    @Override
+    @Transactional
+    public List<Curso> getCursosByUser(Usuario usuario) {
+        return cursoDao.getAllXUser(usuario.getId());
+    }
     
     
     

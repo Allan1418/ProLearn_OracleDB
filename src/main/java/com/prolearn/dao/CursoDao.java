@@ -34,4 +34,7 @@ public interface CursoDao extends JpaRepository<Curso, Long>{
     
     @Procedure(name = "SPCrearRelCursoUser")
     void crearRelUserCurso(@Param("P_ID_CURSO")Long idCurso, @Param("P_ID_USUARIO") Long idUser);
+    
+    @Procedure(name = "SPFindAllXUserCurso")
+    List<Curso> getAllXUser(@Param("P_ID_USUARIO") Long idUser);
 }

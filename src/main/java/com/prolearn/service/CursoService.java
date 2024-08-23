@@ -10,6 +10,8 @@ public interface CursoService {
     public List<Curso> getCursosPublico();
     
     public List<Curso> getCursosAdmin();
+    
+    public List<Curso> getCursosByUser(Usuario usuario);
 
     public Curso getCurso(Curso curso);
     
