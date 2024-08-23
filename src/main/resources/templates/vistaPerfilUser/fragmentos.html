@@ -1,107 +1,79 @@
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-      <head th:replace="~{layout/headerFooter :: head}">
+    <head th:replace="~{layout/headerFooter :: head}">
         <title>Pro Learn</title>
     </head>
 
+    <body>
+        <section th:fragment="usuario">
+            <div id="titulo1" class="fs-3 my-5">Informacion sobre mi perfil</div>
+            <div id="cuerpo-planes" class="container py-4">
+                <div id="perfil" class="row">
+                    <div class="col-9 py-4">Mi perfil</div>
+                    <div class="col-5"> 
+                        <div class="wrapper py-4">
+                            <label for="nombre">Nombre:</label>
+                            <p th:text="${usuario.nombre}"></p>
+                        </div>
 
-    <body id="cuerpo">
-        
-    <section th:fragment="usuario">
-        
-        <div class="container py-4">
-        <div class="row">
-          <div class="col-9 py-4">Mi perfil</div>
-          <div class="col-5"> 
-            <div class="wrapper py-4">
-                <label for="nombre">Nombre:</label>
-                <p>hola</p>
-            </div>
-  
-            <div class="wrapper py-4">
-                <label for="apellidos">Apellidos:</label>
-                <p>hola</p>
-            </div>
-  
-            <div class="wrapper py-4">
-                <label for="edad">Email</label>
-                <p>hola</p>
-            </div>
-  
-            <div class="wrapper py-4">
-                <label for="nacionalidad">Rol</label>
-                <p>hola</p>
-            </div>
-  
-            <div class="wrapper py-4">
-                <label for="anoNacimiento">Vencimiento Suscripción</label>
-                <p>hola</p>
-            </div>
-  
-            <div class="wrapper py-4">
-                <label for="correo">Fecha de Creacion:</label>
-                <p>hola</p>
-            </div>
-        </div>
-          <div class="col-6 px-5">
-            <div class="fs-3 my-5">Facturacion de tu plan </div>
-            <div id="planesCard" class="plans-container">
-            <h2 id="tituloPago">Selecciona tu Plan de Suscripción</h2>
-            <div th:each="monto, contador : ${montos}">
-                <div class="plan">
-                    <h3 th:text="${monto.idMonto}"></h3>
-                    <p th:text="${monto.nombre}"></p>
-                    <p>% Porcentaje de descuento</p>
-                    <p th:text="${monto.descuento}"></p>
-                    <p>Precio original</p>
-                    <p th:text="${monto.montoSinDescuento}"></p>
-                    <p>Monto total</p>
-                    <div th:text="${monto.monto}" class="price"></div>
-                    
-                    <form th:action="@{/metodoPago/listarPlanes/{idMonto}(idMonto=${monto.idMonto})}" 
-                          th:object="${monto}" method="POST">
-                        <input type="hidden" name="idMonto" th:value="${monto.idMonto}"/>
-                        <button type="submit">Seleccionar</button>
-                    </form>
+                        <div class="wrapper py-4">
+                            <label for="apellidos">Apellidos:</label>
+                            <p th:text="${usuario.apellidos}"></p>
+                        </div>
+
+                        <div class="wrapper py-4">
+                            <label for="Email">Email</label>
+                            <p th:text="${usuario.email}"></p>
+                        </div>
+
+                        <div class="wrapper py-4">
+                            <label for="Rol">Rol</label>
+                            <p th:text="${usuario.rol.nombre}"></p>
+                        </div>
+
+                        <div class="wrapper py-4">
+                            <label for="Rol">Mis Cursos</label>
+                            <div th:each="curso, contador : ${cursos}" class="col py-5">
+                                <a th:href="@{/curso/curso/}+${curso.idCurso}">
+                                    <img class="img-thumbnail fixed-size" th:src="${curso.thumbnailCurso}"/>
+                                </a>
+                                <p th:text="${curso.nombreCurso}"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 px-5">
+                        <div class="fs-3 my-5">Facturacion de tus planes </div>
+                        <div id="cardUser" class="plans-container">
+                            <h2 id="tituloPago" class="py-2" >Datos de tus Planes de Suscripcion</h2>
+                            <div>
+                                <div th:each="factura, contador : ${facturas}" class="plan">
+                                    <p>Id de tu Factura</p>
+                                    <h3 class="py-2" th:text="${factura.idFactura}"></h3>
+
+                                    <p>Numero de plan seleccionado</p>
+                                    <p class="py-2" 
+                                       th:text="${factura.idMonto}">Nombre del plan</p>
+
+                                    <p class="py-2" >Id del usuario</p>
+                                    <p th:text="${factura.idUser}"></p>
+
+                                    <p class="py-2" >Fecha de pago</p>
+                                    <div th:text="${factura.fechaPago}" class="price">
+                                    </div>
+
+                                    <p class="py-2" >Vencimiento de tu plan</p>
+                                    <div th:text="${factura.fechaExcp}" class="price">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div></div>
-        </div>
-    </div>
-      <footer class="mt-5" th:fragment="footer" style="background-color: #2D2C2E; color: white;">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-md-3">
-                    <a class="" th:href=@{/Footer/politicaPrivacidad}>
-                        <p>POLÍTICA DE PRIVACIDAD</p>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a class="" th:href=@{/Footer/condiContratacion}>
-                        <p>CONDICIONES DE CONTRATACIÓN</p>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a class="" th:href=@{/Footer/cookies}>
-                        <p>POLÍTICA DE COOKIES</p>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a class="" th:href=@{/Footer/avisoLegal}>
-                        <p>AVISO LEGAL</p>
-                    </a>
-                </div>
-            </div>
-            <div class="my-3">
-                &COPY; Copyright Prolearn 2023
-            </div>
-        </div>
-          
-    </section>
-        
+        </section>
     </body>
 </html>
