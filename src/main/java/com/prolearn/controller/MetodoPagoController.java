@@ -42,22 +42,27 @@ public class MetodoPagoController {
     @PostMapping("/listarPlanes/{idMonto}")
     public String crearFactura(Model model, Monto monto, @CurrentSecurityContext(expression = "authentication?.name") String username) {
 
+        List<Monto> montos = montoService.getMontosPublico();
+        
         monto = montoService.getMonto(monto);
         
         Usuario usuario = usuarioService.getUsuarioByEmail(username);
         if (usuario == null) {
             model.addAttribute("error", "algo salio mal procesando el pago!");
-            return "redirect:/metodoPago/planesCurso";
+            model.addAttribute("montos", montos);
+            return "/metodoPago/planesCurso";
         }
         
         if (usuario.getRol().getNombre().equals("ROLE_PREMIUM")) {
             model.addAttribute("error", "Ya eres usuario premium!");
-            return "redirect:/metodoPago/planesCurso";
+            model.addAttribute("montos", montos);
+            return "/metodoPago/planesCurso";
         }
         
         if (usuario.getRol().getNombre().equals("ROLE_ADMIN")) {
             model.addAttribute("error", "Eres administrador, ya tienes acceso a todo!");
-            return "redirect:/metodoPago/planesCurso";
+            model.addAttribute("montos", montos);
+            return "/metodoPago/planesCurso";
         }
 
         System.out.println("------------------------------"+ monto.getIdMonto());
