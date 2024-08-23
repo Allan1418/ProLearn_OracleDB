@@ -308,15 +308,29 @@ public class AdminCursoController {
         return "/adminCurso/listarUsuarios";
     }
     
+//    @GetMapping("/listarUsuarios/editar/{id}")
+//    public String getUsuario(Model model, Usuario usuario) {
+//        
+//        usuario = usuarioService.getUsuario(usuario);
+//        
+//        model.addAttribute("usuario", usuario);
+//        
+//
+//        return "/adminCurso/listarUsuarios";
+//    }
+    
     @PostMapping("/listarUsuarios/{id}")
     public String cambioRol(Usuario usuario, Rol rol, Model model) {
+        
+        System.out.println("-----------" + usuario.getId());
+        System.out.println("-----------" + rol.getIdRol());
 
         usuario = usuarioService.getUsuario(usuario);
         rol = usuarioService.getRolByIdRol(rol);
 
         usuarioService.cambiarRolAdmin(usuario, rol);
 
-        return "/adminCurso/listarUsuarios";
+        return "redirect:/adminCurso/listarUsuarios";
     }
     
     @GetMapping("/listarCategorias")

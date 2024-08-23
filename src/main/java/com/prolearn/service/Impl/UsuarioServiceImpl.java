@@ -134,11 +134,13 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional()
     public void cambiarRolAdmin(Usuario usuario, Rol newRol) {
         usuarioDao.cambioRolAdmin(usuario.getId(), newRol.getIdRol());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Rol getRolByIdRol(Rol rol) {
         return rolDao.getXId(rol.getIdRol());
     }

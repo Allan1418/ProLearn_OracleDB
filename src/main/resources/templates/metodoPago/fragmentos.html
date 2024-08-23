@@ -18,9 +18,6 @@
                         
                         <div id="planesCard" class="plans-container">
                             <h2 id="tituloPago">Selecciona tu Plan de Suscripción</h2>
-                            <div th:if="${error != null}" class="text-danger">
-                                <span th:text="${error}"></span> 
-                            </div>
                             <div th:each="monto, contador : ${montos}">
                                 <div class="plan">
                                     <h3 th:text="${monto.idMonto}"></h3>
@@ -42,6 +39,9 @@
                         </div>
                         
                     </div>
+                </div>
+                <div th:if="${error != null}" class="text-danger">
+                    <span th:text="${error}"></span> 
                 </div>
             </div>
         </section>
