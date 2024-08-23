@@ -163,6 +163,7 @@
 
 /*================Metodo Pago================*/
 #planesCard {
+    margin-left: 35%;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -232,6 +233,72 @@
     }
 }
 
+#perfil{
+   color: #2D2C2E;
+   font-family: 'Montserrat', sans-serif;
+   box-shadow: 0 10px 20px rgba(0,0,0,0), 0 6px 6px rgba(0,0,0,0);;
+}
+
+#cardUser {
+    color: #2D2C2E;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 40px;
+    width: 500px;
+    max-width: 90%;
+    text-align: center;
+    .h2 {
+        color: #333;
+        margin-bottom: 30px;
+    }
+    .plan {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f7f7f7;
+    }
+    .plan h3 {
+        margin: 0;
+        font-size: 24px;
+        color: #16A9D8;
+    }
+    
+    .plan p {
+        font-size: 18px;
+        color: #555;
+    }
+    
+    .plan .price {
+        font-size: 28px;
+        font-weight: bold;
+        margin: 15px 0;
+        color: #16A9D8;
+    }
+    
+    .plan button {
+        background-color: #00FF29;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .plan button:hover {
+        background-color: #00CC21;
+    }
+    
+    .plan .discount {
+        color: #E74C3C;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    
+}
 /*================Visual Videos================*/
 
 

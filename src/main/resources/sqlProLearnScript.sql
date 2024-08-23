@@ -655,10 +655,10 @@ INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_MONTO_TB (NOMBRE, MONTO, DESCUENTO, MO
 VALUES ('Mensual', 10.000, 0, 10.000, INTERVAL '1' MONTH);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_MONTO_TB (NOMBRE, MONTO, DESCUENTO, MONTO_SIN_DESCUENTO, INTERVALO)
-VALUES ('Trimestral', 45.000, 15, 38.250, INTERVAL '3' MONTH);
+VALUES ('Trimestral',38.250 , 15, 45.000, INTERVAL '3' MONTH);
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_MONTO_TB (NOMBRE, MONTO, DESCUENTO, MONTO_SIN_DESCUENTO, INTERVALO)
-VALUES ('Anual', 120.000, 35, 78.000, INTERVAL '12' MONTH);
+VALUES ('Anual',78.000, 35, 120.000, INTERVAL '12' MONTH);
 
 
 /*insercion de datos*/
@@ -771,7 +771,7 @@ COMMIT;
  /*Inserts de Submodulos Python */
 
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (ID_CAPITULO_PADRE, NOMBRE_CAPITULO_HIJO, VIDEO_CAPITULO, NUMERO_CAPITULO_HIJO) VALUES
-(1,'Lenguaje de Programacion', 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.apps;pot.com/o/Python%2FCapitulo%201%2F1.%20Programaci%C3%B3n%20en%20Python%20_%20Lenguaje%20de%20Programaci%C3%B3n%20Python.mp4?alt=media&token=d123f6a2-939a-42fd-a65d-f7ab73203ef3', 1);
+(1,'Lenguaje de Programacion', 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Python%2FCapitulo%201%2F1.%20Programaci%C3%B3n%20en%20Python%20_%20Lenguaje%20de%20Programaci%C3%B3n%20Python.mp4?alt=media&token=5710329f-f117-4056-83b8-c5f4df4c2586', 1);
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (ID_CAPITULO_PADRE, NOMBRE_CAPITULO_HIJO, VIDEO_CAPITULO, NUMERO_CAPITULO_HIJO) VALUES
 (1,'Intalacion Python', 'https://firebasestorage.googleapis.com/v0/b/prolearn-1a8ca.appspot.com/o/Python%2FCapitulo%201%2F2.%20Programaci%C3%B3n%20en%20Python%20_%20Descargar%20e%20instalar%20Python%20y%20PyCharm.mp4?alt=media&token=6548629f-35a3-499f-b994-012337add54c', 2);
 INSERT INTO FIDE_PROLEARN_FINAL_PROF.FIDE_CAPITULO_HIJO_TB (ID_CAPITULO_PADRE, NOMBRE_CAPITULO_HIJO, VIDEO_CAPITULO, NUMERO_CAPITULO_HIJO) VALUES

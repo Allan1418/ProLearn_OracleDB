@@ -23,8 +23,6 @@
                         <br>
                             <h3 style="color:black;">Se entrega certificado al finalizar.</h3>
                     </div>
-                    <div class="offset-md-4 col-6 ms-auto py-4"><a href="index.html"><button id="btn2" type="button"
-                                                                                             class="btn  ">¡Suscríbete!</button></a></div>
                 </div>
             </div>
 
@@ -44,7 +42,7 @@
                                     <th:block class="my-5" th:each="capituloHijo, contador : ${capitulosEstruc.capitulosHijos}"> 
                                         <a class="my-5" th:href="@{/visualVideos/visualVideos/}+${capituloHijo.id}" 
                                            sec:authorize="hasRole('ROLE_PREMIUM') or hasRole('ROLE_ADMIN')"><strong class="my-5" th:text="${capituloHijo.nombre}"></strong></a><br/>
-                                        <strong class="my-5" th:text="${capituloHijo.nombre}" sec:authorize="!isAuthenticated()"></strong><br/>
+                                        <strong class="my-5" th:text="${capituloHijo.nombre}" sec:authorize="hasRole('ROLE_USER')"></strong><br/>
                                     </th:block>
                                 </div>
                             </div>

@@ -53,9 +53,8 @@
 
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto ">
-                            <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/curso/curso}">Cursos</a></li>
                             <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{/metodoPago/planesCurso}">Precio</a></li>
-                            <li class="nav-item px-2 py-2"><a class="nav-link" th:href="@{Por hacer}">FAQS</a></li>
+                            <li class="nav-item px-2 py-2"><a class="nav-link" href="#cuerpo-preguntas">FAQS</a></li>
 
                             <li sec:authorize="isAuthenticated()" class="nav-item dropdown nav-item px-2 py-2">
                                 <a class="nav-link dropdown-toggle dropdown-item" href="#" id="navbarDropdown" role="button" 
@@ -66,8 +65,6 @@
                                     
                                     <li><a class="dropdown-item" 
                                     th:href="@{/vistaPerfilUser/info}">Mi Perfil</a></li>
-                                    
-                                    <li><a class="dropdown-item" th:href="@{Por hacer}">Mis Cursos</a></li>
 
                                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item" 
                                     th:href="@{/adminCurso/listarCursos}">Vista Administrador</a></li>
@@ -102,7 +99,7 @@
            ==============================================================-->
 
         <footer class="mt-5" th:fragment="footer" style="background-color: #2D2C2E; color: white;">
-            <div class="container">
+            <div id="footer" class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-3">
                         <a class="" th:href=@{/Footer/politicaPrivacidad}>

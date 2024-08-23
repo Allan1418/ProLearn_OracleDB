@@ -26,9 +26,9 @@
                             Formación flexible y adaptable a tus necesidades.</h2>
                     </div>
                     <div class="row" id="botones">
-                        <div class="col-7 col-md-7 my-2"><a href="sesion.html"><button id="btn1" type="button" class="btn ">Más
+                        <div class="col-7 col-md-7 my-2"><a href="#footer"><button id="btn1" type="button" class="btn ">Más
                                     Información</button></a></div>
-                        <div class="col-12 col-md-5 my-2"><a href="sesion.html"><button id="btn2" type="button"
+                        <div class="col-12 col-md-5 my-2"><a th:href="@{/metodoPago/planesCurso}"><button id="btn2" type="button"
                                     class="btn  ">¡Suscríbete!</button></a></div>
                     </div>
                 </div>
@@ -43,49 +43,7 @@
         
         <section th:replace="~{layout/thumbnail :: cursos}"></section>
 
-        <!-- 
-           ==============================================================-->
-        <!-- Inicio de la Planes -->
-        <!-- 
-           ==============================================================-->
-
-        <section>
-            <div id="titulo1" class="fs-3 my-5">Planes</div>
-            <div id="cuerpo-planes" class="row my-5">
-                <div class="col-12 col-md-4 col-lg-4">
-                    <div class="card px-5 py-5">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Mensual</h2>
-                            <p class="fs-4 card-text text-center">Suscribete al plan premium por 12.99$ Mensual!</p>
-                            <div class="mx-auto col-4 text-center"><a href="sesion.html"><button id="btn1" type="button"
-                            class="btn">¡Suscríbete!</button></a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4 col-lg-4">
-                    <div class="card px-5 py-5">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Trimestral</h2>
-                            <p class="fs-4 card-text text-center">Suscribete al plan premium por 34.99$ Trimestral!</p>
-                            <div class="mx-auto col-4 text-center"><a href="sesion.html"><button id="btn1" type="button"
-                             class="btn">¡Suscríbete!</button></a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-4 col-lg-4">
-                    <div class="card px-5 py-5">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">Anual</h2>
-                            <p class="fs-4 card-text text-center">Suscribete al plan premium por 129.99$ Anual!</p>
-                            <div class="mx-auto col-4 text-center"><a href="sesion.html"><button id="btn1" type="button"
-                            class="btn">¡Suscríbete!</button></a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>    
+        
 
         <!-- 
            ==============================================================-->

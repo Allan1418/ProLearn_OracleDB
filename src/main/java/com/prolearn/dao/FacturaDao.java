@@ -13,7 +13,7 @@ public interface FacturaDao extends JpaRepository<Factura, Long> {
     Optional<Factura> findXId(@Param("P_ID_FACTURA") Long id);
     
     @Procedure(name = "SPFindXIdUserFT")
-    List<Factura> findAllXUser(@Param("P_ID_FACTURA") Long idUser);
+    List<Factura> findAllXUser(@Param("P_ID_USER") Long idUser);
 
     @Procedure(name = "SPFindAllFT")
     List<Factura> findAll();

@@ -68,7 +68,7 @@ import lombok.Data;
     procedureName = "OBTENER_CURSOS_USUARIO_SP",
     parameters = {
         @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_USUARIO", type = Long.class),
-        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "P_CURSOR_CURSOS", type = void.class)
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "P_CURSOR_CURSOS", type = void.class)
     },
     resultClasses = { Curso.class } 
 )

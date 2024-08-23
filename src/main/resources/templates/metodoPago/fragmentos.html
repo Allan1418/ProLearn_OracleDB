@@ -4,31 +4,33 @@
       xmlns:th="http://thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-      <head th:replace="~{layout/headerFooter :: head}">
+    <head th:replace="~{layout/headerFooter :: head}">
         <title>Pro Learn</title>
     </head>
 
 
     <body id="cuerpo">
-        
+
         <section th:fragment="planes">
             <div id="formulario-pago" class="py-5 text-align">
                 <div class="containerPago">
-                    <div class="col-7">
-                        
-                        <div id="planesCard" class="plans-container">
-                            <h2 id="tituloPago">Selecciona tu Plan de Suscripción</h2>
+                    <div>
+                        <div id="planesCard" class="plans-container col-md-6 offset-md-3">
+                            <div th:if="${error != null}" class="text-danger">
+                                <span th:text="${error}"></span> 
+                            </div>
+                            <h2 class="py-" id="tituloPago">Selecciona tu Plan de Suscripción</h2>
                             <div th:each="monto, contador : ${montos}">
                                 <div class="plan">
                                     <h3 th:text="${monto.idMonto}"></h3>
                                     <p th:text="${monto.nombre}"></p>
-                                    <p>% Porcentaje de descuento</p>
+                                    <p>Porcentaje de descuento del plan</p>
                                     <p th:text="${monto.descuento}"></p>
                                     <p>Precio original</p>
                                     <p th:text="${monto.montoSinDescuento}"></p>
                                     <p>Monto total</p>
                                     <div th:text="${monto.monto}" class="price"></div>
-                                    
+
                                     <form th:action="@{/metodoPago/listarPlanes/{idMonto}(idMonto=${monto.idMonto})}" 
                                           th:object="${monto}" method="POST">
                                         <input type="hidden" name="idMonto" th:value="${monto.idMonto}"/>
@@ -37,14 +39,9 @@
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                </div>
-                <div th:if="${error != null}" class="text-danger">
-                    <span th:text="${error}"></span> 
                 </div>
             </div>
         </section>
-
     </body>
 </html>
